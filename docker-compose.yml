@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+
+  mysql:
+      image: mysql
+      container_name: mysql-bbdd
+      restart: always
+      environment:
+        MYSQL_DATABASE: 'sotadb'
+        # So you don't have to use root, but you can if you like
+        MYSQL_USER: 'dbadmin'
+        # You can use whatever password you like
+        MYSQL_PASSWORD: 'GT9zEN(FdxSAmWiy'
+        # Password for root access
+        MYSQL_ROOT_PASSWORD: 's0t42022'
+      ports:
+        # <Port exposed> : < MySQL Port running inside container>
+        - '3306:3306'
+        # Where our data will be persisted
+      volumes:
+        - ./data:/var/lib/mysql
+  
+  php-my-admin:
+      image: phpmyadmin
+      container_name: phpmyadmin
+      ports:
+        - 7777:80
+      environment:
+        - PMA_HOST=mysql
+      depends_on:
+        - mysql
+
+  # The existing database container configuration...
+  php-apache:
+    container_name: php-webapp
+    build:
+      context: ./php
+    ports:
+        - '8080:80'
+        - '3001:8001'
+        - '3000:8000'
+        - '3002:8002'
+    volumes:
+      - ./src:/var/www/sota-webapp
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - mysql
+
+# Names our volume
+volumes:
+  data:
