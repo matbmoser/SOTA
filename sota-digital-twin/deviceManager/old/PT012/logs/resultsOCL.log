@@ -1,0 +1,3 @@
+2022/02/11 13:41:17|13828|37.984375|[INFO]: Test Camera Started Objective:[SEND];expectedMessages:[50000];expectedCameras:[5000];expectedMessagesPerCamera:[11]; Control Points: [[1000, 2000, 3000, 4000]].
+2022/02/11 13:41:17|13828|230.01953125|[INFO]: NEW cameras created=[5000]!
+2022/02/11 13:41:17|13828|244.7109375|[STATS]: Messages Sent: ncameras=[5000];messagesSent=[50000];totalTime=[0:00:25.230256];minSendDuration=[0:00:00];avgSendDuration=[0:00:00.005046];maxSendDuration=[0:00:00.195019]

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\mathias.brunkowmoser\bin\framework\v1.0.0\commsManager\BaseProtocol.py", line 235, in processOutputBuffer
+    self.camera.messageDuration = self.camera.messageSended - self.camera.sendingMessage
+TypeError: unsupported operand type(s) for -: 'datetime.datetime' and 'NoneType'

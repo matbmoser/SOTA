@@ -1,0 +1,2 @@
+2022/02/11 13:40:43|18464|38.015625|[INFO]: Test Camera Started Objective:[RECEIVE];expectedMessages:[55000];expectedCameras:[5000];expectedMessagesPerCamera:[11]; Control Points: [[1000, 2000, 3000, 4000]].
+2022/02/11 13:40:43|18464|230.046875|[INFO]: NEW cameras created=[5000]!

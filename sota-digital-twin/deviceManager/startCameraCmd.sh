@@ -1,0 +1,2 @@
+
+py CameraManager.py -cmd
