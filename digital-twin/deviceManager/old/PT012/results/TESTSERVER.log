@@ -1,0 +1,3 @@
+2022/02/11 13:40:34|12792|37.390625|[INFO]: Trying to start test server...
+2022/02/11 13:40:34|12792|37.4140625|[INFO]: You can introduce [exit] to leave
+2022/02/11 13:40:34|12792|37.5859375|[INFO]: [TESTSERVER]-[127.0.0.1:7777] Test Server Started Objective:[CAMERAS];expectedMessages:[55000];expectedCameras:[5000];expectedMessagesPerCamera:[11]; Control Points: [[1000, 2000, 3000, 4000]].

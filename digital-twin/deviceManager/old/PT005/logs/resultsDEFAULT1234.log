@@ -1,0 +1,10 @@
+2022/01/28 16:36:53|21112|38.3828125|[INFO]: Trying to start Camera...
+2022/01/28 16:36:53|21112|38.40234375|[INFO]: You can introduce [exit] to leave
+2022/01/28 16:36:53|21112|38.55078125|[INFO]: SocketBaseCamerasManager.new(protocolClass=TCPSJMPSocketCamera, cameraid=[DEFAULT1234], serverip=[127.0.0.1], serverport=[7777].
+2022/01/28 16:36:53|21112|38.55859375|[INFO]: Camera Socket Opened on [127.0.0.1:55226] ...
+2022/01/28 16:36:53|21112|38.5625|[INFO]: Camera [DEFAULT1234], status [CONNECTED] on [127.0.0.1:55226] type [<class 'TCPSJMPProtocol.TCPSJMPProtocol'>] in [127.0.0.1:7777] 
+2022/01/28 16:36:53|21112|38.56640625|[INFO]: Camera [DEFAULT1234] listening in [<class 'TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-DEFAULT1234-127.0.0.1:7777]
+2022/01/28 16:36:53|21112|38.66015625|[INFO]: Camera [DEFAULT1234] status [ONLINE] logged in with token = [ef522c140ea0fc68c44d1337fd64d861] in [127.0.0.1:7777].
+2022/01/28 16:36:53|21112|38.6640625|[STATS]: Messages Proccessed: nmessages=[1];received=[2022-01-28 15:36:54.808186];processed=[2022-01-28 15:36:54.816165];duration=[0:00:00.007979]
+2022/01/28 16:36:53|21112|38.625|[STATS]: Messages Sent: messagesSent=[5000000];startTime=[2022-01-28 15:36:54.809183];finishTime=[2022-01-28 15:39:59.361956];totalTime=[0:03:04.552773];minSendDuration=[0.0];avgSendDuration=[0.0];maxSendDuration=[0.0]
+2022/01/28 16:36:53|21112|38.625|[INFO]: Camera Closed!

@@ -1,0 +1,8 @@
+2022/01/26 14:22:49|15988|38.19140625|[INFO]: Trying to start Camera...
+2022/01/26 14:22:49|15988|38.2109375|[INFO]: You can introduce [exit] to leave
+2022/01/26 14:22:49|15988|38.81640625|[INFO]: SocketBaseCamerasManager.new(protocolClass=TCPSJMPSocketCamera, cameraid=[Clark], serverip=[127.0.0.1], serverport=[7777].
+2022/01/26 14:22:49|15988|38.828125|[INFO]: Camera Socket Opened on [127.0.0.1:53483] ...
+2022/01/26 14:22:49|15988|38.83203125|[INFO]: Camera CONNECTED:Camera [Clark], status [CONNECTED] on [127.0.0.1:53483] type [<class 'TCPSJMPProtocol.TCPSJMPProtocol'>] in [127.0.0.1:7777] 
+2022/01/26 14:22:49|15988|38.83203125|[INFO]: Camera [Clark] listening in [<class 'TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-Clark-127.0.0.1:7777]
+2022/01/26 14:22:49|15988|38.91796875|[INFO]: Camera [Clark] status [ONLINE] logged in with token = [47f700f45622b93a3ba63f20e5f000be] in [127.0.0.1:7777].
+2022/01/26 14:22:49|15988|38.91796875|[STATS]: Messages Proccessed: nmessages=[1];received=[2022-01-26 13:22:51.563281];processed=[2022-01-26 13:22:51.569302];duration=[0:00:00.006021]

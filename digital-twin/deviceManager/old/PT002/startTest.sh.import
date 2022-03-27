@@ -1,0 +1,27 @@
+### [PT002] PERFORMANCE TEST - configTest.sh
+# Configurations of the cameras and the test
+# by: Mathias Brunkow Moser
+# © CGI - ALL RIGHTS RESERVED
+###
+
+# Import the configurations
+. ../start.sh.import
+
+# Set test payload and the path of the file to execute 
+TESTID="PT002" 
+PAYLOADFILE="payload.txt"
+FILEPATH="../../SocketCamerasManager.py"
+
+# Set the names of the users to create.
+
+# ORIGIN CAMERAS
+OCTCP1="Peter"
+OCTCP2="Mark"
+OCTCP3="John"
+OCTCP4="Mike"
+
+# DESTINATION CAMERAS
+DCTCP1="Clark"
+DCTCP2="Angel"
+DCTCP3="Ian"
+DCTCP4="Josh"

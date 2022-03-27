@@ -1,8 +1,0 @@
-2022/01/28 16:36:49|16416|37.2421875|[INFO]: Trying to start server...
-2022/01/28 16:36:49|16416|37.265625|[INFO]: You can introduce [exit] to leave and [cameras] to list all cameras
-2022/01/28 16:36:49|16416|38.14453125|[INFO]: NEW SERVER CREATED!: name=[TESTSERVER], ip=[127.0.0.1], port=[7777], poll_interval=[0.5]. [Server [127.0.0.1:7777] status [RUNNING] in thread: [<bound method Thread.getName of <Thread(TESTSERVER, started 19784)>>]].
-2022/01/28 16:36:49|16416|38.26953125|[INFO]: Incoming [TCPSJMPCamera] Protocol Connection...
-2022/01/28 16:36:49|16416|38.2890625|[WARNING]: BaseCamerasManager.getByCameraId(cameraid=[DEFAULT1234]). The Camera cameraid [DEFAULT1234] don't exist!
-2022/01/28 16:36:49|16416|38.3671875|[INFO]: BaseCamerasManager.createOrGetCamera(cameraid=[DEFAULT1234]). [NEW] Creating new Camera [DEFAULT1234] with token = [ef522c140ea0fc68c44d1337fd64d861]
-2022/01/28 16:36:49|16416|38.3671875|[INFO]: [TESTSERVER]-[127.0.0.1:7777] > Received one request from DEFAULT1234
-2022/01/28 16:36:49|16416|38.3359375|[STATS]: Total Messages Proccessed: nmessages=[5000001];duration=[0:02:14.190792]

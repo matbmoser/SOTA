@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -x
+
+global0="${0}"
+export global0
+
+. ${global0}.import
+
+echo "Starting tests..."
+for d in */ ; do
+  if [ "$d" != "logs/" ] && [ "$d" != "log/" ] && [ "$d" != "data/" ] && [ "$d" != "tmp/" ]
+    then
+      logInfo "Starting [${d}] TEST..."
+      echo "[TEST ${d} STARTED]"
+      cd ${d}
+      ./$TESTINITFILE
+      wait
+      cd ..
+      echo "Finishing [${d}] TEST..."
+      sleep 5
+  fi
+done 
+
+# Comprobamos los resultados
+./checkResults.sh
+

@@ -1,0 +1,31 @@
+### [PT004] PERFORMANCE TEST
+# Send messages between WebSocket cameras at the same moment
+# by: Mathias Brunkow Moser
+# © CGI - ALL RIGHTS RESERVED
+###
+
+# Import the configurations
+. ../start.sh.import
+. ../../browserConfig.sh.import
+
+# Set test payload and the path of the file to execute 
+TESTID="PT004" 
+PAYLOADFILE="payload.txt"
+FILENAME="index.html"
+# Message to send
+TESTPAYLOADTEXT="It was at that moment that he learned"
+# Number of messages per Camera
+NMSGS=20
+# Set the names of the users to create.
+
+# ORIGIN CAMERAS
+OCWS1="Peter"
+OCWS2="Mark"
+OCWS3="John"
+OCWS4="Mike"
+
+# DESTINATION CAMERAS
+DCWS1="Clark"
+DCWS2="Angel"
+DCWS3="Ian"
+DCWS4="Josh"

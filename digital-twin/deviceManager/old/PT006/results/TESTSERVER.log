@@ -1,0 +1,5 @@
+2022/01/26 14:23:50|15064|37.75390625|[INFO]: Trying to start server...
+2022/01/26 14:23:50|15064|37.7734375|[INFO]: You can introduce [exit] to leave and [cameras] to list all cameras
+2022/01/26 14:23:50|15064|38.0|[EXCEPTION]:[[WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted]. 
+in main(). on int(0.5) Was not possible to parse POLLINTERVAL
+

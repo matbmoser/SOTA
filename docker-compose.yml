@@ -3,7 +3,7 @@ version: "3.9"
 services:
   mysql:
     image: mysql
-    container_name: sota-mysql-bbdd
+    container_name: mysql-bbdd
     environment:
       MYSQL_DATABASE: "sotadb"
       # So you don't have to use root, but you can if you like
@@ -17,11 +17,11 @@ services:
       - "3306:3306"
       # Where our data will be persisted
     volumes:
-      - ./sota-webapp/data:/var/lib/mysql
+      - ./data:/var/lib/mysql
 
   php-my-admin:
     image: phpmyadmin
-    container_name: sota-phpmyadmin
+    container_name: php-my-admin
     ports:
       - 7777:80
     environment:
@@ -31,17 +31,17 @@ services:
 
   # The existing database container configuration...
   php-apache:
-    container_name: sota-php-webapp
+    container_name: php-webapp
     build:
-      context: ./sota-webapp/php
+      context: ./webapp/php
     ports:
       - "8080:80"
       - "3001:8001"
       - "3000:8000"
       - "3002:8002"
     volumes:
-      - ./sota-webapp/src:/var/www/sota-webapp
-      - ./sota-webapp/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./webapp/src:/var/www/webapp
+      - ./webapp/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - mysql
     networks:
@@ -49,15 +49,15 @@ services:
       - appNet
 
   digital-twin:
-    container_name: sota-digital-twin
+    container_name: digital-twin
     build:
-      context: ./sota-digital-twin/python
+      context: ./digital-twin/python
     ports:
       - "3333:80"
     volumes:
-      - ./sota-digital-twin/src:/var/www/sota-digital-twin
-      - ./sota-digital-twin/deviceManager:/usr/src/app
-      - ./sota-digital-twin/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./digital-twin/src:/var/www/digital-twin
+      - ./digital-twin/deviceManager:/usr/src/app
+      - ./digital-twin/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - mysql
     networks:
