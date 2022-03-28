@@ -1,2 +1,2 @@
 
-py CameraManager.py -cmd
+python3 CameraManager.py -cmd

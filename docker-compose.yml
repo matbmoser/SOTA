@@ -51,9 +51,10 @@ services:
   digital-twin:
     container_name: digital-twin
     build:
-      context: ./digital-twin/python
+      context: ./digital-twin
     ports:
       - "3333:80"
+      - "8888:8888"
     volumes:
       - ./digital-twin/src:/var/www/digital-twin
       - ./digital-twin/deviceManager:/usr/src/app
@@ -73,3 +74,4 @@ networks:
 # Names our volume
 volumes:
   data:
+  apache2:

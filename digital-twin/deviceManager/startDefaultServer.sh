@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-py ServerManager.py --default
+python3 ServerManager.py --default
