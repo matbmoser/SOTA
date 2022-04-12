@@ -6,6 +6,7 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Panel from "primevue/panel";
 import Toast from 'primevue/toast';
+import Router from './route.js'
 
 import Dropdown from 'primevue/dropdown';
 
@@ -17,6 +18,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
 const app = createApp(App)
+        .use(Router)
         .use(PrimeVue)
         .use(ToastService)
         .component('Dialog', Dialog)

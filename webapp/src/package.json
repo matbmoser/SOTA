@@ -10,7 +10,14 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "serve": "php artisan serve --host 0.0.0.0"
+        "serve": "php artisan serve --host 0.0.0.0",
+        "faker": "php artisan db:seed",
+        "migrate": "php artisan migrate:fresh",
+        "controller": "php artisan make:controller ${P}Controller",
+        "factory": "php artisan make:factory ${P}Factory",
+        "completeModel": "php artisan make:model ${P} -fcsr",
+        "model": "php artisan make:model ${P}"
+
     },
     "devDependencies": {
         "autoprefixer": "^10.4.4",
@@ -35,6 +42,6 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.49.9",
         "typescript": "^4.6.2",
-        "vue-router": "^4.0.14"
+        "vue-router": "^4.0.13"
     }
 }

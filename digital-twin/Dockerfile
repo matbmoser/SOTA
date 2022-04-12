@@ -3,6 +3,7 @@ FROM php:apache
 RUN apt update \
     && apt install -y \
     g++ \
+    telnet \
     libicu-dev \
     libpq-dev \
     libzip-dev \
@@ -17,19 +18,23 @@ RUN apt update \
     pdo \
     pdo_mysql \
     && docker-php-ext-enable \
-    pdo_mysql
+    pdo_mysql\
+    mysqli
 
 
 WORKDIR /var/www/digital-twin
-RUN chmod 777 ./
-
+RUN usermod -a -G www-data root
+RUN chmod +777 ./
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY ./requirements.txt .
+RUN chmod +777 /usr/src/app 
+COPY ./python/requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY ./deviceManager/ .
-RUN chmod 777 ./*
-RUN chmod 777 /usr/src/app/ServerManager.py
+
+RUN chgrp www-data ./*
+RUN chmod g+rwxs ./*
+RUN chmod g+rwxs /usr/src/app/ServerManager.py
 RUN chgrp www-data /usr/src/app/ServerManager.py

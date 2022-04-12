@@ -4,25 +4,25 @@ DEFAULTSERVERIP = "127.0.0.1";
 DEFAULTSERVERPORT = "8080";
 window.onload = function () {
   const params = new URLSearchParams(window.location.search);
-  if (params.has("clientid") == false || params.get("clientid") == "") {
+  if (params.has("cameraid") == false || params.get("cameraid") == "") {
     document.getElementById("pagewrapper").style = "display: block!important";
     type = "manual";
   } else {
     type = "auto";
-    let clientid = params.get("clientid");
+    let cameraid = params.get("cameraid");
     document.getElementById("pagewrapper").style = "display: none!important";
     if (params.has("ip") == false) {
-      createAndConnectClient(clientid, DEFAULTSERVERIP, DEFAULTSERVERPORT);
+      createAndConnectClient(cameraid, DEFAULTSERVERIP, DEFAULTSERVERPORT);
     } else {
       let ip = params.get("ip");
       if (params.has("port") == false) {
-        createAndConnectClient(clientid, ip, DEFAULTSERVERPORT);
+        createAndConnectClient(cameraid, ip, DEFAULTSERVERPORT);
       } else {
         let port = params.get("port");
         hasClients = params.has("CAMERAS");
         hasText = params.has("text");
         if (!hasText) {
-          createAndConnectClient(clientid, ip, port);
+          createAndConnectClient(cameraid, ip, port);
           return;
         }
 
@@ -43,14 +43,14 @@ window.onload = function () {
           createAndConnectClientToClients(
             text,
             CAMERAS,
-            clientid,
+            cameraid,
             ip,
             port,
             count,
             wait
           );
         } else {
-          createAndConnectClientWithText(text, clientid, ip, port, count, wait);
+          createAndConnectClientWithText(text, cameraid, ip, port, count, wait);
         }
       }
     }

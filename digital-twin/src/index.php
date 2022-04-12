@@ -4,8 +4,8 @@
 <title>Chat JS</title>
 <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
 </head>
-<script src="assets/js/RTJPClient.js"></script>
-<script src="assets/js/RTJPHandler.js"></script>
+<script src="assets/js/CameraClient.js"></script>
+<script src="assets/js/SJMPHandler.js"></script>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/hashFunctions.js"></script>
 <script src="assets/js/printFunctions.js"></script>
@@ -51,6 +51,6 @@
 <br><br>
 <div id="output"></div>
 
-<script src="assets/js/script.js"></script>
+<script src="assets/js/main.js"></script>
 
 

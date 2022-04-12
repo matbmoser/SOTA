@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-python3 ServerManager.py --default
+echo "Starting Server... "
+python3 ServerManager.py --default \
+& echo "On PID [$!]"

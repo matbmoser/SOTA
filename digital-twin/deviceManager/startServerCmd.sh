@@ -1,2 +1,2 @@
-echo "Server Manager Open on PID $!"
+echo "Starting Server $!"
 python3 ServerManager.py  -cmd

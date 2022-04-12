@@ -1,4 +1,4 @@
 <?php
-$output = shell_exec('python3 /usr/src/app/ServerManager.py --default');
+$output = shell_exec('./openServer.sh');
 echo "<pre>$output</pre>";
 ?>

@@ -52,11 +52,18 @@ services:
     container_name: digital-twin
     build:
       context: ./digital-twin
+    environment:
+      DIVICE_MANAGER: "/usr/src/app"
+
+      DIGITAL_TWIN: "/var/www/digital-twin"
+
     ports:
       - "3333:80"
       - "8888:8888"
     volumes:
       - ./digital-twin/src:/var/www/digital-twin
+      - ./digital-twin/php/php.ini-development:/usr/local/etc/php/php.ini-development
+      - ./digital-twin/php/php.ini-production:/usr/local/etc/php/php.ini-production
       - ./digital-twin/deviceManager:/usr/src/app
       - ./digital-twin/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
@@ -74,4 +81,3 @@ networks:
 # Names our volume
 volumes:
   data:
-  apache2:

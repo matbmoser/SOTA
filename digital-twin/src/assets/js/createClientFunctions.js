@@ -1,15 +1,15 @@
 const online = new Event("isonline");
 
-async function newClient(clientid, ip, port) {
-  client = new RTJPClient(clientid);
+async function newClient(cameraid, ip, port) {
+  client = new SJMPClient(cameraid);
   client.type = type;
   client.start(ip, port);
 }
 
-async function createAndConnectClient(clientid, ip, port) {
-  if (clientid != "" && clientid != "" && port >= 0 && port <= 65535) {
+async function createAndConnectClient(cameraid, ip, port) {
+  if (cameraid != "" && cameraid != "" && port >= 0 && port <= 65535) {
     lockConfig();
-    await newClient(clientid, ip, port);
+    await newClient(cameraid, ip, port);
   } else {
     alert("[ERROR] Please insert all values!");
   }
@@ -25,13 +25,13 @@ function waitToClose() {
 async function createAndConnectClientToClients(
   text,
   CAMERAS,
-  clientid,
+  cameraid,
   ip,
   port,
   count = null,
   wait = null
 ) {
-  await createAndConnectClient(clientid, ip, port);
+  await createAndConnectClient(cameraid, ip, port);
 
   if (wait != null) {
     let res = parseInt(wait);
@@ -77,13 +77,13 @@ async function createAndConnectClientToClients(
 
 async function createAndConnectClientWithText(
   text,
-  clientid,
+  cameraid,
   ip,
   port,
   count = 1,
   wait = null
 ) {
-  await createAndConnectClient(clientid, ip, port);
+  await createAndConnectClient(cameraid, ip, port);
 
   if (wait != null) {
     var res = parseInt(wait);

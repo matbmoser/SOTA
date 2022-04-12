@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+## Ruta roles
+
+Route::get('/users', 'UserController@index');
+Route::get('/users/{id}', 'UserController@show');
+Route::post('/users', 'UserController@store');
+Route::delete('/users/{id}', 'UserController@delete');
