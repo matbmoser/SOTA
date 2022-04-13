@@ -31,7 +31,7 @@
     </body>
 </div>
 <div id="mainflow">
-    <button style="position: fixed; bottom: 20px; left: 20px;" type="button" onclick="window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/test/test.php';" id="openserver">Open Server</button> 
+    <button style="position: fixed; bottom: 20px; left: 20px;" type="button" onclick="window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/server/open.php';" id="openserver">Open Server</button> 
     <button style="position: fixed; top: 20px; right: 20px;" type="button" id="clean">Clean</button> 
     <br><br>
     <div id = "status"><span class="alert-danger">DISCONNECTED</span></div>

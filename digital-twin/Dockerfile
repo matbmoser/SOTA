@@ -4,6 +4,7 @@ RUN apt update \
     && apt install -y \
     g++ \
     telnet \
+    nmap \
     libicu-dev \
     libpq-dev \
     libzip-dev \
