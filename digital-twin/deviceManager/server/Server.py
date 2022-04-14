@@ -182,17 +182,10 @@ class RequestHandler(socketserver.BaseRequestHandler):
             self.totalmessagesProcessed += self.messagesProcessed
             self.totalduration += self.duration
 
-            # If the server is in test mode we can store the results
-            if(self.server.isTestServer):
-                # If we processed the total messages defined
-                if(self.totalmessagesProcessed >= self.server.messagesPerCamera):
-                    # Store results of the test performance in server
-                    self.server.storeResults(totalmessagesProcessed=self.totalmessagesProcessed,
-                                             totalduration=self.totalduration, mintime=self.mintime, maxtime=self.maxtime)
-            else:
-                # Print statistics after processing request (Messages Arrived and Time Duration of Processing)
-                op.printLog(logType="STATS", messageStr="Messages Processed: nmessages=["+str(
-                    self.messagesProcessed)+"];duration=["+str(self.duration)+"]")
+     
+            # Print statistics after processing request (Messages Arrived and Time Duration of Processing)
+            op.printLog(logType="STATS", messageStr="Messages Processed: nmessages=["+str(
+                self.messagesProcessed)+"];duration=["+str(self.duration)+"]")
 
     # ================================================================
     # CLOSE CONNECTION METHODS
@@ -351,7 +344,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
         self.startMsgs = datetime.now(timezone.utc)
         # Start server main thread and open connection
         self.thread = threading.Thread(
-            name=self.serverid, target=self.serve_forever, args=[self.poll_interval])
+            name=self.serverid, target=self.serve_forever, args=[self.poll_interval], daemon=False)
         self.thread.setDaemon = True  # don't hang on exit
         self.thread.start()
         if(self.thread == None):

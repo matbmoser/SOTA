@@ -44,12 +44,12 @@ async function writeToScreen(message) {
   var pre = document.createElement("p"); 
   pre.style.wordWrap = "break-word"; 
   pre.innerHTML = message; 
-  output.appendChild(pre);
+  document.getElementById("output").appendChild(pre);
 }
 
 async function writeToScreenSpan(message) {
   var pre = document.createElement("span"); 
   pre.style.wordWrap = "break-word"; 
   pre.innerHTML = message; 
-  output.appendChild(pre);
+  document.getElementById("output").appendChild(pre);
 }

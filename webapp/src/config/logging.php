@@ -12,7 +12,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option defines the default log channel that gets used when writing
-    | messages to the logs. The name specified in this option should match
+    | messages to the log. The name specified in this option should match
     | one of the channels defined in the "channels" configuration array.
     |
     */
@@ -56,13 +56,13 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('log/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('log/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
@@ -112,7 +112,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('log/laravel.log'),
         ],
     ],
 

@@ -1,0 +1,16 @@
+Starting Server Log Messages...
+[INFO]: Trying to start server...
+[INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [hola
+]
+[DEBUG]: Incoming [camera.TCPCamera.TCPCamera] Protocol Connection...
+[DEBUG]: Camera [127.0.0.1:37802], status [ONLINE] on [127.0.0.1:37802] logged in with token = [62becbabb2699f927c80fc1fc63a240d] type [<class 'protocols.TCPProtocol.TCPProtocol'>] 
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from 127.0.0.1:37802
+[DEBUG]: [NEW] RAW Connection Data Received: [hola
+]
+[DEBUG]: Incoming [camera.TCPCamera.TCPCamera] Protocol Connection...
+[DEBUG]: Camera [127.0.0.1:37804], status [ONLINE] on [127.0.0.1:37804] logged in with token = [2880b558316811ae86b74d746a8d0b13] type [<class 'protocols.TCPProtocol.TCPProtocol'>] 
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from 127.0.0.1:37804

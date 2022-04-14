@@ -13,7 +13,8 @@ class CreateUserTable extends Migration
 		$table->increments('id');
 		$table->text('name');
 		$table->string('email', 320)->unique();
-		$table->string('password',128)->comment('Encriptado con SHA512');;
+		$table->string('password',128)->comment('Encriptado con SHA512');
+        $table->string('token',128)->comment('Hash SHA256');
 		$table->timestamps();
         });
     }

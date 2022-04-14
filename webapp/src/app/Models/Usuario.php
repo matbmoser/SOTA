@@ -59,6 +59,7 @@ class Usuario extends Model
         'fechaNacimiento',
         'email',
         'password',
+        'token',
         'correoConfirmado',
         'correoConfirmadoEn',
         'fechaUltimaConexion',

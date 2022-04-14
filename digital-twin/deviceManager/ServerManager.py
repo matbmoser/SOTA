@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 # coding=UTF-8
+from email import message
+import os
 import sys
 import traceback
 from operators.op import op
@@ -143,9 +145,8 @@ class ServerManager():
     def startServer(self, serverid, serverip, serverport, serverpollinterval):
         # Set Camera id from arguments
         serverid = str(serverid)
+        op.startLog(logFile=f"log/{serverid}/serverStatus.log")
         op.printLog(logType="INFO", messageStr="Trying to start server...")
-        op.printLog(
-            logType="INFO", messageStr="You can introduce [exit] to leave and [cameras] to list all cameras")
         # Create and start the server
         server = self.newAndStart(
             serverid=serverid, ip=serverip, port=serverport, poll_interval=serverpollinterval)
@@ -153,77 +154,11 @@ class ServerManager():
         if(server == None):
             op.printLog(logType="ERROR", messageStr="Was not posible to create server [ip=("+serverip+"), port=("+str(
                 serverport)+"), poll_interval=("+str(serverpollinterval)+")]")
-            print("Closing Server...")
+            op.printLog(logType="INFO", messageStr="Closing Server...")
             return None
-
-        # Set keepAlive
-        keepAlive = True
-
-        # While the server is still running or no exit signal is sent
-        while keepAlive and (server.status == "RUNNING"):
-
-            # Read the standard input line per line
-            message = sys.stdin.readline()
-
-            # If we need to exit
-            if(message.rstrip().upper() == "EXIT"):
-                # Stop server
-                server.stop()
-                # Unset keepalive
-                keepAlive = False
-                # Exit loop
-                break
-
-            # If the message is cameras we print the list of cameras connected to server
-            if(message.rstrip().upper() == "CAMERAS"):
-                server.camerasManager.listCameras()
-
-        op.printLog(logType="INFO", messageStr="Server Closed!")
-
-    # Start test server without CMD
-    def startTestServer(self, serverid, serverip, serverport, serverpollinterval, objectiveType, objectiveNC, objectiveNM):
-
-        # Set Camera id from arguments
-        serverid = str(serverid)
-        op.printLog(logType="INFO",
-                    messageStr="Trying to start test server...")
-        op.printLog(logType="INFO",
-                    messageStr="You can introduce [exit] to leave")
-        # Create server dinamically
-        testServer = op.createClass(protocolClass=self.serversprotocolClass,
-                                    ip=serverip, port=serverport, poll_interval=serverpollinterval)
-        # Set server id
-        testServer.setServerId(serverid)
-        # Add server
-        self.addServer(testServer)
-        # Start Test Server with objectives
-        testServer.startTest(objectiveType=objectiveType,
-                             objectiveNC=objectiveNC, objectiveNM=objectiveNM)
-        # If was not posible to start
-        if(testServer == None):
-            op.printLog(logType="ERROR", messageStr="Was not posible to create test server [ip=("+serverip+"), port=("+str(
-                serverport)+"), poll_interval=("+str(serverpollinterval)+")]")
-            print("Closing Test Server...")
-            return None
-
-        # Set keepAlive
-        keepAlive = True
-
-        while keepAlive and (testServer.status == "RUNNING"):
-
-            # Read the standard input line per line
-            message = sys.stdin.readline()
-
-           # If we need to exit
-            if(message.rstrip().upper() == "EXIT"):
-                # Stop server
-                testServer.stop()
-                # Unset keepalive
-                keepAlive = False
-                # Exit loop
-                break
-
-        op.printLog(logType="INFO", messageStr="Test Server Closed!")
+        
+        op.printLog(logType="INFO", messageStr="Server is Opened in Background")
+        return server
 
     # Stop all servers in manager server list
     def stopServers(self):
@@ -375,13 +310,8 @@ def showHelp():
         + '\n\n\t-ip [ip]: IP from server to connect to.'
         + '\n\n\t-port [port]: PORT from server to connect to.'
         + '\n\n\t-poll [poll interval]: Server poll interval, time in seconds to check if server needs to shutdown.'
-        + '\n\n-> TEST ARGUMENTS DESCRIPTION: '
-        + '\n\n\t-t [test objective can be ["CAMERAS" or "MESSAGE"]]: When test mode with objectives is use this option.'
-        + '\n\n\t-oC [nº cameras]: Number of cameras that will send information. '
-        + '\n\n\t-oM [nº messages per Camera]: Number of messages sent by each Camera. '
         + '\n\n-> REQUIREMENTS: '
         + '\n\n\t[serverid] Must be filled to open server.'
-        + '\n\n\tIf TEST OBJECTIVE [-t] IS defined -oC AND -oM need to be set.'
         + '\n\n\tDefault Values if empty:'
         + '\n\n\t-----------------------------------------'
         + '\n\t| [-ip] = '+defaultip+'\t\t\t|'
@@ -458,61 +388,6 @@ def main(serverManager, arguments):
     if(pollinterval < 0):
         pollinterval = defaultpollinterval
 
-    # If the user want to start the test server with objectives
-    if ("-t" in args):
-        # Test objectives
-        objectiveTypes = ["CAMERAS", "MESSAGES"]
-        objectiveType = str(args["-t"]).upper()
-
-        # If the objectives are not valid
-        if(objectiveType not in objectiveTypes):
-            # Print error
-            op.printLog(
-                logType="ERROR", messageStr="You must indicate a valid test type objective!\n")
-            # Print help
-            showHelp()
-            return 2
-
-        # OBJECTIVE: NUMBER OF CAMERAS
-        if("-oC" not in args):
-            op.printLog(
-                logType="ERROR", messageStr="You must indicate a Camera objective number in the test server!\n")
-            # Print help
-            showHelp()
-            return 2
-
-        # Parse int
-        try:
-            objectiveNC = int(args["-oC"])
-        except:
-            op.printLog(
-                logType="ERROR", messageStr="You must indicate a valid Camera objective number in the test server!\n")
-            # Print help
-            showHelp()
-            return 2
-
-        # OBJECTIVE: MESSAGES PER Camera
-        if ("-oM" not in args):
-            op.printLog(
-                logType="ERROR", messageStr="You must indicate a valid objective message number!\n")
-            # Print help
-            showHelp()
-            return 2
-
-        # Parse int
-        try:
-            objectiveNM = int(args["-oM"])
-        except:
-            op.printLog(
-                logType="ERROR", messageStr="You must indicate a valid objective message per Camera in the test server!\n")
-            # Print help
-            showHelp()
-            return 2
-
-        # START Test Server
-        serverManager.startTestServer(serverid=serverid, serverip=ip, serverport=port, serverpollinterval=pollinterval,
-                                      objectiveType=objectiveType, objectiveNC=objectiveNC, objectiveNM=objectiveNM)
-
     # START Server
     serverManager.startServer(
         serverid=serverid, serverip=ip, serverport=port, serverpollinterval=pollinterval)
@@ -527,7 +402,10 @@ if __name__ == '__main__':
     defaultpollinterval = 0.5
     defaultprotocol = "server.WebSocketSJMPServer.WebSocketSJMPServer"
 
+    
     serverManager = ServerManager(serversprotocolClass=defaultprotocol)
 
     exitCode = main(serverManager=serverManager, arguments=sys.argv[1:])
-    sys.exit(exitCode)
+    
+    sys.exit(0)
+    

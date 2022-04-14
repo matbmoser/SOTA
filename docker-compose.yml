@@ -53,7 +53,7 @@ services:
     build:
       context: ./digital-twin
     environment:
-      DIVICE_MANAGER: "/usr/src/app"
+      DEVICE_MANAGER: "/usr/src/app"
 
       DIGITAL_TWIN: "/var/www/digital-twin"
 
