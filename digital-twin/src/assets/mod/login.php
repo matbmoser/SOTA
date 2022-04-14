@@ -1,6 +1,8 @@
 
 <?php
-if (empty($_POST['email']) || empty($_POST['pass']) || $_POST['uuid'] != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'){
+$configs = include('config.php');
+
+if (empty($_POST['email']) || empty($_POST['pass']) || $_POST['uuid'] != $configs["safetyUUID"]){
 
     echo json_encode(array('success' => '0'));
 
@@ -21,4 +23,3 @@ if (empty($_POST['email']) || empty($_POST['pass']) || $_POST['uuid'] != 'e3b0c4
         echo json_encode(array('success' => '-1'));
     }
 }
-?>

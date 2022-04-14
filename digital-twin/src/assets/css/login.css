@@ -13,6 +13,9 @@
     background: #212529!important;
     color: white!important;
 }
-#demo{
+#loading{
     display: none!important;
+}
+.loginlogo{
+    height: 10em;
 }

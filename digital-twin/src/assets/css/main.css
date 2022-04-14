@@ -2,6 +2,15 @@
 *{
     font-family: 'Open Sans', sans-serif;
 }
+:root{
+    --bg-color: #212529;
+    --color: #f8f9fa;
+}
+body {
+    background-color:var(--bg-color)!important;
+    color: var(--color)!important;
+    transition: all .25s ease;
+}
 .hidden {
     display:none!important
 }
