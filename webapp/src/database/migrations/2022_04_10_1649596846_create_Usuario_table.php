@@ -12,16 +12,17 @@ class CreateUsuarioTable extends Migration
 
 		$table->increments('id');
 		$table->text('nombre');
-		$table->string('username',50)->unique();
 		$table->text('apellido1');
 		$table->text('apellido2');
+		$table->string('username',50)->unique();
 		$table->text('documento');
 		$table->text('telefono');
 		$table->string('email', 320)->unique();
-		$table->string('password',128)->comment('Encriptado con SHA512');;
+		$table->string('password',128)->comment('Encriptado con SHA512');
+		$table->string('token',64)->comment('Hash SHA256');
 		$table->date('fechaNacimiento');
 		$table->boolean('correoConfirmado');
-		$table->datetime('correoConfirmadoEn');
+		$table->datetime('correoConfirmadoEn')->nullable();
 		$table->datetime('fechaUltimaConexion');
 		$table->integer('idRol',)->unsigned();
 		$table->foreign('idRol')->references('id')->on('Rol')->onUpdate('CASCADE')->onDelete('CASCADE');

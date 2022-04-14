@@ -1,3 +1,0 @@
-export DEFAULTSERVERFILENAME="ServerManager.py --default"
-export SERVERFILENAME="ServerManager.py"
-export DEVICE_MANAGER=/usr/src/app

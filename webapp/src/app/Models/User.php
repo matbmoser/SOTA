@@ -18,6 +18,7 @@ class User extends Model
         'name',
         'email',
         'password',
+        'token'
     ];
 
     /**

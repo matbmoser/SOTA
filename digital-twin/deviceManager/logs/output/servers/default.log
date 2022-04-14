@@ -1,3 +1,0 @@
-[INFO]: Trying to start server...
-[INFO]: You can introduce [exit] to leave and [cameras] to list all cameras
-[INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].

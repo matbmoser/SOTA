@@ -1,7 +1,17 @@
+<?php
+
+
+include("assets/mod/connect.php");
+if (empty($_SESSION['token']) || empty($_SESSION['username'])){
+    header('Location: login/');
+} 
+
+?>
+
 <!DOCTYPE html>
 <head>
 <meta charset = "utf-8" />
-<title>Chat JS</title>
+<title>Digital Twin</title>
 <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
 </head>
 <script src="assets/js/CameraClient.js"></script>
@@ -31,7 +41,7 @@
     </body>
 </div>
 <div id="mainflow">
-    <button style="position: fixed; bottom: 20px; left: 20px;" type="button" onclick="window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/server/open.php';" id="openserver">Open Server</button> 
+    <button style="position: fixed; bottom: 20px; left: 20px;" type="button" onclick="window.location.href = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>/serverController/open.php?id=matbmoser&token=fafed81ddcaaf718fd30ca34dbe60a24222478c12072f3856256c4deac54f732a5acb9d44cb134f7f2e3847f4451c157518be9f9b47e8a704201b28ee03dd8e9';" id="openserver">Open Server</button> 
     <button style="position: fixed; top: 20px; right: 20px;" type="button" id="clean">Clean</button> 
     <br><br>
     <div id = "status"><span class="alert-danger">DISCONNECTED</span></div>
