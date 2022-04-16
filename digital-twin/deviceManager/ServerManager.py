@@ -6,6 +6,7 @@ import os
 import sys
 import traceback
 from operators.op import op
+from config import globalConfig
 serverManager = None
 
 
@@ -156,8 +157,9 @@ class ServerManager():
                 serverport)+"), poll_interval=("+str(serverpollinterval)+")]")
             op.printLog(logType="INFO", messageStr="Closing Server...")
             return None
-        
-        op.printLog(logType="INFO", messageStr="Server is Opened in Background")
+
+        op.printLog(logType="INFO",
+                    messageStr="Server is Opened in Background")
         return server
 
     # Stop all servers in manager server list
@@ -397,15 +399,13 @@ def main(serverManager, arguments):
 if __name__ == '__main__':
     # SET DEFAULT SERVER CONFIGURATIONS:
     # DEFAULT server configuration
-    defaultip = "127.0.0.1"
-    defaultport = 8888
-    defaultpollinterval = 0.5
-    defaultprotocol = "server.WebSocketSJMPServer.WebSocketSJMPServer"
+    defaultip = globalConfig.defaultip
+    defaultport = globalConfig.defaultport
+    defaultpollinterval = globalConfig.defaultpollinterval
+    defaultprotocol = globalConfig.defaultserverprotocol
 
-    
     serverManager = ServerManager(serversprotocolClass=defaultprotocol)
 
     exitCode = main(serverManager=serverManager, arguments=sys.argv[1:])
-    
+
     sys.exit(0)
-    

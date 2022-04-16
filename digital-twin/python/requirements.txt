@@ -1,1 +1,3 @@
 psutil
+rsa
+mysql-connector-python

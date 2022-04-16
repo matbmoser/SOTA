@@ -6,7 +6,7 @@ from operators.op import op
 import json
 import fileinput
 from datetime import datetime, timezone
-
+from config import globalConfig
 
 from camera.BaseCameraManager import BaseCameraManager
 
@@ -865,10 +865,10 @@ def main(cameraManager, arguments):
 if __name__ == '__main__':
     # SET DEFAULT Camera CONFIGURATIONS:
     # DEFAULT server configuration
-    defaultip = "127.0.0.1"
-    defaultport = 8888
+    defaultip = globalConfig.defaultip
+    defaultport = globalConfig.defaultport
     # DEFAULT Camera configurations
-    defaultprotocol = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+    defaultprotocol = globalConfig.defaultcamaraprotocol
 
     # ------
     cameraManager = CameraManager(cameraprotocolClass=defaultprotocol)
