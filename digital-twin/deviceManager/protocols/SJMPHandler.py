@@ -80,8 +80,8 @@ class handler():
 
         # Check for flag and call the designated handler
 
-        if(self.packet.flag == "MSG"):
-            tmpOutputMessage = self.processMSGFlag()
+        if(self.packet.flag == "IN"):
+            tmpOutputMessage = self.processINFlag()
 
         elif(self.packet.flag == "SYN"):
             tmpOutputMessage = self.processSYNFlag()
@@ -128,15 +128,15 @@ class handler():
         # Camera Must be active
         if(self.camera == None or self.packet == None):
             return None
-        # If token is not in ok packet
-        if(self.packet.token == None):
+        # If sessionid is not in ok packet
+        if(self.packet.sessionid == None):
             return None
 
         # Store session id
-        self.camera.token = self.packet.token
+        self.camera.sessionid = self.packet.sessionid
         self.camera.status = "ONLINE"
         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
-                    self.camera.status+"] logged in with token = ["+self.camera.token+"] in ["+self.camera.serverkey+"].")
+                    self.camera.status+"] logged in with sessionid = ["+self.camera.sessionid+"] in ["+self.camera.serverkey+"].")
 
         return None
 
@@ -148,13 +148,13 @@ class handler():
             return None
 
         self.camera.cameraid = self.packet.cameraid
-        tmpOutputMessage = packet().dumpPacket(flag="OK", device_time=str(
-            datetime.timestamp(datetime.now(timezone.utc))), token=self.camera.token)
+        tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
+            datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid)
 
         return tmpOutputMessage.messageToJSONString()
 
-    # Process MSG flag
-    def processMSGFlag(self):
+    # Process IN flag
+    def processINFlag(self):
 
         # Server Must be active
         if(self.server == None):
@@ -163,7 +163,7 @@ class handler():
             return None
         # Check if origin Camera is authenticated
         originCamera = self.server.camerasManager.getBySessionId(
-            token=self.packet.token)
+            sessionid=self.packet.sessionid)
         # We must return an error if not
 
         tmpOutputPacket = packet()
@@ -171,13 +171,14 @@ class handler():
         # Return to Camera a ERROR if the sending Camera does not exists
         if (originCamera == None):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", message="Origin Camera with token ["+self.packet.token+"] does not exists!")
+                flag="ERR", message="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
 
-        # Check if destination Camera exists
+        # Check if the plate detected by the camera exists
         destinationCamera = self.server.camerasManager.getByCameraId(
-            cameraid=self.packet.cameraid)
+            cameraid=self.packet.matricula)
+
         # We must return an error if not
         if (destinationCamera == None):
             op.printLog(
@@ -190,7 +191,7 @@ class handler():
         # SENDING MESSAGE TO ANOTHER Camera ---------------------------------
         # Create response with message sent by the Camera
         tmpSJMPResponse = packet().dumpPacket(flag="MSG", message=self.packet.message, srv_time=self.packet.srv_time,
-                                              cameraid=originCamera.cameraid, device_time=str(self.packet.device_time))
+                                              cameraid=originCamera.cameraid, clt_time=str(self.packet.clt_time))
         # Add new packet to the destination Camera's OutputMessages list
         destinationCamera.addOutputMessage(
             value=tmpSJMPResponse.messageToJSONString())
@@ -234,13 +235,22 @@ class packet():
 
     :attr str|datetime.timpestamp srv_time: Contains the server timestamp.
 
-    :attr str|datetime.timpestamp device_time: Contains the device timestamp.
+    :attr str|datetime.timpestamp clt_time: Contains the device timestamp.
 
     :attr str cameraid: Contains the Camera identification unique key
 
-    :attr str token: Contains the Camera session identification unique key
+    :attr str sessionid: Contains the Camera session identification unique key
 
-    :attr str message: Contains the packet messages.
+    :attr str response: Contains the packet response.
+
+    :attr str matricula: Contains the packet matricula.
+
+    :attr str position: Contains the camara type or position ["entrance", "exit", "both"].
+
+    :attr str token: Contains the camara client public key.
+
+    :attr str secret: Contains the server public key.
+
 
 
     Functionalities ::
@@ -268,18 +278,28 @@ class packet():
 
         # Flag variables
         self.flag = ""
-        self.flags = ["OK", "ERR", "ACK", "SYN", "MSG", "RCN", "FIN"]
+        self.flags = ["OK", "ERR", "ACK", "SYN", "IN", "OUT", "FIN"]
+
+        self.position = ""
+        self.positions = ["entrance", "exit", "both"]
 
         # Time variables
         self.srv_time = ""
-        self.device_time = ""
+        self.clt_time = ""
 
         # Camera identification variables
         self.cameraid = ""
-        self.token = ""
+        self.sessionid = ""
 
         # Content of packet
-        self.message = ""
+        self.response = ""
+        self.matricula = ""
+
+        # Encryption
+        # Client Public Key
+        self.token = ""
+        # Server Public Key
+        self.secret = ""
 
     # ================================================================
     # LOAD METHODS
@@ -318,19 +338,37 @@ class packet():
             self.srv_time = str(datetime.timestamp(datetime.now(timezone.utc)))
 
         # Get Camera Time
-        if "device-time" in data:
-            self.device_time = op.valueEmpty(data["device-time"])
+        if "clt-time" in data:
+            self.clt_time = op.valueEmpty(data["clt-time"])
 
         # Store rest of attribute if not empty
         if "cameraid" in data:
             self.cameraid = op.valueEmpty(data["cameraid"])
 
+        # Store rest of attribute if not empty
+        if "position" in data:
+            if data["position"] not in self.positions:
+                return None
+            self.position = op.valueEmpty(data["position"])
+
+        # Store rest of attribute if not empty
+        if "matricula" in data:
+            self.matricula = op.valueEmpty(data["matricula"])
+
+        # Store rest of attribute if not empty
+        if "secret" in data:
+            self.secret = op.valueEmpty(data["secret"])
+
+        # Store rest of attribute if not empty
         if "token" in data:
             self.token = op.valueEmpty(data["token"])
 
+        if "sessionid" in data:
+            self.sessionid = op.valueEmpty(data["sessionid"])
+
         # Get the message
-        if "message" in data:
-            self.message = op.valueEmpty(data["message"])
+        if "response" in data:
+            self.response = op.valueEmpty(data["response"])
 
         return self
 
@@ -338,7 +376,7 @@ class packet():
     # DUMP PACKET METHODS
 
     # Store packet params in the structure
-    def dumpPacket(self, flag=None, cameraid=None, token=None, srv_time=None, device_time=None, message="Hay, Camera!"):
+    def dumpPacket(self, flag=None, cameraid=None, sessionid=None, srv_time=None, clt_time=None, response="Hay, Camera!", position=None, token=None, secret=None, matricula=None):
 
         # Store Flag
         if flag != None:
@@ -348,12 +386,28 @@ class packet():
         if self.flag == "" or self.flag == None or self.flag not in self.flags:
             return False
 
-        # Store cameraid and token
+        if position != None:
+            if self.position not in self.positions:
+                return False
+            self.position = position
+        # Store matricula
+        if secret != None:
+            self.secret = secret
+
+        # Store matricula
+        if token != None:
+            self.token = token
+
+        # Store cameraid and sessionid
+        if matricula != None:
+            self.matricula = matricula
+
+        # Store cameraid and sessionid
         if cameraid != None:
             self.cameraid = cameraid
 
-        if token != None:
-            self.token = token
+        if sessionid != None:
+            self.sessionid = sessionid
 
         # Store server time if is not specified
         if (srv_time != None and srv_time != False):
@@ -364,12 +418,12 @@ class packet():
             self.srv_time = None
 
         # Store device time
-        if device_time != None:
-            self.device_time = device_time
+        if clt_time != None:
+            self.clt_time = clt_time
 
         # Store packet message
-        if message != None:
-            self.message = message
+        if response != None:
+            self.response = response
 
         # return packet object
         return self
@@ -392,16 +446,12 @@ class packet():
             packet["flag"] = self.flag
 
             # Depending on the flag we must store some fields or not
-            if(self.flag == "MSG"):
-                packet["device-time"] = self.device_time
-                if(self.token != "" and self.token != None):
-                    packet["token"] = self.token
-                # If the message is not from the server the message will have the srv-time when it arrived
-                if(self.srv_time != "" and self.srv_time != None):
-                    packet["srv-time"] = self.srv_time
+            if(self.flag == "IN" or self.flag == "OUT"):
+                packet["clt-time"] = self.clt_time
+                if(self.sessionid != "" and self.sessionid != None):
+                    packet["sessionid"] = self.sessionid
                 # Camera to send and Message
-                packet["cameraid"] = self.cameraid
-                packet["message"] = self.message
+                packet["matricula"] = self.matricula
                 return packet
 
             if(self.flag == "OK"):
@@ -409,14 +459,18 @@ class packet():
                 if(self.srv_time != None):
                     packet["srv-time"] = self.srv_time
                 # Camera to send
-                packet["token"] = self.token
-
+                packet["sessionid"] = self.sessionid
+                packet["secret"] = self.secret
                 return packet
 
             if(self.flag == "SYN"):
-                packet["device-time"] = self.device_time
+                packet["clt-time"] = self.clt_time
                 # Camera to send
                 packet["cameraid"] = self.cameraid
+                # Camara Cliente Public Key
+                packet["token"] = self.token
+                # If is entrance, exit or both
+                packet["position"] = self.position
                 return packet
 
             # =======
@@ -424,7 +478,7 @@ class packet():
             # =======
             # If the server is sending a message as Server
             packet["srv-time"] = self.srv_time
-            packet["message"] = self.message
+            packet["response"] = self.response
 
             # return the packet dic object
             return packet

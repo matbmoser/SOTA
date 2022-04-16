@@ -31,7 +31,7 @@
 2022/02/10 12:22:48|12904|38.4453125|[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
 2022/02/10 12:22:48|12904|38.4453125|[WARNING]: Something went wrong! BaseProtocol.loadRequest()
 2022/02/10 12:22:48|12904|38.4453125|[STATS]: Messages Processed: nmessages=[11];duration=[0:00:00.097740]
-2022/02/10 12:22:48|12904|38.44140625|[INFO]: Camera [Mike] Reconnected Successfully! With token = [33781c67610c1d3fc6e735e2d0a25995].
+2022/02/10 12:22:48|12904|38.44140625|[INFO]: Camera [Mike] Reconnected Successfully! With sessionid = [33781c67610c1d3fc6e735e2d0a25995].
 2022/02/10 12:22:48|12904|38.4453125|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000997]
 2022/02/10 12:22:48|12904|38.4453125|[STATS]: Messages Processed: nmessages=[46];duration=[0:00:00.005984]
 2022/02/10 12:22:48|12904|38.44921875|[INFO]: Connection with [Mike] is Closed

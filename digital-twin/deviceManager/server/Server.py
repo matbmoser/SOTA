@@ -108,14 +108,14 @@ class RequestHandler(socketserver.BaseRequestHandler):
 
     # Setups the Camera using the protocol
     def setupCamera(self, protocolClass):
-        """OVERRIDE THIS METHOD WITH DESIRED Camera PROTOCOL token SETUP"""
+        """OVERRIDE THIS METHOD WITH DESIRED Camera PROTOCOL sessionid SETUP"""
 
         # Set session id
         tmpSessionId = str(hashlib.md5((self.client_address[0] + ":" + str(
             self.client_address[1]) + ":" + str(datetime.now(timezone.utc))).encode()).hexdigest())
         # Create or Reconnect Camera
         tmpCamera = self.server.camerasManager.createOrGetCamera(
-            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, token=tmpSessionId)
+            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, sessionid=tmpSessionId)
 
         return tmpCamera
 
@@ -182,7 +182,6 @@ class RequestHandler(socketserver.BaseRequestHandler):
             self.totalmessagesProcessed += self.messagesProcessed
             self.totalduration += self.duration
 
-     
             # Print statistics after processing request (Messages Arrived and Time Duration of Processing)
             op.printLog(logType="STATS", messageStr="Messages Processed: nmessages=["+str(
                 self.messagesProcessed)+"];duration=["+str(self.duration)+"]")

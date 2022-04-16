@@ -1,7 +1,7 @@
 class HTTPRequest{
 
     
-    static async POST(url, data) {
+    static async POST(url, data, tag) {
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         xhr.open("POST", url);
@@ -9,7 +9,7 @@ class HTTPRequest{
         xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
         xhr.setRequestHeader("cache-control", "no-cache");
 
-        xhr.onload = () => callback(xhr.responseText);
+        xhr.onload = () => callback(xhr.responseText,tag);
 
         xhr.send(data); 
         

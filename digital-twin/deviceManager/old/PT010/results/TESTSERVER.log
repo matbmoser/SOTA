@@ -3,12 +3,12 @@
 2022/01/26 14:22:46|12292|38.578125|[INFO]: NEW SERVER CREATED!: name=[TESTSERVER], ip=[127.0.0.1], port=[7777], poll_interval=[0.5]. [None].].
 2022/01/26 14:22:46|12292|38.765625|[INFO]: Incoming [TCPSJMPCamera] Protocol Connection...
 2022/01/26 14:22:46|12292|38.78125|[WARNING]: BaseCamerasManager.getByCameraId(cameraid=[Clark]). The Camera cameraid [Clark] don't exist!
-2022/01/26 14:22:46|12292|38.83203125|[INFO]: BaseCamerasManager.createOrGetCamera(cameraid=[Clark]). [NEW] Creating new Camera [Clark] with token = [47f700f45622b93a3ba63f20e5f000be]
+2022/01/26 14:22:46|12292|38.83203125|[INFO]: BaseCamerasManager.createOrGetCamera(cameraid=[Clark]). [NEW] Creating new Camera [Clark] with sessionid = [47f700f45622b93a3ba63f20e5f000be]
 2022/01/26 14:22:46|12292|38.83203125|[INFO]: [TESTSERVER]-[127.0.0.1:7777] > Received one request from Clark
 2022/01/26 14:22:46|12292|38.84375|[STATS]: Messages Proccessed: nmessages=[1];received=[2022-01-26 13:22:51.557312];processed=[2022-01-26 13:22:51.557312];duration=[0:00:00]
 2022/01/26 14:22:46|12292|38.87109375|[INFO]: Incoming [WebSocketSJMPCamera] Protocol Connection...
 2022/01/26 14:22:46|12292|38.90234375|[WARNING]: BaseCamerasManager.getByCameraId(cameraid=[DEFAULT1234]). The Camera cameraid [DEFAULT1234] don't exist!
-2022/01/26 14:22:46|12292|38.96875|[INFO]: BaseCamerasManager.createOrGetCamera(cameraid=[DEFAULT1234]). [NEW] Creating new Camera [DEFAULT1234] with token = [624558201df2d71c335cfae2af8dd082]
+2022/01/26 14:22:46|12292|38.96875|[INFO]: BaseCamerasManager.createOrGetCamera(cameraid=[DEFAULT1234]). [NEW] Creating new Camera [DEFAULT1234] with sessionid = [624558201df2d71c335cfae2af8dd082]
 2022/01/26 14:22:46|12292|38.96875|[INFO]: [TESTSERVER]-[127.0.0.1:7777] > Received one request from DEFAULT1234
 2022/01/26 14:22:46|12292|39.00390625|[EXCEPTION]:[unsupported operand type(s) for -: 'datetime.datetime' and 'NoneType']. 
 BaseProtocol.processOutputBuffer()

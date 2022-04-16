@@ -8,12 +8,12 @@ Camera CONNECTED:
 Camera [Angel], status [CONNECTED] on [127.0.0.1:54614] type [<class 'TCPSJMPProtocol.TCPSJMPProtocol'>] in [127.0.0.1:7777] 
 2022/01/25 14:09:47|14968|37.76171875|Camera [Angel] listening in [<class 'TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-Angel-127.0.0.1:7777]
 2022/01/25 14:09:47|14968|37.83984375|[RECEIVED]: self.rawdata=[
-b'{"flag": "OK", "srv-time": "1643112590.298476", "token": "da4dd9fefd7b013a90b894fc1d5c2bdc"}\x00n'
+b'{"flag": "OK", "srv-time": "1643112590.298476", "sessionid": "da4dd9fefd7b013a90b894fc1d5c2bdc"}\x00n'
 2022/01/25 14:09:47|14968|37.83984375|]
 2022/01/25 14:09:47|14968|37.83984375|status=[MESSAGE ARRIVED]=[
-b'{"flag": "OK", "srv-time": "1643112590.298476", "token": "da4dd9fefd7b013a90b894fc1d5c2bdc"}'
+b'{"flag": "OK", "srv-time": "1643112590.298476", "sessionid": "da4dd9fefd7b013a90b894fc1d5c2bdc"}'
 2022/01/25 14:09:47|14968|37.83984375|]
-2022/01/25 14:09:47|14968|37.859375|Camera [Angel] status [ONLINE] logged in with token = [da4dd9fefd7b013a90b894fc1d5c2bdc] in [127.0.0.1:7777].
+2022/01/25 14:09:47|14968|37.859375|Camera [Angel] status [ONLINE] logged in with sessionid = [da4dd9fefd7b013a90b894fc1d5c2bdc] in [127.0.0.1:7777].
 2022/01/25 14:09:47|14968|37.859375|Message Proccessed INFO: received=[2022-01-25 13:09:50.393223]; processed=[2022-01-25 13:09:50.747277]; duration=[0:00:00.354054]
 2022/01/25 14:09:47|14968|37.859375|[RECEIVED]: self.rawdata=[
 b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned0"}\x00n'

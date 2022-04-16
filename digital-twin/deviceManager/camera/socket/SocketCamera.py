@@ -44,9 +44,9 @@ class SocketCamera(Camera):
     [More Attributes can be added]
     '''
 
-    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, token=None):
+    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, sessionid=None):
         # Call super of BaseCamera
-        super().__init__(ip=ip, port=port, cameraid=cameraid, token=token)
+        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
 
         # Server configurations
         self.serverip = serverip

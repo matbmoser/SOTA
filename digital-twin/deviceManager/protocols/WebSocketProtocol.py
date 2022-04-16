@@ -197,7 +197,7 @@ class WebSocketProtocol(Protocol):
                         tmpResponse.requestVersion = rawMessage.version
                         # If a subprotocol exists
                         tmpResponse.generateSubprotocolResponse(
-                            subprotocol=self.handler.subprotocol, token=self.camera.token)
+                            subprotocol=self.handler.subprotocol, sessionid=self.camera.sessionid)
                         # Generate Handshake
                         tmpResponse.generateHandshake(acceptKey=self.acceptKey)
                         # Clean the Input Buffer
@@ -765,7 +765,7 @@ class WebSocketHTTPResponse(HTTPMessage):
 
     # Generate the subprotocol response
 
-    def generateSubprotocolResponse(self, subprotocol=None, token=None):
+    def generateSubprotocolResponse(self, subprotocol=None, sessionid=None):
         # Sub protocol configuration
 
         # If in the handshake we include a subprotocol we must return it

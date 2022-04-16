@@ -37,13 +37,13 @@ class BaseCameraManager():
 
     # Method responsible to get Camera by session id
     # (Returns Camera and None if does not exists)
-    def getBySessionId(self, token):
+    def getBySessionId(self, sessionid):
         for cameraid in self.Cameras:
             try:
                 # Get Camera
                 camera = self.Cameras[cameraid]
                 # Check if cameraid is the same
-                if camera.token == token:
+                if camera.sessionid == sessionid:
                     return camera  # Return Camera if not
             except Exception:
                 continue  # If the object has no session id
@@ -65,7 +65,7 @@ class BaseCameraManager():
 
     # Creates or gets Camera if already exists
     # (Returns new Camera)
-    def createOrGetCamera(self, protocolClass=None, ip='localhost', port=0, cameraid=None, token=None):
+    def createOrGetCamera(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None):
 
         # Mark tmp var as none
         oldCamera = None
@@ -77,7 +77,7 @@ class BaseCameraManager():
 
             # Camera that is connecting [Can use another protocol than the old Camera]
             newCamera = self.new(protocolClass=protocolClass,
-                                 ip=ip, port=port, cameraid=cameraid, token=token)
+                                 ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
 
             # If Camera does not exists we continue and wait for new messages
             if(oldCamera == None):
@@ -106,7 +106,7 @@ class BaseCameraManager():
 
         except Exception as e:
             op.printLog(logType="CRITICAL", e=e, messageStr="\nBaseCamerasManager.createOrGetCamera(ip=" + ip + ", port=" + str(port) +
-                        ", cameraid=[" + (cameraid if cameraid != None else "None") + "], token=[" + (token if token != None else "None") + "])")
+                        ", cameraid=[" + (cameraid if cameraid != None else "None") + "], sessionid=[" + (sessionid if sessionid != None else "None") + "])")
             traceback.print_exc()
 
         return newCamera
@@ -116,13 +116,13 @@ class BaseCameraManager():
 
     # Method responsible to create new Camera
     # (Returns new Camera)
-    def new(self, protocolClass=None, ip='localhost', port=0, cameraid=None, token=None):
+    def new(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None):
         # If no class type is defined use default
         if protocolClass == None:
             protocolClass = self.cameraprotocolClass
         # Create the Camera dynamicaly
         tmpCamera = op.createClass(
-            newClass=protocolClass, ip=ip, port=port, cameraid=cameraid, token=token)
+            newClass=protocolClass, ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
         # Add Camera to the list
         self.addCamera(camera=tmpCamera)
         # Set online
@@ -163,14 +163,14 @@ class BaseCameraManager():
 
     # Deletes Camera by session id
     # (RETURN TRUE IF SUCESSFULL, NONE IF NOT)
-    def deleteCameraBySessionId(self, token):
+    def deleteCameraBySessionId(self, sessionid):
         for cameraid in self.Cameras:
             # TO REVIEW
             try:
                 # Get Camera
                 camera = self.Cameras[cameraid]
                 # Check if cameraid is the same
-                if camera.token == token:
+                if camera.sessionid == sessionid:
                     # Delete Camera
                     del self.Cameras[cameraid]
                     return True

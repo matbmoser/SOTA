@@ -8,12 +8,12 @@ Camera CONNECTED:
 Camera [Clark], status [CONNECTED] on [127.0.0.1:54612] type [<class 'TCPSJMPProtocol.TCPSJMPProtocol'>] in [127.0.0.1:7777] 
 2022/01/25 14:09:47|21476|37.84765625|Camera [Clark] listening in [<class 'TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-Clark-127.0.0.1:7777]
 2022/01/25 14:09:47|21476|37.92578125|[RECEIVED]: self.rawdata=[
-b'{"flag": "OK", "srv-time": "1643112589.884581", "token": "196fdd6efc318fde47c76d6b427fab98"}\x00n'
+b'{"flag": "OK", "srv-time": "1643112589.884581", "sessionid": "196fdd6efc318fde47c76d6b427fab98"}\x00n'
 2022/01/25 14:09:47|21476|37.92578125|]
 2022/01/25 14:09:47|21476|37.92578125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "OK", "srv-time": "1643112589.884581", "token": "196fdd6efc318fde47c76d6b427fab98"}'
+b'{"flag": "OK", "srv-time": "1643112589.884581", "sessionid": "196fdd6efc318fde47c76d6b427fab98"}'
 2022/01/25 14:09:47|21476|37.92578125|]
-2022/01/25 14:09:47|21476|37.9453125|Camera [Clark] status [ONLINE] logged in with token = [196fdd6efc318fde47c76d6b427fab98] in [127.0.0.1:7777].
+2022/01/25 14:09:47|21476|37.9453125|Camera [Clark] status [ONLINE] logged in with sessionid = [196fdd6efc318fde47c76d6b427fab98] in [127.0.0.1:7777].
 2022/01/25 14:09:47|21476|37.9453125|Message Proccessed INFO: received=[2022-01-25 13:09:49.957386]; processed=[2022-01-25 13:09:50.173808]; duration=[0:00:00.216422]
 2022/01/25 14:09:47|21476|37.9453125|[RECEIVED]: self.rawdata=[
 b'{"flag": "MSG", "device-time": "1643116203223", "srv-time": 1643112603.394517, "cameraid": "Peter", "message": "It was at that moment that he learned0"}\x00n'

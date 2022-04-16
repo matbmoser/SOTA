@@ -1,12 +1,17 @@
 <?php
-include("assets/mod/connect.php");
-include("assets/mod/session.php");
-include("assets/mod/token.php");
+$configs = include('../assets/mod/config.php');
+$dbconfig = include("../assets/mod/db.config.php");
+include("../assets/mod/connect.php");
+include("../assets/mod/session.php");
+
 if (empty($_SESSION['token']) || empty($_SESSION['username'])){
     header('Location: ../login/');
 } 
+include("../assets/mod/token.php");
 
 ?>
+
+
 
 <script src="../assets/js/HTTPRequest.js"></script>
 <script src="../assets/js/ServerConnectionManager.js"></script>

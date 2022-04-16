@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_COOKIE["PHPSESSID"])){
-        if (isset($_COOKIE["__chgn"])&&isset($_COOKIE["__efbr"])) {
+        if (isset($_COOKIE["__chgn"])) {
             if($_COOKIE["__chgn"] != "" || $_COOKIE["__efbr"] != "") {
                 require("class.Encryption.php");
                 $password = $_COOKIE["PHPSESSID"];

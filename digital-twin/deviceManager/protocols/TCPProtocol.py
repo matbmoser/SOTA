@@ -149,14 +149,14 @@ class TCPProtocol(Protocol):
 
                     # Just return handshake
                     if(elements["message"] == "Hello, Server!"):
-                        tmpOutputMessage = "message=Welcome Camera!;token=" + \
-                            str(self.camera.token)+";srv-time=" + \
+                        tmpOutputMessage = "message=Welcome Camera!;sessionid=" + \
+                            str(self.camera.sessionid)+";srv-time=" + \
                             str(datetime.timestamp(datetime.now(timezone.utc)))
                     elif(elements["message"] == "Welcome Camera!"):
-                        self.camera.token = elements["token"]
+                        self.camera.sessionid = elements["sessionid"]
                         self.camera.status = "ONLINE"
                         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
-                                    self.camera.status+"] logged in with token = ["+self.camera.token+"] in ["+self.camera.serverkey+"].")
+                                    self.camera.status+"] logged in with sessionid = ["+self.camera.sessionid+"] in ["+self.camera.serverkey+"].")
                         tmpOutputMessage = None
 
                     # EXAMPLE ==========================================================

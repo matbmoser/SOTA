@@ -186,12 +186,12 @@ class CameraManager(BaseCameraManager):
 
     # Method responsible to create new Camera
     # (Returns new Camera)
-    def new(self, protocolClass=None, cameraid="", serverip='127.0.0.1', serverport=8080, ip="", port="", token=None):
+    def new(self, protocolClass=None, cameraid="", serverip='127.0.0.1', serverport=8080, ip="", port="", sessionid=None):
         if protocolClass == None:
             protocolClass = self.cameraprotocolClass
 
         tmpCamera = op.createClass(newClass=protocolClass, serverip=serverip,
-                                   serverport=serverport, ip=ip, port=port, cameraid=cameraid, token=token)
+                                   serverport=serverport, ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
         self.addCamera(camera=tmpCamera)
         op.printLog(logType="DEBUG", messageStr="SocketCamerasManager.new(protocolClass="+protocolClass +
                     ", cameraid=["+tmpCamera.cameraid+"], serverip=[" + serverip + "], serverport=[" + str(serverport) + "].")
@@ -199,10 +199,10 @@ class CameraManager(BaseCameraManager):
 
     # Method responsible to connect a Camera to server
     # (Returns the Camera if connected and None if not)
-    def newAndConnect(self, protocolClass=None, cameraid=None, serverip='127.0.0.1', serverport=8080, token=None):
+    def newAndConnect(self, protocolClass=None, cameraid=None, serverip='127.0.0.1', serverport=8080, sessionid=None):
 
         tmpCamera = self.new(protocolClass=protocolClass, cameraid=cameraid,
-                             serverip=serverip, serverport=serverport, token=token)
+                             serverip=serverip, serverport=serverport, sessionid=sessionid)
         res = tmpCamera.connect()
         if(res):
             op.printLog(logType="DEBUG", messageStr=tmpCamera.toString())

@@ -1,12 +1,9 @@
 <?php
-    $host_db    = "172.25.0.2";
-    $user_db    = "root";
-    $pass_db    = "s0t42022";
-    $db_name    = "sotadb";
-    $conexion   = new mysqli($host_db, $user_db, $pass_db, $db_name);
+
+    $conexion   = new mysqli($dbconfig["host"], $dbconfig["user"], $dbconfig["pass"], $dbconfig["name"]);
     $acentos    = $conexion->query("SET NAMES 'utf8'");
     if ($conexion->connect_error) {
-        echo json_encode(array('success' => 0));
+        echo json_encode(array('responseCode' => $configs["connectionFailToken"]));
         die("La conexion falló: " . $conexion->connect_error);
     }
 /** MathiasBrunkowMosermatbmoser07160465J64763778mathiasmoser@outlook.com

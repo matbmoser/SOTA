@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. config.import
+. ./config.import
 
 ## GET PID
 
@@ -15,7 +15,9 @@ function getPID(){
     echo "$(ps -ef | grep "python3" | grep "${SEARCHEDELEMENT}" | awk {'print$2'})"
 }
 
-
+function getAllServersPIDS(){
+    echo $(getPID ${SERVERFILENAME})
+}
 
 function getPIDBySocket(){
     IP=${1}
@@ -97,7 +99,7 @@ function getServerNameBySocket(){
 
 function getServerNameByPID(){
     PID=${1}
-    PIDS=$(getServersPIDS)
+    PIDS=$(getAllServersPIDS)
     if [ -z "$PIDS" ];
     then
         echo "No server is not running at the moment."
@@ -119,7 +121,7 @@ function getServerNameByPID(){
 
 function getServerIPByPID(){
     PID=${1}
-    PIDS=$(getServersPIDS)
+    PIDS=$(getAllServersPIDS)
     if [ -z "$PIDS" ];
     then
         echo "No server is not running at the moment."
@@ -141,7 +143,7 @@ function getServerIPByPID(){
 
 function getServerPortByPID(){
     PID=${1}
-    PIDS=$(getServersPIDS)
+    PIDS=$(getAllServersPIDS)
     if [ -z "$PIDS" ];
     then
         echo "No server is not running at the moment."
@@ -262,7 +264,7 @@ function getServerSocketByName(){
 
 function getServerInfoByPID(){
     PID=${1}
-    PIDS=$(getServersPIDS)
+    PIDS=$(getAllServersPIDS)
     if [ -z "$PIDS" ];
     then
         echo "No server is not running at the moment."
@@ -287,9 +289,6 @@ function getServerInfoByPID(){
 
 ## All Servers Functions
 
-function getAllServersPIDS(){
-    echo $(getPID ${SERVERFILENAME})
-}
 
 function closeAllServers(){
     PIDS=$(getPID ${SERVERFILENAME})
@@ -317,6 +316,28 @@ function listAllServers(){
         printf "%4d\t%5s\t%20s\t%12s\t%5s\n" $i $SERVERPID ${SERVERINFO[0]} ${SERVERINFO[1]} ${SERVERINFO[2]}
         ((i+=1))
     done
+}
+
+function getAllServers(){
+    SERVERSPIDS=$(getAllServersPIDS);
+    if [ -z "$SERVERSPIDS" ];
+    then
+        echo '{"err":"No servers were detected!"}';
+        return -1;
+    fi
+    
+    i=1
+    printf "[";
+    for SERVERPID in $SERVERSPIDS; do
+        SERVERINFO=$(getServerInfoByPID $SERVERPID)
+        printf '{"n":"%d","pid":"%s","name":"%s","ip":"%s","port":"%s"}' $i $SERVERPID ${SERVERINFO[0]} ${SERVERINFO[1]} ${SERVERINFO[2]};
+        if [[ $i != ${#SERVERSPIDS[@]} ]];
+        then
+            printf ",";
+        fi
+        ((i+=1))
+    done
+    printf "]";
 }
 
 function closeServersByIP(){
@@ -390,7 +411,7 @@ function closeServerByPort(){
 
 function closeServerByPID(){
     PID=${1}
-    PIDS=$(getServersPIDS)
+    PIDS=$(getAllServersPIDS)
     if [ -z "$PIDS" ];
     then
         echo "[ERROR] No server is not running at the moment."

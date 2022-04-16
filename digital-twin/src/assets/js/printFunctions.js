@@ -47,6 +47,14 @@ async function writeToScreen(message) {
   document.getElementById("output").appendChild(pre);
 }
 
+async function overwriteScreen(message) {
+  var pre = document.createElement("p"); 
+  pre.style.wordWrap = "break-word"; 
+  pre.innerHTML = message; 
+  document.getElementById("output").replaceChildren(pre)
+}
+
+
 async function writeToScreenSpan(message) {
   var pre = document.createElement("span"); 
   pre.style.wordWrap = "break-word"; 
