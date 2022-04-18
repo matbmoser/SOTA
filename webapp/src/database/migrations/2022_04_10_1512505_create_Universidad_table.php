@@ -11,10 +11,10 @@ class CreateUniversidadTable extends Migration
         Schema::create('Universidad', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->integer('nombre',);
+        $table->string('sigla',5)->unique();
+		$table->text('nombre');
         $table->string('email',320)->unique();
         $table->text('telefono');
-		$table->integer('sigla',);
 		$table->text('direccion');
 		$table->integer('codigoPostal',);
 		$table->text('ciudad');

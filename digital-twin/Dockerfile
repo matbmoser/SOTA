@@ -6,6 +6,9 @@ RUN apt update \
     telnet \
     net-tools \
     nmap \
+    openssl \
+    git \
+    iputils-ping \
     libicu-dev \
     libpq-dev \
     libzip-dev \

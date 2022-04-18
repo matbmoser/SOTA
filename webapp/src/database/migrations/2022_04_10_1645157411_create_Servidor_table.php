@@ -13,15 +13,11 @@ class CreateServidorTable extends Migration
 		$table->increments('id');
 		$table->string('serverid',50)->unique();
         $table->string('ip', 12);
-        $table->integer('port', 5);
-		$table->datetime('fechaAlta')->comment('Fecha de Creación');
+        $table->mediumInteger('port');
 		$table->integer('idUniversidad')->unsigned();
         $table->foreign('idUniversidad')->references('id')->on('Universidad')->onUpdate('CASCADE')->onDelete('CASCADE');
+        $table->timestamps();
         });
-
-        
-
-
     }
 
     public function down()

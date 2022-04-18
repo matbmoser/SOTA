@@ -10,12 +10,8 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    /**
-     * The database connection that should be used by the model.
-     *
-     * @var string
-     */
-    protected $connection = 'mysql';
+    protected $table = "Usuario";
+    
     /**
      * Indicates if the model's ID is auto-incrementing.
      *
@@ -31,41 +27,12 @@ class Usuario extends Model
     protected $primaryKey = 'id';
 
     /**
-     * The data type of the auto-incrementing ID.
-     *
-     * @var int
-     */
-    protected $keyType = 'integer';
-
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = true;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
-    protected $attributes = [
-        'nombre',
-        'username',
-        'apellido1',
-        'apellido2',
-        'documento',
-        'telefono',
-        'fechaNacimiento',
-        'email',
-        'password',
-        'token',
-        'correoConfirmado',
-        'correoConfirmadoEn',
-        'fechaUltimaConexion',
-        'idRol'
-    ];
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -83,6 +50,7 @@ class Usuario extends Model
         'password',
         'idRol'
     ];
+    protected $guarded = array('password');
     /**
      * The attributes that should be cast.
      *
@@ -93,7 +61,7 @@ class Usuario extends Model
         'correoConfirmadoEn' => 'datetime',
         'fechaNacimiento' => 'date',
         'correoConfirmado' => 'boolean',
-        'idRol' => 'unsigned integer',
+        'idRol' => 'integer',
     ];
     /**
      * Get the phone record associated with the user.

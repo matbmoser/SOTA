@@ -20,19 +20,19 @@ class UsuarioFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->firstName(),
-            'username' =>$this->faker->userName(),
-            'apellido1' => $this->faker->lastName(),
-            'apellido2' => $this->faker->lastName(),
-            'documento' => Str::random(9),
-            'telefono' => $this->faker->phone(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' =>  hash('sha512',$faker->word()),
-            'fechaNacimiento' => $this->faker->date()
-            'codigoPostal' => random_int(1,5),
-            'ciudad' => $this->faker->address(),
-            'comunidad' => $this->faker->text(15),
-            'pais' => $this->faker->text(12),
+            'nombre' => "Mathias",
+            'username' => "matbmoser",
+            'apellido1' => "Brunkow",
+            'apellido2' => "Moser",
+            'documento' => "07164545J",
+            'telefono' => "647637778",
+            'email' => "mathiasmoser@outlook.com",
+            'password' =>  hash("sha-512","123456789"),
+            'fechaNacimiento' => "26/09/2000",
+            'codigoPostal' => "28223",
+            'ciudad' => "Pozuelo de Alarcón",
+            'comunidad' => "Comunidad de Madrid",
+            'pais' => "España",
         ];
     }
 }

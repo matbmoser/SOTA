@@ -29,11 +29,12 @@ services:
     depends_on:
       - mysql
 
-  # The existing database container configuration...
   php-apache:
     container_name: php-webapp
     build:
-      context: ./webapp/php
+      context: ./webapp
+    environment:
+      WEBAPP: "/var/www/webapp"
     ports:
       - "8080:80"
       - "3001:8001"

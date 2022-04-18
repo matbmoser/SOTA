@@ -12,7 +12,6 @@ class CreateVehiculoTable extends Migration
 
 		$table->increments('id');
 		$table->string('matricula',9)->unique();
-		$table->datetime('fechaRegistro');
 		$table->integer('idTipoVehiculo',)->unsigned();
         $table->foreign('idTipoVehiculo')->references('id')->on('TipoVehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();   

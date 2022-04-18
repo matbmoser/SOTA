@@ -1,5 +1,5 @@
-./data
-./devcontainer
+data
+devcontainer
 */__pycache__
-./.idea
-./.idea/*
+.idea
+.idea/*

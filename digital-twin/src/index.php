@@ -46,6 +46,7 @@ var ip = "<?php echo $ip; ?>"
 <script src="assets/js/dark-mode.js"></script>
 <div id="pagewrapper" style="display: none!important;"> 
     <body>
+        <!--
 <header class="header sticky-top">
     <nav class="navbar shadow">
       <a class="navbar-brand" href="#">
@@ -57,12 +58,12 @@ var ip = "<?php echo $ip; ?>"
                 <li class="nav-item">
                     <?php
                     if ($username != "") {
-                        echo "<span>Welcome <strong>" . $_SESSION['username'] . "</strong>!</span>";
+                        #echo "<span>Welcome <strong>" . $_SESSION['username'] . "</strong>!</span>";
                     }
                     ?>
                 </li>
                 <li class="nav-item">
-                <button type="button" class="ml-3 logout btn btn-light btn-outline-dark" onclick="window.location.href= './assets/mod/logout.php?uuid=<?php echo $configs['logoutToken'] ?>'"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></button>
+                <button type="button" class="ml-3 logout btn btn-light btn-outline-dark" onclick="window.location.href= './assets/mod/logout.php?uuid=<?php #echo $configs['logoutToken'] ?>'"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></button>
                 </li>
                 <li class="nav-item">
                     <button type="button" id="dark-mode" class="ml-3 btn btn-outline-light"><i class="fas fa-sun mr-1"></i><span> Light Mode</span></button>
@@ -70,7 +71,65 @@ var ip = "<?php echo $ip; ?>"
             </ul>
         </div>
    </nav>
-</header>
+</header>-->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+      <img
+        src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+        height="16"
+        alt="MDB Logo"
+        loading="lazy"
+        style="margin-top: -1px;"
+      />
+    </a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-link px-3 me-2">
+          Login
+        </button>
+        <button type="button" class="btn btn-primary me-3">
+          Sign up for free
+        </button>
+        <a
+          class="btn btn-dark px-3"
+          href="https://github.com/mdbootstrap/mdb-ui-kit"
+          role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
     <div class="w-100 d-flex justify-content-center"><div id="clock" class="headerClock"></div></div>
         <div><br><br>
             

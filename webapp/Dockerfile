@@ -6,6 +6,9 @@ RUN apt update \
     telnet \
     net-tools \
     nmap \
+    openssl \
+    iputils-ping \
+    git \
     libicu-dev \
     libpq-dev \
     libzip-dev \
@@ -34,15 +37,4 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
-
-## Check node js / npm js modules
-
-## Check composer php modules
-#RUN php artisan migrate
-
-## Install GIT
-#RUN composer create-project laravel/laravel app --prefer-dist
-#RUN apt-get update
-#RUN apt-get install git-all
-#RUN composer install
-#RUN php artisan migrate
+RUN npm install -g npm@latest
