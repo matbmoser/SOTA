@@ -12,7 +12,7 @@
         "production": "mix --production",
         "serve": "php artisan serve --host 0.0.0.0",
         "faker": "php artisan db:seed",
-        "migrate": "php artisan migrate:fresh",
+        "migrate": "php artisan migrate:fresh --seed",
         "controller": "php artisan make:controller ${P}Controller",
         "factory": "php artisan make:factory ${P}Factory",
         "completeModel": "php artisan make:model ${P} -fcsr",

@@ -14,6 +14,7 @@ class CreateCameraTable extends Migration
 		$table->string('camaraid',50)->unique();
         $table->string('ip', 12);
         $table->mediumInteger('port');
+        $table->string('tipo', 4)->comment('IN/OUT/BOTH');
 		$table->integer('idServidor',)->unsigned();
 		$table->integer('idAparcamiento',)->unsigned();
         $table->foreign('idAparcamiento')->references('id')->on('Aparcamiento')->onUpdate('CASCADE')->onDelete('CASCADE');

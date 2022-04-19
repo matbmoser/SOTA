@@ -15,13 +15,65 @@ class TipoVehiculoSeeder extends Seeder
      */
     public function run()
     {
-        Rol::firstOrCreate(
-            ["nombre" => "Compacto"],
+        TipoVehiculo::firstOrCreate(
             [
-                "ancho" => 1.8,
-                "largo" => 4.1
-                "alto" => 1.45
+                "segmento" => "A",
+                "clasificacion" => "pequeño"
+            ],
+            [
+                "ancho" => 1.72,
+                "largo" => 2.98,
+                "alto" => 1.66
             ]
         );
+        TipoVehiculo::firstOrCreate(
+            [
+                "segmento" => "B",
+                "clasificacion" => "medio pequeño"    
+            ],
+            [
+                "clasificacion" => "medio pequeño",
+                "ancho" => 1.82,
+                "largo" => 4.49,
+                "alto" => 1.7
+            ]
+        );
+        TipoVehiculo::firstOrCreate(
+            [
+                "segmento" => "C",
+                "clasificacion" => "medio",
+            ],
+            [
+                
+                "ancho" => 1.98,
+                "largo" => 4.77,
+                "alto" => 1.86
+            ]
+        );
+        TipoVehiculo::firstOrCreate(
+            [
+                "segmento" => "D",
+                "clasificacion" => "medio grande"
+            ],
+            [
+                
+                "ancho" => 1.93,
+                "largo" => 4.77,
+                "alto" => 1.83
+            ]
+        );
+        TipoVehiculo::firstOrCreate(
+            [
+                "segmento" => "E", 
+                "clasificacion" => "grande"
+            ],
+            [
+                "ancho" => 1.98,
+                "largo" => 5.01,
+                "alto" => 1.815
+            ]
+        );
+
+
     }
 }

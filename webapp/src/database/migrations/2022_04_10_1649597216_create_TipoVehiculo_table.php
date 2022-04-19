@@ -11,7 +11,8 @@ class CreateTipoVehiculoTable extends Migration
         Schema::create('TipoVehiculo', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->string('nombre', 30)->unique();
+		$table->string('segmento', 2)->unique();
+        $table->string('clasificacion', 20)->unique();
 		$table->float('ancho',);
 		$table->float('largo',);
 		$table->float('alto',);
