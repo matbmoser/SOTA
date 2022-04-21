@@ -6,7 +6,7 @@ from operators.op import op
 import json
 import fileinput
 from datetime import datetime, timezone
-from config import globalConfig
+from globalConfig import globalConfig
 
 from camera.BaseCameraManager import BaseCameraManager
 
@@ -465,24 +465,6 @@ class CameraManager(BaseCameraManager):
         print("Choose option:\n")
         return input("[Admin\cameras\cmd] > ")
 
-    # Prints Camera classes the options to select
-    def selectCameraClass(self):
-
-        print("\n------------[Protocols]--------------")
-        print(" 1 -> TCP Camera")
-        print(" 2 -> TCP SJMP Camera")
-        print(" 3 -> Return")
-        print("-------------------------------------\n")
-        print("Choose a protocol:\n")
-        opt = input("[Admin\cameras\protocols] > ")
-
-        if(opt == "1"):
-            return "camera.socket.TCPSocketCamera.TCPSocketCamera"
-        elif(opt == "2"):
-            return "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
-        else:
-            return None
-
     # ================================================================
     # COMMAND LINE METHODS
 
@@ -557,12 +539,7 @@ class CameraManager(BaseCameraManager):
                             "\n[ERROR] The port needs to be between 1 and 65534\n")
                         continue
 
-                    # Get Camera class
-                    print(
-                        "Please select the Camera protocol [Default TCPCamera]: ")
-                    protocolClass = self.selectCameraClass()
-                    if(protocolClass == None):
-                        protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+                    protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
                     try:
                         # Create and Start Server
@@ -659,42 +636,20 @@ class CameraManager(BaseCameraManager):
 
 def showHelp():
     print(
-        "\n***************************************\n"
-        + "\nMultiple Protocol Python Camera Manager"
-        + "\nby: David Graciani and Mathias Moser"
-        + "\nCopyright CGI, All rights reserved"
         + "\n\n***************************************"
         + "\n\nDEFAULT PROTOCOL = ["+defaultprotocol+"]"
         + '\n\n-> IF YOU NEED HELP: '
-        + '\n\n\tpy SocketCamerasManager.py -h'
+        + '\n\n\tpy CameraManager.py -h'
         + '\n\n-> IF YOU WANT TO USE CMD: '
-        + '\n\n\tpy SocketCamerasManager.py -cmd\n'
+        + '\n\n\tpy Camerasanager.py -cmd\n'
         + '\n\n-> ARGUMENTS DESCRIPTION: '
         + '\n\n\t-n [cameraid] [MANDATORY]: Camera unique identificator, can be alfanumeric.'
         + '\n\n\t-ip [ip]: IP from server to connect to.'
         + '\n\n\t-port [port]: PORT from server to connect to.'
-        + '\n\n\t-f [filepath]: Messages file path. If no other params are set messages will be sent to server.'
-        + '\n\t\tFile messages can use JSON format to specify the destination cameras and message: Ex: {"cameraid": "Clark", "message": "fraud tight cheese"} '
-        + '\n\n\t-m [message]: If a specific messages must be sent to different cameras'
-        + '\n\n\t-c [destination cameras]: Camerasid to send divided by "|". Ex: CL1|CL2|CL3.'
-        + '\n\n\t-nM [Number of messages to send]: Number of messages to send'
-        + '\n\n\t-dC [destination cameras base name]: If the cameras need to send to other cameras with a base destination cameraid.'
-        + '\n\n\t-nC [number of cameras to create]: If we need to create multiple cameras. Will be created using the -n [cameraid] as "baseCameraid + number"'
-        + '\n\n-> TEST ARGUMENTS DESCRIPTION: '
-        + '\n\n\t-t [test objective can be ["SEND" or "RECEIVE"]]: When test mode with objectives is use this option.'
-        + '\n\n\t-oC [nº cameras]: Number of cameras that will send information. '
-        + '\n\n\t-oM [nº messages per Camera]: Number of messages sent by each Camera. '
-        + '\n\n-> REQUIREMENTS: '
-        + '\n\n\t[cameraid] Must be filled to open Camera.'
-        + '\n\n\tIf TEST Objective is [RECEIVE]: -oC AND -oM need to be set.'
-        + '\n\n\tIf TEST Objective is [SEND]: -nC AND -nM need to be set.'
         + '\n\n\tDefault Values if empty:'
         + '\n\n\t-----------------------------------------'
         + '\n\t| [-ip] = '+defaultip+'\t\t\t|'
         + '\n\t| [-port] = '+str(defaultport)+'\t\t\t|'
-        + '\n\t| [-nM] = '+str(1)+'\t\t\t\t|'
-        + '\n\t| [-nC] = '+str(1)+'\t\t\t\t|'
-        + '\n\t| [-c] = None\t\t\t\t|'
         + '\n\t| Other Arguments = None\t\t|'
         + '\n\t-----------------------------------------\n'
     )

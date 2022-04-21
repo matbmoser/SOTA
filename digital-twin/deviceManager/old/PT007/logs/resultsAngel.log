@@ -3,7 +3,7 @@ You can introduce [exit] to leave
 
 2022/01/25 14:09:47|14968|37.73046875|SocketBaseCamerasManager.new(protocolClass=TCPSJMPSocketCamera, cameraid=[Angel], serverip=[127.0.0.1], serverport=[7777].
 2022/01/25 14:09:47|14968|37.7578125|Camera Socket Opened on [127.0.0.1:54614] ...
-2022/01/25 14:09:47|14968|37.76171875|[Angel]->[SENT]: {"flag": "SYN", "device-time": 1643112590.07607, "cameraid": "Angel"}
+2022/01/25 14:09:47|14968|37.76171875|[Angel]->[SENT]: {"flag": "SYN", "clt-time": 1643112590.07607, "cameraid": "Angel"}
 Camera CONNECTED:
 Camera [Angel], status [CONNECTED] on [127.0.0.1:54614] type [<class 'TCPSJMPProtocol.TCPSJMPProtocol'>] in [127.0.0.1:7777] 
 2022/01/25 14:09:47|14968|37.76171875|Camera [Angel] listening in [<class 'TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-Angel-127.0.0.1:7777]
@@ -16,423 +16,423 @@ b'{"flag": "OK", "srv-time": "1643112590.298476", "sessionid": "da4dd9fefd7b013a
 2022/01/25 14:09:47|14968|37.859375|Camera [Angel] status [ONLINE] logged in with sessionid = [da4dd9fefd7b013a90b894fc1d5c2bdc] in [127.0.0.1:7777].
 2022/01/25 14:09:47|14968|37.859375|Message Proccessed INFO: received=[2022-01-25 13:09:50.393223]; processed=[2022-01-25 13:09:50.747277]; duration=[0:00:00.354054]
 2022/01/25 14:09:47|14968|37.859375|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned0"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned0"}\x00n'
 2022/01/25 14:09:47|14968|37.859375|]
 2022/01/25 14:09:47|14968|37.859375|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned0"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned0"}'
 2022/01/25 14:09:47|14968|37.859375|]
 2022/01/25 14:09:47|14968|37.859375|Message Proccessed INFO: received=[2022-01-25 13:10:01.716989]; processed=[2022-01-25 13:10:02.149833]; duration=[0:00:00.432844]
 2022/01/25 14:09:47|14968|37.859375|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned1"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned1"}\x00n'
 2022/01/25 14:09:47|14968|37.859375|]
 2022/01/25 14:09:47|14968|37.859375|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned1"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned1"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:02.322372]; processed=[2022-01-25 13:10:02.365258]; duration=[0:00:00.042886]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned2"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned2"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned2"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned2"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:02.722305]; processed=[2022-01-25 13:10:02.783142]; duration=[0:00:00.060837]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned3"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned3"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned3"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned3"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:03.004552]; processed=[2022-01-25 13:10:03.104286]; duration=[0:00:00.099734]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned4"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned4"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned4"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned4"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:03.598966]; processed=[2022-01-25 13:10:03.702687]; duration=[0:00:00.103721]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned5"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned5"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned5"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned5"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:04.157481]; processed=[2022-01-25 13:10:04.426754]; duration=[0:00:00.269273]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned6"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned6"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned6"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned6"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:04.818709]; processed=[2022-01-25 13:10:04.853615]; duration=[0:00:00.034906]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned7"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned7"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned7"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned7"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:05.682403]; processed=[2022-01-25 13:10:05.720301]; duration=[0:00:00.037898]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned8"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned8"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned8"}'
+b'{"flag": "MSG", "clt-time": "1643116201371", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned8"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:06.262851]; processed=[2022-01-25 13:10:06.343636]; duration=[0:00:00.080785]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned9"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned9"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned9"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned9"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:06.538118]; processed=[2022-01-25 13:10:06.631868]; duration=[0:00:00.093750]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned10"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned10"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned10"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112601.433746, "cameraid": "John", "message": "It was at that moment that he learned10"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:06.851282]; processed=[2022-01-25 13:10:06.913117]; duration=[0:00:00.061835]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned11"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned11"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned11"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned11"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:07.995227]; processed=[2022-01-25 13:10:08.079004]; duration=[0:00:00.083777]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned12"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned12"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned12"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned12"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:08.706328]; processed=[2022-01-25 13:10:08.954665]; duration=[0:00:00.248337]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned13"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned13"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned13"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned13"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:09.028469]; processed=[2022-01-25 13:10:09.095290]; duration=[0:00:00.066821]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned14"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned14"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned14"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned14"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:09.438373]; processed=[2022-01-25 13:10:09.544092]; duration=[0:00:00.105719]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned15"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned15"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned15"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned15"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:10.013838]; processed=[2022-01-25 13:10:10.052737]; duration=[0:00:00.038899]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned16"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned16"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned16"}'
+b'{"flag": "MSG", "clt-time": "1643116201372", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned16"}'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|Message Proccessed INFO: received=[2022-01-25 13:10:10.731921]; processed=[2022-01-25 13:10:10.913436]; duration=[0:00:00.181515]
 2022/01/25 14:09:47|14968|37.86328125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned17"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned17"}\x00n'
 2022/01/25 14:09:47|14968|37.86328125|]
 2022/01/25 14:09:47|14968|37.86328125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned17"}'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned17"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:11.089964]; processed=[2022-01-25 13:10:11.179725]; duration=[0:00:00.089761]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned18"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned18"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned18"}'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned18"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:11.572677]; processed=[2022-01-25 13:10:11.688366]; duration=[0:00:00.115689]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned19"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned19"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned19"}'
+b'{"flag": "MSG", "clt-time": "1643116201373", "srv-time": 1643112607.450682, "cameraid": "John", "message": "It was at that moment that he learned19"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:11.817023]; processed=[2022-01-25 13:10:11.906783]; duration=[0:00:00.089760]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned0"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned0"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned0"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned0"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:13.039758]; processed=[2022-01-25 13:10:13.093614]; duration=[0:00:00.053856]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned1"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned1"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned1"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112609.201007, "cameraid": "Peter", "message": "It was at that moment that he learned1"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:13.503520]; processed=[2022-01-25 13:10:13.662097]; duration=[0:00:00.158577]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned2"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned2"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned2"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned2"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:14.300392]; processed=[2022-01-25 13:10:14.340286]; duration=[0:00:00.039894]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned3"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned3"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned3"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned3"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:14.771136]; processed=[2022-01-25 13:10:14.818019]; duration=[0:00:00.046883]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned4"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned4"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned4"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned4"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:15.121202]; processed=[2022-01-25 13:10:15.176054]; duration=[0:00:00.054852]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned5"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned5"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned5"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned5"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:15.502184]; processed=[2022-01-25 13:10:15.540083]; duration=[0:00:00.037899]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned6"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned6"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned6"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned6"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:15.787422]; processed=[2022-01-25 13:10:15.869204]; duration=[0:00:00.081782]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned7"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned7"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned7"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned7"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:16.160428]; processed=[2022-01-25 13:10:16.260161]; duration=[0:00:00.099733]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned8"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned8"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned8"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned8"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:16.447660]; processed=[2022-01-25 13:10:16.487552]; duration=[0:00:00.039892]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned9"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned9"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned9"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned9"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:16.807699]; processed=[2022-01-25 13:10:16.922392]; duration=[0:00:00.114693]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned10"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned10"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned10"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned10"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:17.237551]; processed=[2022-01-25 13:10:17.326316]; duration=[0:00:00.088765]
 2022/01/25 14:09:47|14968|37.8671875|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned11"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned11"}\x00n'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned11"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned11"}'
 2022/01/25 14:09:47|14968|37.8671875|]
 2022/01/25 14:09:47|14968|37.8671875|Message Proccessed INFO: received=[2022-01-25 13:10:17.663414]; processed=[2022-01-25 13:10:17.713282]; duration=[0:00:00.049868]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned12"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned12"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned12"}'
+b'{"flag": "MSG", "clt-time": "1643116203225", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned12"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:17.970594]; processed=[2022-01-25 13:10:18.027441]; duration=[0:00:00.056847]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned13"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned13"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned13"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112614.089955, "cameraid": "Peter", "message": "It was at that moment that he learned13"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:18.284755]; processed=[2022-01-25 13:10:18.376511]; duration=[0:00:00.091756]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned0"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned0"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned0"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned0"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:18.806363]; processed=[2022-01-25 13:10:18.883158]; duration=[0:00:00.076795]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned14"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned14"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned14"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned14"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:18.904100]; processed=[2022-01-25 13:10:19.026773]; duration=[0:00:00.122673]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned1"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned1"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned1"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned1"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:19.234220]; processed=[2022-01-25 13:10:19.382823]; duration=[0:00:00.148603]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned15"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned15"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned15"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned15"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:19.398780]; processed=[2022-01-25 13:10:19.503501]; duration=[0:00:00.104721]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned16"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned16"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned16"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned16"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:19.649114]; processed=[2022-01-25 13:10:19.758819]; duration=[0:00:00.109705]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned2"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned2"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned2"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned2"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:19.809686]; processed=[2022-01-25 13:10:19.925373]; duration=[0:00:00.115687]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned17"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned17"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned17"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned17"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:19.963274]; processed=[2022-01-25 13:10:20.045055]; duration=[0:00:00.081781]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned3"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned3"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned3"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112615.126187, "cameraid": "Mark", "message": "It was at that moment that he learned3"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:20.112873]; processed=[2022-01-25 13:10:20.318325]; duration=[0:00:00.205452]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned18"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned18"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned18"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned18"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:20.330293]; processed=[2022-01-25 13:10:20.549708]; duration=[0:00:00.219415]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned19"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned19"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned19"}'
+b'{"flag": "MSG", "clt-time": "1643116203226", "srv-time": 1643112618.522122, "cameraid": "Peter", "message": "It was at that moment that he learned19"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:20.749176]; processed=[2022-01-25 13:10:20.821980]; duration=[0:00:00.072804]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned4"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned4"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned4"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned4"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:20.922712]; processed=[2022-01-25 13:10:21.003496]; duration=[0:00:00.080784]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned5"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned5"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned5"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned5"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:21.354559]; processed=[2022-01-25 13:10:21.393455]; duration=[0:00:00.038896]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned6"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned6"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned6"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned6"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:21.965927]; processed=[2022-01-25 13:10:22.007815]; duration=[0:00:00.041888]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned7"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned7"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned7"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned7"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:22.225235]; processed=[2022-01-25 13:10:22.261139]; duration=[0:00:00.035904]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned8"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned8"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned8"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned8"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:22.665060]; processed=[2022-01-25 13:10:22.823641]; duration=[0:00:00.158581]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned9"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned9"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned9"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned9"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:23.142784]; processed=[2022-01-25 13:10:23.183675]; duration=[0:00:00.040891]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned10"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned10"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned10"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned10"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:23.425030]; processed=[2022-01-25 13:10:23.483873]; duration=[0:00:00.058843]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned11"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned11"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned11"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned11"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:23.668381]; processed=[2022-01-25 13:10:23.946638]; duration=[0:00:00.278257]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned12"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned12"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned12"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned12"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:24.064323]; processed=[2022-01-25 13:10:24.194974]; duration=[0:00:00.130651]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned13"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned13"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned13"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned13"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:24.400425]; processed=[2022-01-25 13:10:24.444309]; duration=[0:00:00.043884]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned14"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned14"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned14"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112620.647446, "cameraid": "Mark", "message": "It was at that moment that he learned14"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:24.814321]; processed=[2022-01-25 13:10:24.928019]; duration=[0:00:00.113698]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned15"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned15"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned15"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned15"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:25.556341]; processed=[2022-01-25 13:10:25.691983]; duration=[0:00:00.135642]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned16"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned16"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned16"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned16"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:25.918374]; processed=[2022-01-25 13:10:26.138786]; duration=[0:00:00.220412]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned17"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned17"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned17"}'
+b'{"flag": "MSG", "clt-time": "1643116209763", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned17"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:26.455940]; processed=[2022-01-25 13:10:26.502814]; duration=[0:00:00.046874]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned18"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned18"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned18"}'
+b'{"flag": "MSG", "clt-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned18"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:26.920698]; processed=[2022-01-25 13:10:27.037385]; duration=[0:00:00.116687]
 2022/01/25 14:09:47|14968|37.89453125|[RECEIVED]: self.rawdata=[
-b'{"flag": "MSG", "device-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned19"}\x00n'
+b'{"flag": "MSG", "clt-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned19"}\x00n'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|status=[MESSAGE ARRIVED]=[
-b'{"flag": "MSG", "device-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned19"}'
+b'{"flag": "MSG", "clt-time": "1643116209764", "srv-time": 1643112625.153417, "cameraid": "Mark", "message": "It was at that moment that he learned19"}'
 2022/01/25 14:09:47|14968|37.89453125|]
 2022/01/25 14:09:47|14968|37.89453125|Message Proccessed INFO: received=[2022-01-25 13:10:27.363515]; processed=[2022-01-25 13:10:27.497158]; duration=[0:00:00.133643]
 2022/01/25 14:09:47|14968|37.88671875|EXCEPTION:[[WinError 10054] An existing connection was forcibly closed by the remote host]. 

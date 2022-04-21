@@ -60,6 +60,8 @@ class Camera():
     '''
 
     def __init__(self, ip, port, cameraid=None, sessionid=None):
+        
+        self.types = ["ENTRY", "EXIT", "BOTH"]
         # Atributes from Camera
         self.ip = ip
         self.port = port
@@ -70,7 +72,9 @@ class Camera():
         # Attributes for handshake
         self.cameraid = self.setCameraId(value=cameraid)
         self.sessionid = self.setSessionId(value=sessionid)
-
+        self.publicKey, self.privateKey = self.generateSecret()
+        self.type = "BOTH" 
+        
         # Datetime elements
         self.created = datetime.now(timezone.utc)
         self.last_message = self.created
@@ -90,7 +94,11 @@ class Camera():
         # Initialize the variables that contain the counter of messages
         self.messagesRecieved = 0
         self.messagesSent = 0
-
+    
+    ## Generate Public and Private Keys
+    def generateSecret(self):
+        return None, None
+    
     # Sets the protocol from Camera
     def getProtocol(self):
         """MAY BE OVERRIDED WITH DESIRED PROTOCOL"""

@@ -1,7 +1,7 @@
 from datetime import datetime
 from datetime import datetime
-from BaseController import BaseController
-from TipoVehiculoController import TipoVehiculoController
+from db.controllers.BaseController import BaseController
+from db.controllers.TipoVehiculoController import TipoVehiculoController
 
 class UniversidadController(BaseController):
     def __init__(self):
@@ -15,7 +15,10 @@ class UniversidadController(BaseController):
     
     def deleteBySigla(self, sigla):
         self.conn.deleteTableElement(table=self.tableName, where="sigla="+str(sigla))
-        
+    
+    def get(self, where):
+        return self.conn.fetchAll(table=self.tableName, where=where)
+    
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
     
@@ -24,13 +27,15 @@ class UniversidadController(BaseController):
         return self.values
 
     def update(self, where="all", sigla=None, nombre=None, email=None, telefono=None, dirección=None, codigoPostal=None, ciudad=None, comunidad=None, pais=None):
+        localsList = locals()
         if where == "all":
             where=None
         setList = []
-        
-        for var in locals()[1:]:
-            fieldName = f'{var=}'.split('=')[0]
+        for var in localsList:
+            if(var=="where" or var=="self" or var=="setList"):
+                continue
             
-            if(fieldName != None): setList.append((fieldName, var))
+            if(localsList[var] != None): setList.append((var, localsList[var]))
         
         self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
+    

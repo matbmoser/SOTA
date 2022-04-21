@@ -1,7 +1,7 @@
 from datetime import datetime
 from datetime import datetime
-from BaseController import BaseController
-from TipoVehiculoController import TipoVehiculoController
+from db.controllers.BaseController import BaseController
+from db.controllers.TipoVehiculoController import TipoVehiculoController
 
 class VehiculoController(BaseController):
     def __init__(self):
@@ -19,7 +19,10 @@ class VehiculoController(BaseController):
     
     def deleteByMatricula(self, matricula):
         self.conn.deleteTableElement(table=self.tableName, where="matricula="+str(matricula))
-        
+    
+    def getByMatricula(self, matricula):
+        return self.conn.fetchAll(table=self.tableName,where="matricula="+str(matricula))   
+    
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
     

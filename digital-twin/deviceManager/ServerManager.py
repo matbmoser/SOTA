@@ -6,7 +6,7 @@ import os
 import sys
 import traceback
 from operators.op import op
-from config import globalConfig
+from globalConfig import globalConfig
 serverManager = None
 
 
@@ -80,9 +80,7 @@ class ServerManager():
     def new(self, serverid, ip='localhost', port=0, poll_interval=0.5):
         # Create server object dinamically
         tmpServer = op.createClass(
-            newClass=self.serversprotocolClass, ip=ip, port=port, poll_interval=poll_interval)
-        # Sets serverid and add server
-        tmpServer.setServerId(serverid)
+            newClass=self.serversprotocolClass, ip=ip, port=port, poll_interval=poll_interval, serverid=serverid)
         self.addServer(tmpServer)
 
         return tmpServer
@@ -295,10 +293,6 @@ class ServerManager():
 
 def showHelp():
     print(
-        "\n***************************************\n"
-        + "\nMultiple Protocol Python Servers Manager"
-        + "\nby: David Graciani and Mathias Moser"
-        + "\nCopyright CGI, All rights reserved"
         + "\n\n***************************************"
         + "\n\nDEFAULT PROTOCOL = ["+defaultprotocol+"]"
         + '\n\n-> IF YOU NEED HELP: '

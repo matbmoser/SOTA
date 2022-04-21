@@ -168,7 +168,7 @@ function getServerPortByPID(){
 
 function openServerOnPort(){
     NAME=$(generateRandomName 12)
-    IP="127.0.0.1"
+    IP=${DEFAULTIP}
     PORT=${1}
 
     if [ -z "$PORT" ];
@@ -177,7 +177,14 @@ function openServerOnPort(){
         return -1
     fi
     
-    nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo "Server with NAME=[${NAME}] IP=[${IP}] PORT=[${PORT}] started on PID=[$!]"
+    PID=$(getPIDBySocket $IP $PORT)
+
+    if [ -z $PID];
+    then
+        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo "Server with NAME=[${NAME}] IP=[${IP}] PORT=[${PORT}] started on PID=[$!]"
+    else
+        echo "[ERROR] Server with IP=[${IP}] PORT=[${PORT}] is Already Running on PID=[$PID]"
+    fi
 }
 
 function openServer(){

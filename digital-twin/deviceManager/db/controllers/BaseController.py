@@ -1,7 +1,6 @@
 import sys
-sys.path.append('/usr/src/app/db/')
 from datetime import datetime
-from DBManager import DBManager
+from db.DBManager import DBManager
 
 
 class BaseController():

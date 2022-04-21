@@ -2,7 +2,7 @@
 from operators.op import op
 import threading
 import socket
-
+from operators.cryptool import cryptool
 
 from camera.socket.SocketCamerasHandler import SocketCamerasHandler
 from protocols.Protocol import *
@@ -52,7 +52,8 @@ class SocketCamera(Camera):
         self.serverip = serverip
         self.serverport = serverport
         self.serverkey = self.serverip+":"+str(self.serverport)
-
+        self.serversecret = None
+        
         # Socket configurations
         self.socket = None
         self.socketkey = None
@@ -74,6 +75,9 @@ class SocketCamera(Camera):
     # ================================================================
     # CONNECTION HANDLING METHODS
 
+    def generateSecret(self):
+        return cryptool.generateKeys(id=self.cameraid)
+    
     # Gets the handler of connection
     def getHandler(self):
         """OVERRIDE THIS METHOD WITH DESIRED HANDLER"""

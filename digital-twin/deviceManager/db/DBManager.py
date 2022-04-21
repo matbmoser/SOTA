@@ -5,7 +5,7 @@ sys.path.append("/usr/src/app/")
 from operators.op import op
 import traceback
 import mysql.connector
-from dbConfig import dbConfig
+from db.dbConfig import dbConfig
 from datetime import datetime, timezone
 
 
@@ -149,7 +149,6 @@ class DBManager():
         return False
     
     def fetchAll(self, table, where=None):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.fetchAll("+str(table)+")")
@@ -222,7 +221,6 @@ class DBManager():
         return setString
     
     def getIdValueList(self, id, value, table):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.getIdValueList("+str(table)+")")
@@ -238,7 +236,6 @@ class DBManager():
         return ids
     
     def getValueIdDict(self, id, value, table):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.getIdValueList("+str(table)+")")
@@ -254,7 +251,6 @@ class DBManager():
         return values
 
     def insertTableElement(self, elem, table):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.insertTableElement("+str(table)+")")
@@ -265,7 +261,6 @@ class DBManager():
         return result
     
     def deleteTableElement(self, table, where):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.addElementToTable("+str(table)+")")
@@ -276,7 +271,6 @@ class DBManager():
         return result
     
     def updateTableElement(self, table, set, where=None):
-        self.refreshDatabase()
         if(not self.tableExist(table)):
             op.printLog(logType="ERROR",
                         messageStr="Table not Exists. DBManager.addElementToTable("+str(table)+")")
@@ -312,3 +306,4 @@ if __name__ == '__main__':
         print(dbManager.insertTableElement(elem=("1247-LDG",1,time, time), table='Vehiculo'))
     else:
         print("Is not connected!")
+        

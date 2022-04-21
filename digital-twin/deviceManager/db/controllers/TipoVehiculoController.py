@@ -1,7 +1,7 @@
 from copy import deepcopy
 from datetime import datetime
 from datetime import datetime
-from BaseController import BaseController
+from db.controllers.BaseController import BaseController
 
 class TipoVehiculoController(BaseController):
     def __init__(self) -> None:
@@ -28,17 +28,7 @@ class TipoVehiculoController(BaseController):
             if(localsList[var] != None): setList.append((var, localsList[var]))
         
         self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
-        """
-        if(nombre != None): setList.append(("nombre", nombre))
-
-        if(ancho != None): setList.append(("ancho", ancho))
-        
-        if(largo != None): setList.append(("ancho", largo))
-        
-        if(largo != None): setList.append(("ancho", alto))
-        """
-        
-        #self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
+    
     
     def deleteByName(self, name):
         self.conn.deleteTableElement(table=self.tableName, where="nombre="+str(name))

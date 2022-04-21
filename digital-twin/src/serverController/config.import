@@ -6,6 +6,9 @@ export DEFAULTNAME="DefaultServer"
 export DEFAULTIP="127.0.0.1"
 export DEFAULTPORT=8888
 
+
+
+
 function generateRandomName(){
     LEN=${1}
     if [ -z $LEN ];

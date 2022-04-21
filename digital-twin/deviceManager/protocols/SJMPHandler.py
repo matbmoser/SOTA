@@ -3,7 +3,7 @@ import traceback
 from operators.op import op
 from datetime import datetime, timezone
 import json
-
+from db.controllers import VehiculoController
 
 class handler():
     """
@@ -42,6 +42,7 @@ class handler():
         self.camera = handler.camera
         self.server = handler.server
         self.packet = None
+        self.vehicleController = VehiculoController()
 
     # ================================================================
     # SETUP METHODS
@@ -82,6 +83,9 @@ class handler():
 
         if(self.packet.flag == "IN"):
             tmpOutputMessage = self.processINFlag()
+        
+        if(self.packet.flag == "OUT"):
+            tmpOutputMessage = self.processOUTFlag()
 
         elif(self.packet.flag == "SYN"):
             tmpOutputMessage = self.processSYNFlag()
@@ -134,6 +138,8 @@ class handler():
 
         # Store session id
         self.camera.sessionid = self.packet.sessionid
+        self.camera.serversecret = self.packet.secret
+        
         self.camera.status = "ONLINE"
         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
                     self.camera.status+"] logged in with sessionid = ["+self.camera.sessionid+"] in ["+self.camera.serverkey+"].")
@@ -148,8 +154,10 @@ class handler():
             return None
 
         self.camera.cameraid = self.packet.cameraid
+        self.camara.token = self.packet.token
+        
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
-            datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid)
+            datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.public)
 
         return tmpOutputMessage.messageToJSONString()
 
@@ -212,7 +220,64 @@ class handler():
             flag="ACK", message="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
 
         return tmpOutputMessage.messageToJSONString()
+    
+    # Process OUT flag
+    def processOUTFlag(self):
 
+        # Server Must be active
+        if(self.server == None):
+            op.printLog(
+                logType="DEBUG", messageStr=f"[{self.camera.cameraid}] > SJMP MSG RECEIVED FROM [{self.packet.cameraid}]")
+            return None
+        # Check if origin Camera is authenticated
+        originCamera = self.server.camerasManager.getBySessionId(
+            sessionid=self.packet.sessionid)
+        # We must return an error if not
+
+        tmpOutputPacket = packet()
+
+        # Return to Camera a ERROR if the sending Camera does not exists
+        if (originCamera == None):
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ERR", message="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
+
+            return tmpOutputMessage.messageToJSONString()
+
+        # Check if the plate detected by the camera exists, in other words that the vehicle exists
+        destinationVehicle = self.getVehicleIfExists(matricula="")
+
+        # We must return an error if not
+        if (destinationCamera == None):
+            op.printLog(
+                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(cameraid=["+self.packet.cameraid+"]). The cameraid [" + self.packet.cameraid + "] don't exist!")
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ERR", message="Destination cameraid ["+self.packet.cameraid+"] does not exists!")
+
+            return tmpOutputMessage.messageToJSONString()
+
+        # SENDING MESSAGE TO ANOTHER Camera ---------------------------------
+        # Create response with message sent by the Camera
+        tmpSJMPResponse = packet().dumpPacket(flag="MSG", message=self.packet.message, srv_time=self.packet.srv_time,
+                                              cameraid=originCamera.cameraid, clt_time=str(self.packet.clt_time))
+        
+        
+        # ------------------------------------
+
+        # SENDING MESSAGE BACK TO Camera ---------------------------------
+        # Send a message to the Camera saying that the message was sent
+        if(destinationCamera.status == "ONLINE" or destinationCamera.status == "CONNECTED"):
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ACK", message="Message was sent to Camera ["+destinationCamera.cameraid+"]")
+
+            return tmpOutputMessage.messageToJSONString()
+
+        # Prepare response
+        tmpOutputMessage = tmpOutputPacket.dumpPacket(
+            flag="ACK", message="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
+
+        return tmpOutputMessage.messageToJSONString()
+
+    
 
 class packet():
     """
@@ -367,8 +432,8 @@ class packet():
             self.sessionid = op.valueEmpty(data["sessionid"])
 
         # Get the message
-        if "response" in data:
-            self.response = op.valueEmpty(data["response"])
+        if "message" in data:
+            self.message = op.valueEmpty(data["message"])
 
         return self
 
@@ -376,7 +441,7 @@ class packet():
     # DUMP PACKET METHODS
 
     # Store packet params in the structure
-    def dumpPacket(self, flag=None, cameraid=None, sessionid=None, srv_time=None, clt_time=None, response="Hay, Camera!", position=None, token=None, secret=None, matricula=None):
+    def dumpPacket(self, flag=None, cameraid=None, sessionid=None, srv_time=None, clt_time=None, message="Hay, Camera!", position=None, token=None, secret=None, matricula=None):
 
         # Store Flag
         if flag != None:
@@ -422,8 +487,8 @@ class packet():
             self.clt_time = clt_time
 
         # Store packet message
-        if response != None:
-            self.response = response
+        if message != None:
+            self.message = message
 
         # return packet object
         return self
@@ -478,7 +543,7 @@ class packet():
             # =======
             # If the server is sending a message as Server
             packet["srv-time"] = self.srv_time
-            packet["response"] = self.response
+            packet["message"] = self.message
 
             # return the packet dic object
             return packet

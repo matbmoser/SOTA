@@ -96,8 +96,8 @@ class CameraClient{
                 if("srv-time" in this.parsedMessage){
                     writeToScreenSpan("<span style='color:#0d6efd'>server-time = ["+this.parsedMessage["srv-time"]+"] </span>");
                 }
-                if("device-time" in this.parsedMessage){
-                    writeToScreenSpan("<span style='color:#0d6efd'>device-time = ["+this.parsedMessage["device-time"]+"] </span>");
+                if("clt-time" in this.parsedMessage){
+                    writeToScreenSpan("<span style='color:#0d6efd'>clt-time = ["+this.parsedMessage["clt-time"]+"] </span>");
                 }
                 writeToScreenSpan("<br>");
             }

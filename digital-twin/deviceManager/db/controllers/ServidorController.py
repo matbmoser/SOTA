@@ -1,15 +1,16 @@
 from datetime import datetime
 from datetime import datetime
-from BaseController import BaseController
+from db.controllers.BaseController import BaseController
+from db.controllers.UniversidadController import UniversidadController
 
 class ServidorController(BaseController):
     def __init__(self) -> None:
         self.tableName = 'Servidor'
         super().__init__()
-        self.tipos = self.getTipos()
-        self.externalTable = Universidad()
+        self.tipos = self.getValues()
+        self.externalTable = UniversidadController()
     
-    def add(self, serverid, ip, port, ):
+    def add(self, serverid, ip, port, siglaUni):
         time = datetime.now().strftime("Y-m-d hh:mm:ss")
         self.tipos = self.getTipos()
         if(tipo not in self.tipos):

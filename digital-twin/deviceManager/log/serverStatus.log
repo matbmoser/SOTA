@@ -1,6 +1,4 @@
 Starting Server Log Messages...
-[STATS]: [19] tables found in [0:00:00.034114] DBManager.refreshDatabase()
-[STATS]: [19] tables found in [0:00:00.023062] DBManager.refreshDatabase()
-[STATS]: [19] tables found in [0:00:00.035118] DBManager.refreshDatabase()
-[STATS]: [1] elements update in [0:00:00.009617] DBManager.updateQuery()
-[STATS]: [0] elements update in [0:00:00.033944] DBManager.updateQuery()
+[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[123456789], serverip=[localhost], serverport=[8888].
+[DEBUG]: Camera Socket Opened on [127.0.0.1:60250] ...
+[EXCEPTION]:[dumpPacket() got an unexpected keyword argument 'clt_time']. in SocketCamerasManager(). On newAndStart()

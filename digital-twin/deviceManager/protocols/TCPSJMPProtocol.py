@@ -17,7 +17,7 @@ class TCPSJMPProtocol(TCPProtocol):
 
     # Prepares and returns a connection message
     def getConnectionMessage(self, cameraid):
-        return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=cameraid, device_time=datetime.timestamp(datetime.now(timezone.utc)), message="Hallo, Server!").messageToJSONString())
+        return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=cameraid, clt_time=datetime.timestamp(datetime.now(timezone.utc)), message="Hallo, Server!").messageToJSONString())
 
     # Prepares and returns a close message
     def getCloseMessage(self):

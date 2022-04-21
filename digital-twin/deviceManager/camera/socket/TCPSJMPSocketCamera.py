@@ -21,7 +21,7 @@ class TCPSJMPSocketCamera(SocketCamera, TCPSJMPCamera):
         res = super().connect()
         # Send handshake connection
         if res:
-            connectionPayload = packet().dumpPacket(flag="SYN", cameraid=self.cameraid, device_time=datetime.timestamp(
+            connectionPayload = packet().dumpPacket(flag="SYN", cameraid=self.cameraid, clt_time=datetime.timestamp(
                 datetime.now(timezone.utc)), message="Hallo, Server!").messageToJSONString()
             op.printLog(
                 logType="DEBUG", messageStr="["+self.cameraid+"]->[SENT SJMP SYN MESSAGE]")
@@ -31,7 +31,7 @@ class TCPSJMPSocketCamera(SocketCamera, TCPSJMPCamera):
 
     def sendMessageToCamera(self, message, cameraid):
         message = packet().dumpPacket(srv_time=False, flag="MSG", sessionid=self.sessionid, cameraid=cameraid,
-                                      device_time=datetime.timestamp(datetime.now(timezone.utc)), message=message).messageToJSONString()
+                                      clt_time=datetime.timestamp(datetime.now(timezone.utc)), message=message).messageToJSONString()
         op.printLog(logType="DEBUG",
                     messageStr="["+self.cameraid+"]->[SENT SJMP MSG MESSAGE]")
         self.addOutputMessage(message)

@@ -3,6 +3,7 @@ import traceback
 import threading
 import socketserver
 from operators.op import op
+from operators.cryptool import cryptool
 from datetime import datetime, timezone
 import hashlib
 
@@ -237,7 +238,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
     """
 
-    def __init__(self, ip='localhost', port=0, poll_interval=0.5, bind_and_activate: bool = ...) -> None:
+    def __init__(self, serverid, ip='localhost', port=0, poll_interval=0.5, bind_and_activate: bool = ...) -> None:
         # Mandatory Socket Server attributes
         self.RequestHandlerClass = self.getServerRequestHandler()
         self.ip = ip
@@ -254,8 +255,9 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         # Server identification Attributes
         self.socketkey = self.ip+":"+str(self.port)
-        self.serverid = self.socketkey
-
+        self.serverid = serverid
+        self.publicKey, self.privateKey = self.generateSecret()
+        
         # Thread Attributes
         self.thread = None
 
@@ -285,6 +287,9 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         return BaseCameraManager(cameraprotocolClass="BaseCamera")
 
+    def generateSecret(self):
+        return cryptool.generateKeys(id=self.serverid)
+    
     # Defines the server request handler type
     def getServerRequestHandler(self):
         """OVERRIDE THIS METHOD WITH DESIRED DEFAULT PROTOCOL HANDLER"""

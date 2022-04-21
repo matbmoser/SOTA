@@ -1,0 +1,35 @@
+Starting Server Log Messages...
+[INFO]: Trying to start server...
+[INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [hola
+]
+[DEBUG]: Incoming [camera.TCPCamera.TCPCamera] Protocol Connection...
+[DEBUG]: Camera [127.0.0.1:60246], status [ONLINE] on [127.0.0.1:60246] logged in with sessionid = [ab2941c0b6138795c38b9bd6efe73c90] type [<class 'protocols.TCPProtocol.TCPProtocol'>] 
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from 127.0.0.1:60246
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000472]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000089]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000146]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000093]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000201]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000116]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000089]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000084]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000056]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000115]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000120]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000070]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000116]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000111]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000061]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000118]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000121]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000150]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000095]
+[EXCEPTION]:['utf-8' codec can't decode byte 0xff in position 0: invalid start byte]. TCPMessage.parseMessage()
+[EXCEPTION]:['NoneType' object has no attribute 'content']. 
+BaseProtocol.processInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.041379]

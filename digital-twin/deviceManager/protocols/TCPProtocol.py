@@ -49,7 +49,7 @@ class TCPProtocol(Protocol):
 
     # Prepares and returns a connection message
     def getConnectionMessage(self, cameraid):
-        return self.newMessage(content="message=Hello, Server! Connection Requested.;cameraid="+str(cameraid)+";device-time="+str(datetime.timestamp(datetime.now(timezone.utc))))
+        return self.newMessage(content="message=Hello, Server! Connection Requested.;cameraid="+str(cameraid)+";clt-time="+str(datetime.timestamp(datetime.now(timezone.utc))))
 
     # Prepares and returns a close message
     def getCloseMessage(self):
