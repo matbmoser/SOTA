@@ -9,6 +9,9 @@ class BaseController():
         self.fields = self.conn.tables[self.tableName]["keys"]
         self.fieldNames = self.fields["keynames"]
     
+    def refresh(self):
+        self.conn.refreshDatabase()
+    
     def add(self):
         # Adds new data to table
         return True
@@ -23,12 +26,19 @@ class BaseController():
     def deleteBy(self):
         #Deletes the data
         pass
-        
+    
+    def get(self, where):
+        pass
+    
     def getAll(self):
         # Gets all values
         pass
     
     def getValues(self):
+        # Gets the values form the main key and id
+        pass
+    
+    def getValuesBy(self):
         # Gets the values form the main key and id
         pass
     

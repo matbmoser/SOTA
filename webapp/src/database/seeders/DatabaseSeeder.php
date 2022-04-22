@@ -18,7 +18,13 @@ class DatabaseSeeder extends Seeder
             RolSeeder::class,
             UsuarioSeeder::class,
             UniversidadSeeder::class,
-            TipoVehiculoSeeder::class
+            TipoVehiculoSeeder::class,
+            AparcamientoSeeder::class,
+            TipoPlazaSeeder::class,
+            ZonaSeeder::class,
+            TipoVehiculoTipoPlazaSeeder::class,
+            VehiculoSeeder::class,
+            UsuarioVehiculoSeeder::class
         ]);
   
     }

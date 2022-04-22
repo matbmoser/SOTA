@@ -30,14 +30,18 @@ class TipoVehiculoController(BaseController):
         self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
     
     
-    def deleteByName(self, name):
-        self.conn.deleteTableElement(table=self.tableName, where="nombre="+str(name))
+    def deleteBySegmento(self, name):
+        self.conn.deleteTableElement(table=self.tableName, where="segmento="+str(name))
          
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
     
     def getValues(self):
-        self.values = self.conn.getValueIdDict(id="id", value="nombre", table=self.tableName)
+        self.values = self.conn.getValueIdDict(id="id", value="segmento", table=self.tableName)
+        return self.values
+    
+    def getValuesByClasificacion(self):
+        self.values = self.conn.getValueIdDict(id="id", value="clasificacion", table=self.tableName)
         return self.values
     
 if __name__ == "__main__":

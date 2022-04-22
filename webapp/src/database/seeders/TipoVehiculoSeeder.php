@@ -21,9 +21,9 @@ class TipoVehiculoSeeder extends Seeder
                 "clasificacion" => "pequeño"
             ],
             [
-                "ancho" => 1.72,
-                "largo" => 2.98,
-                "alto" => 1.66
+                "ancho" => 172,
+                "largo" => 298,
+                "alto" => 166
             ]
         );
         TipoVehiculo::firstOrCreate(
@@ -33,9 +33,9 @@ class TipoVehiculoSeeder extends Seeder
             ],
             [
                 "clasificacion" => "medio pequeño",
-                "ancho" => 1.82,
-                "largo" => 4.49,
-                "alto" => 1.7
+                "ancho" => 182,
+                "largo" => 449,
+                "alto" => 170
             ]
         );
         TipoVehiculo::firstOrCreate(
@@ -45,9 +45,9 @@ class TipoVehiculoSeeder extends Seeder
             ],
             [
                 
-                "ancho" => 1.98,
-                "largo" => 4.77,
-                "alto" => 1.86
+                "ancho" => 198,
+                "largo" => 477,
+                "alto" => 186
             ]
         );
         TipoVehiculo::firstOrCreate(
@@ -57,9 +57,9 @@ class TipoVehiculoSeeder extends Seeder
             ],
             [
                 
-                "ancho" => 1.93,
-                "largo" => 4.77,
-                "alto" => 1.83
+                "ancho" => 193,
+                "largo" => 477,
+                "alto" => 183
             ]
         );
         TipoVehiculo::firstOrCreate(
@@ -68,9 +68,9 @@ class TipoVehiculoSeeder extends Seeder
                 "clasificacion" => "grande"
             ],
             [
-                "ancho" => 1.98,
-                "largo" => 5.01,
-                "alto" => 1.815
+                "ancho" => 198,
+                "largo" => 501,
+                "alto" => 181
             ]
         );
 

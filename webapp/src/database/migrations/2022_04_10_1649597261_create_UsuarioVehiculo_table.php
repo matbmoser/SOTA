@@ -14,6 +14,7 @@ class CreateUsuarioVehiculoTable extends Migration
 		$table->integer('idVehiculo',)->unsigned();
 		$table->integer('numAparcamientos',);
 		$table->datetime('fechaUltimoAparcamiento');
+        $table->boolean('aparcado');
 		$table->primary(['idUsuario','idVehiculo']);
         $table->foreign('idUsuario')->references('id')->on('Usuario')->onUpdate('CASCADE')->onDelete('CASCADE');   
         $table->foreign('idVehiculo')->references('id')->on('Vehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');

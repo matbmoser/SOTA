@@ -23,6 +23,9 @@ class VehiculoController(BaseController):
     def getByMatricula(self, matricula):
         return self.conn.fetchAll(table=self.tableName,where="matricula="+str(matricula))   
     
+    def get(self, where):
+        return self.conn.fetchAll(table=self.tableName, where=where)
+    
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
     

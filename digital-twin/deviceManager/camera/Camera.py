@@ -59,7 +59,7 @@ class Camera():
 
     '''
 
-    def __init__(self, ip, port, cameraid=None, sessionid=None):
+    def __init__(self, ip, port, cameraid=None, sessionid=None, type="BOTH"):
         
         self.types = ["ENTRY", "EXIT", "BOTH"]
         # Atributes from Camera
@@ -73,7 +73,7 @@ class Camera():
         self.cameraid = self.setCameraId(value=cameraid)
         self.sessionid = self.setSessionId(value=sessionid)
         self.publicKey, self.privateKey = self.generateSecret()
-        self.type = "BOTH" 
+        self.type = type 
         
         # Datetime elements
         self.created = datetime.now(timezone.utc)

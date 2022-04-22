@@ -44,9 +44,9 @@ class SocketCamera(Camera):
     [More Attributes can be added]
     '''
 
-    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, sessionid=None):
+    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, sessionid=None, type="BOTH"):
         # Call super of BaseCamera
-        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
         # Server configurations
         self.serverip = serverip
@@ -76,7 +76,7 @@ class SocketCamera(Camera):
     # CONNECTION HANDLING METHODS
 
     def generateSecret(self):
-        return cryptool.generateKeys(id=self.cameraid)
+        return cryptool.generateKeys(id="camera/"+self.cameraid, string=True)
     
     # Gets the handler of connection
     def getHandler(self):
@@ -113,7 +113,7 @@ class SocketCamera(Camera):
 
         # Send Connection Message with protocol format
         self.addOutputMessage(
-            value=self.protocol.getConnectionMessage(cameraid=self.cameraid))
+            value=self.protocol.getConnectionMessage(camera=self))
         op.printLog(logType="DEBUG",
                     messageStr="["+self.cameraid+"]->[SENT CONNECTION MESSAGE]")
 
@@ -163,12 +163,6 @@ class SocketCamera(Camera):
         # Set message logic
         self.addOutputMessage(message)
 
-    # Sends messages adding to output buffer (TO Camera)
-    def sendMessageToCamera(self, message, cameraid):
-        """OVERRIDE THIS METHOD WITH DESIRED PROTOCOL SENDING MESSAGE STRUCTURE"""
-
-        self.addOutputMessage(message)
-
     # ================================================================
     # PRINT METHODS
 
@@ -181,29 +175,3 @@ class SocketCamera(Camera):
             tmpString += "in ["+str(self.serverkey)+"] "
 
         return tmpString
-
-    # ================================================================
-    # TEST METHODS (Can be removed in production)
-
-    # Start test Camera passing as parameter the cameras manager information to complete test.
-
-    def startTest(self, manager):
-        # Store test vars
-        self.isTestCamera = True
-        # Start Camera
-        # Open Camera passing the manager inside the handler, so we can access to objective information
-        self.handler = self.getHandler()
-        self.handler.manager = manager
-
-        # Set listening thread
-        self.thread = threading.Thread(name=str(
-            str(type(self))+"-"+self.cameraid+"-"+self.serverkey), target=self.handler.listen)
-        if(self.thread == None):
-            return False
-        self.thread.setDaemon = True
-        self.thread.start()
-
-        op.printLog(
-            logType="DEBUG", messageStr="Camera ["+self.cameraid+"] listening in ["+self.thread.getName()+"]")
-
-        return True

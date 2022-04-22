@@ -16,12 +16,15 @@ class TCPSJMPProtocol(TCPProtocol):
     # MESSAGE HANDLE METHODS
 
     # Prepares and returns a connection message
-    def getConnectionMessage(self, cameraid):
-        return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=cameraid, clt_time=datetime.timestamp(datetime.now(timezone.utc)), message="Hallo, Server!").messageToJSONString())
+    def getConnectionMessage(self, camera):
+        token=camera.publicKey.decode("utf-8")
+        print(token)
+        print(type(token))
+        return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=camera.cameraid, clt_time=datetime.timestamp(datetime.now(timezone.utc)), token=token, type=camera.type).messageToJSONString())
 
     # Prepares and returns a close message
     def getCloseMessage(self):
-        return self.newMessage(content=packet().dumpPacket(flag="FIN", message="Connection Closed! Server shutdown").messageToJSONString())
+        return self.newMessage(content=packet().dumpPacket(flag="FIN", response="Connection Closed! Server shutdown").messageToJSONString())
 
     # ================================================================
     # INPUT MESSAGE

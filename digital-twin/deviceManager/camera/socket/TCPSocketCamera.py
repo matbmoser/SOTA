@@ -40,9 +40,9 @@ class TCPSocketCamera(SocketCamera, TCPCamera):
     [More Attributes can be added]
     '''
 
-    def __init__(self, serverip, serverport, ip="", port="", cameraid=None, sessionid=None):
+    def __init__(self, serverip, serverport, ip="", port="", cameraid=None, sessionid=None, type="BOTH"):
         super().__init__(serverip=serverip, serverport=serverport,
-                         ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+                         ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
     # Gets the handler of connection
     def getHandler(self):

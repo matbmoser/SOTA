@@ -1,4 +1,9 @@
 Starting Server Log Messages...
-[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[123456789], serverip=[localhost], serverport=[8888].
-[DEBUG]: Camera Socket Opened on [127.0.0.1:60250] ...
-[EXCEPTION]:[dumpPacket() got an unexpected keyword argument 'clt_time']. in SocketCamerasManager(). On newAndStart()
+[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[mathias], serverip=[localhost], serverport=[8888].
+[DEBUG]: Camera Socket Opened on [127.0.0.1:60354] ...
+[EXCEPTION]:['NoneType' object has no attribute 'status']. TCPProtocol.processOutputMessage()
+[WARNING]: Something went wrong! BaseCamera.addOutputMessage()
+[DEBUG]: [mathias]->[SENT CONNECTION MESSAGE]
+[DEBUG]: [mathias]->[SENT SJMP SYN MESSAGE]
+[DEBUG]: Camera [mathias], status [CONNECTED] on [127.0.0.1:60354] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] in [localhost:8888] 
+[DEBUG]: Camera [mathias] listening in [<class 'camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-mathias-localhost:8888]

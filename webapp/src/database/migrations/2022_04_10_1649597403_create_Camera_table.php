@@ -12,9 +12,8 @@ class CreateCameraTable extends Migration
 
 		$table->increments('id');
 		$table->string('camaraid',50)->unique();
-        $table->string('ip', 12);
-        $table->mediumInteger('port');
-        $table->string('tipo', 4)->comment('IN/OUT/BOTH');
+        $table->string('socketKey', 20)->unique();
+        $table->string('type', 4)->comment('IN/OUT/BOTH');
         $table->text('protocol')->comment('TCP, HTTP, WebSocket, TCPSJMP', 'WebSocketSJMP');
 		$table->integer('idServidor',)->unsigned();
 		$table->integer('idAparcamiento',)->unsigned();

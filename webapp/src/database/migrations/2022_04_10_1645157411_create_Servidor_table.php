@@ -12,8 +12,7 @@ class CreateServidorTable extends Migration
 
 		$table->increments('id');
 		$table->string('serverid',50)->unique();
-        $table->string('ip', 12);
-        $table->mediumInteger('port');
+        $table->string('socketKey', 20)->unique();
 		$table->integer('idUniversidad')->unsigned();
         $table->foreign('idUniversidad')->references('id')->on('Universidad')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();

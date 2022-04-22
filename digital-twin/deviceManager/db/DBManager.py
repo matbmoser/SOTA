@@ -1,4 +1,3 @@
-from ast import Delete, Return
 from datetime import datetime
 import sys
 sys.path.append("/usr/src/app/")
@@ -42,7 +41,6 @@ class DBManager():
         return False
 
     def refreshDatabase(self):
-        initTime = datetime.now(timezone.utc)
         self.tables = dict()
         query = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + \
             str(dbConfig.dbname)+"';"
@@ -53,13 +51,11 @@ class DBManager():
             tmpTable["keys"] = self.getKeys(tmpTable["name"])
             self.tables[tmpTable["name"]] = tmpTable
         
-        finiTime = datetime.now(timezone.utc)
-        self.nTables = len(self.tables)
-        op.printLog(logType="STATS",
-            messageStr="["+str(self.nTables)+"] tables found in ["+str(finiTime-initTime)+"] DBManager.refreshDatabase()")
+        #op.printLog(logType="STATS",
+        #   messageStr="["+str(self.nTables)+"] tables found in ["+str(finiTime-initTime)+"] DBManager.refreshDatabase()")
         return self.tables
 
-    def getKeys(self, table):
+    def getTableKeys(self, table):
         keys = dict()
         keynames = list()
         query = "SHOW FIELDS FROM "+str(self.dbname)+"."+str(table)
@@ -144,9 +140,12 @@ class DBManager():
             return None
      
     def tableExist(self, table):
-        if(table in self.tables):
+        query = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'"+str(table)+"')"
+        result = self.query(query)
+        if(result == "1"):
             return True
         return False
+    
     
     def fetchAll(self, table, where=None):
         if(not self.tableExist(table)):

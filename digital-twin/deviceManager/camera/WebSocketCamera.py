@@ -26,12 +26,14 @@ class WebSocketCamera(Camera):
     :attr str cameraid: Contains the Camera identification unique key
 
     :attr str sessionid: Contains the Camera session identification unique key
+    
+    :attr str type: Contains the type of camara/the function designated (add cars of delete cars, or both) ["ENTRY", "EXIT", "BOTH"] default: BOTH
 
     [More Attributes can be added]
     '''
 
-    def __init__(self, ip, port, cameraid=None, sessionid=None):
-        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+    def __init__(self, ip, port, cameraid=None, sessionid=None, type="BOTH"):
+        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
     # Sets the protocol from Camera
     def getProtocol(self):

@@ -20,7 +20,8 @@ class TipoVehiculo extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'nombre',
+        'segmento',
+        'clasificacion',
         'ancho',
         'largo',
         'alto'

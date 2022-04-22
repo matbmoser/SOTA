@@ -10,9 +10,9 @@ from camera.TCPSJMPCamera import TCPSJMPCamera
 
 class TCPSJMPSocketCamera(SocketCamera, TCPSJMPCamera):
 
-    def __init__(self, serverip, serverport, ip="", port="", cameraid=None, sessionid=None):
+    def __init__(self, serverip, serverport, ip="", port="", cameraid=None, sessionid=None,  type="BOTH"):
         super().__init__(serverip=serverip, serverport=serverport,
-                         ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+                         ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
     def getHandler(self):
         return SocketCamerasHandler(camera=self)
@@ -22,18 +22,25 @@ class TCPSJMPSocketCamera(SocketCamera, TCPSJMPCamera):
         # Send handshake connection
         if res:
             connectionPayload = packet().dumpPacket(flag="SYN", cameraid=self.cameraid, clt_time=datetime.timestamp(
-                datetime.now(timezone.utc)), message="Hallo, Server!").messageToJSONString()
+                datetime.now(timezone.utc)),token=self.publicKey,type=self.type).messageToJSONString()
             op.printLog(
                 logType="DEBUG", messageStr="["+self.cameraid+"]->[SENT SJMP SYN MESSAGE]")
             self.socket.send(bytes(connectionPayload, 'utf-8'))
             self.last_message = datetime.now(timezone.utc)
         return res
 
-    def sendMessageToCamera(self, message, cameraid):
-        message = packet().dumpPacket(srv_time=False, flag="MSG", sessionid=self.sessionid, cameraid=cameraid,
-                                      clt_time=datetime.timestamp(datetime.now(timezone.utc)), message=message).messageToJSONString()
+    def sendAddVehicle(self, plate):
+        message = packet().dumpPacket(srv_time=False, flag="IN", sessionid=self.sessionid, plate=plate,
+                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).messageToJSONString()
         op.printLog(logType="DEBUG",
-                    messageStr="["+self.cameraid+"]->[SENT SJMP MSG MESSAGE]")
+                    messageStr="["+self.cameraid+"]->[SENT SJMP IN MESSAGE]")
+        self.addOutputMessage(message)
+    
+    def sendDeleteVehicle(self, plate):
+        message = packet().dumpPacket(srv_time=False, flag="OUT", sessionid=self.sessionid, plate=plate,
+                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).messageToJSONString()
+        op.printLog(logType="DEBUG",
+                    messageStr="["+self.cameraid+"]->[SENT SJMP OUT MESSAGE]")
         self.addOutputMessage(message)
 
     def reconnect(self):

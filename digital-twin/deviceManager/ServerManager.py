@@ -293,7 +293,7 @@ class ServerManager():
 
 def showHelp():
     print(
-        + "\n\n***************************************"
+        "\n\n***************************************"
         + "\n\nDEFAULT PROTOCOL = ["+defaultprotocol+"]"
         + '\n\n-> IF YOU NEED HELP: '
         + '\n\n\tpy BaseServersManager.py -h'

@@ -1,8 +1,10 @@
 # coding=UTF-8
 import traceback
 from operators.op import op
+from db.controllers.VehiculoController import VehiculoController
+from db.controllers.CameraController import CameraController
 import copy
-
+from globalConfig import globalConfig
 
 class BaseCameraManager():
 
@@ -27,11 +29,13 @@ class BaseCameraManager():
     '''
 
     def __init__(self, cameraprotocolClass="Camera.Camera"):
-        # Cameras stored in the manager
+        # Local Cameras stored in the manager
         self.Cameras = {}
         # Camera default type (May be overrided)
         self.cameraprotocolClass = cameraprotocolClass
-
+        
+    
+        
     # ================================================================
     # GET METHODS
 
@@ -63,9 +67,43 @@ class BaseCameraManager():
 
         return None
 
+    def getVehicleByPlate(self, plate):
+        self.vehicleController = VehiculoController()
+        vehiculo = self.vehicleController.getByMatricula(matricula=plate)
+        if(vehiculo == [] or vehiculo == None):
+            return None
+        
+        return vehiculo[0]
+    
+    def getBySocketKey(self, socketKey):
+        self.cameraController = CameraController()
+        self.cameraController.refresh()
+        camera = self.cameraController.getBySocketKey(socketKey=socketKey)
+        if(camera == [] or camera == None):
+            return None
+        
+        return camera[0]    
+    
+    
+    ### Save in Database Methods
+    
+    def saveOrUpdateCamera(self, camera, server):
+        dbCamara = self.getBySocketKey(socketKey=camera.socketkey)
+        
+        socketkey = server.socketkey
+        cameraid = camera.cameraid
+        protocol = str(type(camera.protocol))
+        type = camera.type
+        aparcamiento = globalConfig.defaultparking
+        
+        if(dbCamara != None):
+            self.cameraController.update(where="id="+dbCamara["id"],camaraid=cameraid, type=type, protocol=protocol,serverSocketKey=socketkey, nombreAparcamiento=aparcamiento)
+
+        self.cameraController.add(cameraid,camera.socketkey, type, protocol, socketkey, nombreAparcamiento=aparcamiento )
+        
     # Creates or gets Camera if already exists
     # (Returns new Camera)
-    def createOrGetCamera(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None):
+    def createOrGetCamera(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None, type="BOTH"):
 
         # Mark tmp var as none
         oldCamera = None
@@ -77,7 +115,7 @@ class BaseCameraManager():
 
             # Camera that is connecting [Can use another protocol than the old Camera]
             newCamera = self.new(protocolClass=protocolClass,
-                                 ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+                                 ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
             # If Camera does not exists we continue and wait for new messages
             if(oldCamera == None):
@@ -116,13 +154,13 @@ class BaseCameraManager():
 
     # Method responsible to create new Camera
     # (Returns new Camera)
-    def new(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None):
+    def new(self, protocolClass=None, ip='localhost', port=0, cameraid=None, sessionid=None, type="BOTH"):
         # If no class type is defined use default
         if protocolClass == None:
             protocolClass = self.cameraprotocolClass
         # Create the Camera dynamicaly
         tmpCamera = op.createClass(
-            newClass=protocolClass, ip=ip, port=port, cameraid=cameraid, sessionid=sessionid)
+            newClass=protocolClass, ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
         # Add Camera to the list
         self.addCamera(camera=tmpCamera)
         # Set online
@@ -138,8 +176,12 @@ class BaseCameraManager():
     # Responsible to copy the information from a already existing Camera to a new one
     # (Returns newCamera object)
     def updateCamera(self, newCamera, oldCamera):
-
+        
         # Copy values that we want to maintain
+        # Copy values that we want to maintain
+        newCamera.privateKey = copy.deepcopy(oldCamera.privateKey)
+        newCamera.publicKey = copy.deepcopy(oldCamera.publicKey)
+        newCamera.type = copy.deepcopy(oldCamera.type)
         newCamera.cameraid = copy.deepcopy(oldCamera.cameraid)
         newCamera.created = copy.deepcopy(oldCamera.created)
         newCamera.last_message = copy.deepcopy(oldCamera.last_message)

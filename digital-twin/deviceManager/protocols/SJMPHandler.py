@@ -1,9 +1,10 @@
 # coding=UTF-8
+from pickle import NONE
 import traceback
 from operators.op import op
+from operators.cryptool import cryptool
 from datetime import datetime, timezone
 import json
-from db.controllers import VehiculoController
 
 class handler():
     """
@@ -42,7 +43,6 @@ class handler():
         self.camera = handler.camera
         self.server = handler.server
         self.packet = None
-        self.vehicleController = VehiculoController()
 
     # ================================================================
     # SETUP METHODS
@@ -138,7 +138,7 @@ class handler():
 
         # Store session id
         self.camera.sessionid = self.packet.sessionid
-        self.camera.serversecret = self.packet.secret
+        self.camera.serversecret = bytes(self.packet.secret, 'utf-8')
         
         self.camera.status = "ONLINE"
         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
@@ -154,10 +154,13 @@ class handler():
             return None
 
         self.camera.cameraid = self.packet.cameraid
-        self.camara.token = self.packet.token
+        self.camera.type = self.packet.type
+        self.camera.publicKey = bytes(self.packet.token, 'utf-8')
+        
+        self.server.camerasManager.saveOrUpdateCamera(camera=self.camera, server=self.server)
         
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
-            datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.public)
+            datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.publicKey.decode("utf-8"))
 
         return tmpOutputMessage.messageToJSONString()
 
@@ -173,57 +176,56 @@ class handler():
         originCamera = self.server.camerasManager.getBySessionId(
             sessionid=self.packet.sessionid)
         # We must return an error if not
-
+        
         tmpOutputPacket = packet()
-
+        
         # Return to Camera a ERROR if the sending Camera does not exists
         if (originCamera == None):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", message="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
+                flag="ERR", response="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
+        
+        ##  If the camara is in the exit can not registrate a entrace
+        if (originCamera.type=="EXIT"):
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ERR", response="Invalid Flag for Type ["+originCamera.type+"] of Camera!")
 
+            return tmpOutputMessage.messageToJSONString()
+        
+        
         # Check if the plate detected by the camera exists
-        destinationCamera = self.server.camerasManager.getByCameraId(
-            cameraid=self.packet.matricula)
+        tmpVehicle = self.server.camerasManager.getVehicleByPlate(plate=self.packet.plate)
 
         # We must return an error if not
-        if (destinationCamera == None):
+        if (tmpVehicle == None):
             op.printLog(
-                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(cameraid=["+self.packet.cameraid+"]). The cameraid [" + self.packet.cameraid + "] don't exist!")
+                logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) The vehicle with plate [" + self.packet.plate + "] don't exist!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", message="Destination cameraid ["+self.packet.cameraid+"] does not exists!")
+                flag="ERR", response="The vehicle with plate ["+self.packet.plate+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
 
-        # SENDING MESSAGE TO ANOTHER Camera ---------------------------------
-        # Create response with message sent by the Camera
-        tmpSJMPResponse = packet().dumpPacket(flag="MSG", message=self.packet.message, srv_time=self.packet.srv_time,
-                                              cameraid=originCamera.cameraid, clt_time=str(self.packet.clt_time))
-        # Add new packet to the destination Camera's OutputMessages list
-        destinationCamera.addOutputMessage(
-            value=tmpSJMPResponse.messageToJSONString())
-        op.printLog(
-            logType="DEBUG", messageStr=f"[{originCamera.cameraid}] > SENT SJMP MSG TO [{self.packet.cameraid}]")
+        
         # ------------------------------------
 
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
         if(destinationCamera.status == "ONLINE" or destinationCamera.status == "CONNECTED"):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ACK", message="Message was sent to Camera ["+destinationCamera.cameraid+"]")
+                flag="ACK", response="Message was sent to Camera ["+destinationCamera.cameraid+"]")
 
             return tmpOutputMessage.messageToJSONString()
 
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", message="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
+            flag="ACK", response="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
 
         return tmpOutputMessage.messageToJSONString()
     
     # Process OUT flag
     def processOUTFlag(self):
-
+        
         # Server Must be active
         if(self.server == None):
             op.printLog(
@@ -239,45 +241,39 @@ class handler():
         # Return to Camera a ERROR if the sending Camera does not exists
         if (originCamera == None):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", message="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
+                flag="ERR", response="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
+        
+        ##  If the camara is in the entrace can not registrate a exit
+        if (originCamera.type=="ENTRACE"):
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ERR", response="Invalid Flag for Type ["+originCamera.type+"] of Camera!")
 
+            return tmpOutputMessage.messageToJSONString()
+        
         # Check if the plate detected by the camera exists, in other words that the vehicle exists
-        destinationVehicle = self.getVehicleIfExists(matricula="")
+        destinationVehicle = self.getVehicleIfExists(plate="")
 
         # We must return an error if not
-        if (destinationCamera == None):
+        if (destinationVehicle == None):
             op.printLog(
-                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(cameraid=["+self.packet.cameraid+"]). The cameraid [" + self.packet.cameraid + "] don't exist!")
+                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(matricula=["+self.packet.plate+"]) The plate [" + self.packet.plate + "] don't exist!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", message="Destination cameraid ["+self.packet.cameraid+"] does not exists!")
+                flag="ERR", response="Destination plate ["+self.packet.plate+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
 
-        # SENDING MESSAGE TO ANOTHER Camera ---------------------------------
-        # Create response with message sent by the Camera
-        tmpSJMPResponse = packet().dumpPacket(flag="MSG", message=self.packet.message, srv_time=self.packet.srv_time,
-                                              cameraid=originCamera.cameraid, clt_time=str(self.packet.clt_time))
-        
-        
-        # ------------------------------------
 
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
-        if(destinationCamera.status == "ONLINE" or destinationCamera.status == "CONNECTED"):
-            tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ACK", message="Message was sent to Camera ["+destinationCamera.cameraid+"]")
-
-            return tmpOutputMessage.messageToJSONString()
 
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", message="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
+            flag="ACK", message="Vehicle ["+destinationVehicle+"] was deleted from parking")
 
         return tmpOutputMessage.messageToJSONString()
-
-    
+ 
 
 class packet():
     """
@@ -346,8 +342,9 @@ class packet():
         self.flags = ["OK", "ERR", "ACK", "SYN", "IN", "OUT", "FIN"]
 
         self.position = ""
-        self.positions = ["entrance", "exit", "both"]
-
+        self.types = ["ENTRY", "EXIT", "BOTH"]
+        self.type = ""
+        
         # Time variables
         self.srv_time = ""
         self.clt_time = ""
@@ -358,7 +355,7 @@ class packet():
 
         # Content of packet
         self.response = ""
-        self.matricula = ""
+        self.plate = ""
 
         # Encryption
         # Client Public Key
@@ -411,14 +408,14 @@ class packet():
             self.cameraid = op.valueEmpty(data["cameraid"])
 
         # Store rest of attribute if not empty
-        if "position" in data:
-            if data["position"] not in self.positions:
+        if "type" in data:
+            if data["type"] not in self.types:
                 return None
-            self.position = op.valueEmpty(data["position"])
+            self.type = op.valueEmpty(data["type"])
 
         # Store rest of attribute if not empty
-        if "matricula" in data:
-            self.matricula = op.valueEmpty(data["matricula"])
+        if "plate" in data:
+            self.plate = op.valueEmpty(data["plate"])
 
         # Store rest of attribute if not empty
         if "secret" in data:
@@ -432,8 +429,8 @@ class packet():
             self.sessionid = op.valueEmpty(data["sessionid"])
 
         # Get the message
-        if "message" in data:
-            self.message = op.valueEmpty(data["message"])
+        if "response" in data:
+            self.response = op.valueEmpty(data["response"])
 
         return self
 
@@ -441,7 +438,7 @@ class packet():
     # DUMP PACKET METHODS
 
     # Store packet params in the structure
-    def dumpPacket(self, flag=None, cameraid=None, sessionid=None, srv_time=None, clt_time=None, message="Hay, Camera!", position=None, token=None, secret=None, matricula=None):
+    def dumpPacket(self, flag=None, cameraid=None, sessionid=None, srv_time=None, clt_time=None, response="Hay, Camera!", type=None, token=None, secret=None, plate=None):
 
         # Store Flag
         if flag != None:
@@ -451,10 +448,11 @@ class packet():
         if self.flag == "" or self.flag == None or self.flag not in self.flags:
             return False
 
-        if position != None:
-            if self.position not in self.positions:
+        if type != None:
+            if type not in self.types:
                 return False
-            self.position = position
+            self.type = type
+            
         # Store matricula
         if secret != None:
             self.secret = secret
@@ -464,8 +462,8 @@ class packet():
             self.token = token
 
         # Store cameraid and sessionid
-        if matricula != None:
-            self.matricula = matricula
+        if plate != None:
+            self.plate = plate
 
         # Store cameraid and sessionid
         if cameraid != None:
@@ -487,8 +485,8 @@ class packet():
             self.clt_time = clt_time
 
         # Store packet message
-        if message != None:
-            self.message = message
+        if response != None:
+            self.response = response
 
         # return packet object
         return self
@@ -496,8 +494,16 @@ class packet():
     # Builds the packet as a dictionary and returns a JSON object
     def messageToJSONString(self):
         tmpBuildedPacket = self.buildPacket()
-
+        print(tmpBuildedPacket)
         return json.dumps(tmpBuildedPacket)
+    
+    # Builds the packet as a dictionary and returns an encrypted JSON object using a public key
+    def encryptJSONMessage(self, publicKey):
+        
+        cryptool.loadPublicKeyFromString(publicKey)
+        tmpBuildedPacket = self.buildPacket()
+        rawPacket = json.dumps(tmpBuildedPacket)
+        return cryptool.encrypt(rawPacket,publicKey)
 
     # ================================================================
     # BUILD PACKET METHODS
@@ -516,7 +522,7 @@ class packet():
                 if(self.sessionid != "" and self.sessionid != None):
                     packet["sessionid"] = self.sessionid
                 # Camera to send and Message
-                packet["matricula"] = self.matricula
+                packet["plate"] = self.plate
                 return packet
 
             if(self.flag == "OK"):
@@ -525,7 +531,9 @@ class packet():
                     packet["srv-time"] = self.srv_time
                 # Camera to send
                 packet["sessionid"] = self.sessionid
-                packet["secret"] = self.secret
+                if(type(self.secret) == bytes):
+                    self.secret= self.secret.decode("utf-8")
+                packet["secret"] = str(self.secret)
                 return packet
 
             if(self.flag == "SYN"):
@@ -533,9 +541,12 @@ class packet():
                 # Camera to send
                 packet["cameraid"] = self.cameraid
                 # Camara Cliente Public Key
-                packet["token"] = self.token
+                if(type(self.token) == bytes):
+                    self.token = self.token.decode("utf-8")
+                
+                packet["token"] = str(self.token)
                 # If is entrance, exit or both
-                packet["position"] = self.position
+                packet["type"] = self.type
                 return packet
 
             # =======
@@ -543,7 +554,7 @@ class packet():
             # =======
             # If the server is sending a message as Server
             packet["srv-time"] = self.srv_time
-            packet["message"] = self.message
+            packet["response"] = self.response
 
             # return the packet dic object
             return packet
