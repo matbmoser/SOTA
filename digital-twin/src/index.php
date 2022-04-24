@@ -11,14 +11,16 @@ if(empty( $_SESSION["token"] )){
     exit;
   }
 
-require_once("assets/mod/token.php");
-require_once("assets/mod/fallos.php");
 
-if (empty($username)){
-    header('Location: login/?result='.$configs["securityErrorToken"]);
-} 
-$modals = include("assets/mod/modals.php");
-$ip = include("assets/mod/getIP.php"); 
+  require_once("assets/mod/token.php");
+  require_once("assets/mod/fallos.php");
+  
+  if (empty($username)){
+      header('Location: login/?result='.$configs["securityErrorToken"]);
+  } 
+  $modals = include("assets/mod/modals.php");
+  $ip = include("assets/mod/getIP.php"); 
+  
 ?>
 <!DOCTYPE html>
 <head>

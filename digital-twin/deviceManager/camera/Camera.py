@@ -72,7 +72,7 @@ class Camera():
         # Attributes for handshake
         self.cameraid = self.setCameraId(value=cameraid)
         self.sessionid = self.setSessionId(value=sessionid)
-        self.publicKey, self.privateKey = self.generateSecret()
+        self.publicKey, self.privateKey =  None, None
         self.type = type 
         
         # Datetime elements
@@ -95,9 +95,6 @@ class Camera():
         self.messagesRecieved = 0
         self.messagesSent = 0
     
-    ## Generate Public and Private Keys
-    def generateSecret(self):
-        return None, None
     
     # Sets the protocol from Camera
     def getProtocol(self):

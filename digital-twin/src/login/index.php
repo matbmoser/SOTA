@@ -21,6 +21,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset = "utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Digital Twin Login</title>
 <link rel="stylesheet" type="text/css" href="../assets/css/login.css"/>
 <link rel="stylesheet" type="text/css" href="../assets/css/main.css"/>
@@ -98,5 +99,5 @@
 </section>
 <script src="../assets/bt/js/bootstrap.js"></script>
 <script src="../assets/js/libs/crypto-js/aes.js"></script>
-<script src="../assets/js/hashFunctions.js"></script>
+<script src="../assets/js/libs/cryptool/hashFunctions.js"></script>
 <script src="../assets/js/login.js"></script>

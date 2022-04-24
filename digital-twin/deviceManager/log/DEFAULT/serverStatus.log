@@ -2,19 +2,3 @@ Starting Server Log Messages...
 [INFO]: Trying to start server...
 [INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].
 [INFO]: Server is Opened in Background
-[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1650595732.429052, "cameraid": "mathias", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwlM6SI/5t9yyTlkVO8hD\nHZBa/jzswHJIL6cJ+mzaV4oeMA7cKGdb4jMGRNrwIB3OjV5CcO0Ip4mOCLejcvHC\ngLtUUaaIoxIZJsDZJtjoFxJ827coQhwdF/R5BWYPYEneJf1flSoYaTM45BQBUTCj\nKh+sZbKl4p+tYXvqCkDzG6uELElCpUW8NwJ4gn5uSmobNUW8U9YzpnUJL7Q6ni+b\ndEqKFc/I+vj2XWRjAOI26mblGwajMgukdGbqxdyjl+V6cR2d04nmETc3H0nefUcw\nz/AebZUYHrrCQy3md6wv39IseZPLBr8w3LKvNLuqIPeEGGAxtOpfYUCktPEvbmXg\ncwIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
-[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
-[DEBUG]: Camera [mathias], status [ONLINE] on [127.0.0.1:60354] logged in with sessionid = [46783b442f621a2106604df72386b5c6] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] 
-[DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
-[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from mathias
-[STATS]: [18] tables found in [0:00:00.034655] DBManager.refreshDatabase()
-[STATS]: [18] tables found in [0:00:00.034332] DBManager.refreshDatabase()
-[STATS]: [18] tables found in [0:00:00.033575] DBManager.refreshDatabase()
-[STATS]: [18] tables found in [0:00:00.034722] DBManager.refreshDatabase()
-[STATS]: [18] tables found in [0:00:00.032431] DBManager.refreshDatabase()
-[STATS]: [18] tables found in [0:00:00.032367] DBManager.refreshDatabase()
-[EXCEPTION]:[local variable 'type' referenced before assignment]. TCPSJMPProtocol.processInputMessage()
-[WARNING]: Something went wrong! BaseCamera.addInputMessage()
-[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
-[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.331648]

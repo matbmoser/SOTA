@@ -20,6 +20,13 @@ class cryptool:
         return private_key.public_key()
     
     @staticmethod
+    def deleteKeys(id):
+        keysDir = f"keys/{id}"
+        if op.deleteDir(nameDir=keysDir):
+            return True
+        return False
+    
+    @staticmethod
     def generateKeys(id, keySize=2048, publicExponent=65537, string=False):
         keysDir = f"keys/{id}"
         op.makeDir(nameDir=keysDir)

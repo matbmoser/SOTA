@@ -7,7 +7,8 @@ import json
 import fileinput
 from datetime import datetime, timezone
 from globalConfig import globalConfig
-
+import uuid
+  
 from camera.BaseCameraManager import BaseCameraManager
 
 
@@ -332,9 +333,10 @@ class CameraManager(BaseCameraManager):
         print(" 1 -> Start new Camera")
         print(" 2 -> Start Default Camera")
         print(" 3 -> Disconnect Camera")
-        print(" 4 -> Send Message")
-        print(" 5 -> List all cameras")
-        print(" 6 -> Exit")
+        print(" 4 -> Add Vehicle")
+        print(" 5 -> Delete Vehicle")
+        print(" 6 -> List all cameras")
+        print(" 7 -> Exit")
         print("-------------------------------------\n")
         print("Choose option:\n")
         return input("[Admin\cameras\cmd] > ")
@@ -360,6 +362,24 @@ class CameraManager(BaseCameraManager):
         else:
             return None
 
+    def selectCamaraAndPlate(self):
+        
+        print("Select a Camera to send message FROM:")
+        tmpFromCamera = self.selectCamera(
+            route="\\sendmessage\\from")
+        if (tmpFromCamera == None):
+            return None, None
+
+        print("Insert Vehicle Licence Plate")
+        licencePlate = input(
+            "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
+        while(licencePlate == "" or len(licencePlate) < 12):
+            print("Please input a correct Vehicle Licence Plate!\n")
+            licencePlate = input(
+                "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
+            
+        return tmpFromCamera, licencePlate
+    
     # ================================================================
     # COMMAND LINE METHODS
 
@@ -406,7 +426,8 @@ class CameraManager(BaseCameraManager):
 
                 # Create new Camera
                 if (numopt == 1):
-                    cameraid = input("Please insert Camera id: ")
+                    cameraid = uuid.uuid4()
+                    print("Creating Camara... camaraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
                         print("\n[ERROR] A Camera id needs to be specified!\n")
@@ -492,31 +513,31 @@ class CameraManager(BaseCameraManager):
 
                     tmpCamera.forceClose()
 
-                # Send messages to Camera
+                # Add Vehicle
                 elif (numopt == 4):
-
-                    print("Select a Camera to send message FROM:")
-                    tmpFromCamera = self.selectCamera(
-                        route="\\sendmessage\\from")
-                    if (tmpFromCamera == None):
+                    
+                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    if(tmpFromCamera == None or licencePlate == None):
                         continue
-
-                    print("Insert Vehicle Licence Plate")
-                    licencePlate = input(
-                        "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
-                    while(licencePlate == "" or len(licencePlate) < 12):
-                        print("Please input a correct Vehicle Licence Plate!\n")
-                        licencePlate = input(
-                            "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate:: ")
+                    
                     tmpFromCamera.sendAddVehicle(licencePlate)
                     continue
-
-                # Print all cameras
+                
+                # Delete Vehicle
                 elif (numopt == 5):
+                    
+                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    if(tmpFromCamera == None or licencePlate == None):
+                        continue
+                    
+                    tmpFromCamera.sendDeleteVehicle(licencePlate)
+                    continue
+                # Print all cameras
+                elif (numopt == 6):
                     self.listCameras()
 
                 # Exit the manager
-                elif (numopt == 6):
+                elif (numopt == 7):
                     self.closeCameras()
                     break
 

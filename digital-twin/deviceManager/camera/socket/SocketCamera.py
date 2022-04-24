@@ -78,6 +78,11 @@ class SocketCamera(Camera):
     def generateSecret(self):
         return cryptool.generateKeys(id="camera/"+self.cameraid, string=True)
     
+    def deleteSecret(self):
+        self.privateKey = None
+        self.publicKey = None
+        return cryptool.deleteKeys(id="camera/"+self.cameraid)
+    
     # Gets the handler of connection
     def getHandler(self):
         """OVERRIDE THIS METHOD WITH DESIRED HANDLER"""
@@ -87,6 +92,9 @@ class SocketCamera(Camera):
     # Connects to server though socket
     # (Returns True if was posible to connect, and False if not, None if connection data is not defined)
     def connect(self):
+        
+        self.publicKey, self.privateKey = self.generateSecret()
+        
         # Check if server has connection information defined
         if(((self.serverip == "" or self.serverip == None) or (self.serverport == "" or self.serverport == None))):
             return None
