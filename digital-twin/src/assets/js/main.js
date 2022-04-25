@@ -1,7 +1,5 @@
 var submitconf = document.getElementById('submitconf');
 var sendmessage = document.getElementById('sendmessage');
-var disconnect = document.getElementById('disconnect');
-var clean = document.getElementById('clean');
 var nom = "";
 var output = document.getElementById("output");;
 
@@ -33,14 +31,6 @@ sendmessage.onclick = function(){
     
 }
 
-clean.onclick = function(){
-    cleanOutput();
-}
-
-disconnect.onclick = function(){
-    client.close()
-    stopMessage();
-}
 //-----------------Slide In desde la Arriba Bajo----------------
 $(document).ready(function(){
     // Slide in elements on scroll

@@ -1,8 +1,8 @@
 <?php
-$configs = include('assets/mod/config.php');
-$dbconfig = include("assets/mod/db.config.php");
-require_once("assets/mod/connect.php");
-require_once("assets/mod/session.php");
+$configs = include('assets/mod/configs/config.php');
+$dbconfig = include("assets/mod/configs/db.config.php");
+require_once("assets/mod/connection/connect.php");
+require_once("assets/mod/auth/session.php");
 
 
 if(empty( $_SESSION["token"] )){
@@ -12,21 +12,30 @@ if(empty( $_SESSION["token"] )){
   }
 
 
-  require_once("assets/mod/token.php");
-  require_once("assets/mod/fallos.php");
+  require_once("assets/mod/auth/token.php");
+  require_once("assets/mod/err/fallos.php");
   
   if (empty($username)){
       header('Location: login/?result='.$configs["securityErrorToken"]);
   } 
-  $modals = include("assets/mod/modals.php");
-  $ip = include("assets/mod/getIP.php"); 
+  $modals = include("assets/mod/front/modals.php");
+
+  $ip = include("assets/mod/API/getIP.php"); 
+
+  require_once("assets/mod/API/class.Table.php");
+
+  $tablaZona = new Table($dbconfig, "Zona");
+  $zonas = $tablaZona->getRows(array('return_type' => 'all'));
   
 ?>
 <!DOCTYPE html>
 <head>
 <meta charset = "utf-8" />
 <title>Digital Twin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/header.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/map.css"/>
 <link rel="stylesheet" type="text/css" href="assets/bt/css/bootstrap.css"/>
 <script src="assets/js/libs/jquery/jquery-3.5.1.slim.min.js"></script>
 <link rel="icon" type="image/x-icon" href="media/favicon.ico">
@@ -37,148 +46,112 @@ if(empty( $_SESSION["token"] )){
 var modals = <?php echo json_encode($modals); ?>;
 var ip = "<?php echo $ip; ?>"
 </script>
-<script src="assets/js/CameraClient.js"></script>
-<script src="assets/js/SJMPHandler.js"></script>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/hashFunctions.js"></script>
-<script src="assets/js/printFunctions.js"></script>
-<script src="assets/js/workflowFunctions.js"></script>
-<script src="assets/js/createClientFunctions.js"></script>
-<script src="assets/js/clock.js"></script>
-<script src="assets/js/dark-mode.js"></script>
-<div id="pagewrapper" style="display: none!important;"> 
-    <body>
-      
-<header class="header sticky-top">
-    <nav class="navbar shadow">
-      <a class="navbar-brand" href="#">
-      	<img id="mylogo" class="img-light"src="../media/img/logoblue.png" style="height:4em">
-        <span class="logoName">Digital Twin</span>
-      </a>
-        <div class="w-100 d-flex justify-content-end">
-            <ul class="nav justify-content-end align-items-center">
-                <li class="nav-item">
-                    <?php
-                    if ($username != "") {
-                        echo "<span>Welcome <strong>" . $_SESSION['username'] . "</strong>!</span>";
-                    }
-                    ?>
-                </li>
-                <li class="nav-item">
-                <button type="button" class="ml-3 logout btn btn-light btn-outline-dark" onclick="window.location.href= './assets/mod/logout.php?uuid=<?php echo $configs['logoutToken'] ?>'"><i class="fas fa-sign-out-alt"></i> <span>Log out</span></button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" id="dark-mode" class="ml-3 btn btn-outline-light"><i class="fas fa-sun mr-1"></i><span> Light Mode</span></button>
-                </li>
+<div id="pagewrapper"> 
+  <body>
+    <header class="header sticky-top">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+          <a class="navbar-brand me-2" href="">
+            <img id="mylogo" src="../media/img/logoblue.png" height="90" loading="lazy" class="img-light" style="margin-top: -1px;"/>
+          </a>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link logoName" href="#">Digital Twin</a>
+              </li>
             </ul>
+
+              <button
+                id="openbtn"
+                class="openbtn navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#buttonArea"
+                aria-controls="buttonArea"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+              <i class="fas fa-bars"></i>
+            </button>
+
+          <div id="buttonArea" class="collapse navbar-collapse justify-content-end">
+
+            <div class="d-flex align-items-center justify-content-end">
+              <div class="px-3 me-2">
+                <?php if ($username != "") { echo "<span>Welcome <strong>" . $_SESSION['username'] . "</strong>!</span>"; } ?>
+              </div>
+              <button type="button" class="btn me-3 btn-light btn-outline-dark" onclick="window.location.href= './assets/mod/user/logout.php?uuid=<?php echo $configs['logoutToken'] ?>'">
+                <i class="fas fa-sign-out-alt"></i> 
+                <span>Log out</span>
+              </button>
+              <button type="button" id="dark-mode" class="ml-3 btn btn-outline-light">
+                <i class="fas fa-sun mr-1"></i>
+                <span> Light Mode</span>
+              </button>
+            </div>
+          </div>
         </div>
-   </nav>
-</header>
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-        height="16"
-        alt="MDB Logo"
-        loading="lazy"
-        style="margin-top: -1px;"
-      />
-    </a>
+      </nav>
+      <div class="clockContainer w-100 d-flex justify-content-between">
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarButtonsExample"
-      aria-controls="navbarButtonsExample"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
+        <div id="clock" class="headerClock"></div>
 
-    <div class="collapse navbar-collapse" id="navbarButtonsExample">
-     
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-      </ul>
+        <div class="headerClock">Parking "<?php echo $configs['letraAparcamiento'];?>" - <?php echo $ip?> - <?php echo $configs['siglaUniversidad'];?></div>
+      
+      </div>
+    </header>
 
+    <div id="mainflow">
+        <div class="mainContainer container-fluid">
+          <div class="row d-flex align-content-center justify-content-center">
+            <div class="col-xl-8 mapa">
+              <div class="mapaContainer">
+                <?php foreach ($zonas as $zona) {?>
+                  <div id="Zona<?php echo $zona["letra"]?>" class="Zona">
+                      <span class="dataZona" >0/<?php echo $zona["plazas"]?></span>
+                  </div>
+                <?}?>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-link px-3 me-2">
-          Login
-        </button>
-        <button type="button" class="btn btn-primary me-3">
-          Sign up for free
-        </button>
-        <a
-          class="btn btn-dark px-3"
-          href="https://github.com/mdbootstrap/mdb-ui-kit"
-          role="button"
-          ><i class="fab fa-github"></i
-        ></a>
+        <button class="btn btn-warning" style="position: fixed; bottom: 20px; left: 20px;" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#Modal">Open Server</button> 
+        <button class="btn btn-warning" style="position: fixed; bottom: 20px; right: 20px;" type="button" id="refresh">Refresh</button> 
+    </div>
+
+    <div class="container-fluid mt-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-3 d-flex justify-content-center">
+          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-plus"></i> Coche</button>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center">
+          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-minus"></i> Coche</button>
+        </div>
+        <div class="col-md-3 d-flex justify-content-center">
+          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-eye"></i> Ver Coches</button>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
--->
-    <div class="w-100 d-flex justify-content-center"><div id="clock" class="headerClock"></div></div>
-        <div><br><br>
-            
-            <div id="config">
-                <label for="ip">Please insert IP of server!</label>
-                <input type="text" id="ip" name="ip"><br><br>
-                <label for="port">Please insert PORT of server!</label>
-                <input type="number" id="port" name="port"><br><br>
-                <button type="submit" id="submitconf">Connect</button> 
-            </div>
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div id="modalContent" class="modal-content">
         </div>
-    </body>
-</div>
-<div id="mainflow">
-    <button class="btn btn-warning" style="position: fixed; bottom: 20px; left: 20px;" type="button" id="openserver">Open Server</button> 
-    <button class="btn btn-warning" style="position: fixed; bottom: 20px; right: 20px;" type="button" id="refresh">Refresh</button> 
-    <br><br>
-    <div id = "status"><span class="alert-danger">DISCONNECTED</span></div>
-    <br>
-    <div id="response" class="hidden">
-        <button type="button" id="disconnect">Disconnect</button> 
-        <br><br>
-        <label for="client">* Client to Send:</label>
-        <input type="text" id="client" name="client"><br><br>
-        <label for="message">* Message to Send:</label>
-        <input type="text" id="message" name="message"><br><br>
-        <button type="submit" id="sendmessage">Send Message</button> 
+      </div>
     </div>
-    <br>
-    <div><p style="font-size:0.8em">The fields marked with * are obligatory!</p></div>
+  </body>
 </div>
-<br><br>
-<div id="output"></div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="assets/bt/js/bootstrap.js"></script>
-<script src="assets/js/libs/crypto-js/aes.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/HTTPRequest.js"></script>
-<script src="assets/js/ServerConnectionManager.js"></script>
-<script src="assets/js/serverFunctions.js"></script>
-
-<button type="button" id="inButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal"><i class="fa-solid fa-plus"></i> Coche</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-whatever="@fat">Open modal for @fat</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
-
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div id="modalContent" class="modal-content">
-    </div>
-  </div>
-</div>
-
+<script src="assets/js/cryptool/hashFunctions.js"></script>
+<script src="assets/js/front/printFunctions.js"></script>
+<script src="assets/js/front/clock.js"></script>
+<script src="assets/js/map/map.js"></script>
+<script src="assets/js/front/dark-mode.js"></script>
 <script>
-    
+
     function randomIntFromInterval(min, max) { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -193,12 +166,8 @@ var ip = "<?php echo $ip; ?>"
         var modalContent = document.getElementById("modalContent");
         var openServerButton = document.getElementById("openserver");
         var inButton = document.getElementById("inButton");
-        
-        // Open Server Button
+      
         openServerButton.addEventListener('click', function() {
-            window.location.href = 'http://'+config["httpHost"]+'/serverController/open.php';
-        });
-        inButton.addEventListener('click', function() {
             //Limites
             var minPort = 1;
             var maxPort = 65535; //Habria que discutir un máximo

@@ -1,18 +1,19 @@
 <?php
-  $configs = include('../assets/mod/config.php');
+  $configs = include('../assets/mod/configs/config.php');
   if(!empty($_COOKIE["__LOGIN__"]) && $_COOKIE["__LOGIN__"] == "TRUE"){
     header("Location:  ../");
   }
   
-  include('../assets/mod/loginCookies.php');
+  include('../assets/mod/user/loginCookies.php');
     
 
   $user = "";
   $pass = "";
   $errorType="";
-  include("../assets/mod/requestuser.php");
+  require("../assets/mod/cryptool/class.Encryption.php");
+  include("../assets/mod/user/requestuser.php");
 
-  $responses = include("../assets/mod/responses.php");
+  $responses = include("../assets/mod/front/responses.php");
   if(isset($_COOKIE["__err__"])){
     $errorType = $_COOKIE["__err__"];
   }
@@ -99,5 +100,5 @@
 </section>
 <script src="../assets/bt/js/bootstrap.js"></script>
 <script src="../assets/js/libs/crypto-js/aes.js"></script>
-<script src="../assets/js/libs/cryptool/hashFunctions.js"></script>
-<script src="../assets/js/login.js"></script>
+<script src="../assets/js/cryptool/hashFunctions.js"></script>
+<script src="../assets/js/login/login.js"></script>

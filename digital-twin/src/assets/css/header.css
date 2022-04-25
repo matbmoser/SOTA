@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100&family=Sarpanch:wght@400;500;600;700;800;900&display=swap');
+.img-dark{
+    filter:invert(0)!important;
+}
+.img-light{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(141deg) brightness(200%) contrast(200%);
+}
+
+.logoName{
+    color: var(--color)!important;
+    font-family: "Kanit";
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: 100;
+    vertical-align: middle;
+    font-style: italic;
+}
+.clockContainer{
+    color: var(--bg-color)!important;
+    background-color: var(--color)!important;
+    padding: 1em;
+}
+.header{
+    margin-bottom: 1em;
+}
+.navbar{
+    background-color:var(--bg-color) !important;
+    color: var(--color)!important;
+}
+
+.headerClock{
+    vertical-align: middle;
+    font-family:"Sarpanch";
+    font-size: 25px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+.nav-item {
+    margin: 8px;
+}
+
+.openbtn {
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #fff3;
+    color: var(--color);
+    padding: 10px 20px;
+    margin: 10px 5px 8px 5px;
+    border-radius: 0!important;
+    border: none;
+    z-index: 100000;
+    transition: all .25s ease-in;
+    padding: 0.5rem 0.75rem!important;
+}
+
+.openbtn:hover {
+    background-color: var(--color);
+    color: var(--bg-color);
+    transition: all .25s ease-in;
+    border-radius: none!important;
+}
+
+.openbtn:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none!important;
+}

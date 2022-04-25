@@ -12,37 +12,12 @@ body {
     color: var(--color)!important;
     transition: all .25s ease;
 }
-.logoName{
-    color: var(--color)!important;
-    font-family: "Kanit";
-    font-size: 1.5em;
-    letter-spacing: 1px;
-    vertical-align: middle;
-}
-.navbar{
-    background-color:var(--bg-color) !important;
-    color: var(--color) !important;
-}
 
 /*Index*/
-
+.mainContainer{
+    padding: 0!important;
+}
 /* HEADER */
-.nav-item {
-    margin: 8px;
-}
-.headerClock{
-    vertical-align: middle;
-    font-family:"Sarpanch";
-    font-size: 25px;
-    letter-spacing: 2px;
-    font-weight: 100;
-}
-.img-dark{
-    filter:invert(0)!important;
-}
-.img-light{
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(141deg) brightness(200%) contrast(200%);
-}
 
 /* MODAL */
 .modal-content {

@@ -1,0 +1,172 @@
+.dataZona{
+    color: var(--color);
+    background: var(--bg-color);
+    padding:5px 10px;
+    margin: 5px;
+}
+.Zona{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+/** INICIO ZONAS APARCAMIENTO **/
+#ZonaA{
+    position: relative;
+    top: 86%;
+    width: 19em;
+    right: 10em;
+    height: 63px;
+    margin: auto;
+    background-color: rgb(255 192 0 / 20%);
+}
+#ZonaB{
+    position: relative;
+    top: 74.5%;
+    left: 50%;
+    width: 19em;
+    height: 63px;
+    background-color: rgb(0 31 255 / 20%);
+}
+#ZonaC{
+    position: relative;
+    top: 33.5%;
+    width: 15.7em;
+    right: 8.4em;
+    height: 63px;
+    margin: auto;
+    background-color: rgb(223 1 8 / 20%);
+}
+#ZonaD{
+    position: relative;
+    top: 22%;
+    left: 50%;
+    width: 16em;
+    height: 63px;
+    background-color: rgb(0 230 5 / 20%);
+}
+#ZonaE{
+    position: relative;
+    bottom: 2%;
+    width: 15em;
+    right: 8em;
+    height: 63px;
+    margin: auto;
+    background-color: rgb(68 0 255 / 20%);
+
+}
+#ZonaF{
+    position: relative;
+    bottom: 13%;
+    left: 50%;
+    width: 16em;
+    height: 60px;
+    background-color: rgb(255 22 203 / 20%);
+}
+
+#ZonaG{
+    position: relative;
+    bottom: 58%;
+    width: 19em;
+    right: 10em;
+    height: 111px;
+    margin: auto;
+    background-color: rgb(0 222 224 / 20%);
+}
+
+#ZonaH{
+    position: relative;
+    bottom: 67%;
+    left: 51%;
+    width: 6em;
+    height: 45px;
+    background-color: rgb(250 129 0 / 20%);
+}
+#ZonaI{
+    position: relative;
+    bottom: 95%;
+    width: 14em;
+    left: 13.5em;
+    height: 100px;
+    margin: auto;
+    background-color: rgb(127 41 40 / 20%);
+}
+
+/** FIN ZONAS APARCAMIENTO **/
+.btnAccion{
+    width:100%;
+}
+
+
+
+.mapa{
+    width: 60em;
+    height: 35em;
+    padding: 0;
+}
+
+.mapaContainer {
+    background-image: url('../../media/img/mapaparking.jpg')!important;
+    background-size: contain;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    border: 5px solid var(--color);
+    background-color: #f8f9fa;
+    overflow: hidden;
+    
+}
+
+@media screen and (max-width: 793px) {
+    #ZonaA, #ZonaB, #ZonaC, #ZonaD, #ZonaE, #ZonaF, #ZonaG, #ZonaH, #ZonaI{
+        display: none!important;
+    }
+}
+
+
+
+@media screen and (max-width: 1280px) {
+
+}
+
+@media screen and (max-width: 980px) {
+    
+}
+
+@media screen and (max-width: 736px) {
+
+}
+
+@media screen and (max-width: 321px){
+
+
+}
+
+
+@media screen and (max-width: 319.98px) {
+    /*Telefonos Muy pequeños*/
+
+}
+
+@media (min-width: 320px) and (max-width: 575.90px) {
+    /*Iphone 4, Teléfonos Pequeños y Medianos*/
+
+}
+
+@media (min-width: 576px) and (max-width:767.98px) {
+    /*Teléfonos plus, o Tablets Pequeñas */
+
+}
+
+@media (min-width: 760px) and (max-width:991.98px) {
+    /*Tablets medianas y grandes*/
+
+}
+
+@media (min-width: 992px) and (max-width:1199.98px) {
+    /*Ordenadores pequeños y tablets PRO*/
+    
+}
+
+@media screen and (min-width: 1200px) {
+    /*Mayoria de ordenadores grandes*/
+}
