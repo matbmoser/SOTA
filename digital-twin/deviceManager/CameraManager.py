@@ -426,7 +426,7 @@ class CameraManager(BaseCameraManager):
 
                 # Create new Camera
                 if (numopt == 1):
-                    cameraid = uuid.uuid4()
+                    cameraid = str(uuid.uuid4())
                     print("Creating Camara... camaraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
@@ -471,7 +471,7 @@ class CameraManager(BaseCameraManager):
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
                     except Exception as e:
                         op.printLog(
-                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndStart()")
+                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndConnect()")
                         traceback.print_exc()
                     continue
 
@@ -500,7 +500,7 @@ class CameraManager(BaseCameraManager):
 
                     except Exception as e:
                         op.printLog(
-                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndStart()")
+                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndConnect()")
                         traceback.print_exc()
 
                     continue

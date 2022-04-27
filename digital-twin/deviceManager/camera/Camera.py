@@ -94,6 +94,7 @@ class Camera():
         # Initialize the variables that contain the counter of messages
         self.messagesRecieved = 0
         self.messagesSent = 0
+        self.encrypted = False
     
     
     # Sets the protocol from Camera

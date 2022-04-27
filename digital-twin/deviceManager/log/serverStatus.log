@@ -1,9 +1,10 @@
 Starting Server Log Messages...
-[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[mathias], serverip=[localhost], serverport=[8888].
-[DEBUG]: Camera Socket Opened on [127.0.0.1:60354] ...
+[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[f9a98f77-8edd-41ab-898f-8d625749e53b], serverip=[localhost], serverport=[8888].
+[DEBUG]: Camera Socket Opened on [127.0.0.1:54044] ...
 [EXCEPTION]:['NoneType' object has no attribute 'status']. TCPProtocol.processOutputMessage()
 [WARNING]: Something went wrong! BaseCamera.addOutputMessage()
-[DEBUG]: [mathias]->[SENT CONNECTION MESSAGE]
-[DEBUG]: [mathias]->[SENT SJMP SYN MESSAGE]
-[DEBUG]: Camera [mathias], status [CONNECTED] on [127.0.0.1:60354] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] in [localhost:8888] 
-[DEBUG]: Camera [mathias] listening in [<class 'camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-mathias-localhost:8888]
+[DEBUG]: [f9a98f77-8edd-41ab-898f-8d625749e53b]->[SENT CONNECTION MESSAGE]
+[DEBUG]: [f9a98f77-8edd-41ab-898f-8d625749e53b]->[SENT SJMP SYN MESSAGE]
+[DEBUG]: Camera [f9a98f77-8edd-41ab-898f-8d625749e53b], status [CONNECTED] on [127.0.0.1:54044] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] in [localhost:8888] 
+[DEBUG]: Camera [f9a98f77-8edd-41ab-898f-8d625749e53b] listening in [<class 'camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-f9a98f77-8edd-41ab-898f-8d625749e53b-localhost:8888]
+[DEBUG]: Camera [f9a98f77-8edd-41ab-898f-8d625749e53b] KILLED!

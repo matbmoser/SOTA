@@ -124,7 +124,7 @@ class SocketCamera(Camera):
             value=self.protocol.getConnectionMessage(camera=self))
         op.printLog(logType="DEBUG",
                     messageStr="["+self.cameraid+"]->[SENT CONNECTION MESSAGE]")
-
+        self.encrypted = True
         return True
 
     # ================================================================
@@ -151,6 +151,7 @@ class SocketCamera(Camera):
 
     # Close the Camera connection and stop listening
     def close(self):
+        self.deleteSecret()
         # If there is a socket connected
         if(self.socket != None):
             self.socket.close()

@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Rol;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Usuario extends Model
+class User extends Authenticatable implements JWTSubject 
 {
-    use HasFactory;
-
-    protected $table = "Usuario";
+    use Notifiable;
     
     /**
      * Indicates if the model's ID is auto-incrementing.
@@ -48,26 +50,40 @@ class Usuario extends Model
         'fechaNacimiento',
         'email',
         'password',
+        'token',
         'idRol'
     ];
-    protected $guarded = array('password');
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
         'fechaUltimaConexion' => 'datetime',
         'correoConfirmadoEn' => 'datetime',
         'fechaNacimiento' => 'date',
-        'correoConfirmado' => 'boolean',
+        'email_verified_at' => 'datetime',
         'idRol' => 'integer',
+        
+    ];
+    
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
     ];
     /**
-     * Get the phone record associated with the user.
+     * Get the rol record associated with the user.
      */
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'id', 'idRol');
+    }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

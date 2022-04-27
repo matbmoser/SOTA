@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="main">
-  <div class="t row justify-content-center">
+  <div class="d-flex row justify-content-center">
   <div class="container-fluid">
     <h1 class="h1 mb-4 mt-4 text-gray-800">Admin Dashboard</h1>
     <Panel class="p-shadow-4" header="5 Last Registered Users">
@@ -9,15 +9,13 @@
                 <p>Total Users:<span class='bg-primary' style='padding:10px;margin-top:20px;'>{{numUsers}} Users</span></p>
           </template>
           <DataTable :value="users" responsiveLayout="stack">
-            <Column field="displayName" header="Name"></Column>
-            <Column field="userName" header="Username"></Column>
+            <Column field="id" header="id"></Column>
+            <Column field="nombre" header="Nombre"></Column>
             <Column field="email" header="Email"></Column>
-            <Column field="role" header="Role"></Column>
-            <Column field="created" header="Joined At"></Column>
+            <Column field="documento" header="documento"></Column>
+            <Column field="username" header="Username"></Column>
+            <Column field="created_at" header="Joined At"></Column>
           </DataTable>
-    </Panel>
-    <Panel class="p-shadow-4" header="User Flow Chart" :toggleable="true">
-      <Chart type="line" :data="basicData" />
     </Panel>
     </div>
   </div>
@@ -34,7 +32,6 @@
                  * Number of Users Registered
                  * */
                 numUsers: 0,
-                token: this.$store.state.jwtToken,
                 users: null,
                 basicData: {
                     labels: null,
@@ -58,7 +55,7 @@
              */
             fetchUsers() {
                 axios
-                    .get('/api/users', {
+                    .get('/api/usuario', {
                         headers: {
                             Authorization: 'Bearer ' + this.token,
                         }
@@ -109,7 +106,7 @@
              * @see forceUpdate()
              */
             fetchNumUsers() {
-                fetch('/api/users', {
+                fetch('/api/usuario', {
                     headers: {
                         Authorization: 'Bearer ' + this.token,
                     }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Usuario;
+use App\Models\User;
 
 class Notificacion extends Model
 {   
@@ -35,6 +35,6 @@ class Notificacion extends Model
     
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'id', 'idUsuario');
+        return $this->belongsTo(User::class, 'id', 'idUsuario');
     }
 }

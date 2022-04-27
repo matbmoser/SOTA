@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Vehiculo;
 
@@ -46,7 +46,7 @@ class Incidencia extends Model
 
     public function aprobador()
     {
-        return $this->belongsTo(Usuario::class, 'id', 'idAprobador');
+        return $this->belongsTo(User::class, 'id', 'idAprobador');
     }
 
     public function ticket()

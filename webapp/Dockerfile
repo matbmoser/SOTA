@@ -38,3 +38,4 @@ RUN node --version
 RUN npm --version
 
 RUN npm install -g npm@latest
+

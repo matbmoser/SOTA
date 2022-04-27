@@ -58,7 +58,16 @@ class handler():
         # If the packet is empty we can not process
         if (rawPacket == None):
             return None
-
+        
+        # If we are in the server
+        if(self.camara.encrypted):
+            print("Paquete ENCRIPTADO:")
+            print(rawPacket)
+            rawPacket = cryptool.decrypt(rawPacket, self.server.privateKey)
+            print("Paquete DESENCRIPTADO:")
+            print(rawPacket)
+        
+        
         # Create new packet to parse
         tmpSJMPPacket = packet()
         res = tmpSJMPPacket.parse(rawdata=rawPacket)
@@ -156,13 +165,14 @@ class handler():
         self.camera.cameraid = self.packet.cameraid
         self.camera.type = self.packet.type
         self.camera.publicKey = bytes(self.packet.token, 'utf-8')
+        self.camara.encrypted = True
         
         self.server.camerasManager.saveOrUpdateCamera(camera=self.camera, server=self.server)
         
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
             datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.publicKey.decode("utf-8"))
 
-        return tmpOutputMessage.messageToJSONString()
+        return tmpOutputMessage.encryptJSONMessage(self.camera.publicKey)
 
     # Process IN flag
     def processINFlag(self):
@@ -172,6 +182,7 @@ class handler():
             op.printLog(
                 logType="DEBUG", messageStr=f"[{self.camera.cameraid}] > SJMP MSG RECEIVED FROM [{self.packet.cameraid}]")
             return None
+        
         # Check if origin Camera is authenticated
         originCamera = self.server.camerasManager.getBySessionId(
             sessionid=self.packet.sessionid)
@@ -206,22 +217,36 @@ class handler():
 
             return tmpOutputMessage.messageToJSONString()
 
-        
         # ------------------------------------
 
         # SENDING MESSAGE BACK TO Camera ---------------------------------
-        # Send a message to the Camera saying that the message was sent
-        if(destinationCamera.status == "ONLINE" or destinationCamera.status == "CONNECTED"):
+        # We must return an error if not
+        if (tmpVehicle == None):
+            op.printLog(
+                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(matricula=["+self.packet.plate+"]) The plate [" + self.packet.plate + "] don't exist!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ACK", response="Message was sent to Camera ["+destinationCamera.cameraid+"]")
+                flag="ERR", response="Destination plate ["+self.packet.plate+"] does not exists!")
 
             return tmpOutputMessage.messageToJSONString()
 
+
+        # SENDING MESSAGE BACK TO Camera ---------------------------------
+        # Send a message to the Camera saying that the message was sent
+
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", response="Camera ["+destinationCamera.cameraid+"] is ["+destinationCamera.status+"]. Message stored in OutputMessages")
+            flag="ACK", message="Vehicle ["+tmpVehicle["plate"]+"] was added to parking")
+        
+        
+        if(self.server != None):
+            if originCamera.publicKey == None:
+                return tmpOutputMessage.messageToJSONString()
+ 
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+        
+        return None
 
-        return tmpOutputMessage.messageToJSONString()
+ 
     
     # Process OUT flag
     def processOUTFlag(self):
@@ -272,8 +297,13 @@ class handler():
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
             flag="ACK", message="Vehicle ["+destinationVehicle+"] was deleted from parking")
 
-        return tmpOutputMessage.messageToJSONString()
+        if(self.server != None):
+            if originCamera.publicKey == None:
+                return tmpOutputMessage.messageToJSONString()
  
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+        
+        return None
 
 class packet():
     """
@@ -368,6 +398,7 @@ class packet():
 
     # Load rawdata and prepare to loadpacket into structure
     def loadPacketFromBytes(self, data):
+        
         # If data is not string we convert it to string
         if type(data) != str:
             data = str(data, "utf-8")

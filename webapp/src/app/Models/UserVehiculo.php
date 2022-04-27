@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Vehiculo;
-use App\Models\Usuario;
+use App\Models\User;
 
-class UsuarioVehiculo extends Model
+class UserVehiculo extends Model
 {
-    protected $table = "UsuarioVehiculo";
+    protected $table = "UserVehiculo";
     public $timestamps = true;
     public $incrementing = false;
     protected $primaryKey = ['idUsuario', 'idVehiculo'];
@@ -38,7 +38,7 @@ class UsuarioVehiculo extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'id', 'idUsuario');
+        return $this->belongsTo(User::class, 'id', 'idUsuario');
     }
 
     public function vehiculo()

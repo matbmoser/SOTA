@@ -20,7 +20,7 @@ class CreateTicketTable extends Migration
 		$table->integer('idZona',)->unsigned();
 		$table->integer('idUsuario',)->unsigned();
 		$table->integer('idVehiculo',)->unsigned();
-		$table->foreign('idUsuario')->references('id')->on('Usuario')->onUpdate('CASCADE')->onDelete('CASCADE');   
+		$table->foreign('idUsuario')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');   
         $table->foreign('idVehiculo')->references('id')->on('Vehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');   
 		$table->foreign('idZona')->references('id')->on('Zona')->onUpdate('CASCADE')->onDelete('CASCADE');   
         $table->timestamps();    

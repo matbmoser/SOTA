@@ -17,7 +17,7 @@ class CreateNotificacionTable extends Migration
 		$table->string('tituloBoton',25);
 		$table->text('enlaceBoton');
 		$table->integer('idUsuario',)->unsigned();
-        $table->foreign('idUsuario')->references('id')->on('Usuario')->onUpdate('CASCADE')->onDelete('CASCADE');
+        $table->foreign('idUsuario')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();
         });
     }

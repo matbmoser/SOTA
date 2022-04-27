@@ -7,10 +7,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\Rol;
 
-class UsuarioSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        Usuario::firstOrCreate(
+        User::firstOrCreate(
         ['email' => "mathiasmoser@outlook.com"],
         [
             'nombre' => "Mathias",
@@ -28,7 +28,7 @@ class UsuarioSeeder extends Seeder
             'apellido2' => "Moser",
             'documento' => "07164545J",
             'telefono' => "647637778",
-            'password' =>  hash("sha512","123456789"),
+            'password' =>  bcrypt("123456789"),
             'token' => hash("sha256","mathiasmoser@outlook.com".hash("sha512","123456789")),
             'fechaNacimiento' => "2000-09-26",
             'correoConfirmado' => 0,
@@ -36,7 +36,7 @@ class UsuarioSeeder extends Seeder
             'idRol' => Rol::where('nombre', 'Administrador')->get("id")[0]->id
         ]);
 
-        Usuario::firstOrCreate(
+        User::firstOrCreate(
             ['email' => "prueba@gmail.com"],
             [
                 'nombre' => "Prueba",
@@ -45,7 +45,7 @@ class UsuarioSeeder extends Seeder
                 'apellido2' => "Prueba12345",
                 'documento' => "12132123",
                 'telefono' => "512131",
-                'password' =>  hash("sha512","123456789"),
+                'password' =>  bcrypt("123456789"),
                 'token' => hash("sha256","prueba@gmail.com".hash("sha512","123456789")),
                 'fechaNacimiento' => "1952-10-26",
                 'correoConfirmado' => 0,

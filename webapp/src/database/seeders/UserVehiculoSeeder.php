@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Vehiculo;
-use App\Models\Usuario;
-use App\Models\UsuarioVehiculo;
+use App\Models\User;
+use App\Models\UserVehiculo;
 
-class UsuarioVehiculoSeeder extends Seeder
+class UserVehiculoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,9 +20,9 @@ class UsuarioVehiculoSeeder extends Seeder
      */
     public function run()
     {
-        UsuarioVehiculo::firstOrCreate(
+        UserVehiculo::firstOrCreate(
             [
-                "idUsuario" => Usuario::where('username', 'matbmoser')->get("id")[0]->id,
+                "idUsuario" => User::where('username', 'matbmoser')->get("id")[0]->id,
                 "idVehiculo" => Vehiculo::where('matricula', '1605-LDJ')->get("id")[0]->id
             ],
             [

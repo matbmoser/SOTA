@@ -31,16 +31,21 @@ class TCPSJMPSocketCamera(SocketCamera, TCPSJMPCamera):
 
     def sendAddVehicle(self, plate):
         message = packet().dumpPacket(srv_time=False, flag="IN", sessionid=self.sessionid, plate=plate,
-                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).messageToJSONString()
+                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).encryptJSONMessage(self.serversecret)
         op.printLog(logType="DEBUG",
                     messageStr="["+self.cameraid+"]->[SENT SJMP IN MESSAGE]")
+        print("Mensaje ENCRIPTADO:")
+        print(message)
         self.addOutputMessage(message)
     
     def sendDeleteVehicle(self, plate):
         message = packet().dumpPacket(srv_time=False, flag="OUT", sessionid=self.sessionid, plate=plate,
-                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).messageToJSONString()
+                                      clt_time=datetime.timestamp(datetime.now(timezone.utc))).encryptJSONMessage(self.serversecret)
         op.printLog(logType="DEBUG",
                     messageStr="["+self.cameraid+"]->[SENT SJMP OUT MESSAGE]")
+        
+        print("Mensaje ENCRIPTADO:")
+        print(message)
         self.addOutputMessage(message)
 
     def reconnect(self):

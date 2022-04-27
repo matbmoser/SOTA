@@ -112,6 +112,10 @@ class cryptool:
     
     @staticmethod
     def encrypt(message, public_key, encoding="utf-8"):
+        
+        if type(public_key) == bytes or type(public_key) == str:
+            public_key = cryptool.loadPublicKeyFromString(public_key)
+            
         return public_key.encrypt(
                 bytes(message, encoding=encoding),
                 padding.OAEP(
@@ -123,6 +127,9 @@ class cryptool:
 
     @staticmethod
     def decrypt(encrypted, private_key, encoding="utf-8"):
+        if type(private_key) == bytes or type(private_key) == str:
+            private_key = cryptool.loadPrivateKeyFromString(private_key)
+        
         return str(private_key.decrypt(
                 encrypted,
                 padding.OAEP(
