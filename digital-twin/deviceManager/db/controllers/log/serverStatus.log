@@ -1,0 +1,8 @@
+Starting Server Log Messages...
+[STATS]: [18] tables found in [0:00:00.178299] DBManager.refreshDatabase()
+[STATS]: [18] tables found in [0:00:00.022188] DBManager.refreshDatabase()
+[STATS]: [18] tables found in [0:00:00.023567] DBManager.refreshDatabase()
+[STATS]: [18] tables found in [0:00:00.019045] DBManager.refreshDatabase()
+[STATS]: [18] tables found in [0:00:00.020338] DBManager.refreshDatabase()
+[STATS]: [18] tables found in [0:00:00.019437] DBManager.refreshDatabase()
+[STATS]: [1] elements update in [0:00:00.470022] DBManager.updateQuery()

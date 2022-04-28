@@ -1,0 +1,84 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-bbdd
+    environment:
+      MYSQL_DATABASE: "sotadb"
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: "dbadmin"
+      # You can use whatever password you like
+      MYSQL_PASSWORD: "GT9zEN(FdxSAmWiy"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "s0t42022"
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - "3306:3306"
+      # Where our data will be persisted
+    volumes:
+      - ./data:/var/lib/mysql
+
+  php-my-admin:
+    image: phpmyadmin
+    container_name: php-my-admin
+    ports:
+      - 7777:80
+    environment:
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+
+  php-apache:
+    container_name: php-webapp
+    build:
+      context: ./webapp
+    environment:
+      WEBAPP: "/var/www/webapp"
+    ports:
+      - "8080:80"
+      - "3001:8001"
+      - "3000:8000"
+      - "3002:8002"
+    volumes:
+      - ./webapp/src:/var/www/webapp
+      - ./webapp/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - mysql
+    networks:
+      - default
+      - appNet
+
+  digital-twin:
+    container_name: digital-twin
+    build:
+      context: ./digital-twin
+    environment:
+      DEVICE_MANAGER: "/usr/src/app"
+
+      DIGITAL_TWIN: "/var/www/digital-twin"
+
+    ports:
+      - "3333:80"
+      - "8888:8888"
+    volumes:
+      - ./digital-twin/src:/var/www/digital-twin
+      - ./digital-twin/php/php.ini-development:/usr/local/etc/php/php.ini-development
+      - ./digital-twin/php/php.ini-production:/usr/local/etc/php/php.ini-production
+      - ./digital-twin/deviceManager:/usr/src/app
+      - ./digital-twin/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - mysql
+    networks:
+      - default
+      - appNet
+
+networks:
+  default: # this network (app2)
+    driver: bridge
+  appNet: # external network (app1)
+    external: true
+
+# Names our volume
+volumes:
+  data:

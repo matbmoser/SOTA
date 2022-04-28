@@ -1,0 +1,5 @@
+data
+devcontainer
+*/__pycache__
+.idea
+.idea/*

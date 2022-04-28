@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\mathias.brunkowmoser\bin\framework\v1.0.0\commsManager\BaseProtocol.py", line 60, in loadRequest
+    self.rawdata = self.request.recv(self.buffer)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host

@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&family=Sarpanch:wght@400;900&display=swap');
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    height: 100%!important;
+    
+}
+.alertMessage{
+    position: fixed!important;
+    top:1px!important; 
+    left: 50% !important;
+    transform: translateX(-50%)!important;
+}
+body{
+    height: 100%!important;
+}
+.main-card{
+    padding: 1.5em 3em!important
+}
+
+html {
+    height: 100%!important;
+}
+.fieldsForm{
+    background: #212529!important;
+    color: white!important;
+}
+#loading{
+    display: none!important;
+}
+.loginlogo{
+    height: 10em;
+}
+.loginTitle{
+    font-family: "Kanit";
+}

@@ -1,0 +1,474 @@
+#!/usr/bin/env bash
+
+. ./config.import
+
+## GET PID
+
+# Script Name
+function getPID(){
+    SEARCHEDELEMENT=${1}
+    if [ -z "$SEARCHEDELEMENT" ];
+    then
+        echo "[ERROR] Please select a element to search."
+        return -1
+    fi
+    echo "$(ps -ef | grep "python3" | grep "${SEARCHEDELEMENT}" | awk {'print$2'})"
+}
+
+function getAllServersPIDS(){
+    echo $(getPID ${SERVERFILENAME})
+}
+
+function getPIDBySocket(){
+    IP=${1}
+    PORT=${2}
+
+    if [ -z "$IP" ];
+    then
+        echo "[ERROR] Please indicate the Server IP: getPIDBySocket <IP> <PORT>"
+        return -2
+    fi
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: getPIDBySocket <IP> <PORT>"
+        return -3
+    fi
+    echo "$(ps -ef | grep "python3" | grep "${SERVERFILENAME}" | grep "ip ${IP} -port ${PORT}" | awk {'print$2'})"
+
+}
+
+function getPIDByName(){
+    NAME=${1}
+    if [ -z "$NAME" ];
+    then
+        echo "[ERROR] Please indicate the Server NAME: getPIDByName <NAME>"
+        return -1
+    fi
+    echo "$(ps -ef | grep "python3" | grep "${SERVERFILENAME}" | grep "n ${NAME}" | awk {'print$2'})"
+
+}
+
+function getPIDByPort(){
+    PORT=${1}
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: getPIDByPort <PORT>"
+        return -1
+    fi
+    echo "$(ps -ef | grep "python3" | grep "${SERVERFILENAME}" | grep "port ${PORT}" | awk {'print$2'})"
+
+}
+
+function getPIDByIP(){
+    IP=${1}
+    if [ -z "$IP" ];
+    then
+        echo "[ERROR] Please indicate the Server IP: getPIDByPort <IP>"
+        return -1
+    fi
+    echo "$(ps -ef | grep "python3" | grep "${SERVERFILENAME}" | grep "ip ${IP}" | awk {'print$2'})"
+
+}
+
+## GET NAME
+
+function getServerNameBySocket(){
+    IP=${1}
+    PORT=${2}
+
+    if [ -z "$IP" ];
+    then
+        echo "[ERROR] Please indicate the Server IP: getServerName <IP> <PORT>"
+        return -2
+    fi
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: getServerName <IP> <PORT>"
+        return -2
+    fi
+
+    PID=$(getPIDBySocket ${IP} ${PORT})
+
+    if [ -z $PID ];
+    then
+        echo "[ERROR] No server is in this socket"
+    else
+        echo "$(ps -ef | grep "python3" | grep "${SERVERFILENAME}" | grep "ip ${IP} -port ${PORT}" | awk {'print$11'})"
+    fi
+}   
+
+function getServerNameByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                echo $(ps $PID | awk {'print$8'})
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+}
+
+function getServerIPByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                echo $(ps $PID | awk {'print$10'})
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+} 
+
+function getServerPortByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                echo $(ps $PID | awk {'print$12'})
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+} 
+
+
+## Open Server Functions
+
+function openServerOnPort(){
+    NAME=$(generateRandomName 12)
+    IP=${DEFAULTIP}
+    PORT=${1}
+
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: openServerOnPort <PORT>"
+        return -1
+    fi
+    
+    PID=$(getPIDBySocket $IP $PORT)
+
+    if [ -z $PID];
+    then
+        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo "Server with NAME=[${NAME}] IP=[${IP}] PORT=[${PORT}] started on PID=[$!]"
+    else
+        echo "[ERROR] Server with IP=[${IP}] PORT=[${PORT}] is Already Running on PID=[$PID]"
+    fi
+}
+
+function openServer(){
+    NAME=${1}
+    IP=${2}
+    PORT=${3}
+
+    if [ -z "$NAME" ];
+    then
+        echo "[ERROR] Please set the Server Name: openServer <NAME> <IP> <PORT>"
+        return -1
+    fi
+    if [ -z "$IP" ];
+    then
+        echo "[ERROR] Please set the Server IP: openServer <NAME> <IP> <PORT>"
+        return -2
+    fi
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please set the Server PORT: openServer <NAME> <IP> <PORT>"
+        return -3
+    fi
+
+    PID=$(getPIDBySocket $IP $PORT)
+
+    if [ -z $PID];
+    then
+        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo "Server with NAME=[${NAME}] IP=[${IP}] PORT=[${PORT}] started on PID=[$!]"
+    else
+        echo "[ERROR] Server with IP=[${IP}] PORT=[${PORT}] is Already Running on PID=[$PID]"
+    fi
+}   
+
+
+# Get Server Socket <IP> <PORT>
+
+function getServerSocketByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                IP=$(ps $PID | awk {'print$10'})
+                PORT=$(ps $PID | awk {'print$12'})
+                echo "$IP $PORT"
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+}
+
+function getServerSocketByName(){
+    NAME=${1}
+    if [ -z "$NAME" ];
+    then
+        echo "[ERROR] Please set the Server Name: getServerSocketByName <NAME>"
+        return -1
+    fi
+    
+    PID=$(getPIDByName $NAME)
+
+    if [ -z "$PID" ];
+    then
+        echo "[ERROR] No server is not running with NAME=[$NAME] at the moment"
+        return 1
+    else
+        SOCKET=$(getServerSocketByPID $PID)
+        echo "$SOCKET"
+        return 0
+    fi
+}
+
+
+## Get Server Info <NAME> <IP> <PORT> 
+
+function getServerInfoByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                NAME=$(ps $PID | awk {'print$8'})
+                IP=$(ps $PID | awk {'print$10'})
+                PORT=$(ps $PID | awk {'print$12'})
+                echo "$NAME $IP $PORT"
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+}
+
+## All Servers Functions
+
+
+function closeAllServers(){
+    PIDS=$(getPID ${SERVERFILENAME})
+    if [ -z "$PIDS" ];
+    then
+        echo "No server is not running at the moment."
+    else 
+        kill -9 $PIDS
+        echo "Closed all servers on PIDS=["$PIDS"]"
+    fi
+}
+
+function listAllServers(){
+    SERVERSPIDS=$(getAllServersPIDS)
+    if [ -z "$SERVERSPIDS" ];
+    then
+        echo "[WARNING] No servers were detected!"
+        return -1
+    fi
+    
+    i=1
+    printf "%4s\t%5s\t%20s\t%12s\t%5s\n" "N" "PID" "NAME" "IP" "PORT"
+    for SERVERPID in $SERVERSPIDS; do
+        SERVERINFO=$(getServerInfoByPID $SERVERPID)
+        printf "%4d\t%5s\t%20s\t%12s\t%5s\n" $i $SERVERPID ${SERVERINFO[0]} ${SERVERINFO[1]} ${SERVERINFO[2]}
+        ((i+=1))
+    done
+}
+
+function getAllServers(){
+    SERVERSPIDS=$(getAllServersPIDS);
+    if [ -z "$SERVERSPIDS" ];
+    then
+        echo '{"err":"No servers were detected!"}';
+        return -1;
+    fi
+    
+    i=1
+    printf "[";
+    for SERVERPID in $SERVERSPIDS; do
+        SERVERINFO=$(getServerInfoByPID $SERVERPID)
+        printf '{"n":"%d","pid":"%s","name":"%s","ip":"%s","port":"%s"}' $i $SERVERPID ${SERVERINFO[0]} ${SERVERINFO[1]} ${SERVERINFO[2]};
+        if [[ $i != ${#SERVERSPIDS[@]} ]];
+        then
+            printf ",";
+        fi
+        ((i+=1))
+    done
+    printf "]";
+}
+
+function closeServersByIP(){
+    IP=${1}
+
+    if [ -z "$IP" ];
+    then
+        echo "[ERROR] Please indicate the Server IP: closeServerByIP <IP>"
+        return -1
+    fi
+
+    PID=$(getPIDByIP $IP)
+
+    if [ -z "$PID" ];
+    then
+        echo "No server is not running on IP=[$IP] at the moment"
+        return 1
+    else
+        echo "Closing servers running on IP=[$IP] in PID=["$PID"]"
+        kill -9 $PID
+        return 0
+    fi
+}
+
+
+### Close Server Functions
+
+function closeServerByName(){
+    NAME=${1}
+
+    if [ -z "$NAME" ];
+    then
+        echo "[ERROR] Please indicate the Server NAME: closeServerByName <NAME>"
+        return -1
+    fi
+
+    PID=$(getPIDByName $NAME)
+
+    if [ -z "$PID" ];
+    then
+        echo "[ERROR] No server is not running with NAME=[$NAME] at the moment"
+        return 1
+    else
+        echo "Closing server running with NAME=[$NAME] in PID=[$PID]"
+        closeServerByPID $PID
+        return 0
+    fi
+}
+
+function closeServerByPort(){
+    PORT=${1}
+
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: closeServerByPort <PORT>"
+        return -1
+    fi
+
+    PID=$(getPIDByPort $PORT)
+
+    if [ -z "$PID" ];
+    then
+        echo "[ERROR] No server is not running on PORT=[$PORT] at the moment"
+        return 1
+    else
+        echo "Closing server running on PORT=[$PORT] in PID=[$PID]"
+        closeServerByPID $PID
+        return 0
+    fi
+}
+
+function closeServerByPID(){
+    PID=${1}
+    PIDS=$(getAllServersPIDS)
+    if [ -z "$PIDS" ];
+    then
+        echo "[ERROR] No server is not running at the moment."
+    else
+        if [ -z "$PID" ];
+        then
+            echo "Please give a PID from this list: PIDS=["$PIDS"]"
+        else
+            echo $PIDS | grep -w -q $PID
+            if [ $? -eq 0 ];
+            then
+                kill -9 $PID
+                echo "Closed server on PID: [$PID]"
+            else
+                echo "No server was found in PID: [$PID]"
+            fi
+        fi
+    fi
+}
+
+## DEFAULT SERVER CONFIGURATIONS
+
+function closeDefaultServer(){
+    
+    PID=$(getDefaultServerPID)
+
+    if [ -z $PID ];
+    then
+        echo "[ERROR] Default Server is not running"
+    else
+        kill -9 $PID
+        echo "Closed Default Server with PID=[$PID]"
+    fi
+
+}
+
+function openDefaultServer(){
+    
+    PID=$(getDefaultServerPID)
+
+    if [ -z $PID ];
+    then
+        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${DEFAULTNAME} -ip ${DEFAULTIP} -port ${DEFAULTPORT} > /dev/null 2>&1& echo "Server with NAME=[${DEFAULTNAME}] IP=[${DEFAULTIP}] PORT=[${DEFAULTPORT}] started on PID=[$!]"
+    else
+        echo "[ERROR] Default Server with IP=[${DEFAULTIP}] PORT=[${DEFAULTPORT}] is Already Running on PID=[$PID]"
+    fi
+
+}
+
+function getDefaultServerPID(){
+    echo $(getPIDBySocket $DEFAULTIP $DEFAULTPORT)
+}
+
