@@ -24,7 +24,6 @@ class Plaza extends Model
      */
     protected $fillable = [
         'token',
-        'descripcion',
         'fechaEntrada',
         'fechaSalida',
         'valido',
