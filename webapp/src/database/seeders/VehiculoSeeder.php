@@ -23,6 +23,7 @@ class VehiculoSeeder extends Seeder
             ["matricula" => "1605-LDJ"],
             [
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'C')->get("id")[0]->id
+                "id"    
             ]
         );
         

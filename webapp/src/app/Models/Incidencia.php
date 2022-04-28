@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Ticket;
+use App\Models\Plaza;
 use App\Models\Vehiculo;
 
 class Incidencia extends Model
@@ -32,7 +32,7 @@ class Incidencia extends Model
         'notaCierre',
         'nombreArchivoFoto',
         'idAprobador',
-        'idTicket',
+        'idPlaza',
         'idVehiculo',
     ];
     protected $casts = [
@@ -40,7 +40,7 @@ class Incidencia extends Model
         'fechaCierre' => 'datetime',
         'resuelta' => 'boolean',
         'idAprobador' => 'integer',
-        'idTicket' => 'integer',
+        'idPlaza' => 'integer',
         'idVehiculo' => 'integer'
     ];
 
@@ -49,9 +49,9 @@ class Incidencia extends Model
         return $this->belongsTo(User::class, 'id', 'idAprobador');
     }
 
-    public function ticket()
+    public function plaza()
     {
-        return $this->belongsTo(Ticket::class, 'id', 'idTicket');
+        return $this->belongsTo(Plaza::class, 'id', 'idPlaza');
     }
 
     public function vehiculo()

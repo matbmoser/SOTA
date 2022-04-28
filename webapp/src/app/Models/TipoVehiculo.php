@@ -24,7 +24,7 @@ class TipoVehiculo extends Model
         'clasificacion',
         'ancho',
         'largo',
-        'alto'
+        'alto',
     ];
     protected $casts = [
         'ancho' => 'float',

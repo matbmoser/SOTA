@@ -101,7 +101,7 @@ class AuthController extends Controller
         #With passport $success['token'] =  $usuario->createToken('__appMyParking')->accessToken;
         return response()->json([
             'success' => true,
-            'token' => $success,
+            'token' => $token,
             'user' => $usuario
         ], 200)->header('Authorization', $token);;
     }
@@ -112,12 +112,12 @@ class AuthController extends Controller
             $user = $this->guard()->user();
             
             #Wtih passport $success['token'] =  $user->createToken('__appMyParking')-> accessToken;
-            $success['token'] =  $user->token;
-            $success['email'] =  $user->email;
+            $userdata['token'] =  $user->token;
+            $userdata['email'] =  $user->email;
             return response()->json([
                 'success' => true,
-                'token' => $success
-            ])->header('Authorization', $token);;
+                'user' => $userdata
+            ])->header('Authorization', $token);
         }
         else{
             return response()->json([

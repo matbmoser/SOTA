@@ -3,7 +3,7 @@
   <div class="main">
   <div class="d-flex row justify-content-center">
   <div class="container-fluid">
-    <h1 class="h1 mb-4 mt-4 text-gray-800">Admin Dashboard</h1>
+    <h1 class="h1 mb-4 mt-4">Mis Notificaciones</h1>
     <Panel class="p-shadow-4" header="5 Last Registered Users">
           <template #icons>
                 <p>Total Users:<span class='bg-primary' style='padding:10px;margin-top:20px;'>{{numUsers}} Users</span></p>
@@ -55,7 +55,7 @@
              */
             fetchUsers() {
                 axios
-                    .get('/api/usuario', {
+                    .get('/api/user', {
                         headers: {
                             Authorization: 'Bearer ' + this.token,
                         }
@@ -106,7 +106,7 @@
              * @see forceUpdate()
              */
             fetchNumUsers() {
-                fetch('/api/usuario', {
+                fetch('/api/user', {
                     headers: {
                         Authorization: 'Bearer ' + this.token,
                     }

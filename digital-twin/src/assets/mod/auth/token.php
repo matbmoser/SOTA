@@ -11,19 +11,13 @@ if(empty($token) || empty($username)){
   exit;
 }
 
-if(!$result = $conexion->query("SELECT * FROM Usuario WHERE token='$token' ")){
+$token = mysqli_real_escape_string($conexion,$token);
+if(!$result = $conexion->query("SELECT * FROM users WHERE token='$token' ")){
   error("connectionFailToken");
   exit;
 }
 
 $usuario = $result->fetch_object();
-
-$r_token = hash('sha256',$usuario->email.$usuario->password);
-
-if($token != $r_token){
-  error("securityErrorToken");
-  exit;
-}
 
 $roleResult = $conexion->query("SELECT * FROM Rol WHERE `id`=".$usuario->idRol);
 $rowResult = $roleResult->fetch_object();

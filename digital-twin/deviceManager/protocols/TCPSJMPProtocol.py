@@ -18,8 +18,6 @@ class TCPSJMPProtocol(TCPProtocol):
     # Prepares and returns a connection message
     def getConnectionMessage(self, camera):
         token=camera.publicKey.decode("utf-8")
-        print(token)
-        print(type(token))
         return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=camera.cameraid, clt_time=datetime.timestamp(datetime.now(timezone.utc)), token=token, type=camera.type).messageToJSONString())
 
     # Prepares and returns a close message

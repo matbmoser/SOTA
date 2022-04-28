@@ -93,7 +93,7 @@ async function encrypt(user, pass){
     const seed = user+cryptpass;
     const token = await sha256(seed);
     const UUID = getCookie("UUID");
-    return 'email='+user+'&pass='+ cryptpass + '&token=' + token + "&uuid=" + UUID;
+    return 'token=' + token + "&uuid=" + UUID;
 }
 
 

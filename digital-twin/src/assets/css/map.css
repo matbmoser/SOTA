@@ -103,7 +103,9 @@
     height: 35em;
     padding: 0;
 }
-
+.mapaMainContainer{
+    overflow: hidden!important;
+}
 .mapaContainer {
     background-image: url('../../media/img/mapaparking.jpg')!important;
     background-size: contain;
@@ -112,7 +114,7 @@
     height: 100%;
     border: 5px solid var(--color);
     background-color: #f8f9fa;
-    overflow: hidden;
+    overflow: hidden!important;
     
 }
 

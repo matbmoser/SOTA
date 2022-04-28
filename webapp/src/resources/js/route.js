@@ -1,11 +1,15 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
-import User from "./views/User.vue";
-import Dashboard from "./views/Dashboard.vue";
+import Profile from "./views/Profile.vue";
+import AdminDashboard from "./views/AdminDashboard.vue";
+import AdminIncidencias from "./views/AdminIncidencias.vue";
+import Notificaciones from "./views/Notificaciones.vue";
+import Incidencias from "./views/Incidencias.vue";
+import Tickets from "./views/Tickets.vue";
+import Vehiculos from "./views/Vehiculos.vue";
 import NotFound from "./views/NotFound.vue";
 import Login from "./views/Login.vue";
-import Register from "./views/Register.vue"
+import Register from "./views/Register.vue";
 export const routes = [
   {
     path: "/",
@@ -13,14 +17,14 @@ export const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/admin/dashboard",
+    name: "AdminDashboard",
+    component: AdminDashboard,
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    path: "/admin/incidencias",
+    name: "AdminIncidencias",
+    component: AdminIncidencias,
   },
   {
     path: "/login",
@@ -33,28 +37,30 @@ export const routes = [
     component: Register,
   },
   {
-    path: "/user/:name",
-    name: "User",
-    component: User,
+    path: "/vehiculos",
+    name: "Vehiculos",
+    component: Vehiculos,
+  },
+  {
+    path: "/incidencias",
+    name: "Incidencias",
+    component: Incidencias,
+  },
+  {
+    path: "/tickets",
+    name: "Tickets",
+    component: Tickets,
+  },
+  {
+    path: "/notificaciones",
+    name: "Notificaciones",
+    component: Notificaciones,
+  },
+  {
+    path: "/profile/:name",
+    name: "Profile",
+    component: Profile,
     props: true,
-  },
-  // USER ROUTES
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
-    meta: {
-      auth: true
-    }
-  },
-  // ADMIN ROUTES
-  {
-    path: '/admin',
-    name: 'admin.dashboard',
-    component: AdminDashboard,
-    meta: {
-      auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
-    }
   },
   {
   path: "/:catchAll(.*)",

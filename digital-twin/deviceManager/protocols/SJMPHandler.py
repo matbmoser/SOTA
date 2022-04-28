@@ -172,8 +172,8 @@ class handler():
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
             datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.publicKey.decode("utf-8"))
 
-        return tmpOutputMessage.encryptJSONMessage(self.camera.publicKey)
-
+        #return tmpOutputMessage.encryptJSONMessage(self.camera.publicKey)
+        return tmpOutputMessage.messageToJSONString()
     # Process IN flag
     def processINFlag(self):
 
@@ -242,7 +242,8 @@ class handler():
             if originCamera.publicKey == None:
                 return tmpOutputMessage.messageToJSONString()
  
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            #return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            return tmpOutputMessage.messageToJSONString()
         
         return None
 
@@ -300,8 +301,9 @@ class handler():
         if(self.server != None):
             if originCamera.publicKey == None:
                 return tmpOutputMessage.messageToJSONString()
- 
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+
+            return tmpOutputMessage.messageToJSONString()
+            #return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
         return None
 

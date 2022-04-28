@@ -20,11 +20,11 @@ class CreateIncidenciaTable extends Migration
 		$table->text('notaCierre');
 		$table->text('nombreArchivoFoto');
 		$table->integer('idAprobador',)->unsigned();
-		$table->integer('idTicket',)->unsigned();
+		$table->integer('idPlaza',)->unsigned();
 		$table->integer('idVehiculo',)->unsigned();
 		$table->integer('idTipoIncidencia',)->unsigned();
 		$table->foreign('idAprobador')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('idTicket')->references('id')->on('Ticket')->onUpdate('CASCADE')->onDelete('CASCADE'); 
+		$table->foreign('idPlaza')->references('id')->on('Plaza')->onUpdate('CASCADE')->onDelete('CASCADE'); 
 		$table->foreign('idVehiculo')->references('id')->on('Vehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');  
         $table->timestamps();    
 		});

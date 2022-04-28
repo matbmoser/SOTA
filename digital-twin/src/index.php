@@ -1,19 +1,19 @@
 <?php
-$configs = include('assets/mod/configs/config.php');
-$dbconfig = include("assets/mod/configs/db.config.php");
-require_once("assets/mod/connection/connect.php");
-require_once("assets/mod/auth/session.php");
+  $configs = include('assets/mod/configs/config.php');
+  $dbconfig = include("assets/mod/configs/db.config.php");
+  require_once("assets/mod/connection/connect.php");
+  require_once("assets/mod/auth/session.php");
+  include("assets/mod/err/fallos.php");
+  require_once("assets/mod/auth/token.php");
 
 
-if(empty( $_SESSION["token"] )){
+  if(empty( $_SESSION["token"] )){  
     setcookie("__LOGIN__", "", time() - 3600, "/");
     header('Location: login/');
     exit;
   }
 
 
-  require_once("assets/mod/auth/token.php");
-  require_once("assets/mod/err/fallos.php");
   
   if (empty($username)){
       header('Location: login/?result='.$configs["securityErrorToken"]);
@@ -26,7 +26,35 @@ if(empty( $_SESSION["token"] )){
 
   $tablaZona = new Table($dbconfig, "Zona");
   $zonas = $tablaZona->getRows(array('return_type' => 'all'));
+
+  $tablaVehiculo = new Table($dbconfig, "Vehiculo");
+  $vehiculos = $tablaVehiculo->getRows(array('return_type' => 'all'));
   
+  $tablaPlaza = new Table($dbconfig, "Plaza");
+  $conditions = array(
+    'return_type' => 'all',
+    'where'       => array(
+      'valido' => '1'
+    ),
+  );
+  $plazasOcupadas = $tablaPlaza->getRows($conditions);
+  print_r($plazasOcupadas);
+
+  $tablaTipoVehiculo = new Table($dbconfig, "TipoVehiculo");
+  $tipoVehiculo = $tablaTipoVehiculo->getRows(array('return_type' => 'all'));
+  
+
+  function getIDValue($arr, $id, $value){
+    $ids = array();
+    foreach ($arr as $elem){
+      $ids[$elem[$id]] = $elem[$value];
+    }
+    return $ids;
+  }
+  $clasificacionesVehiculos = getIDValue($tipoVehiculo, "id", "clasificacion");
+  $segmentosVehiculos = getIDValue($tipoVehiculo, "id", "segmento");
+  $idVehiculos = getIDValue($vehiculos, "id", "idTipoVehiculo");
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -103,7 +131,7 @@ var ip = "<?php echo $ip; ?>"
     </header>
 
     <div id="mainflow">
-        <div class="mainContainer container-fluid">
+        <div class="mapaMainContainer container-fluid">
           <div class="row d-flex align-content-center justify-content-center">
             <div class="col-xl-8 mapa">
               <div class="mapaContainer">
@@ -121,22 +149,111 @@ var ip = "<?php echo $ip; ?>"
         <button class="btn btn-warning" style="position: fixed; bottom: 20px; right: 20px;" type="button" id="refresh">Refresh</button> 
     </div>
 
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4 mb-4">
       <div class="row d-flex justify-content-center">
-        <div class="col-md-3 d-flex justify-content-center">
-          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-plus"></i> Coche</button>
+        <div class="col-md-2 mt-2  mb-2 d-flex justify-content-center">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#EntradaVehiculo"class="btnAccion btn btn-primary" ><i class="fa-solid fa-plus"></i> Añadir Vehiculo</button>
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
-          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-minus"></i> Coche</button>
+        <div class="col-md-2 mt-2  mb-2 d-flex justify-content-center">
+          <button type="button" id="deleteVehicle" data-bs-toggle="modal" data-bs-target="#SalidaVehiculo"class="btnAccion btn btn-primary" ><i class="fa-solid fa-minus"></i> Borrar Vehiculo</button>
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
-          <button type="button" id="inButton" class="btnAccion btn btn-primary" ><i class="fa-solid fa-eye"></i> Ver Coches</button>
+        <div class="col-md-2 mt-2 mb-2 d-flex justify-content-center">
+          <button type="button" id="seeVehicles" data-bs-toggle="modal" data-bs-target="#VerPlazas"class="btnAccion btn btn-primary" ><i class="fa-solid fa-eye"></i> Ver Plazas</button>
+        </div>
+        <div class="col-md-2 mt-2 mb-2 d-flex justify-content-center">
+          <button type="button" id="barreras" data-bs-toggle="modal" data-bs-target="#Modal" class="btnAccion btn btn-primary w-100" ><i class="fa-solid fa-triangle-exclamation"></i> Barreras</button>
         </div>
       </div>
     </div>
     <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div id="modalContent" class="modal-content">
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="EntradaVehiculo" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div id="modalContent" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Camera Entrada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body">
+          <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
+          <textfield class="w-100 h-100" id="monitorEntrada" disable></textfield>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" id="addVehiculo" type="submit">Enviar Matricula</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="SalidaVehiculo" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div id="modalContent" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Camera Salida</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body">
+          <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
+          <textfield class="w-100 h-100" id="monitorSalida" disable></textfield>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" id="deleteVehiculo" type="submit">Enviar Matricula</button>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="VerPlazas" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div id="modalContent" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ver Plazas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body">
+          <div class="container-fluid mt-4 d-flex justify-content-center table-responsive" style="background: var(--color); color: var(--bg-color);">
+          <div class="col-sm-8">
+              <div class="row mt-5">    
+              <div class="col-12">
+              <h2 class="text-center">
+              Plazas Ocupadas<strong style="color:green"></strong>
+              </h2>
+              </div>
+              <table class="table m-2 table-striped table-hovertext-nowrap">
+                  <thead>
+                    <tr>
+                      <th>idPlaza</th>
+                      <th>Matrícula</th>
+                      <th>Segmento</th>
+                      <th>Tamaño</th>
+                      <th>Fecha Entrada</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      foreach ($zonas as $zona){      
+                        foreach ($plazasOcupadas as $plaza){ 
+                          if($plaza["idZona"] == $zona["id"])
+                          { ?>
+                            <tr>              
+                              <td><?php echo $zona["letra"].$plaza['id']; ?></td>
+                              <td><?php echo $plaza['matricula']; ?></td>
+                              <td><?php echo $segmentosVehiculos[$idVehiculos[$plaza["idVehiculo"]]] ?></td>
+                              <td><?php echo $clasificacion[$idVehiculos[$plaza["idVehiculo"]]] ?></td>
+                              <td><?php echo $plaza['created_at']; ?></td>
+                            </tr>
+                    <?php }
+                        } 
+                      }
+                    ?>                
+                  </tbody>
+                </table>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-dismiss="modal" type="button">Cerrar</button>
+        </div>
         </div>
       </div>
     </div>
@@ -150,6 +267,7 @@ var ip = "<?php echo $ip; ?>"
 <script src="assets/js/front/clock.js"></script>
 <script src="assets/js/map/map.js"></script>
 <script src="assets/js/front/dark-mode.js"></script>
+<script src="assets/js/barreras/barrera.js"></script>
 <script>
 
     function randomIntFromInterval(min, max) { // min and max included 
@@ -165,17 +283,21 @@ var ip = "<?php echo $ip; ?>"
     $(function(){
         var modalContent = document.getElementById("modalContent");
         var openServerButton = document.getElementById("openserver");
-        var inButton = document.getElementById("inButton");
-      
+        var addVehicle = document.getElementById("addVehicle");
+
+        barreras.addEventListener('click', function() {
+          modalContent.innerHTML  = `<?php echo $modals["barreras"]; ?>`;
+          adminBarreras();
+        });
         openServerButton.addEventListener('click', function() {
-            //Limites
+            //Limites de Puertos
             var minPort = 1;
-            var maxPort = 65535; //Habria que discutir un máximo
+            var maxPort = 65535; 
             var timeout;
 
             var ipPattern = "#ip-pattern";
             var portPattern = "#port-pattern";
-            modalContent.innerHTML  = '<?php echo $modals["openServer"]; ?>';
+            modalContent.innerHTML  =  `<?php echo $modals["openServer"]; ?> `;
             $(portPattern).val(randomIntFromInterval(minPort, maxPort));
 
             var defaultPortButton= document.getElementById("defaultPort");

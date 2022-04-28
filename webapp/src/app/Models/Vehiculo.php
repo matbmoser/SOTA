@@ -23,13 +23,19 @@ class Vehiculo extends Model
     protected $fillable = [
         'matricula',
         'idTipoVehiculo',
+        'idUsuario'
     ];
     protected $casts = [
-        'idTipoVehiculo' => 'integer'
+        'idTipoVehiculo' => 'integer',
+        'idUsuario' => 'integer'
     ];
 
     public function tipovehiculo()
     {
         return $this->belongsTo(TipoVehiculo::class, 'id', 'idTipoVehiculo');
+    }
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id', 'idUsuario');
     }
 }

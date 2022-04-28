@@ -1,95 +1,99 @@
 <template>
-  <div class="login">
-    <h1 class="title">Login in the page</h1>
-    <form action class="form" @submit.prevent="login">
-      <label class="form-label" for="#email">Email:</label>
-      <input
-        v-model="email"
-        class="form-input"
-        type="email"
-        id="email"
-        required
-        placeholder="Email"
-      >
-      <label class="form-label" for="#password">Password:</label>
-      <input
-        v-model="password"
-        class="form-input"
-        type="password"
-        id="password"
-        placeholder="Password"
-      >
-      <p v-if="error" class="error">Has introducido mal el email o la contraseña.</p>
-      <input class="form-submit" type="submit" value="Login">
-    </form>
-  </div>
+    <div class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+        <div class="grid justify-content-center p-2 lg:p-0" style="min-width:80%">
+            <div class="col-12 xl:col-6" style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color), rgba(33, 150, 243, 0) 30%);">
+                <div class="h-full w-full m-0 py-7 px-4" style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
+                    <div class="text-center mb-5">
+                        <img src="../assets/img/logowhite.png" alt="Image" class="loginlogo mb-3">
+                        <div class="text-900 text-3xl font-medium mb-3 loginTitle">Web App</div>
+                    </div>
+                    <div class=" w-full md:w-10 mx-auto">
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+                        <InputText id="email1" v-model="email" type="text" class="w-full mb-3" placeholder="Email" style="padding:1rem;" />
+                
+                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                        <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
+                
+                        <div class="flex align-items-center justify-content-between mb-5">
+                            <div class="flex align-items-center">
+                                <Checkbox id="rememberme1" v-model="checked" :binary="true" class="mr-2"></Checkbox>
+                                <label for="rememberme1">Remember me</label>
+                            </div>
+                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
+                        </div>
+                        <Button label="Sign In" class="w-full p-3 text-xl"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
-
 <script>
 export default {
-  data: () => ({
-    email: "",
-    password: "",
-    error: false
-  }),
-  methods: {
-    login() {
-      console.log(this.email);
-      console.log(this.password);
+    data() {
+        return {
+            email: '',
+            password: '',
+            checked: false
+        }
+    },
+    computed: {
+        logoColor() {
+            if (this.$appState.darkTheme) return 'white';
+            return 'dark';
+        }
     }
-  }
-};
+}
 </script>
 
-<style lang="scss" scoped>
-.login {
-  padding: 2rem;
+<style scoped>
+.pi-eye {
+    transform:scale(1.6);
+    margin-right: 1rem;
 }
-.title {
-  text-align: center;
+.pi-eye-slash {
+    transform:scale(1.6);
+    margin-right: 1rem;
 }
-.form {
-  margin: 3rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
-  background: rgba(19, 35, 47, 0.9);
-  border-radius: 5px;
-  padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&family=Sarpanch:wght@400;900&display=swap');
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    height: 100%!important;
+    
 }
-.form-label {
-  margin-top: 2rem;
-  color: white;
-  margin-bottom: 0.5rem;
-  &:first-of-type {
-    margin-top: 0rem;
-  }
+.alertMessage{
+    position: fixed!important;
+    top:1px!important; 
+    left: 50% !important;
+    transform: translateX(-50%)!important;
 }
-.form-input {
-  padding: 10px 15px;
-  background: none;
-  background-image: none;
-  border: 1px solid white;
-  color: white;
-  &:focus {
-    outline: 0;
-    border-color: #1ab188;
-  }
+
+.main-card{
+    padding: 1.5em 3em!important
 }
-.form-submit {
-  background: #1ab188;
-  border: none;
-  color: white;
-  margin-top: 3rem;
-  padding: 1rem 0;
-  cursor: pointer;
-  transition: background 0.2s;
-  &:hover {
-    background: #0b9185;
-  }
+
+html {
+    height: 100%!important;
+}
+.fieldsForm{
+    background: #212529!important;
+    color: white!important;
+}
+#loading{
+    display: none!important;
+}
+.loginlogo{
+    height: 10em;
+}
+.loginTitle{
+    font-family: "Kanit";
 }
 </style>
