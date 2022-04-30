@@ -1,7 +1,7 @@
 <template>
 	<div class="layout-topbar">
 		<router-link to="/" class="layout-topbar-logo">
-			<img alt="Logo" src="../assets/img/logowhite.png" />
+			<img alt="Logo" src="../media/img/logowhite.png" />
 			<span>WebApp MyParking</span>
 		</router-link>
 		<button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">

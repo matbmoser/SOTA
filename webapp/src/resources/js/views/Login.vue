@@ -1,52 +1,191 @@
 <template>
-    <div class="surface-0 flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
-        <div class="grid justify-content-center p-2 lg:p-0" style="min-width:80%">
-            <div class="col-12 xl:col-6" style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color), rgba(33, 150, 243, 0) 30%);">
-                <div class="h-full w-full m-0 py-7 px-4" style="border-radius:53px; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
-                    <div class="text-center mb-5">
-                        <img src="../assets/img/logowhite.png" alt="Image" class="loginlogo mb-3">
-                        <div class="text-900 text-3xl font-medium mb-3 loginTitle">Web App</div>
+    <div id="mainContainer" class="gradient-custom flex align-items-center justify-content-center">
+            <div class="form-demo">
+            <Dialog v-model:visible="showMessage" :breakpoints="{ '960px': '80vw' }" :style="{ width: '30vw' }" position="top">
+                <div class="flex align-items-center flex-column pt-6 px-3">
+                    <i class="pi pi-check-circle" :style="{fontSize: '5rem', color: 'var(--green-500)' }"></i>
+                    <h5>Registration Successful!</h5>
+                    <p :style="{lineHeight: 1.5, textIndent: '1rem'}">
+                        Your account is registered under name <b>{{state.email}}</b> ; it'll be valid next 30 days without activation. Please check <b>{{state.email}}</b> and {{state.email}} for activation instructions.
+                    </p>
+                </div>
+                <template #footer>
+                    <div class="flex justify-content-center">
+                        <Button label="OK" @click="toggleDialog" class="p-button-text" />
                     </div>
-                    <div class=" w-full md:w-10 mx-auto">
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <InputText id="email1" v-model="email" type="text" class="w-full mb-3" placeholder="Email" style="padding:1rem;" />
-                
-                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-                        <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
-                
-                        <div class="flex align-items-center justify-content-between mb-5">
-                            <div class="flex align-items-center">
-                                <Checkbox id="rememberme1" v-model="checked" :binary="true" class="mr-2"></Checkbox>
-                                <label for="rememberme1">Remember me</label>
-                            </div>
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
+                </template>
+            </Dialog>
+                <div class="main-card justify-content-center">
+                    <div class="card">
+                        <div class="text-center mb-5">
+                            <img src="../media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
+                            <div class="text-900 text-3xl font-medium mb-3 loginTitle">WebApp MyParking</div>
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl"></button>
+                        <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid" autocomplete="off">
+                            <div class="field mt-4">
+                                <div class="p-float-label p-input-icon-right">
+                                    <i class="pi pi-envelope" />
+                                    <InputText id="email" v-model="v$.email.$model" :class="{'p-invalid':v$.email.$invalid && submitted}" aria-describedby="email-error"/>
+                                    <label for="email" :class="{'p-error':v$.email.$invalid && submitted}">Email*</label>
+                                </div>
+                                <span v-if="v$.email.$error && submitted">
+                                    <span id="email-error" v-for="(error, index) of v$.email.$errors" :key="index">
+                                    <small class="p-error">{{error.$message}}</small>
+                                    </span>
+                                </span>
+                                <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{v$.email.required.$message.replace('Value', 'Email')}}</small>
+                            </div>
+                            <div class="field mt-4">
+                                <div class="p-float-label">
+                                    <Password id="password" v-model="v$.password.$model" :feedback="false" :class="{'p-invalid':v$.password.$invalid && submitted}" toggleMask>
+          
+          
+                                    </Password>
+                                    <label for="password" :class="{'p-error':v$.password.$invalid && submitted}">Password*</label>
+                                </div>
+                                <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value', 'Password')}}</small>
+                            </div>
+                        
+                            <div class="field-checkbox">
+                                <Checkbox id="remember" name="remember" value="Accept" v-model="v$.remember.$model" :class="{'p-invalid':v$.remember.$invalid && submitted}" />
+                                <label for="remember" :class="{'p-error': v$.remember.$invalid && submitted}">Remember me</label>
+                            </div>
+                            <Button type="submit" label="Login" class="mt-2 submitButton" />
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 <script>
+import {ToastSeverity} from 'primevue/api';
+import { reactive, ref, onMounted } from 'vue';
+import { email, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { useStore } from 'vuex'
+import router from '../route/index.js'
+import axios from "axios";
 export default {
+    name: "Login",
     data() {
         return {
-            email: '',
-            password: '',
-            checked: false
+            user: null,
+            authorization: null
         }
     },
-    computed: {
-        logoColor() {
-            if (this.$appState.darkTheme) return 'white';
-            return 'dark';
+    setup() {
+        const store = useStore();
+
+        const state = reactive({
+            email: '',
+            password: '',
+            remember: null
+        });
+
+        const rules = {
+            email: { required, email },
+            password: { required },
+            remember: { }
+        };
+
+        const submitted = ref(false);
+        const showMessage = ref(false);
+
+        const v$ = useVuelidate(rules, state);
+
+        const handleSubmit = (isFormValid) => {
+            submitted.value = true;
+
+            if (!isFormValid) {
+                return;
+            }
+            let emitObj = JSON.parse(JSON.stringify(this.additionalInfo));
+            this.$emit('login', emitObj)
+
+            axios
+            .post("/api/auth/login",{
+                "email": state.email,
+                "password": state.password
+            })
+            .then(function (response) {
+                saveUser(response.data.user,response.headers.authorization);
+            });
         }
-    }
+        const saveUser = (user, token) => {
+            store.commit('saveCurrentUser',user);
+            store.commit('saveJwtToken', token);
+            
+            axios
+            .get("/api/rol/"+user.idRol,{
+                headers:{
+                    Authorization: 'Bearer ' + token,
+                }
+            })
+            .then(function (response) {
+                saveUserRol(response.data.rol);
+            }); 
+        }
+        const saveUserRol = (rol) =>{
+            store.commit('saveCurrentRole', rol);
+            router.push("/");
+        }
+        const toggleDialog = () => {
+            
+            showMessage.value = !showMessage.value;
+
+            if(!showMessage.value) {
+                resetForm();
+            }
+        }
+
+        const resetForm = () => {
+            state.email = '';
+            state.password = '';
+            submitted.value = false;
+        }
+
+        return { state, v$, handleSubmit, toggleDialog, saveUserRol, saveUser, submitted, showMessage}
+    },
+    methods:{
+        
+    },
 }
 </script>
 
+
 <style scoped>
+.submitButton {
+    width: 100%;
+    /* color: aqua; */
+    background: white;
+     border: none;
+}
+.submitButton:enabled:hover {
+    width: 100%;
+    /* color: aqua; */
+    background: rgb(187 187 187 / 22%)!important;
+    border: none;
+    color:#ffffff;
+    transition: all .25s ease;
+}
+.field {
+    margin-bottom: 1rem;
+    width: 25em;
+    /* height: 3em; */
+}
+.card {
+    background-color: #1f3c5930;
+    padding: 1.5rem;
+    color: var(--surface-900);
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 3px 5px rgb(0 0 0 / 2%), 0px 0px 2px rgb(0 0 0 / 5%), 0px 1px 4px rgb(0 0 0 / 8%) !important;
+}
+
+#mainContainer{
+    height:100%;
+    width: 100%;
+}
 .pi-eye {
     transform:scale(1.6);
     margin-right: 1rem;
@@ -61,13 +200,22 @@ export default {
     background: #6a11cb;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    */
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background: linear-gradient(360deg, #621bc9, #00c6ff);
     
     height: 100%!important;
     
+}
+
+.main-card{
+    padding: 1.5em 3em!important;
+    width: 100%;
+}
+.button_custom {
+    background:white!important;
 }
 .alertMessage{
     position: fixed!important;
@@ -76,20 +224,12 @@ export default {
     transform: translateX(-50%)!important;
 }
 
-.main-card{
-    padding: 1.5em 3em!important
-}
 
-html {
-    height: 100%!important;
-}
 .fieldsForm{
     background: #212529!important;
     color: white!important;
 }
-#loading{
-    display: none!important;
-}
+
 .loginlogo{
     height: 10em;
 }

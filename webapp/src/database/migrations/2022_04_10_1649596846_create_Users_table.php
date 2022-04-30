@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
 		$table->increments('id');
 		$table->text('nombre');
 		$table->text('apellido1');
-		$table->text('apellido2');
+		$table->text('apellido2')->nullable();
 		$table->string('username',50)->unique();
 		$table->text('documento');
 		$table->text('telefono');

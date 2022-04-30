@@ -1,11 +1,14 @@
 class ServerConnectionManager{
+    static open(port) {
+        HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/serverController/open.php', 'port=' + port.toString()+'&uuid='+CONFIGS["securityUUIDToken"],  'serverOpen');
+    }
     static close(pid) {
-        HTTPRequest.POST('http://'+configs["httpHost"]+'/serverController/close.php', 'pid=' + pid+';uuid='+configs["securityUUIDToken"],  'serverClose');
+        HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/serverController/close.php', 'pid=' + pid+'&uuid='+CONFIGS["securityUUIDToken"],  'serverClose');
     }
     static closeDefault() {
-        HTTPRequest.POST('http://'+configs["httpHost"]+'/serverController/close.php', "", 'serverClose');
+        HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/serverController/close.php', "", 'serverClose');
     }
     static getProcesses() {
-        HTTPRequest.POST('http://'+configs["httpHost"]+'/serverController/psef.php', "", 'serverRefresh');
+        HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/serverController/psef.php', "", 'serverRefresh');
     }
 }

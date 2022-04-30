@@ -119,12 +119,6 @@ class SocketCamera(Camera):
         op.printLog(
             logType="DEBUG", messageStr="Camera Socket Opened on ["+self.socketkey+"] ...")
 
-        # Send Connection Message with protocol format
-        self.addOutputMessage(
-            value=self.protocol.getConnectionMessage(camera=self))
-        op.printLog(logType="DEBUG",
-                    messageStr="["+self.cameraid+"]->[SENT CONNECTION MESSAGE]")
-        self.encrypted = True
         return True
 
     # ================================================================

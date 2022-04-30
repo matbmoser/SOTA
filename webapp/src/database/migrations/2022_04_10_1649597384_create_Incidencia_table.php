@@ -14,18 +14,14 @@ class CreateIncidenciaTable extends Migration
 		$table->integer('gravedad',)->comment('0-5');
 		$table->string('titulo');
 		$table->text('descripcion');
-		$table->datetime('fechaApertura');
-		$table->datetime('fechaCierre');
-		$table->boolean('resuelta');
-		$table->text('notaCierre');
-		$table->text('nombreArchivoFoto');
-		$table->integer('idAprobador',)->unsigned();
-		$table->integer('idPlaza',)->unsigned();
-		$table->integer('idVehiculo',)->unsigned();
-		$table->integer('idTipoIncidencia',)->unsigned();
+		$table->datetime('fechaCierre')->nullable();
+		$table->boolean('resuelta')->default(0);
+		$table->text('notaCierre')->nullable();
+		$table->text('nombreArchivoFoto')->nullable();
+		$table->integer('idAprobador',)->unsigned()->nullable();
+		$table->string('tokenPlaza',128)->unique()->comment('Unique sha512 hash');
 		$table->foreign('idAprobador')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('idPlaza')->references('id')->on('Plaza')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('idVehiculo')->references('id')->on('Vehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');  
+		$table->foreign('tokenPlaza')->references('token')->on('Plaza')->onUpdate('CASCADE');
         $table->timestamps();    
 		});
     }

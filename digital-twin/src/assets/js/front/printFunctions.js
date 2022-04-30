@@ -2,17 +2,21 @@
 async function cleanOutput(){
   document.getElementById("output").innerHTML = "";
 }
+
 async function setOnline(){
   document.getElementById("status").innerHTML = '<span class="alert-online">ONLINE</span>';
   // Dispatch the event.
   document.dispatchEvent(online);
 }
+
 async function setConnected(){
   document.getElementById("status").innerHTML = '<span class="alert-connected">CONNECTED</span>';
 }
+
 async function setConnecting(){
   document.getElementById("status").innerHTML = '<span class="alert-fail">CONNECTING</span>';
 }
+
 async function setOffline(){
   document.getElementById("status").innerHTML = '<span class="alert-danger">DISCONNECTED</span>';
 }

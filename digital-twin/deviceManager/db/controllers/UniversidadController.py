@@ -22,6 +22,9 @@ class UniversidadController(BaseController):
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
     
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
+    
     def getValues(self):
         self.values = self.conn.getValueIdDict(id="id", value="sigla", table=self.tableName)
         return self.values

@@ -25,6 +25,13 @@ class RolSeeder extends Seeder
                 "digitalTwin" => 1
             ]
         );
+        Rol::firstOrCreate(
+            ["nombre" => "Manager"],
+            [
+                "incidencias" => 1,
+                "digitalTwin" => 1
+            ]
+        );
         
         Rol::firstOrCreate(
             ["nombre" => "Usuario"],

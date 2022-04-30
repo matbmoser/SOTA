@@ -12,13 +12,13 @@ class CreatePlazaTable extends Migration
 				
 			$table->integer('id',)->unsigned();
 			$table->datetime('fechaEntrada')->now();
-			$table->datetime('fechaSalida');
+			$table->datetime('fechaSalida')->nullable();
 			$table->boolean('valido')->default('1');
 			$table->boolean('incidencia')->default('0');
 			$table->integer('idZona',)->unsigned();
-			$table->integer('idVehiculo',)->unsigned();
-			$table->primary(['id','idZona','valido']);
+			$table->integer('idVehiculo',)->unsigned()->unique();
 			$table->string('token',128)->unique()->comment('Unique sha512 hash');
+			$table->primary(['id','idZona', 'token']);
 			$table->foreign('idVehiculo')->references('id')->on('Vehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');   
 			$table->foreign('idZona')->references('id')->on('Zona')->onUpdate('CASCADE')->onDelete('CASCADE');   
 			$table->timestamps();    

@@ -2,7 +2,8 @@ import './assets/layout.scss';
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './route.js';
+import router from './route/index.js';
+import store from './store/index.js';
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';
@@ -88,17 +89,19 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 
-
-const app = createApp(App);
 import 'primevue/resources/themes/lara-dark-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
+
+const app = createApp(App);
+
 app.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(router);
+app.use(store);
 
 app.directive('tooltip', Tooltip);
 app.directive('ripple', Ripple);

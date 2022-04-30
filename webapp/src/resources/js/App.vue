@@ -1,11 +1,13 @@
 <template>
 	<div :class="containerClass" @click="onWrapperClick">
-        <AppTopBar @menu-toggle="onMenuToggle" />
-        <div class="layout-sidebar" @click="onSidebarClick">
-            <AppMenu :model="menu" @menuitem-click="onMenuItemClick" />
+        <div v-if="!$route.meta.hideNavigation">
+            <AppTopBar @menu-toggle="onMenuToggle"/>
+            <div class="layout-sidebar" @click="onSidebarClick">
+                <AppMenu :model="menu" @menuitem-click="onMenuItemClick" />
+            </div>
         </div>
-        <div class="layout-main-container">
-            <div class="layout-main">
+        <div id="wrapper" class="layout-main-container">
+            <div class="layout-main overflow-hidden" >
                 <router-view />
             </div>
         </div>
@@ -48,10 +50,15 @@ export default {
             ]
         }
     },
+    mounted(){
+        if(!this.$route.meta.hideNavigation){
+            this.staticMenuInactive=true;
+            document.getElementById("wrapper").classList.remove("layout-main-container");
+        }
+    },
     watch: {
         $route() {
             this.menuActive = false;
-            this.$toast.removeAllGroups();
         }
     },
     methods: {

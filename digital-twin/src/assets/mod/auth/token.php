@@ -3,17 +3,18 @@
 $nombre = "";
 $token = "";
 
-$token = $_SESSION['token'];
-$username = $_SESSION['username'];
-
-if(empty($token) || empty($username)){
-  error("securityErrorToken");
+if(empty($_SESSION['token']) || empty($_SESSION['username'])){
+  
+  error("securityErrorToken", $configs);
   exit;
 }
 
+$token = $_SESSION['token'];
+$username = $_SESSION['username'];
+
 $token = mysqli_real_escape_string($conexion,$token);
 if(!$result = $conexion->query("SELECT * FROM users WHERE token='$token' ")){
-  error("connectionFailToken");
+  error("connectionFailToken", $configs);
   exit;
 }
 

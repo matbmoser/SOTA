@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             ZonaSeeder::class,
             TipoVehiculoTipoPlazaSeeder::class,
             VehiculoSeeder::class,
-            UserVehiculoSeeder::class
+            PlazaSeeder::class,
+            IncidenciaSeeder::class,
+            NotificacionSeeder::class,
         ]);
   
     }

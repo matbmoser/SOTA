@@ -1,14 +1,18 @@
 Starting Server Log Messages...
 [INFO]: Trying to start server...
+[STATS]: [1] elements update in [0:00:00.072689] DBManager.updateQuery()
+[INFO]: Server [DEFAULT] updated in id [1]
 [INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].
 [INFO]: Server is Opened in Background
-[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1650905867.691792, "cameraid": "f9a98f77-8edd-41ab-898f-8d625749e53b", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1dOlxn/i80/0UZD+Hrak\nygq0RDfH1sKF96Q4SL8uGD4yNeabnFGtJQc42+AJnPC0afOeiaxl/TP7b8Da1/2n\n3wCi1d3E+GJCy9VviWvR0/YBY2ysLpVDBu0nSqUs62fRKIc/18fsu9MnNXCHd1uZ\n3+6PLdyURqmwfJcM4V/JIPOVannTNWlxwNCs72Ukju9txF60C/RKGaVW1WZMREBM\nBjvq8QFfR27BWjKkZSAfM7EvFvLMAFz0iWYCB3JL0pngr39vU6QDdvvIrypGxJqP\niBODFtFETDiMtv4ngHtPmLLqFqKk7uNS9ejcnOdAlvclFGsBqLm2PiLNj7BMHCA8\ntQIDAQAB\n-----END PUBLIC KEY-----\n", "type": "ENTRY"}]
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651287038.720626, "cameraid": "0b3cae3b-4a92-46d6-84d2-336ea5f8327c", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZutEgZbDmouXmixj0kQ\nKAM4JSBovu04gZRZQi6GaySWhme2hS1CMgdNmCVxpA1JIEP5KMfoFM+PRbsScy7U\nuz++GHxAZHT6ddqa2xG+pLwlYXCcsoQzIBe67ms+8Yen4xCXK6cKoEuofPPxQq9X\n85+oclP6m36qzuf0O20jLnYmp6krc4VStL1VuIriXfTkGVeXjN1xBvsVC8mnG/Tp\nJKFjuG5mSPw9Sk5/ZHeYJ7jcu4PwosDL+SxSCsbFss02sVQhy4g+vm50AgLWDT64\njeq1cYjtaHe3Mhi5bq9pPvnmjB3EyFv1/YpUdHM/UTiHWD+BFk+8i2FL7WK/uBZp\nVQIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
 [DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
-[DEBUG]: Camera [f9a98f77-8edd-41ab-898f-8d625749e53b], status [ONLINE] on [127.0.0.1:54044] logged in with sessionid = [261898ab9d7c9a6a09dbeb7ffe0a1775] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] 
+[DEBUG]: Camera [0b3cae3b-4a92-46d6-84d2-336ea5f8327c], status [ONLINE] on [127.0.0.1:34664] logged in with sessionid = [e67a236aab9df22ae4d82547ffa60e9d] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] 
 [DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
-[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from f9a98f77-8edd-41ab-898f-8d625749e53b
-[EXCEPTION]:['handler' object has no attribute 'camara']. TCPSJMPProtocol.processInputMessage()
-[WARNING]: Something went wrong! BaseCamera.addInputMessage()
-[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
-[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.108111]
+[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from 0b3cae3b-4a92-46d6-84d2-336ea5f8327c
+[STATS]: [1] elements inserted in [0:00:00.029056] DBManager.insertQuery()
+[INFO]: Camera [0b3cae3b-4a92-46d6-84d2-336ea5f8327c] added into DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.139519]
+[STATS]: [1] elements inserted in [0:00:00.044172] DBManager.insertQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.540529]
+[ERROR]: SJMPHandler.processINFlag(matricula=[4523-JKM]) The vehicle with plate [4523-JKM] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.352277]

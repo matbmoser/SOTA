@@ -362,7 +362,7 @@ class CameraManager(BaseCameraManager):
         else:
             return None
 
-    def selectCamaraAndPlate(self):
+    def selectCameraAndPlate(self):
         
         print("Select a Camera to send message FROM:")
         tmpFromCamera = self.selectCamera(
@@ -373,7 +373,7 @@ class CameraManager(BaseCameraManager):
         print("Insert Vehicle Licence Plate")
         licencePlate = input(
             "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
-        while(licencePlate == "" or len(licencePlate) < 12):
+        while(licencePlate == "" or len(licencePlate) > 9 or len(licencePlate) < 0):
             print("Please input a correct Vehicle Licence Plate!\n")
             licencePlate = input(
                 "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
@@ -426,8 +426,10 @@ class CameraManager(BaseCameraManager):
 
                 # Create new Camera
                 if (numopt == 1):
-                    cameraid = str(uuid.uuid4())
-                    print("Creating Camara... camaraid=["+str(cameraid)+"]")
+                    cameraid = input(
+                        "Please insert the Camara ID [Default Random UUID]: ")
+                    cameraid = cameraid if not cameraid == "" else str(uuid.uuid4())
+                    print("Creating camera... camaraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
                         print("\n[ERROR] A Camera id needs to be specified!\n")
@@ -460,7 +462,7 @@ class CameraManager(BaseCameraManager):
                     camaraType = self.selectCameraType()
                     
                     if(camaraType == None):
-                        continue
+                        camaraType = "BOTH"
                     
                     try:
                         # Create and Start Server
@@ -516,21 +518,21 @@ class CameraManager(BaseCameraManager):
                 # Add Vehicle
                 elif (numopt == 4):
                     
-                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
                     if(tmpFromCamera == None or licencePlate == None):
                         continue
                     
-                    tmpFromCamera.sendAddVehicle(licencePlate)
+                    tmpFromCamera.sendAddVehicle(str(licencePlate))
                     continue
                 
                 # Delete Vehicle
                 elif (numopt == 5):
                     
-                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
                     if(tmpFromCamera == None or licencePlate == None):
                         continue
                     
-                    tmpFromCamera.sendDeleteVehicle(licencePlate)
+                    tmpFromCamera.sendDeleteVehicle(str(licencePlate))
                     continue
                 # Print all cameras
                 elif (numopt == 6):

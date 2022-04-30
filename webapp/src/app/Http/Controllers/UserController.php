@@ -13,7 +13,12 @@ class UserController extends Controller
     */
     public function index()
     {
-        return User::orderBy('created_at', 'asc')->get();  //returns values in ascending order
+        $users = User::all();
+        return response()->json(
+            [
+                'status' => 'success',
+                'users' => $users->toArray()
+            ], 200);
     }
     
     // Show the form for creating a new resource.
@@ -22,7 +27,12 @@ class UserController extends Controller
     */
     public function show($id)
     {
-        return User::findorFail($id); //searches for the object in the database using its id and returns it.
+        $user = User::find($id);
+        return response()->json(
+            [
+                'status' => 'success',
+                'user' => $user->toArray()
+            ], 200);
     }
     
 

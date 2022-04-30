@@ -48,11 +48,11 @@ class DBManager():
         for table in result:
             tmpTable = dict()
             tmpTable["name"] = table[0]
-            tmpTable["keys"] = self.getKeys(tmpTable["name"])
+            tmpTable["keys"] = self.getTableKeys(tmpTable["name"])
             self.tables[tmpTable["name"]] = tmpTable
         
         #op.printLog(logType="STATS",
-        #   messageStr="["+str(self.nTables)+"] tables found in ["+str(finiTime-initTime)+"] DBManager.refreshDatabase()")
+         # messageStr="["+str(self.nTables)+"] tables found in ["+str(finiTime-initTime)+"] DBManager.refreshDatabase()")
         return self.tables
 
     def getTableKeys(self, table):
@@ -96,7 +96,7 @@ class DBManager():
             op.printLog(logType="STATS",
             messageStr="["+str(count)+"] elements inserted in ["+str(finiTime-initTime)+"] DBManager.insertQuery()")
             cursor.close()
-            return True
+            return self.isSuccess(count)
         except mysql.connector.Error as e:
             op.printLog(logType="CRITICAL", e=e,
                         messageStr="DBManager.insertQuery("+str(query)+")")
@@ -114,7 +114,7 @@ class DBManager():
             op.printLog(logType="STATS",
             messageStr="["+str(count)+"] elements update in ["+str(finiTime-initTime)+"] DBManager.updateQuery()")
             cursor.close()
-            return True
+            return self.isSuccess(count)
         except mysql.connector.Error as e:
             op.printLog(logType="CRITICAL", e=e,
                         messageStr="DBManager.updateQuery("+str(query)+")")
@@ -132,20 +132,26 @@ class DBManager():
             op.printLog(logType="STATS",
             messageStr="["+str(count)+"] elements deleted in ["+str(finiTime-initTime)+"] DBManager.deleteQuery()")
             cursor.close()
-            return True
+            return self.isSuccess(count)
         except mysql.connector.Error as e:
             op.printLog(logType="CRITICAL", e=e,
                         messageStr="DBManager.deleteQuery("+str(query)+")")
             traceback.print_exc()
             return None
      
+    def isSuccess(self, result):
+        if(result==1):
+            return True
+        return False
+
+    
+     
     def tableExist(self, table):
         query = "SELECT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'"+str(table)+"')"
         result = self.query(query)
-        if(result == "1"):
+        if(result[0][0] == 1):
             return True
         return False
-    
     
     def fetchAll(self, table, where=None):
         if(not self.tableExist(table)):
@@ -258,6 +264,16 @@ class DBManager():
         query = "INSERT INTO "+str(table)+" "+str(tuple(self.tables[table]["keys"]["keynames"])).replace("'id', ", "").replace("'","`")+" VALUES "+ str(elem)
         result = self.insertQuery(query)
         return result
+
+    def insertTableElementWithId(self, ignore, elem, table):
+        if(not self.tableExist(table)):
+            op.printLog(logType="ERROR",
+                        messageStr="Table not Exists. DBManager.insertTableElement("+str(table)+")")
+            return None
+        
+        query = "INSERT INTO "+str(table)+" "+str(tuple(self.tables[table]["keys"]["keynames"])).replace("'"+str(ignore)+"', ", "").replace("'","`")+" VALUES "+ str(elem)
+        result = self.insertQuery(query)
+        return result
     
     def deleteTableElement(self, table, where):
         if(not self.tableExist(table)):
@@ -288,7 +304,7 @@ class DBManager():
             return None
         self.query("SET  @num := 0;")
         self.updateQuery('UPDATE '+str(table)+' SET id = @num := (@num+1);')
-        result  = self.updateQuery('ALTER TABLE '+str(table)+' AUTO_INCREMENT = 1;')
+        result =self.updateQuery('ALTER TABLE '+str(table)+' AUTO_INCREMENT = 1;')
         return result
 
     
@@ -298,11 +314,11 @@ if __name__ == '__main__':
         time = str(datetime.now())
         #print(dbManager.insertTableElement(elem=("SUV", "250","350", "150", time, time), table='TipoVehiculo'))
         #print(dbManager.insertTableElement(elem=("Furgoneta", "300","380", "200", time, time), table='TipoVehiculo'))
-        values = dbManager.getValueIdDict(id="id", value="nombre", table="TipoVehiculo")
-        print(values)
-        dbManager.resetIndex(table="TipoVehiculo")
-        dbManager.deleteTableElement(table="TipoVehiculo", where="id = "+str(values["SUV"]))
-        print(dbManager.insertTableElement(elem=("1247-LDG",1,time, time), table='Vehiculo'))
+        #values = dbManager.getValueIdDict(id="id", value="nombre", table="TipoVehiculo")
+        #print(values)
+        #dbManager.resetIndex(table="TipoVehiculo")
+        #dbManager.deleteTableElement(table="TipoVehiculo", where="id = "+str(values["SUV"]))
+        #print(dbManager.insertTableElement(elem=("1247-LDG",1,time, time), table='Vehiculo'))
     else:
         print("Is not connected!")
         

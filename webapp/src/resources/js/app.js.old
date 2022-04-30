@@ -190,3 +190,22 @@ app.mount('#app');
 
 require("./bootstrap");
 
+this.request = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body:{
+                    "email": state.email,
+                    "password": state.password
+                }
+            }
+            axios
+            .get("/api/auth/login",this.request)
+            .then(function (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.headers);
+                console.log(response.config);
+            });

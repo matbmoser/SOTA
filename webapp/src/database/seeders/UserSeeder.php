@@ -37,20 +37,49 @@ class UserSeeder extends Seeder
         ]);
 
         User::firstOrCreate(
-            ['email' => "prueba@gmail.com"],
+            ['email' => "conductor@email.com"],
             [
-                'nombre' => "Prueba",
-                'username' => "Prueba123",
-                'apellido1' => "Prueba12321",
-                'apellido2' => "Prueba12345",
-                'documento' => "12132123",
-                'telefono' => "512131",
+                'nombre' => "Conductor",
+                'username' => "conductor",
+                'apellido1' => "MyParking",
+                'documento' => "TSH123156",
+                'telefono' => "621232548",
                 'password' =>  bcrypt("123456789"),
                 'token' => hash("sha256","prueba@gmail.com".hash("sha512","123456789")),
                 'fechaNacimiento' => "1952-10-26",
                 'correoConfirmado' => 0,
                 'fechaUltimaConexion' => now(),
                 'idRol' => Rol::where('nombre', 'Usuario')->get("id")[0]->id
+            ]);
+        User::firstOrCreate(
+            ['email' => "admin@myparking.com"],
+            [
+                'nombre' => "Admin",
+                'username' => "admin",
+                'apellido1' => "MyParking",
+                'documento' => "YJAD67676",
+                'telefono' => "21354995456",
+                'password' =>  bcrypt("789456123"),
+                'token' => hash("sha256","admin@ufv.myparking.com".hash("sha512","789456123")),
+                'fechaNacimiento' => "2022-04-28",
+                'correoConfirmado' => 0,
+                'fechaUltimaConexion' => now(),
+                'idRol' => Rol::where('nombre', 'Administrador')->get("id")[0]->id
+            ]);
+        User::firstOrCreate(
+            ['email' => "manager@myparking.com"],
+            [
+                'nombre' => "Manager",
+                'username' => "manager",
+                'apellido1' => "MyParking",
+                'documento' => "HJAMS45621",
+                'telefono' => "5213688712",
+                'password' =>  bcrypt("789456123"),
+                'token' => hash("sha256","manager@myparking.com".hash("sha512","789456123")),
+                'fechaNacimiento' => "2022-04-28",
+                'correoConfirmado' => 0,
+                'fechaUltimaConexion' => now(),
+                'idRol' => Rol::where('nombre', 'Manager')->get("id")[0]->id
             ]);
     }
 }

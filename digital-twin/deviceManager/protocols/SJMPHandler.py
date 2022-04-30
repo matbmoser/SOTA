@@ -55,58 +55,80 @@ class handler():
                     -> IF error -> RJTP Error packet
                     -> IF success -> SJMP Success Ack packet
         """
-        # If the packet is empty we can not process
-        if (rawPacket == None):
-            return None
+        try:
+
+            # If the packet is empty we can not process
+            if (rawPacket == None):
+                return None
+            
+            # If we are in the server
+            if(self.camera.encrypted):
+                print("Paquete ENCRIPTADO:")
+                print(rawPacket)
+                try:
+                    if(self.server != None):
+                        rawPacket = cryptool.decrypt(rawPacket, self.server.privateKey)
+                    elif(self.server == None and self.camera != None):
+                        rawPacket = cryptool.decrypt(rawPacket, self.camera.privateKey)
+                    print("Paquete DESENCRIPTADO:")
+                    print(rawPacket)
+                except Exception as e:
+                    op.printLog(logType="EXCEPTION", e=e,
+                        messageStr="in SJMPHandler(). On processPacket() Decryption failed [NO ENCRIPTADO]")
+                    traceback.print_exc()
+          
+            
+            
+            # Create new packet to parse
+            tmpSJMPPacket = packet()
+            res = tmpSJMPPacket.parse(rawdata=rawPacket)
+
+            # If we were not able to parse
+            if(not res):
+                print("[MESSAGE ARRIVED]")
+                print(rawPacket)
+                # Return nothing if we were not able to parse.
+                return None
+
+            # Store server time, when the message has arrived
+            tmpSJMPPacket.srv_time = self.handler.messageRecievedTimestamp.timestamp()
+
+            # If there is no output message we will return None
+            tmpOutputMessage = None
+
+            # If is SJMP Store Packet
+            self.packet = tmpSJMPPacket
+
+            # Check for flag and call the designated handler
+
+            if(self.packet.flag == "IN"):
+                tmpOutputMessage = self.processINFlag()
+            
+            if(self.packet.flag == "OUT"):
+                tmpOutputMessage = self.processOUTFlag()
+
+            elif(self.packet.flag == "SYN"):
+                tmpOutputMessage = self.processSYNFlag()
+
+            elif(self.packet.flag == "OK"):
+                tmpOutputMessage = self.processOKFlag()
+
+            elif(self.packet.flag == "FIN"):
+                tmpOutputMessage = self.processFINFlag()
+                
+            elif(self.packet.flag == "ERR"):
+                op.printLog(logType="ERROR", messageStr="[NEW INCOMING ERROR]: ["+self.packet.messageToJSONString()+"]")
+
+            # Return nothing or something depending in the result from the flag processing
+            return tmpOutputMessage
         
-        # If we are in the server
-        if(self.camara.encrypted):
-            print("Paquete ENCRIPTADO:")
-            print(rawPacket)
-            rawPacket = cryptool.decrypt(rawPacket, self.server.privateKey)
-            print("Paquete DESENCRIPTADO:")
-            print(rawPacket)
-        
-        
-        # Create new packet to parse
-        tmpSJMPPacket = packet()
-        res = tmpSJMPPacket.parse(rawdata=rawPacket)
-
-        # If we were not able to parse
-        if(not res):
-            print("[MESSAGE ARRIVED]")
-            print(rawPacket)
-            # Return nothing if we were not able to parse.
-            return None
-
-        # Store server time, when the message has arrived
-        tmpSJMPPacket.srv_time = self.handler.messageRecievedTimestamp.timestamp()
-
-        # If there is no output message we will return None
-        tmpOutputMessage = None
-
-        # If is SJMP Store Packet
-        self.packet = tmpSJMPPacket
-
-        # Check for flag and call the designated handler
-
-        if(self.packet.flag == "IN"):
-            tmpOutputMessage = self.processINFlag()
-        
-        if(self.packet.flag == "OUT"):
-            tmpOutputMessage = self.processOUTFlag()
-
-        elif(self.packet.flag == "SYN"):
-            tmpOutputMessage = self.processSYNFlag()
-
-        elif(self.packet.flag == "OK"):
-            tmpOutputMessage = self.processOKFlag()
-
-        elif(self.packet.flag == "FIN"):
-            tmpOutputMessage = self.processFINFlag()
-
-        # Return nothing or something depending in the result from the flag processing
-        return tmpOutputMessage
+        except Exception as e:
+            op.printLog(logType="EXCEPTION", e=e,
+                        messageStr="in SJMPHandler(). On processPacket()")
+            traceback.print_exc()
+            return packet().dumpPacket(
+                flag="ERR", response="Was not posible to finish connection!").messageToJSONString()
+            
 
     # ================================================================
     # FLAG METHODS
@@ -148,6 +170,7 @@ class handler():
         # Store session id
         self.camera.sessionid = self.packet.sessionid
         self.camera.serversecret = bytes(self.packet.secret, 'utf-8')
+        self.camera.encrypted = True
         
         self.camera.status = "ONLINE"
         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
@@ -158,21 +181,22 @@ class handler():
     # Process SYN flag
     def processSYNFlag(self):
 
-        # Camera Must be active
-        if(self.camera == None or self.packet == None):
+        # Server Must be active
+        if(self.camera == None or self.packet == None or self.server == None):
             return None
 
         self.camera.cameraid = self.packet.cameraid
         self.camera.type = self.packet.type
         self.camera.publicKey = bytes(self.packet.token, 'utf-8')
-        self.camara.encrypted = True
+        self.camera.encrypted = True
         
         self.server.camerasManager.saveOrUpdateCamera(camera=self.camera, server=self.server)
         
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
             datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.publicKey.decode("utf-8"))
 
-        #return tmpOutputMessage.encryptJSONMessage(self.camera.publicKey)
+        #return tmpOutputMessage.encryptJSONMessage(self.packet.token)
+    
         return tmpOutputMessage.messageToJSONString()
     # Process IN flag
     def processINFlag(self):
@@ -195,18 +219,18 @@ class handler():
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
-        ##  If the camara is in the exit can not registrate a entrace
+        ##  If the camera is in the exit can not registrate a entrace
         if (originCamera.type=="EXIT"):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Invalid Flag for Type ["+originCamera.type+"] of Camera!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
         
         # Check if the plate detected by the camera exists
-        tmpVehicle = self.server.camerasManager.getVehicleByPlate(plate=self.packet.plate)
+        tmpVehicle = self.server.camerasManager.db_getVehicleByPlate(plate=self.packet.plate)
 
         # We must return an error if not
         if (tmpVehicle == None):
@@ -215,40 +239,38 @@ class handler():
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="The vehicle with plate ["+self.packet.plate+"] does not exists!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
 
-        # ------------------------------------
-
-        # SENDING MESSAGE BACK TO Camera ---------------------------------
-        # We must return an error if not
-        if (tmpVehicle == None):
+        
+        tipoPlazas = self.server.camerasManager.db_getTipoPlazasByIdTipoVehiculo(idTipoVehiculo=tmpVehicle["idTipoVehiculo"])
+        plaza, zona, idPlaza = self.server.camerasManager.db_getZonasByTipoPlazas(tipoPlazas=tipoPlazas)
+        res = self.server.camerasManager.db_asignarPlaza(plaza, zona, tmpVehicle["id"])
+        
+        if(not res):
             op.printLog(
-                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(matricula=["+self.packet.plate+"]) The plate [" + self.packet.plate + "] don't exist!")
+                logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", response="Destination plate ["+self.packet.plate+"] does not exists!")
-
-            return tmpOutputMessage.messageToJSONString()
-
+                flag="ERR", response="Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+        # ------------------------------------
 
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
 
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", message="Vehicle ["+tmpVehicle["plate"]+"] was added to parking")
+            flag="ACK", response="Vehicle with plate ["+str(tmpVehicle["matricula"])+"] asigned to ["+str(idPlaza)+"]!")
         
         
         if(self.server != None):
             if originCamera.publicKey == None:
                 return tmpOutputMessage.messageToJSONString()
  
-            #return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            #return tmpOutputMessage.messageToJSONString()
         
         return None
 
- 
-    
     # Process OUT flag
     def processOUTFlag(self):
         
@@ -269,41 +291,43 @@ class handler():
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
-        ##  If the camara is in the entrace can not registrate a exit
-        if (originCamera.type=="ENTRACE"):
+        ##  If the camera is in the entrace can not registrate a exit
+        if (originCamera.type=="ENTRY"):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Invalid Flag for Type ["+originCamera.type+"] of Camera!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
-        # Check if the plate detected by the camera exists, in other words that the vehicle exists
-        destinationVehicle = self.getVehicleIfExists(plate="")
+        # Check if the plate detected by the camera exists
+        tmpVehicle = self.server.camerasManager.db_getVehicleByPlate(plate=self.packet.plate)
 
         # We must return an error if not
-        if (destinationVehicle == None):
+        if (tmpVehicle == None):
             op.printLog(
-                logType="ERROR", messageStr="SJMPHandler.processMSGFlag(matricula=["+self.packet.plate+"]) The plate [" + self.packet.plate + "] don't exist!")
+                logType="ERROR", messageStr="SJMPHandler.processOUTFlag(matricula=["+self.packet.plate+"]) The vehicle with plate [" + self.packet.plate + "] don't exist!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
-                flag="ERR", response="Destination plate ["+self.packet.plate+"] does not exists!")
+                flag="ERR", response="The vehicle with plate ["+self.packet.plate+"] does not exists!")
 
-            return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
 
+        
+        tipoVehiculo = self.server.camerasManager.db_getTipoPlazasByIdTipoVehiculo(idTipoVehiculo=tmpVehicle["idTipoVehiculo"])
 
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
 
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", message="Vehicle ["+destinationVehicle+"] was deleted from parking")
+            flag="ACK", message="Vehicle ["+tmpVehicle+"] was deleted from parking")
 
         if(self.server != None):
             if originCamera.publicKey == None:
                 return tmpOutputMessage.messageToJSONString()
 
-            return tmpOutputMessage.messageToJSONString()
-            #return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            #return tmpOutputMessage.messageToJSONString()
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
         
         return None
 
@@ -338,9 +362,9 @@ class packet():
 
     :attr str matricula: Contains the packet matricula.
 
-    :attr str position: Contains the camara type or position ["entrance", "exit", "both"].
+    :attr str position: Contains the camera type or position ["entrance", "exit", "both"].
 
-    :attr str token: Contains the camara client public key.
+    :attr str token: Contains the camera client public key.
 
     :attr str secret: Contains the server public key.
 
@@ -573,7 +597,7 @@ class packet():
                 packet["clt-time"] = self.clt_time
                 # Camera to send
                 packet["cameraid"] = self.cameraid
-                # Camara Cliente Public Key
+                # camera Cliente Public Key
                 if(type(self.token) == bytes):
                     self.token = self.token.decode("utf-8")
                 

@@ -12,8 +12,8 @@ class Plaza extends Model
 {
     protected $table = "Plaza";
     public $timestamps = true;
-    public $incrementing = true;
-    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $primaryKey = ['id','idZona', 'token'];
 
     use HasFactory;
 

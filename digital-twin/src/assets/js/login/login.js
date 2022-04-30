@@ -48,7 +48,7 @@ $(function() {
             http.onreadystatechange = function() {
                 if(http.readyState === 4) {
                     if(http.status === 200) { //LISTO
-                        let responseCode = configs["wrongRequestToken"];
+                        let responseCode = CONFIGS["wrongRequestToken"];
                         let username = "none";
                         let token = "null"
                         loading.style.display = "none!important";
@@ -56,20 +56,20 @@ $(function() {
                             var obj = JSON.parse(http.responseText);
                             responseCode = obj.responseCode;
                         } catch(e){
-                            responseCode = configs["wrongRequestToken"];
+                            responseCode = CONFIGS["wrongRequestToken"];
                         }
-                        if(responseCode == configs["successToken"]){
+                        if(responseCode == CONFIGS["successToken"]){
                             token = obj.token;
                             username = obj.username;
                             setCookie("__LOGIN__", "TRUE",0.2,"/");
-                            window.location.search = "?result"+configs["successToken"];
+                            window.location.search = "?result"+CONFIGS["successToken"];
                             window.location.href = "../?username="+ username + "&token=" + token;
                         }
                         else{
                             window.location.search = "?result="+responseCode.toString();
                         }
                     } else { //DENEGADO
-                        window.location.search = "?result"+configs["wrongRequestToken"];
+                        window.location.search = "?result"+CONFIGS["wrongRequestToken"];
                     }
                 }else{
                     loading.style.display = "block!important";
@@ -80,7 +80,7 @@ $(function() {
                 http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 http.send(params);
             }catch{
-                window.location.search = "?result"+configs["wrongRequestToken"];
+                window.location.search = "?result"+CONFIGS["wrongRequestToken"];
             }
 
         }
@@ -95,7 +95,6 @@ async function encrypt(user, pass){
     const UUID = getCookie("UUID");
     return 'token=' + token + "&uuid=" + UUID;
 }
-
 
 function getSession() {
     cname = "PHPSESSID";

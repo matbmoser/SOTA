@@ -8,23 +8,18 @@ class VehiculoController(BaseController):
         self.tableName = 'Vehiculo'
         super().__init__()
         self.externalTable = TipoVehiculoController()
-        
-    def add(self, matricula, tipo):
-        time = datetime.now().strftime("Y-m-d hh:mm:ss")
-        self.tipos = self.externalTable.getValues()
-        if(tipo not in self.tipos):
-            return None
-        self.conn.insertTableElement(elem=(matricula,self.tipos[tipo],time, time), table=self.tableName)
-        return True
     
     def deleteByMatricula(self, matricula):
-        self.conn.deleteTableElement(table=self.tableName, where="matricula="+str(matricula))
+        self.conn.deleteTableElement(table=self.tableName, where="matricula='"+str(matricula)+"'")
     
     def getByMatricula(self, matricula):
-        return self.conn.fetchAll(table=self.tableName,where="matricula="+str(matricula))   
+        return self.conn.fetchAll(table=self.tableName,where="matricula='"+str(matricula)+"'")   
     
     def get(self, where):
         return self.conn.fetchAll(table=self.tableName, where=where)
+    
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
     
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)

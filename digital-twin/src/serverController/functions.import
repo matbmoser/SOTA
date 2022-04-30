@@ -181,7 +181,7 @@ function openServerOnPort(){
 
     if [ -z $PID];
     then
-        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo "Server with NAME=[${NAME}] IP=[${IP}] PORT=[${PORT}] started on PID=[$!]"
+        nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo '{"name": "'${NAME}'", "ip": "'${IP}'", "port": "'${PORT}'", "pid": "'$!'", "status": "RUNNING"}'
     else
         echo "[ERROR] Server with IP=[${IP}] PORT=[${PORT}] is Already Running on PID=[$PID]"
     fi

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,11 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::resource('user', UserController::class);
+Route::group(['middleware' => 'auth:api'], function(){
+    // Users
+    Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
+    Route::get('user/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
+    // Roles
+    Route::get('roles', 'App\Http\Controllers\RolController@index')->middleware('isAdmin');
+    Route::get('rol/{id}', 'App\Http\Controllers\RolController@show')->middleware('isAdminOrSelf');
+});
