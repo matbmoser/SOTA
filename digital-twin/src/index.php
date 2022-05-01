@@ -40,6 +40,7 @@
 <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 <script src="https://kit.fontawesome.com/6d67b863f5.js" crossorigin="anonymous"></script>
 </head>
+<script src="assets/js/map/map.js"></script>
 <script>
   // Definición de constantes del servidor
   const CONFIGS = <?php echo json_encode($configs); ?>;
@@ -117,12 +118,8 @@
             </div>
           </div>
         </div>
-
-        <button class="btn btn-warning" style="position: fixed; bottom: 20px; left: 20px;" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#Modal">Open Server</button> 
-        <button class="btn btn-warning" style="position: fixed; bottom: 20px; right: 20px;" type="button" id="refresh">Refresh</button> 
-    </div>
     <!-- Botones -->
-    <div class="container-fluid mt-4 mb-4">
+    <div class="container-fluid mt-2 mb-2">
       <div class="row d-flex justify-content-center">
         <div class="col-md-2 mt-2  mb-2 d-flex justify-content-center">
           <button type="button" data-bs-toggle="modal" data-bs-target="#EntradaVehiculo"class="btnAccion btn btn-primary" ><i class="fa-solid fa-plus"></i> Añadir Vehiculo</button>
@@ -137,91 +134,28 @@
           <button type="button" id="barreras" data-bs-toggle="modal" data-bs-target="#Modal" class="btnAccion btn btn-primary w-100" ><i class="fa-solid fa-triangle-exclamation"></i> Barreras</button>
         </div>
       </div>
-    </div>
-  
-    <!-- Modal genérico -->
-    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div id="modalContent" class="modal-content">
+      <div class="row d-flex justify-content-between">
+        <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
+          <button class="btn btn-warning" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#OpenServer">Open Server</button> 
         </div>
-      </div>
-    </div>
-    
-    <!-- Entrada Vehiculo Añadir Matricula-->
-    <div class="modal fade" id="EntradaVehiculo" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div id="modalContent" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Camera Entrada E1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-        <div class="modal-body">
-          <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
-          <textfield class="w-100 h-100" id="monitorEntrada" disable></textfield>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success" id="addVehiculo" type="submit">Enviar Matricula</button>
-        </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Salida Vehiculo Borrar Matricula-->
-    <div class="modal fade" id="SalidaVehiculo" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div id="modalContent" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Camera Salida S1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-        <div class="modal-body">
-          <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
-          <textfield class="w-100 h-100" id="monitorSalida" disable></textfield>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-success" id="deleteVehiculo" type="submit">Enviar Matricula</button>
-        </div>
-        </div>
-      </div>
-    </div>
-
-     <!-- Ver Vehiculos-->
-    <div class="modal fade" id="VerPlazas" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-      <div id="modalContent" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ver Plazas</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-        <div class="modal-body">
-          <div class="container-fluid mt-4 d-flex justify-content-center table-responsive" style="background: var(--color); color: var(--bg-color);">
-              <div class="row mt-5">    
-              <div class="col-12">
-              <h2 class="text-center">
-                Plazas Ocupadas<strong style="color:green"></strong>
-              </h2>
-              </div>
-              <table class="table m-2 table-striped table-hovertext-nowrap">
-                  <thead>
-                    <tr>
-                      <th>idPlaza</th>
-                      <th>Matrícula</th>
-                      <th>Segmento</th>
-                      <th>Tamaño</th>
-                      <th>Fecha Entrada</th>
-                    </tr>
-                  </thead>
-                  <tbody id="verPlazasTable">
-                  
-                  </tbody>
-                </table>
+        <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 justify-content-md-end justify-content-xl-end">
+          <!-- Checked switch -->
+            <div class="form-check form-switch" style="margin-right: 10px; ">
+              <input class="form-check-input" type="checkbox" role="switch" id="autorefresh" />
+              <label class="form-check-label" for="flexSwitchCheckChecked">Auto-refresh</label>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <button class="btn btn-warning" id="refreshModal">Refresh</button>
-          <button class="btn btn-danger" data-bs-dismiss="modal" type="button">Cerrar</button>
-        </div>
+            <button class="btn btn-warning ml-2" type="button" id="refresh">Refresh</button>
         </div>
       </div>
     </div>
+    <?php
+      // Importamos modales
+      include("assets/mod/front/modals/genericModal.php");
+      include("assets/mod/front/modals/openServerModal.php");
+      include("assets/mod/front/modals/simuladorCamaraModal.php");
+      include("assets/mod/front/modals/verVehiculosModal.php");
+    ?>
+
   </body>
 </div>
 <div id="output"></div>
@@ -234,138 +168,72 @@
 <script src="assets/js/cryptool/hashFunctions.js"></script>
 <script src="assets/js/front/printFunctions.js"></script>
 <script src="assets/js/front/clock.js"></script>
-<script src="assets/js/map/map.js"></script>
 <script src="assets/js/front/dark-mode.js"></script>
 <script src="assets/js/barreras/barrera.js"></script>
 <script src="assets/js/front/cookieFunctions.js"></script>
 <script>
+    const parkingMap = new ParkingMap();
+    parkingMap.refreshZonas();
+      
+    window.onload = function (){
+      refreshServerStatus();
+    }
       //HTTP Request function Callbacks
-      function callback(message, tag) {
+    function callback(response, tag) {
         switch (tag) {
             case "serverOpen":
-                handleServer(message);
+                handleOpen(response);
                 break;
             case "serverClose":
-                writeToMonitor(message);
+                handleClose(response);
+                break;
+            case "getServer":
+                checkIfServerIsAlive(response);
                 break;
             case "serverRefresh":
                 break;
             case "refreshZonas":
-                pintarZonas(message);
+                parkingMap.pintarZonas(response);
                 break;
         }
     }
-    //RefeshServerStatus
-    async function refreshServerStatus(){
-        //checkServerStatus();
-        let status = localStorage.getItem("serverStatus");
-        let content = "";
-        switch (status){
-          case "CREATING":
-            content = '<span class="alert-fail">CREATING</span>';
-            break;
-          
-          case "RUNNING":
-            content = '<span class="alert-connected">RUNNING</span>';
-            break;
-          
-          case "STOPPED":
-            content = '<span class="alert-danger">STOPPED</span>';
-            break;
 
-        }
-        document.getElementById("status").innerHTML = content;
-
+    function setAutoRefresh(){
+      let content = ""
+      let setAutoRefresh = localStorage.getItem("autorefresh");
+      let elem = document.querySelector("#autorefresh");
+      if(setAutoRefresh == "true"){
+        parkingMap.startAutoRefresh();
+        elem.checked = true;
+      }else{
+        content = `<input class="form-check-input" type="checkbox" role="switch" id="autorefresh"/>`
+        parkingMap.stopAutoRefresh();
+        elem.checked = false;
       }
-
-    refreshZonas();
-    refreshServerStatus();
-
-    function pintarZonas(response){
-        var parsedResponse = JSON.parse(response);
-        var ocupacionZonas = parsedResponse["plazasZonas"];
-        var plazasOcupadas = parsedResponse["vehiculosPlazas"];
-        var lenzonas = ZONAS.length;
-        var zonasPattern = "#dataZona";
-        let i = 0;
-        let table = $("#verPlazasTable");
-        let tableContent = "";
-        while(i < lenzonas){
-          //Constante zonas mapa
-          let zona = ZONAS[i];
-          let idZona = zona["id"];
-          let aforo = zona["plazas"];
-          // Datos recogidos
-          let plazasZona = plazasOcupadas[idZona];
-          let lenplazaszona = plazasZona.length;
-          let j = 0;
-          while(j < lenplazaszona){
-            let plaza = plazasZona[j];
-            let idPlaza = plaza["idPlaza"].toString();
-            let matricula = plaza["matricula"].toString();
-            let segmento = plaza["segmento"].toString();
-            let clasificacion = plaza["clasificacion"].toString();
-            let created_at = plaza["created_at"].toString();
-            let row = `<tr>
-              <td>`+idPlaza+`</td>
-              <td>`+matricula+`</td>
-              <td>`+segmento+`</td>
-              <td>`+clasificacion+`</td>
-              <td>`+created_at+`</td>
-            </tr>`;
-            tableContent += row;
-            j++;
-          }
-          datoZona = $(zonasPattern+idZona.toString()).html(ocupacionZonas[idZona].toString() +"/"+ aforo.toString()) 
-          i++;
-        }
-        table.html(tableContent);
-        document.querySelectorAll("#refresh, #refreshModal").forEach((ele) => {
-            ele.innerHTML = `Refresh`;
-        });
-    }
-
-    function refreshZonas(){
-      var uuid = getCookie("UUID");
-      var data = "uuid="+uuid;
-      HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/assets/mod/API/getPlazasZonas.php', data,  'refreshZonas');
-    }
-
-    const refreshInterval = setInterval(function() {
-      let ele = document.getElementById("refresh");
-      ele.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
-      refreshZonas();
-    }, 20 * 1000); // 60 * 1000 milsec
-
-    function randomIntFromInterval(min, max) { // min and max included 
-        return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
     $(function(){
+        setAutoRefresh()
+        $('#autorefresh').change(function() {
+          if(this.checked) {
+            localStorage.setItem("autorefresh", "true")
+              parkingMap.startAutoRefresh();
+          }else{
+            localStorage.setItem("autorefresh", "false")
+            parkingMap.stopAutoRefresh();
+          }
+        });
         currentTime();
+        getServerStatus();
         document.querySelectorAll("#refresh, #refreshModal").forEach((ele) => {
           ele.addEventListener("click", function (e) {
             ele.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
-            refreshZonas();
+            parkingMap.refreshZonas();
           });
         });
     })
 
-    function handleServer(response){
-      try{
-        overwriteMonitor(response);
-        var data = JSON.parse(response)["serverData"];
-        localStorage.setItem("serverInfo",JSON.stringify(data));
-        console.log(data);
-        localStorage.setItem("serverStatus", "RUNNING");
-        printlnMonitor(data);
-        printlnMonitor("Servidor Abierto!");
-      }catch(e){
-        overwriteMonitor("Was not posible to start server: ["+ e.toString()+"]")
-        localStorage.setItem("serverStatus", "FAIL");
-        localStorage.removeItem("serverInfo")
-      }
-    }
+  
     function overwriteMonitor(data){
       let monitor = document.getElementById("monitor");
       monitor.innerHTML = data;
@@ -390,108 +258,50 @@
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
       );
     }
-    function blockAddServer(){
-      var openServerButton = document.getElementById("openserver");
-      var defaultPortButton= document.getElementById("defaultPort");
-      var randomPortButton = document.getElementById("randomPort");
-      var openButton = document.getElementById("open");
 
-      openServerButton.innerHTML = "Close Server";
-      openButton.innerHTML = "Cerrar Servidor";
-      openButton.classList.remove("btn-success");
-      openButton.classList.add("btn-danger");
-      randomPortButton.classList.add("hidden");
-      defaultPortButton.classList.add("hidden");
-      $("#port-pattern").attr('disabled','disabled');
-      refreshStatus();
+    function randomIntFromInterval(min, max) { // min and max included 
+      return Math.floor(Math.random() * (max - min + 1) + min)
     }
     $(function(){
         var modalContent = document.getElementById("modalContent");
-        var openServerButton = document.getElementById("openserver");
         var addVehicle = document.getElementById("addVehicle");
 
         barreras.addEventListener('click', function() {
           modalContent.innerHTML  = `<?php echo $modals["barreras"]; ?>`;
           adminBarreras();
         });
-        openServerButton.addEventListener('click', function() {
-            //Limites de Puertos
-          
-            modalContent.innerHTML  =  `<?php echo $modals["openServer"]; ?> `;
+        
+        var ipPattern = "#ip-pattern";
+        var portPattern = "#port-pattern";
+        var minPort = 1;
+        var maxPort = 65535;
 
-            var server = localStorage.getItem("serverInfo");
-            if(server!=null){
-              $("#port-pattern").val(JSON.parse(server)["port"]);
-              blockAddServer();
-              var openButton = document.getElementById("open");
-
-              openButton.addEventListener('click', function() {
-                let pid = JSON.parse(localStorage.getItem("serverInfo"))["pid"];
-                closeServer(pid);
-              });
-
-            }else{
-              var ipPattern = "#ip-pattern";
-              var portPattern = "#port-pattern";
-              var minPort = 1;
-              var maxPort = 65535; 
-              var timeout;
-              var ipPattern = "#ip-pattern";
-              var portPattern = "#port-pattern";
-              modalContent.innerHTML  =  `<?php echo $modals["openServer"]; ?> `;
-
-              $(portPattern).removeAttr('disabled');
-              $(portPattern).val(randomIntFromInterval(minPort, maxPort));
-
-              var defaultPortButton= document.getElementById("defaultPort");
-              defaultPortButton.classList.remove("hidden");
-              defaultPortButton.addEventListener('click', function() {
-                  $(ipPattern).val(CONFIGS["defaultIP"]);
-                  $(portPattern).val(CONFIGS["defaultPort"]);
-              });
-
-              var randomPortButton = document.getElementById("randomPort");
-              randomPortButton.classList.remove("hidden");
-              randomPortButton.addEventListener('click', function() {
-                  $(portPattern).val(randomIntFromInterval(minPort, maxPort));
-              });
-
-              var openButton = document.getElementById("open");
-              openButton.addEventListener('click', function() {
-                  let ip = $(ipPattern).val();
-                  let port = $(portPattern).val();
-                  let monitor = document.getElementById("monitor");
-                  localStorage.setItem("serverStatus", "CONNECTING");
-                  monitor.innerHTML = `<span style="color:green"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Abriendo Servidor en IP=[`+ip.toString()+`] y PORT=[`+port.toString()+`]</span>`
-                  openServer(port);
-                  blockAddServer();
-                  refreshStatus();
-                  var server = localStorage.getItem("serverInfo");
-                  if(server!=null){
-                    $("#port-pattern").val(JSON.parse(server)["port"]);
-                    blockAddServer();
-                    var openButton = document.getElementById("open");
-
-                    openButton.addEventListener('click', function() {
-                      let pid = JSON.parse(localStorage.getItem("serverInfo"))["pid"];
-                      closeServer(pid);
-                    });
-                  }
-                });
-              $(portPattern).change(function () { //Cuando detecta un cambio mira si ha superado el maximo o el minimo y lo cambia
-                try {
-                    var valor = parseInt($(portPattern).val());
-                    if (valor < minPort) {
-                        $(portPattern).val(minPort);
-                    } else if (valor > maxPort) {
-                        $(portPattern).val(maxPort);
-                    }
-                } catch (Exception) {
-                    $(portPattern).val(minPort);
-                }
-            });
-          }
+        $(portPattern).removeAttr('disabled');
+        $(portPattern).val(randomIntFromInterval(minPort, maxPort));
+        var defaultPortButton= document.getElementById("defaultPort");
+        defaultPortButton.classList.remove("hidden");
+        defaultPortButton.addEventListener('click', function() {
+            $(ipPattern).val(CONFIGS["defaultIP"]);
+            $(portPattern).val(CONFIGS["defaultPort"]);
         });
+        var randomPortButton = document.getElementById("randomPort");
+        randomPortButton.classList.remove("hidden");
+        randomPortButton.addEventListener('click', function() {
+            $(portPattern).val(randomIntFromInterval(minPort, maxPort));
+        });
+        $(portPattern).change(function () { //Cuando detecta un cambio mira si ha superado el maximo o el minimo y lo cambia
+          try {
+              var valor = parseInt($(portPattern).val());
+              if (valor < minPort) {
+                  $(portPattern).val(minPort);
+              } else if (valor > maxPort) {
+                  $(portPattern).val(maxPort);
+              }
+          } catch (Exception) {
+              $(portPattern).val(minPort);
+          }
+      });
+        
     });
     // Disable form submissions if there are invalid fields
     (function() {

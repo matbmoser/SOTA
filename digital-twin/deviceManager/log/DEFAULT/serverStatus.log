@@ -1,18 +1,7 @@
 Starting Server Log Messages...
 [INFO]: Trying to start server...
-[STATS]: [1] elements update in [0:00:00.072689] DBManager.updateQuery()
+[STATS]: [1] elements update in [0:00:00.027486] DBManager.updateQuery()
 [INFO]: Server [DEFAULT] updated in id [1]
 [INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [127.0.0.1:8888] status [RUNNING] in thread: [DEFAULT]].
 [INFO]: Server is Opened in Background
-[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651287038.720626, "cameraid": "0b3cae3b-4a92-46d6-84d2-336ea5f8327c", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZutEgZbDmouXmixj0kQ\nKAM4JSBovu04gZRZQi6GaySWhme2hS1CMgdNmCVxpA1JIEP5KMfoFM+PRbsScy7U\nuz++GHxAZHT6ddqa2xG+pLwlYXCcsoQzIBe67ms+8Yen4xCXK6cKoEuofPPxQq9X\n85+oclP6m36qzuf0O20jLnYmp6krc4VStL1VuIriXfTkGVeXjN1xBvsVC8mnG/Tp\nJKFjuG5mSPw9Sk5/ZHeYJ7jcu4PwosDL+SxSCsbFss02sVQhy4g+vm50AgLWDT64\njeq1cYjtaHe3Mhi5bq9pPvnmjB3EyFv1/YpUdHM/UTiHWD+BFk+8i2FL7WK/uBZp\nVQIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
-[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
-[DEBUG]: Camera [0b3cae3b-4a92-46d6-84d2-336ea5f8327c], status [ONLINE] on [127.0.0.1:34664] logged in with sessionid = [e67a236aab9df22ae4d82547ffa60e9d] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] 
-[DEBUG]: [DEFAULT]-[127.0.0.1:8888] BaseRequestHandler.setup().
-[DEBUG]: [DEFAULT]-[127.0.0.1:8888] > Received one request from 0b3cae3b-4a92-46d6-84d2-336ea5f8327c
-[STATS]: [1] elements inserted in [0:00:00.029056] DBManager.insertQuery()
-[INFO]: Camera [0b3cae3b-4a92-46d6-84d2-336ea5f8327c] added into DB!
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.139519]
-[STATS]: [1] elements inserted in [0:00:00.044172] DBManager.insertQuery()
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.540529]
-[ERROR]: SJMPHandler.processINFlag(matricula=[4523-JKM]) The vehicle with plate [4523-JKM] don't exist!
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.352277]
+[INFO]: Closing [DEFAULT] Server...

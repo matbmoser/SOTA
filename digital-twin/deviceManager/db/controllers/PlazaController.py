@@ -37,7 +37,13 @@ class PlazaController(BaseController):
         self.tipos1 = self.externalTable1.getValues()
         if(matricula not in self.tipos1):
             return None
-        self.conn.deleteTableElement(table=self.tableName, where="idVehiculo="+str(self.tipos1[matricula]))
+        self.conn.deleteTableElement(table=self.tableName, where="idVehiculo='"+str(self.tipos1[matricula])+"'")
+
+    def invalidTicket(self, idVehiculo):
+        return self.conn.updateTableElement(table=self.tableName, set=[('valido',0)], where="idVehiculo='"+str(idVehiculo)+"'")
+    
+    def deleteByToken(self, token):
+        self.conn.deleteTableElement(table=self.tableName, where="token='"+str(token)+"'")
     
     def deleteByIdZona(self, id, idZona):
         self.conn.deleteTableElement(table=self.tableName, where="id="+str(id)+" AND idZona="+str(idZona)+"")
@@ -102,6 +108,6 @@ class PlazaController(BaseController):
                 continue
             if(kwargs[var] != None): setList.append((var, kwargs[var]))
 
-        self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
+        res = self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
         
-        return True
+        return res

@@ -16,6 +16,14 @@ class DBManager():
         self.operators=[">", "=", "<", "<=", ">=", "!=", "IN"]
         self.version = None
         self.dbname = None
+        self.connect()
+
+    def checkIfConnected(self):
+        if self.conn.is_connected():
+            return True
+        return False
+
+    def connect(self):
         try:
             connection = mysql.connector.connect(host=dbConfig.hostname,
                                                  database=dbConfig.dbname,
@@ -30,16 +38,18 @@ class DBManager():
                 record = cursor.fetchone()
                 self.dbname = record[0]
                 self.refreshDatabase()
-                
+                return True
+            else:
+                return False
+             
         except mysql.connector.Error as e:
             op.printLog(logType="CRITICAL", e=e,messageStr="DBManager.__init__()")
-            traceback.print_exec()
-
-    def checkIfConnected(self):
-        if self.conn.is_connected():
-            return True
-        return False
-
+            traceback.print_exc()
+            return False
+    
+    def close(self):
+        return self.conn.close()
+        
     def refreshDatabase(self):
         self.tables = dict()
         query = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + \
@@ -65,20 +75,18 @@ class DBManager():
             key["name"] = info[0]
             keynames.append(key["name"])
             key["type"] = info[1]
-            attr = list()
-            for clave in info[2:]:
-                attr.append(clave)
-            key["attr"] = attr
             keys[key["name"]] = key
         
         keys["keynames"] = keynames
         return keys
 
     def query(self, query):
-        cursor = self.conn.cursor()
         try:
+            cursor = self.conn.cursor()
             cursor.execute(query)
-            return cursor.fetchall()
+            data = cursor.fetchall()
+            cursor.close()
+            return data
         except mysql.connector.Error as e:
             op.printLog(logType="CRITICAL", e=e,
                         messageStr="DBManager.query("+str(query)+")")
@@ -87,8 +95,8 @@ class DBManager():
     
     def insertQuery(self, query):
         initTime = datetime.now(timezone.utc)
-        cursor = self.conn.cursor()
         try:
+            cursor = self.conn.cursor()
             cursor.execute(query)
             self.conn.commit()
             finiTime = datetime.now(timezone.utc)
@@ -105,8 +113,8 @@ class DBManager():
     
     def updateQuery(self, query):
         initTime = datetime.now(timezone.utc)
-        cursor = self.conn.cursor()
         try:
+            cursor = self.conn.cursor()
             cursor.execute(query)
             self.conn.commit()
             finiTime = datetime.now(timezone.utc)
@@ -123,8 +131,8 @@ class DBManager():
     
     def deleteQuery(self, query):
         initTime = datetime.now(timezone.utc)
-        cursor = self.conn.cursor()
         try:
+            cursor = self.conn.cursor(dictionary=True)
             cursor.execute(query)
             self.conn.commit()
             finiTime = datetime.now(timezone.utc)
@@ -219,7 +227,7 @@ class DBManager():
                 
                 value = cond[1]
                 if(type(value) == str):
-                    value = "'"+value+"'"
+                    value = '"'+value+'"'
                     
                 setString += key + "=" + str(value) + ","
                 
@@ -291,7 +299,7 @@ class DBManager():
                         messageStr="Table not Exists. DBManager.addElementToTable("+str(table)+")")
             return None
         setString = self.parseSet(set, table)
-        query = "UPDATE "+str(table) +" "+ str(setString) + "updated_at='" + str(datetime.now()) + "'"
+        query = 'UPDATE '+str(table) +' '+ str(setString) + 'updated_at="' + str(datetime.now()) + '"'
         if(where!=None):
             query+= " WHERE " + str(where)
         result = self.updateQuery(query)
@@ -316,6 +324,7 @@ if __name__ == '__main__':
         #print(dbManager.insertTableElement(elem=("Furgoneta", "300","380", "200", time, time), table='TipoVehiculo'))
         #values = dbManager.getValueIdDict(id="id", value="nombre", table="TipoVehiculo")
         #print(values)
+        dbManager.query()
         #dbManager.resetIndex(table="TipoVehiculo")
         #dbManager.deleteTableElement(table="TipoVehiculo", where="id = "+str(values["SUV"]))
         #print(dbManager.insertTableElement(elem=("1247-LDG",1,time, time), table='Vehiculo'))

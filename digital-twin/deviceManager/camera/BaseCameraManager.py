@@ -38,9 +38,18 @@ class BaseCameraManager():
         self.Cameras = {}
         # Camera default type (May be overrided)
         self.cameraprotocolClass = cameraprotocolClass
-        self.cameraController = CamaraController()
+        self.cameraController = None
+        self.plazaController = None
+        self.zonaController = None
+        self.tipoVehiculotipoPlazaController = None
+        self.controllersStarted = False
     
-        
+    def startControllers(self):
+        self.controllersStarted = True
+        self.cameraController = CamaraController()
+        self.plazaController = PlazaController()
+        self.zonaController = ZonaController()
+        self.tipoVehiculotipoPlazaController = TipoVehiculoTipoPlazaController()
     # ================================================================
     # GET METHODS
 
@@ -96,10 +105,9 @@ class BaseCameraManager():
         
         return camera[0]  
     
-    
     def db_getTipoPlazasByIdTipoVehiculo(self, idTipoVehiculo):
-        controller = TipoVehiculoTipoPlazaController()
-        tipoPlazas = controller.getByIdTipoVehiculo(idTipoVehiculo)
+        self.tipoVehiculotipoPlazaController.refresh()
+        tipoPlazas = self.tipoVehiculotipoPlazaController.getByIdTipoVehiculo(idTipoVehiculo)
         data = []
         for tipo in tipoPlazas:
             data.append(tipo["idTipoPlaza"])
@@ -117,8 +125,6 @@ class BaseCameraManager():
             zonas = self.conn.query("SELECT id, plazas FROM Zona WHERE idTipoPlaza in "+str(tipoPlazas)+" ORDER BY RAND()")
         elif(len(tipoPlazas) <= 0):
             return None
-        
-            
     
         for zona in zonas:
             rawplazasOcupadas = self.conn.query("SELECT id FROM Plaza WHERE idZona = "+str(zona[0]))
@@ -139,16 +145,33 @@ class BaseCameraManager():
         if(plazaFinal == None or zonaFinal == None):
             return None, None
         
-        zona = ZonaController().getById(id=zonaFinal)
-        print(f"Plaza ["+zona[0]["letra"]+str(plazaFinal)+"] Elegida!")
+        self.zonaController.refresh()
+        zona = self.zonaController.getById(id=zonaFinal)
+        self.conn.close()
         return plazaFinal, zona[0]["id"], str(zona[0]["letra"])+str(plazaFinal)
     
     def db_asignarPlaza(self, plaza, idZona, idVehiculo):
-        self.plazaController = PlazaController()
-        
+        self.plazaController.refresh()
         return self.plazaController.addTicket(id=plaza, idZona=idZona, idVehiculo=idVehiculo)
         
+    def db_invalidarPlaza(self, idVehiculo):
+        self.plazaController.refresh()
+        return self.plazaController.invalidTicket(idVehiculo=idVehiculo)
     
+    def db_checkIfPlaza(self, idVehiculo):
+        self.plazaController.refresh()
+        plaza = self.plazaController.getByIdVehiculo(idVehiculo=idVehiculo)
+        if(plaza == [] or plaza == None):
+            return None, None
+        
+        zona = self.zonaController.getById(id=plaza["idZona"])
+        return plaza, zona
+    
+    def db_deleteTicket(self, token):
+        self.plazaController.refresh()
+        return self.plazaController.deleteByToken(token=token)
+        
+        
     ### Save in Database Methods
     
     def saveOrUpdateCamera(self, camera, server):
@@ -163,7 +186,7 @@ class BaseCameraManager():
         socketKeyCamera = self.db_getBySocketKey(socketKey)
         
         if(dbcamera != None and socketKeyCamera == None):
-            if(self.cameraController.update(where="id="+dbcamera["id"],camaraid=cameraid, tipo=tipo, socketKey=socketKey, protocol=protocol,serverid=serverid, letra=aparcamiento)):
+            if(self.cameraController.update(where="id="+str(dbcamera["id"]),cameraid=cameraid, type=tipo, socketKey=socketKey, protocol=protocol,serverid=serverid, letra=aparcamiento)):
                 op.printLog(logType="INFO", messageStr=f"Camera [{cameraid}] updated in id [{dbcamera['id']}]") 
                 return True
             else:
@@ -172,7 +195,7 @@ class BaseCameraManager():
             
         elif(dbcamera != None and socketKeyCamera != None):
             self.cameraController.deleteByCameraId(cameraid = socketKeyCamera["cameraid"])
-            if(self.cameraController.update(where="id="+dbcamera["id"],camaraid=cameraid, socketKey=socketKey,tipo=tipo, protocol=protocol,serverid=serverid, letra=aparcamiento)):
+            if(self.cameraController.update(where="id="+str(dbcamera["id"]),cameraid=cameraid, socketKey=socketKey,type=tipo, protocol=protocol,serverid=serverid, letra=aparcamiento)):
                 op.printLog(logType="INFO", messageStr=f"Camera [{cameraid}] updated in id [{dbcamera['id']}]") 
                 return True
             else:
@@ -182,7 +205,7 @@ class BaseCameraManager():
         elif(socketKeyCamera != None):
             self.cameraController.deleteByCameraId(cameraid = socketKeyCamera["cameraid"])
         
-        if(self.cameraController.add(camaraid=cameraid, tipo=tipo, socketKey=socketKey, protocol=protocol,serverid=serverid, letra=aparcamiento)):
+        if(self.cameraController.add(cameraid=cameraid, tipo=tipo, socketKey=socketKey, protocol=protocol,serverid=serverid, letra=aparcamiento)):
             op.printLog(logType="INFO", messageStr=f"Camera [{cameraid}] added into DB!") 
             return True
         else:
@@ -335,11 +358,17 @@ class BaseCameraManager():
                 continue
             res = self.Cameras[cameraid].forceClose()
             op.printLog(
-                logType="DEBUG", messageStr="Camera ["+self.Cameras[cameraid].cameraid+"] KILLED!")
+                logType="INFO", messageStr="Camera ["+str(cameraid)+"] KILLED!")
             # If there is a problem in closing all cameras
             if not res:
                 break
-
+            
+        if(self.controllersStarted):
+            self.cameraController.close()
+            self.plazaController.close()
+            self.zonaController.close()
+            self.tipoVehiculotipoPlazaController.close()
+            
         return res
 
     # ================================================================

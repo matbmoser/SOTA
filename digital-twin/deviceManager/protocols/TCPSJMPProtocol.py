@@ -21,8 +21,10 @@ class TCPSJMPProtocol(TCPProtocol):
         return self.newMessage(content=packet().dumpPacket(flag="SYN", cameraid=camera.cameraid, clt_time=datetime.timestamp(datetime.now(timezone.utc)), token=token, type=camera.type).messageToJSONString())
 
     # Prepares and returns a close message
-    def getCloseMessage(self):
-        return self.newMessage(content=packet().dumpPacket(flag="FIN", response="Connection Closed! Server shutdown").messageToJSONString())
+    def getCloseMessage(self, camera):
+        if(camera.serversecret != None):
+            return self.newMessage(content=packet().dumpPacket(flag="FIN", sessionid=camera.sessionid, response="Connection Closed! Server shutdown").encryptJSONMessage(camera.serversecret))
+        return self.newMessage(content=packet().dumpPacket(flag="FIN", sessionid=camera.sessionid, response="Connection Closed! Server shutdown").messageToJSONString())
 
     # ================================================================
     # INPUT MESSAGE

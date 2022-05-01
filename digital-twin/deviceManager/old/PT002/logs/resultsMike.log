@@ -1,8 +1,0 @@
-2022/02/10 07:01:44|14556|38.32421875|[INFO]: NEW cameras created=[1]!
-2022/02/10 07:01:44|14556|38.34375|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00]
-2022/02/10 07:01:44|14556|37.29296875|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00]
-2022/02/10 07:01:44|14556|37.296875|[STATS]: Messages Sent: ncameras=[0];messagesSent=[8];totalTime=[0:00:00.003994];minSendDuration=[0:00:00.001997];avgSendDuration=[0:00:00.003994];maxSendDuration=[0:00:00.001997]
-2022/02/10 07:01:44|14556|37.27734375|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00]
-2022/02/10 07:01:44|14556|37.28125|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00]
-2022/02/10 07:01:44|14556|37.28125|[STATS]: Messages Processed: nmessages=[3];duration=[0:00:00]
-2022/02/10 07:01:44|14556|37.28125|[STATS]: Messages Processed: nmessages=[2];duration=[0:00:00.000998]

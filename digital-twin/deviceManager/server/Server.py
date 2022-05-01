@@ -249,6 +249,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         # Server connection Atributtes
         self.camerasManager = self.getCamerasManager()
+        self.camerasManager.startControllers()
         self.keepAlive = True
         self.ip, self.port = self.server_address  # find out what port we were given
         self.status = "SHUTDOWN"

@@ -183,7 +183,7 @@ function openServerOnPort(){
     then
         nohup python3 "${DEVICE_MANAGER}/${SERVERFILENAME}" -n ${NAME} -ip ${IP} -port ${PORT} > /dev/null 2>&1& echo '{"name": "'${NAME}'", "ip": "'${IP}'", "port": "'${PORT}'", "pid": "'$!'", "status": "RUNNING"}'
     else
-        echo "[ERROR] Server with IP=[${IP}] PORT=[${PORT}] is Already Running on PID=[$PID]"
+        echo '{"err": "Server with IP=['${IP}'] PORT=['${PORT}'] is Already Running on PID=['$PID']"}'
     fi
 }
 
@@ -347,6 +347,29 @@ function getAllServers(){
     printf "]";
 }
 
+
+function getServerByPort(){
+    PORT=${1}
+
+    if [ -z "$PORT" ];
+    then
+        echo "[ERROR] Please indicate the Server PORT: getServerByPort <PORT>"
+        return -1
+    fi
+
+    SERVERPID=$(getPIDByPort $PORT)
+    if [ -z "$SERVERPID" ];
+    then
+        echo '{"err": "No server on port ['${PORT}'] was detected!"}';
+        return -1;
+    fi
+    
+    SERVERINFO=$(getServerInfoByPID $SERVERPID)
+    printf '{"name": "%s", "ip": "%s", "port": %s, "pid": %s, "status": "RUNNING"}' ${SERVERINFO[0]} ${SERVERINFO[1]} ${SERVERINFO[2]} $SERVERPID;
+
+}
+
+
 function closeServersByIP(){
     IP=${1}
 
@@ -399,7 +422,7 @@ function closeServerByPort(){
 
     if [ -z "$PORT" ];
     then
-        echo "[ERROR] Please indicate the Server PORT: closeServerByPort <PORT>"
+        echo '{"err": "Please indicate the Server PORT: closeServerByPort <PORT>"}'
         return -1
     fi
 
@@ -407,10 +430,10 @@ function closeServerByPort(){
 
     if [ -z "$PID" ];
     then
-        echo "[ERROR] No server is not running on PORT=[$PORT] at the moment"
+        echo '{"err": "No server is not running on PORT=['$PORT'] at the moment"}'
         return 1
     else
-        echo "Closing server running on PORT=[$PORT] in PID=[$PID]"
+        echo '{"res": "Closing server running on PORT=['$PORT'] in PID=['$PID']"}'
         closeServerByPID $PID
         return 0
     fi

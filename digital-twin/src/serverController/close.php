@@ -1,5 +1,5 @@
 <?php
-$pid = $_POST['pid'];
+$port = $_POST['port'];
 $configs = include("../assets/mod/configs/config.php");
 if(!isset($_POST['uuid'])){
     echo '{"fail":"Bad Request"}';
@@ -11,5 +11,12 @@ if($_POST['uuid'] != $configs["securityUUIDToken"]){
    exit;
 }
 
-$output = shell_exec('./closeServer.sh '.$pid);
-echo json_encode(array("success"=>"true", "serverData" => json_decode($output)));
+$output = shell_exec('./closeServer.sh '.$port);
+$response = json_decode($output, true);
+
+if(!empty($response["err"])){
+    echo json_encode(array("success" => "false", "err" => $response["err"]));
+    exit;
+}
+
+echo json_encode(array("success" => "true"));

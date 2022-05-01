@@ -126,8 +126,18 @@ class handler():
             op.printLog(logType="EXCEPTION", e=e,
                         messageStr="in SJMPHandler(). On processPacket()")
             traceback.print_exc()
-            return packet().dumpPacket(
-                flag="ERR", response="Was not posible to finish connection!").messageToJSONString()
+            errPacket = packet().dumpPacket(
+                flag="ERR", response="Was not posible to finish connection!")
+            if(self.camera.encrypted):
+                if(self.server != None and self.camera != None):
+                    errPacket = errPacket.encryptJSONMessage(self.camera.publicKey)
+                elif(self.server == None and self.camera != None):
+                    errPacket = errPacket.encryptJSONMessage(self.camera.serversecret)
+                else:
+                    errPacket = errPacket.messageToJSONString()
+            else:
+                errPacket = errPacket.messageToJSONString()    
+            return errPacket
             
 
     # ================================================================
@@ -195,9 +205,22 @@ class handler():
         tmpOutputMessage = packet().dumpPacket(flag="OK", clt_time=str(
             datetime.timestamp(datetime.now(timezone.utc))), sessionid=self.camera.sessionid, secret=self.server.publicKey.decode("utf-8"))
 
-        #return tmpOutputMessage.encryptJSONMessage(self.packet.token)
+        #return tmpOutputMessage.encryptJSONMessage(self.camera.publicKey)
     
         return tmpOutputMessage.messageToJSONString()
+    
+    def generateTicket(self, vehicle):
+        try:
+            tipoPlazas = self.server.camerasManager.db_getTipoPlazasByIdTipoVehiculo(idTipoVehiculo=vehicle["idTipoVehiculo"])
+            plaza, zona, idPlaza = self.server.camerasManager.db_getZonasByTipoPlazas(tipoPlazas=tipoPlazas)
+            res = self.server.camerasManager.db_asignarPlaza(plaza, zona, vehicle["id"])
+            return res, idPlaza
+        except Exception as e:
+            op.printLog(logType="EXCEPTION", e=e,
+                        messageStr="in SJMPHandler(). On generateTicket() Was not posible to generate ticket! To vehicle ["+vehicle["matricula"]+"]")
+            traceback.print_exc()
+        return False, None
+    
     # Process IN flag
     def processINFlag(self):
 
@@ -242,13 +265,29 @@ class handler():
             return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
 
         
-        tipoPlazas = self.server.camerasManager.db_getTipoPlazasByIdTipoVehiculo(idTipoVehiculo=tmpVehicle["idTipoVehiculo"])
-        plaza, zona, idPlaza = self.server.camerasManager.db_getZonasByTipoPlazas(tipoPlazas=tipoPlazas)
-        res = self.server.camerasManager.db_asignarPlaza(plaza, zona, tmpVehicle["id"])
+        plaza, zona  = self.server.camerasManager.db_checkIfPlaza(idVehiculo=tmpVehicle["id"])
         
-        if(not res):
+        if(plaza != None or zona!=None):
+            if(plaza["valido"] == 1):
+                op.printLog(
+                    logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) The vehicle with plate [" + self.packet.plate + "] is already parked in [" + str(zona["letra"])+str(plaza["id"]) + "] ")
+                tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                    flag="ERR", response=" The vehicle with plate [" + self.packet.plate + "] is already parked in [" + str(zona["letra"])+str(plaza["id"]) + "] ")
+
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            
             op.printLog(
-                logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
+                logType="INFO", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Deleting old ticket from vehicle with plate ["+tmpVehicle["matricula"]+"], ticketToken=["+plaza["token"]+"] oldPlaza=["+str(zona["letra"])+str(plaza["id"])+"] ")
+            res = self.server.camerasManager.db_deleteTicket(token=plaza["token"])
+            
+        
+            
+        # Generate Ticket
+        res, idPlaza = self.generateTicket(vehicle=tmpVehicle)
+        
+        if(not res or idPlaza==None):
+            op.printLog(
+                logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Was not posible to generate ticket for vehicle ["+self.packet.plate+"]!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
             return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
@@ -313,14 +352,32 @@ class handler():
             return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
 
         
-        tipoVehiculo = self.server.camerasManager.db_getTipoPlazasByIdTipoVehiculo(idTipoVehiculo=tmpVehicle["idTipoVehiculo"])
+        plaza, zona  = self.server.camerasManager.db_checkIfPlaza(idVehiculo=tmpVehicle["id"])
+        
+        if(plaza != None or zona != None):
+            if(plaza["valido"] == 0):
+                op.printLog(
+                    logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) The vehicle with plate [" + self.packet.plate + "] is already parked in [" + str(zona["letra"])+str(plaza["id"]) + "] ")
+                tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                    flag="ERR", response=" The vehicle with plate [" + self.packet.plate + "] is not inside the parking!")
 
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+        
+        res = self.server.camerasManager.db_invalidarPlaza(idVehiculo=tmpVehicle["id"])
+        
+        if(not res):
+            op.printLog(
+                logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
+            tmpOutputMessage = tmpOutputPacket.dumpPacket(
+                flag="ERR", response="Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
+            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+        #
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
 
         # Prepare response
         tmpOutputMessage = tmpOutputPacket.dumpPacket(
-            flag="ACK", message="Vehicle ["+tmpVehicle+"] was deleted from parking")
+            flag="ACK", response="Vehicle with plate ["+self.packet.plate+"] was delete from parking!")
 
         if(self.server != None):
             if originCamera.publicKey == None:

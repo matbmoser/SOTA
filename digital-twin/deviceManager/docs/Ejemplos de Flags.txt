@@ -1,0 +1,2 @@
+# IN FLAG, [note: cambiar sessionid]
+{"flag":"IN", "clt-time": 1651344138.21215, "plate": "1236-SLD", "sessionid": "dc5572cf1f0ed7184d0f9ce580e0b596"} 

@@ -74,7 +74,7 @@ class Camera():
         self.sessionid = self.setSessionId(value=sessionid)
         self.publicKey, self.privateKey =  None, None
         self.type = type 
-        
+        self.serversecret = None
         # Datetime elements
         self.created = datetime.now(timezone.utc)
         self.last_message = self.created
@@ -129,7 +129,7 @@ class Camera():
         res = False
         # If Camera is online we can force close
         if self.status == "ONLINE":
-            res = self.addOutputBuffer(value=self.protocol.getCloseMessage())
+            res = self.addOutputBuffer(value=self.protocol.getCloseMessage(camera=self))
             self.close()
 
         return res
@@ -326,5 +326,6 @@ class Camera():
             tmpString += "on ["+self.socketkey+"] "
         if(self.sessionid != None):
             tmpString += "logged in with sessionid = ["+self.sessionid+"] "
-        tmpString += "type ["+str(type(self.protocol))+"] "
+        tmpString += "protocol ["+str(type(self.protocol))+"] "
+        tmpString += "type ["+str(self.type)+"] "
         return tmpString

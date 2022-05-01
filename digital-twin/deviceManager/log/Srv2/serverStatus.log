@@ -1,7 +1,0 @@
-Starting Server Log Messages...
-[INFO]: Trying to start server...
-[STATS]: [1] elements deleted in [0:00:00.020049] DBManager.deleteQuery()
-[STATS]: [0] elements update in [0:00:00.002294] DBManager.updateQuery()
-[INFO]: Server [Srv2] updated in id [7]
-[INFO]: NEW SERVER CREATED!: serverid=[Srv2], ip=[127.0.0.1], port=[4444], poll_interval=[0.5]. [Server [Srv2] in socket [127.0.0.1:4444] status [RUNNING] in thread: [Srv2]].
-[INFO]: Server is Opened in Background

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 # coding=UTF-8
-from email import message
 import os
 import sys
+import getpass
 import traceback
 from operators.op import op
 from globalConfig import globalConfig
@@ -200,7 +200,10 @@ class ServerManager():
         # Set Camera id from arguments
         serverid = str(serverid)
         op.startLog(logFile=f"log/{serverid}/serverStatus.log")
+        op.printLog(logType="INFO" , messageStr="You are ["+getpass.getuser()+"]")
         op.printLog(logType="INFO", messageStr="Trying to start server...")
+        
+            
         # Create and start the server
         server = self.newAndStart(
             serverid=serverid, ip=serverip, port=serverport, poll_interval=serverpollinterval)
@@ -212,7 +215,8 @@ class ServerManager():
             return None
 
         op.printLog(logType="INFO",
-                    messageStr="Server is Opened in Background")
+            messageStr="Server is Opened in Background")
+     
         return server
 
     # Stop all servers in manager server list

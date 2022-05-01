@@ -427,9 +427,9 @@ class CameraManager(BaseCameraManager):
                 # Create new Camera
                 if (numopt == 1):
                     cameraid = input(
-                        "Please insert the Camara ID [Default Random UUID]: ")
+                        "Please insert the Camera ID [Default Random UUID]: ")
                     cameraid = cameraid if not cameraid == "" else str(uuid.uuid4())
-                    print("Creating camera... camaraid=["+str(cameraid)+"]")
+                    print("Creating camera... cameraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
                         print("\n[ERROR] A Camera id needs to be specified!\n")
@@ -459,15 +459,15 @@ class CameraManager(BaseCameraManager):
 
                     protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
-                    camaraType = self.selectCameraType()
+                    cameraType = self.selectCameraType()
                     
-                    if(camaraType == None):
-                        camaraType = "BOTH"
+                    if(cameraType == None):
+                        cameraType = "BOTH"
                     
                     try:
                         # Create and Start Server
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port, type=camaraType)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
@@ -482,20 +482,21 @@ class CameraManager(BaseCameraManager):
                     # SET DEFAULT Camera CONFIGURATIONS:
 
                     cameraid = "DEFAULT"
-                    camaraType = "BOTH"
+                    cameraType = "BOTH"
                     
                     # If Camera exists
-                    if(self.getByCameraId(cameraid=cameraid) != None):
+                    camera = self.getByCameraId(cameraid=cameraid) 
+                    if(camera != None):
+                        self.deleteCameraByCameraId(cameraid=cameraid)
                         op.printLog(
-                            logType="ERROR", messageStr="Camera already registed in the server! Create a new Camera...")
-                        continue
+                            logType="WARNING", messageStr="Camera was already registerd, deleting camera.")
 
                     protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
                     try:
                         # Start new Camera
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport, type=camaraType)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
@@ -747,7 +748,7 @@ if __name__ == '__main__':
     defaultip = globalConfig.defaultip
     defaultport = globalConfig.defaultport
     # DEFAULT Camera configurations
-    defaultprotocol = globalConfig.defaultcamaraprotocol
+    defaultprotocol = globalConfig.defaultcameraprotocol
 
     # ------
     cameraManager = CameraManager(cameraprotocolClass=defaultprotocol)

@@ -47,3 +47,6 @@ class BaseController():
     
     def update(self):
         pass
+    
+    def close(self):
+        self.conn.close()

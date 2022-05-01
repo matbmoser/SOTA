@@ -22,7 +22,7 @@ class Camera extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'camaraid',
+        'cameraid',
         'socketKey',
         'type',
         'protocol',

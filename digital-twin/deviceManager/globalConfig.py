@@ -7,4 +7,4 @@ class globalConfig:
     defaultname = "DEFAULT"
     defaultpollinterval = 0.5
     defaultserverprotocol = "server.WebSocketSJMPServer.WebSocketSJMPServer"
-    defaultcamaraprotocol = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+    defaultcameraprotocol = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"

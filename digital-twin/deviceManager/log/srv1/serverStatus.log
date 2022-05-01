@@ -1,18 +1,2 @@
 Starting Server Log Messages...
 [INFO]: Trying to start server...
-[STATS]: [1] elements update in [0:00:00.044265] DBManager.updateQuery()
-[INFO]: Server [Srv1] updated in id [2]
-[INFO]: NEW SERVER CREATED!: serverid=[Srv1], ip=[127.0.0.1], port=[4444], poll_interval=[0.5]. [Server [Srv1] in socket [127.0.0.1:4444] status [RUNNING] in thread: [Srv1]].
-[INFO]: Server is Opened in Background
-[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651286536.233194, "cameraid": "ee9734a6-c3b4-4d03-b5ab-99b21bd6eeed", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuJRCqVNb9ygEvePJ6q0i\nvwFfQvPpalG7XfIyl0lc8ABLPK9NXUGRM7edwi8kqQuTyfuH22lW0IKPOr9XSU4Y\nYvZSHC/wmFO9nxDQ8RHg5VGE96SFKHg/UG5GycvB4kkZ2gs4ydfMee3ys+/Zovat\n7SXV9bhRWRyhLxgKxZwjnAbc7EJUO+Mz59kT/O9j/QYQyVvDM4EJH6pJnp3wiNAu\nXnUPETkMIYaO7b4UXLFArvr1s4HJgnLOBFYf7DJi/z1PzES+6/ownqtdAj5LEuFQ\n9FMQgQzmqMntv9yn7fLDSez/hgLPOPcquZ+GT5FpR3THDesMy/5i49TOY4bW3vNa\nBQIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
-[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
-[DEBUG]: Camera [ee9734a6-c3b4-4d03-b5ab-99b21bd6eeed], status [ONLINE] on [127.0.0.1:35910] logged in with sessionid = [169ea0b6aa9cd1ce3f892aa009037919] type [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] 
-[DEBUG]: [Srv1]-[127.0.0.1:4444] BaseRequestHandler.setup().
-[DEBUG]: [Srv1]-[127.0.0.1:4444] > Received one request from ee9734a6-c3b4-4d03-b5ab-99b21bd6eeed
-[STATS]: [1] elements inserted in [0:00:00.027026] DBManager.insertQuery()
-[INFO]: Camera [ee9734a6-c3b4-4d03-b5ab-99b21bd6eeed] added into DB!
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.106651]
-[STATS]: [1] elements inserted in [0:00:00.048223] DBManager.insertQuery()
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.514496]
-[EXCEPTION]:[Ciphertext length must be equal to key size.]. in SJMPHandler(). On processPacket() Decryption failed [NO ENCRIPTADO]
-[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.335339]

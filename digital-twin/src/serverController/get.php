@@ -11,5 +11,12 @@ if($_POST['uuid'] != $configs["securityUUIDToken"]){
    exit;
 }
 
-$output = shell_exec('./getServer.sh '.$port);
-echo json_encode(array("success"=>"true", "serverData" => json_decode($output)));
+$output = shell_exec('./get.sh '.$port);
+$response = json_decode($output, true);
+
+if(!empty($response["err"])){
+    echo json_encode(array("success" => "false", "err" => $response["err"]));
+    exit;
+}
+
+echo json_encode(array("success" => "true", "server" => $response));
