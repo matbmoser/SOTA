@@ -1,8 +1,0 @@
-Starting Server Log Messages...
-[INFO]: You are [www-data]
-[INFO]: Trying to start server...
-[STATS]: [1] elements deleted in [0:00:00.037730] DBManager.deleteQuery()
-[STATS]: [1] elements inserted in [0:00:00.046432] DBManager.insertQuery()
-[INFO]: Server [24322e451a57] added into DB!
-[INFO]: NEW SERVER CREATED!: serverid=[24322e451a57], ip=[127.0.0.1], port=[10716], poll_interval=[0.5]. [Server [24322e451a57] in socket [127.0.0.1:10716] status [RUNNING] in thread: [24322e451a57]].
-[INFO]: Server is Opened in Background

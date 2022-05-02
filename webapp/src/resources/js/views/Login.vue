@@ -1,120 +1,101 @@
 <template>
     <div id="mainContainer" class="gradient-custom flex align-items-center justify-content-center">
             <div class="form-demo">
-            <Dialog v-model:visible="showMessage" :breakpoints="{ '960px': '80vw' }" :style="{ width: '30vw' }" position="top">
-                <div class="flex align-items-center flex-column pt-6 px-3">
-                    <i class="pi pi-check-circle" :style="{fontSize: '5rem', color: 'var(--green-500)' }"></i>
-                    <h5>Registration Successful!</h5>
-                    <p :style="{lineHeight: 1.5, textIndent: '1rem'}">
-                        Your account is registered under name <b>{{state.email}}</b> ; it'll be valid next 30 days without activation. Please check <b>{{state.email}}</b> and {{state.email}} for activation instructions.
-                    </p>
-                </div>
-                <template #footer>
-                    <div class="flex justify-content-center">
-                        <Button label="OK" @click="toggleDialog" class="p-button-text" />
-                    </div>
-                </template>
-            </Dialog>
                 <div class="main-card justify-content-center">
                     <div class="card">
                         <div class="text-center mb-5">
                             <img src="../media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
-                            <div class="text-900 text-3xl font-medium mb-3 loginTitle">WebApp MyParking</div>
+                            <div class="text-900 text-3xl font-medium mb-3 loginTitle">UFV MyParking</div>
                         </div>
                         <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid" autocomplete="off">
-                            <div class="field mt-4">
-                                <div class="p-float-label p-input-icon-right">
-                                    <i class="pi pi-envelope" />
-                                    <InputText id="email" v-model="v$.email.$model" :class="{'p-invalid':v$.email.$invalid && submitted}" aria-describedby="email-error"/>
-                                    <label for="email" :class="{'p-error':v$.email.$invalid && submitted}">Email*</label>
-                                </div>
-                                <span v-if="v$.email.$error && submitted">
-                                    <span id="email-error" v-for="(error, index) of v$.email.$errors" :key="index">
-                                    <small class="p-error">{{error.$message}}</small>
-                                    </span>
+                        <div class="field mt-4">
+                            <div class="p-float-label p-input-icon-right">
+                                <i class="pi pi-envelope" />
+                                <InputText id="email" v-model="v$.email.$model" :class="{'p-invalid':v$.email.$invalid && submitted}" aria-describedby="email-error"/>
+                                <label for="email" :class="{'p-error':v$.email.$invalid && submitted}">Email*</label>
+                            </div>
+                            <span v-if="v$.email.$error && submitted">
+                                <span id="email-error" v-for="(error, index) of v$.email.$errors" :key="index">
+                                <small class="p-error">{{error.$message}}</small>
                                 </span>
-                                <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{v$.email.required.$message.replace('Value', 'Email')}}</small>
-                            </div>
-                            <div class="field mt-4">
-                                <div class="p-float-label">
-                                    <Password id="password" v-model="v$.password.$model" :feedback="false" :class="{'p-invalid':v$.password.$invalid && submitted}" toggleMask>
-          
-          
-                                    </Password>
-                                    <label for="password" :class="{'p-error':v$.password.$invalid && submitted}">Password*</label>
-                                </div>
-                                <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value', 'Password')}}</small>
-                            </div>
-                        
-                            <div class="field-checkbox">
-                                <Checkbox id="remember" name="remember" value="Accept" v-model="v$.remember.$model" :class="{'p-invalid':v$.remember.$invalid && submitted}" />
-                                <label for="remember" :class="{'p-error': v$.remember.$invalid && submitted}">Remember me</label>
-                            </div>
-                            <Button type="submit" label="Login" class="mt-2 submitButton" />
-                        </form>
+                            </span>
+                            <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{v$.email.required.$message.replace('Value', 'Email')}}</small>
+                        </div>
+                        <div class="field mt-4">
+                        <div class="p-float-label">
+                            <Password id="password" v-model="v$.password.$model" :feedback="false" :class="{'p-invalid':v$.password.$invalid && submitted}" toggleMask>
+                            </Password>
+                            <label for="password" :class="{'p-error':v$.password.$invalid && submitted}">Password*</label>
+                        </div>
+                        <small v-if="(v$.password.$invalid && submitted) || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value', 'Password')}}</small>
                     </div>
-                </div>
+                    <div class="field-checkbox">
+                        <Checkbox id="remember" name="remember" value="remember" v-model="remember" />
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <Button type="submit" :icon="iconComputed" :label="labelComputed" class="mt-2 submitButton" />
+                    
+                </form>
+                <p>¿Todavia no estas registrado? <a href="./register">Registrate</a></p>
             </div>
+            <Toast position="top-center"/>
+        </div>
     </div>
+</div>
 </template>
 <script>
-import {ToastSeverity} from 'primevue/api';
-import { reactive, ref, onMounted } from 'vue';
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import { useStore } from 'vuex'
-import router from '../route/index.js'
+import {ToastSeverity} from 'primevue/api';
 import axios from "axios";
 export default {
     name: "Login",
+    setup: () => ({ v$: useVuelidate() }),
     data() {
         return {
-            user: null,
-            authorization: null
-        }
-    },
-    setup() {
-        const store = useStore();
-
-        const state = reactive({
             email: '',
             password: '',
-            remember: null
-        });
-
-        const rules = {
-            email: { required, email },
-            password: { required },
-            remember: { }
-        };
-
-        const submitted = ref(false);
-        const showMessage = ref(false);
-
-        const v$ = useVuelidate(rules, state);
-
-        const handleSubmit = (isFormValid) => {
-            submitted.value = true;
-
-            if (!isFormValid) {
-                return;
-            }
-            let emitObj = JSON.parse(JSON.stringify(this.additionalInfo));
-            this.$emit('login', emitObj)
-
-            axios
-            .post("/api/auth/login",{
-                "email": state.email,
-                "password": state.password
-            })
-            .then(function (response) {
-                saveUser(response.data.user,response.headers.authorization);
-            });
+            remember: null,
+            submitted: false,
+            showMessage: false,
+            loading: false,
         }
-        const saveUser = (user, token) => {
-            store.commit('saveCurrentUser',user);
-            store.commit('saveJwtToken', token);
-            
+    },
+    computed: {
+        labelComputed(){
+        let label = ''
+
+        if (this.loading) label = 'Loading...'
+        else label = 'Log in'
+
+        return label
+        },
+        iconComputed(){
+            let icon = ''
+
+            if (this.loading) icon = 'pi pi-spin pi-spinner'
+            else icon = ''
+
+            return icon
+        }
+    },
+    validations() {
+        return {
+            email: {
+                required,
+                email
+            },
+            password: {
+                required
+            }
+        }
+    },
+    methods: {
+        
+        saveUser(user, token){
+            var self = this
+            this.$store.dispatch('saveCurrentUser', user);
+            this.$store.dispatch('saveJwtToken', token);
             axios
             .get("/api/rol/"+user.idRol,{
                 headers:{
@@ -122,33 +103,45 @@ export default {
                 }
             })
             .then(function (response) {
-                saveUserRol(response.data.rol);
+                self.saveUserRol(response.data.rol);
             }); 
-        }
-        const saveUserRol = (rol) =>{
-            store.commit('saveCurrentRole', rol);
-            router.push("/");
-        }
-        const toggleDialog = () => {
-            
-            showMessage.value = !showMessage.value;
+        },
+        saveUserRol(rol){
+            this.$store.dispatch('saveCurrentRole', rol);
+            this.$router.push("/").catch(() => {});
+        },
+        setLoading() {
+            this.loading = true;
+        },
+        resetForm() {
+            this.email = '';
+            this.password = '';
+            this.submitted = false;
+        },
+        displayErrorMessage(error) {
+            this.loading = false;
+            this.$toast.add({severity:ToastSeverity.ERROR, summary: 'Login Failed!', detail:error, life: 3000});
+        },
+        handleSubmit(isFormValid) {
+            this.submitted = true;
 
-            if(!showMessage.value) {
-                resetForm();
+            if (!isFormValid) {
+                return;
             }
+            this.setLoading();
+            var self = this
+            axios
+            .post("/api/auth/login",{
+                "email": this.email,
+                "password": this.password
+            })
+            .then(function (response) {
+                self.saveUser(response.data.user,response.headers.authorization);
+            }).catch(error =>{
+                self.displayErrorMessage(error.response.data.message);
+            });
         }
-
-        const resetForm = () => {
-            state.email = '';
-            state.password = '';
-            submitted.value = false;
-        }
-
-        return { state, v$, handleSubmit, toggleDialog, saveUserRol, saveUser, submitted, showMessage}
-    },
-    methods:{
-        
-    },
+    }
 }
 </script>
 

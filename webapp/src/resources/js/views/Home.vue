@@ -1,133 +1,137 @@
 <template>
-    <div class="landing p-grid">
-        <div class="p-col-12">
-            <img alt="EcoHero logo" class="responsive" src="../media/img/logowhite.png">
-        </div>
-        <div class="card p-col-12 p-md-12 p-lg-6 center">
-            <Divider align="center">
-                <div class="p-d-inline-flex p-ai-center">
-                    <em class="pi pi-home p-mr-2"></em>
-                    <strong>Welcome to EcoHero</strong>
-                </div>
-            </Divider>
-            <p>
-                EcoHero is a platform to challenge people to be more sustainable. Being sustainable is quite hard, which is why
-                this platform has a reward system. You will get points by entering sustainable activities, challenge your friends and
-                become a EcoHero. Sign up and make the world a better place.
-            </p>
-
-            <Divider align="center" class="p-col-fixed center" style="width:150px">
-                <Button label="Button" @click="handleClickSignIn()" icon="pi pi-google" class="p-button-outlined" id="join-button">Join us</Button>
-            </Divider>
-
-            <div>
-                <Divider align="center">
-                    <div class="p-d-inline-flex p-ai-center">
-                        <em class="pi pi-user p-mr-2"></em>
-                        <strong>Cookies</strong>
+    <div>
+    <Dashboard>
+        <Fieldset legend="Ocupación Zonas" class="flex justify-content-center align-content-center" toggleable="true">
+             <div class="grid">
+                <div v-for="(zona, index) in zonas" :key="index">
+                    <div class="col-4 w-full">
+                        <Card :id="setIdZona(zona.letra)">
+                            <template #title>
+                                <div class="flex justify-content-end">
+                                    <p>{{ tipoPlazas[zona.idTipoPlaza] }}</p>
+                                </div>
+                                <div class="flex justify-content-between">
+                                <span class="letraZona">{{ zona.letra }}</span>
+                                </div>
+                            </template>
+                            <template #content>
+                                <span class="numZona">{{ plazas[zona.id] }}/{{ zona.plazas }}</span>
+                            </template>
+                        </Card>
                     </div>
-                </Divider>
-                <p>
-                    We value your privacy! This means we only collect essential cookies.
-                    These cookies are needed to move around and interact with the website. 
-                    Without these cookies the website and it's services cannot be provided.
-                </p>
-                <img src="../media/cookie.png"
-                     style="width: 20%;margin-top: 20px; border-radius:50%;" alt="cookies" />
+                </div>
             </div>
-        </div>     
+        </Fieldset>
+        <Fieldset legend="Mapa" class="mt-3 flex justify-content-center" :collapsed="true" toggleable="true">
+            <img src="../media/img/mapaparking.jpg" style="width:100%" alt="Mapa" preview/>
+        </Fieldset>
+    </Dashboard>
+    <Toast position="middle-center"/>
     </div>
 </template>
 
 <script>
-    import { inject, toRefs } from "vue";
-
+import axios from "axios";
+import {ToastSeverity} from 'primevue/api';
+import Dashboard from '../components/Dashboard.vue';
     export default {
-        name: 'Landing',
-        data() {
+        name: 'Home',
+        data(){
             return {
-                id: 0
+                numUsers: 0,
+                zonas: null,
+                plazas: null,
+                tipoPlazas: null,
+                currentIdx: 0,
+                loading: false
             }
+        },
+        components: {
+            "Dashboard" : Dashboard
         },
         methods: {
-            async handleClickSignIn() {
-                try {
-                    const googleUser = await this.$gAuth.signIn();
-                    this.id = googleUser.getId();
-                    if (!googleUser) {
-                        return null;
-                    }
-
-                    // send the token from google to the backend
-                    await this.sendtoken();
-
-                } catch (error) {
-                    //on fail do something
-                    console.error(error);
-                    return null;
-                }
+            setIdZona(letra){
+                return "Zona"+letra;
             },
-            async sendtoken() {
-                // retreive the google token from the client
-                let token = this.$gAuth.instance.currentUser.get().getAuthResponse().id_token;
-                const response = await fetch("api/accounts/auth/google", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        IdToken: token
+            /**
+             * Updates the number of users with the lenght of a JSON list of all users from the back-end.
+             * After this function is called use the forceUpdate() function to update the table.
+             * uses API endpoint GET /api/user/
+             *
+             * @see forceUpdate()
+             */
+            fetchAll() {
+                axios
+                    .get('/api/plazas/validas/zonas', {
+                        headers: {
+                            Authorization: 'Bearer ' + this.$store.state.jwtToken,
+                        }
                     })
-                });
-
-                const jwttoken = await response.json();
-                this.$store.dispatch('saveJwtToken', jwttoken.token);
-                this.getUser(jwttoken.token);
+                    .then(response => {
+                        this.loading = false;
+                        this.zonas = response.data.zonas;
+                        this.tipoPlazas = response.data.tipoPlazas;
+                        this.plazas = response.data.plazas;
+                    })
             },
-            getUser(token) {
-                // Send the bearer token that is generated by us in the header, to verify if the user is autorised 
-                const headers = {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                    "Accept": "application/json"
-                };
-                fetch("api/user/id=" + this.id, { headers })
-                    .then(response => response.json())
-                    .then(data => {
-                        this.$store.dispatch('saveCurrentUser', data)
-                        this.getRole(token, data.role);
-                    });
+            displayErrorMessage(error) {
+                this.loading = false;
+                this.$toast.add({severity:ToastSeverity.ERROR, summary: 'Login Failed!', detail:error, life: 3000});
             },
-            getRole(token, id) {
-                // Send the bearer token that is generated by us in the header, to verify if the user is autorised
-                const headers = {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                    "Accept": "application/json"
-                };
-                fetch("/api/rol/id=" + id, { headers })
-                    .then(response => response.json())
-                    // Send current role to the store
-                    .then(data => (this.$store.dispatch('saveCurrentRole', data.name)))
-                    .then(setTimeout(() => this.$router.push('/'), 100));
-            }
+            startLoading() {
+                this.loading = true;
+                this.$toast.add({severity:ToastSeverity.INFO, summary: 'Loading Content', detail: "<ProgressSpinner />", life: 4000});
+            },
         },
-        setup(props) {
-          
+        mounted() {
+            this.startLoading(),
+            this.fetchAll()
         }
     }
 </script>
 
 <style scoped>
-    .center {
-        margin: auto;
-        padding: 10px;
-    }
-    .responsive {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        margin-bottom: -5%;
-    }
+.numZona, .letraZona{
+    font-size:4.5rem;
+}
+.letraZona{
+    margin-right:10px
+}
+
+/** INICIO ZONAS APARCAMIENTO **/
+#ZonaA{
+    background-color: rgb(255 192 0);
+}
+#ZonaB{
+    background-color: rgb(0 31 255);
+}
+#ZonaC{
+    background-color: rgb(223 1 8);
+}
+#ZonaD{
+    background-color: rgb(0 230 5);
+}
+#ZonaE{
+    background-color: rgb(68 0 255);
+
+}
+#ZonaF{
+
+    background-color: rgb(255 22 203);
+}
+
+#ZonaG{
+
+    background-color: rgb(0 222 224);
+}
+
+#ZonaH{
+
+    background-color: rgb(250 129 0);
+}
+#ZonaI{
+
+    background-color: rgb(127 41 40);
+}
+
 </style>

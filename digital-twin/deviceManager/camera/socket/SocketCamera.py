@@ -76,12 +76,12 @@ class SocketCamera(Camera):
     # CONNECTION HANDLING METHODS
 
     def generateSecret(self):
-        return cryptool.generateKeys(id="camera/"+self.cameraid, string=True)
+        return cryptool.generateKeys(string=True)
     
     def deleteSecret(self):
         self.privateKey = None
         self.publicKey = None
-        return cryptool.deleteKeys(id="camera/"+self.cameraid)
+        return True
     
     # Gets the handler of connection
     def getHandler(self):

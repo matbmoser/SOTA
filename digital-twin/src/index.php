@@ -138,6 +138,9 @@
         <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
           <button class="btn btn-warning" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#OpenServer">Open Server</button> 
         </div>
+        <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
+          <button class="btn btn-warning" type="button" id="connectCamera" data-bs-toggle="modal" data-bs-target="#ConnectCamera">Connect Camera</button> 
+        </div>
         <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 justify-content-md-end justify-content-xl-end">
           <!-- Checked switch -->
             <div class="form-check form-switch" style="margin-right: 10px; ">
@@ -152,6 +155,7 @@
       // Importamos modales
       include("assets/mod/front/modals/genericModal.php");
       include("assets/mod/front/modals/openServerModal.php");
+      include("assets/mod/front/modals/connectCameraModal.php");
       include("assets/mod/front/modals/simuladorCamaraModal.php");
       include("assets/mod/front/modals/verVehiculosModal.php");
     ?>

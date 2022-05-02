@@ -43,12 +43,13 @@ class RolController extends Controller
         /*
         @return \Illuminate\Http\Response
         */
-        public function create($nombre, $incidencias, $digitalTwin) {
+        public function create($nombre, $incidencias, $userDashboard) {
             return Rol::firstOrCreate(
                 ["nombre" => $nombre],
                 [
                     "incidencias" => $incidencias,
-                    "digitalTwin" => $digitalTwin
+                    "digitalTwin" => $digitalTwin,
+                    "userDashboard" => $userDashboard
                 ]
             );
         }
@@ -64,12 +65,14 @@ class RolController extends Controller
                 'nombre' => 'required|unique:Rol',
                 'digitalTwin' => 'required|bool',
                 'incidencias' => 'required|bool',
+                "userDashboard" => 'required|bool'
             ]);
       
             $rol = new Rol;
             $rol->nombre = $request->input('nombre');
             $rol->digitalTwin = $request->input('digitalTwin');
             $rol->incidencias = $request->input('incidencias');
+            $rol->userDashboard = $request->input('userDashboard');
             $rol->save(); //storing values as an object
     
             return $rol;
@@ -89,12 +92,14 @@ class RolController extends Controller
                 'nombre' => 'required|unique:Rol',
                 'digitalTwin' => 'required|bool',
                 'incidencias' => 'required|bool',
+                "userDashboard" => 'required|bool'
             ]);
       
             $rol = Rol::findorFail($id);
             $rol->nombre = $request->input('nombre');
             $rol->digitalTwin = $request->input('digitalTwin');
             $rol->incidencias = $request->input('incidencias');
+            $rol->userDashboard = $request->input('userDashboard');
             $rol->save(); //storing values as an object
     
             return $rol;

@@ -12,25 +12,24 @@ import NotFound from "../views/NotFound.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 
-
 export const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: "/admin/dashboard",
     name: "AdminDashboard",
     component: AdminDashboard,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true, userDashboard: true}
   },
   {
     path: "/admin/incidencias",
     name: "AdminIncidencias",
     component: AdminIncidencias,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true, incidencias: true }
   },
   {
     path: "/login",
@@ -54,32 +53,32 @@ export const routes = [
     path: "/vehiculos",
     name: "Vehiculos",
     component: Vehiculos,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true}
   },
   {
     path: "/incidencias",
     name: "Incidencias",
     component: Incidencias,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: "/tickets",
     name: "Tickets",
     component: Tickets,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true}
   },
   {
     path: "/notificaciones",
     name: "Notificaciones",
     component: Notificaciones,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: "/profile/:name",
     name: "Profile",
     component: Profile,
     props: true,
-    meta: { requiresAuth: true, adminAuth: true, userAuth: true }
+    meta: { requiresAuth: true }
   },
   {
   path: "/:catchAll(.*)",
@@ -96,39 +95,42 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let jwtToken = store.state.jwtToken;
-  let role = store.state.currentRole;
-  // Check if the meta has a authentication tag
+  var rol = {};
+  var jwtToken = '';
   if (to.meta.requiresAuth) {
-      if (jwtToken === '') {
-          // Send to the login page when the jwtToken is empty
-          next('/login');
-      }
-      else if (to.meta.userAuth) {
-          if (role === 'Usuario') {
-              // Send to the next page when the user has the user role
-              next();
-          }
-          else {
-              // Send to the home page
-              next('/');
-          }
-      }
-      else if (to.meta.adminAuth) {
-          if (role === 'Administrador') {
-              // Send to the next page when the user has the admin role
-              next();
-          }
-          else {
-              // Send to the home page
-              next('/');
-          }
-      }
-      // Send to the next page, when a authentication tag is not required
-  }
-  else {
+    jwtToken = store.state.jwtToken;
+    if (jwtToken === '') {
+        // Send to the login page when the jwtToken is empty
+        next('/login');
+        return;
+    }
+    store.dispatch('updateProfile');
+    rol = store.state.currentRole;
+    }
+    if (to.meta.incidencias && rol.incidencias==true) {
       next();
-  }
+      return;
+    } else if (to.meta.incidencias && rol.incidencias==false) {
+      next("/");
+      return;
+    }
+  
+    if (to.meta.userDashboard && rol.userDashboard==true) {
+      next();
+      return;
+    } else if (to.meta.userDashboard && rol.userDashboard==false){
+      next("/");
+      return;
+    }
+  
+    if (jwtToken != '') {
+      // Send to the login page when the jwtToken is empty
+      if(to.name === 'Login' || to.name === 'Register')
+      {
+          next("/");
+          return;
+      }
+    }
+    next();
 });
 export default router;
-//# sourceMappingURL=index.js.map

@@ -13,7 +13,7 @@ class CameraClient{
         this.SJMPHandler = new SJMPHandler(this)
     }
     async start(ip, port){
-        setConnecting()
+        setConnecting();
         this.serverip = ip;
         this.serverport = port;
         this.serverkey = ip + ":" + port.toString();

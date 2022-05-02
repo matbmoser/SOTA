@@ -1,7 +1,0 @@
-Starting Server Log Messages...
-[INFO]: You are [www-data]
-[INFO]: Trying to start server...
-[STATS]: [1] elements inserted in [0:00:00.008717] DBManager.insertQuery()
-[INFO]: Server [22fdb0c4ce3c] added into DB!
-[INFO]: NEW SERVER CREATED!: serverid=[22fdb0c4ce3c], ip=[127.0.0.1], port=[4444], poll_interval=[0.5]. [Server [22fdb0c4ce3c] in socket [127.0.0.1:4444] status [RUNNING] in thread: [22fdb0c4ce3c]].
-[INFO]: Server is Opened in Background

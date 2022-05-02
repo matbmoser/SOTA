@@ -126,9 +126,21 @@ class AuthController extends Controller
     {
         $this->guard()->logout();
         return response()->json([
-            'status' => 'success',
-            'msg' => 'Logged out Successfully.'
+            'success' => true,
+            'message' => 'Logged out Successfully.'
         ], 200);
+    }
+    public function check()
+    {
+        if ($this->guard()->check()) {
+            return response()->json([
+                'success' => true
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => false
+            ], 401);
+        }
     }
     public function user(Request $request)
     {
@@ -142,7 +154,7 @@ class AuthController extends Controller
     {
         if ($token = $this->guard()->refresh()) {
             return response()
-                ->json(['status' => 'successs'], 200)
+                ->json(['status' => 'success'], 200)
                 ->header('Authorization', $token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);

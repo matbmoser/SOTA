@@ -146,7 +146,9 @@ function blockAddServer(){
     var randomPortButton = document.getElementById("randomPort");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
+    var connectCamera = document.getElementById("ConnectCamera");
 
+    connectCamera.classList.remove("hidden");
     openServerButton.innerHTML = "Close Server";
     openButton.classList.add("hidden");
     closeButton.classList.remove("hidden");
@@ -168,7 +170,9 @@ function unblockAddServer(){
     var randomPortButton = document.getElementById("randomPort");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
+    var connectCamera = document.getElementById("ConnectCamera");
 
+    connectCamera.classList.add("hidden");
     openServerButton.innerHTML = "Open Server";
     openButton.classList.remove("hidden");
     closeButton.classList.add("hidden");

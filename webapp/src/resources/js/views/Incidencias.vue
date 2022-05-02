@@ -33,17 +33,6 @@
                  * */
                 numUsers: 0,
                 users: null,
-                basicData: {
-                    labels: null,
-                    datasets: [
-                        {
-                            label: 'Registered Users',
-                            data: null,
-                            fill: false,
-                            borderColor: '#1bcf33'
-                        }
-                    ]
-                }
             }
         },
         methods: {

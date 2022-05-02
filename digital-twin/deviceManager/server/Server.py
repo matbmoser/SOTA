@@ -289,7 +289,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
         return BaseCameraManager(cameraprotocolClass="BaseCamera")
 
     def generateSecret(self):
-        return cryptool.generateKeys(id="server/"+self.serverid, string=True)
+        return cryptool.generateKeys(string=True)
     
     # Defines the server request handler type
     def getServerRequestHandler(self):
