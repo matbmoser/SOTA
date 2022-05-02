@@ -25,14 +25,15 @@
         <Fieldset legend="Mapa" class="mt-3 flex justify-content-center" :collapsed="true" toggleable="true">
             <img src="../media/img/mapaparking.jpg" style="width:100%" alt="Mapa" preview/>
         </Fieldset>
+        <CustomToast position="center"/>
     </Dashboard>
-    <Toast position="middle-center"/>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import {ToastSeverity} from 'primevue/api';
+import CustomToast from "../components/CustomToast.vue";
 import Dashboard from '../components/Dashboard.vue';
     export default {
         name: 'Home',
@@ -47,7 +48,8 @@ import Dashboard from '../components/Dashboard.vue';
             }
         },
         components: {
-            "Dashboard" : Dashboard
+            "Dashboard" : Dashboard,
+            "CustomToast": CustomToast
         },
         methods: {
             setIdZona(letra){
@@ -61,6 +63,7 @@ import Dashboard from '../components/Dashboard.vue';
              * @see forceUpdate()
              */
             fetchAll() {
+
                 axios
                     .get('/api/plazas/validas/zonas', {
                         headers: {
@@ -69,6 +72,7 @@ import Dashboard from '../components/Dashboard.vue';
                     })
                     .then(response => {
                         this.loading = false;
+                        this.$toast.removeAllGroups();
                         this.zonas = response.data.zonas;
                         this.tipoPlazas = response.data.tipoPlazas;
                         this.plazas = response.data.plazas;
@@ -76,11 +80,11 @@ import Dashboard from '../components/Dashboard.vue';
             },
             displayErrorMessage(error) {
                 this.loading = false;
-                this.$toast.add({severity:ToastSeverity.ERROR, summary: 'Login Failed!', detail:error, life: 3000});
+                this.$toast.add({severity:ToastSeverity.ERROR, summary: 'FAIL', detail:error});
             },
             startLoading() {
                 this.loading = true;
-                this.$toast.add({severity:ToastSeverity.INFO, summary: 'Loading Content', detail: "<ProgressSpinner />", life: 4000});
+                this.$toast.add({severity:ToastSeverity.SUCCESS, summary:"Please Wait...", detail: "<h3>Loading Content...</h3>"});
             },
         },
         mounted() {
