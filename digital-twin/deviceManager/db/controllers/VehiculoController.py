@@ -28,7 +28,10 @@ class VehiculoController(BaseController):
         self.values = self.conn.getValueIdDict(id="id", value="matricula", table=self.tableName)
         return self.values
 
-    def update(self, where="all", matricula=None, tipo=None):
+    def addAparcamiento(self, idVehiculo):
+        return self.conn.updateQuery("UPDATE "+self.tableName+" SET numAparcamientos=numAparcamientos + 1,ultimoAparcamiento=now() WHERE idVehiculo='"+str(idVehiculo)+"'")
+    
+    def update(self, where="all", matricula=None, tipo=None, ultimoAparcamiento=None, numAparcamientos=None):
         if where == "all":
             where=None
         setList = []

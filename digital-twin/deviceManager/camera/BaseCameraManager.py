@@ -152,6 +152,8 @@ class BaseCameraManager():
     
     def db_asignarPlaza(self, plaza, idZona, idVehiculo):
         self.plazaController.refresh()
+        self.vehicleController.refresh()
+        self.vehicleController.addAparcamiento(idVehiculo=idVehiculo)
         return self.plazaController.addTicket(id=plaza, idZona=idZona, idVehiculo=idVehiculo)
         
     def db_invalidarPlaza(self, idVehiculo):

@@ -49,14 +49,16 @@ function handleOpen(response){
       localStorage.setItem("serverInfo",JSON.stringify(data));
       localStorage.setItem("serverStatus", "RUNNING");
       printServerStatus(data);
+      $("#cameraServerPort").val(data["port"]);
       blockAddServer();
     }catch(e){
-      localStorage.setItem("serverStatus", "FAIL");
-      localStorage.removeItem("serverInfo")
+        console.log(e);
+        localStorage.setItem("serverStatus", "FAIL");
+        localStorage.removeItem("serverInfo")
     }
   }
     //Check if server is alive
-    function checkIfServerIsAlive(response){
+function checkIfServerIsAlive(response){
     var parsedResponse = JSON.parse(response);
     if(parsedResponse["success"] === "true"){
         var server = parsedResponse["server"];
@@ -64,12 +66,15 @@ function handleOpen(response){
         printServerStatus(server);
         localStorage.setItem("serverStatus", "RUNNING");
         $("#port-pattern").val(server["port"]);
+        $("#cameraServerPort").val(server["port"]);
         blockAddServer();
+        reconnectCamara(server);
         return true;
     }
 
     localStorage.setItem("serverStatus", "STOPPED");
     refreshServerStatus();
+    localStorage.removeItem("cameraid");
     localStorage.removeItem("serverInfo");
     unblockAddServer();
     return false;
@@ -81,8 +86,8 @@ function getServerStatus(){
         server = JSON.parse(rawServer);
         getServer(server["port"]);
     }else{
-    localStorage.removeItem("serverInfo");
-    unblockAddServer();
+        localStorage.removeItem("serverInfo");
+        unblockAddServer();
     }
 }
 function replaceForm(){
@@ -146,7 +151,7 @@ function blockAddServer(){
     var randomPortButton = document.getElementById("randomPort");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
-    var connectCamera = document.getElementById("ConnectCamera");
+    var connectCamera = document.getElementById("connectCamera");
 
     connectCamera.classList.remove("hidden");
     openServerButton.innerHTML = "Close Server";
@@ -170,7 +175,7 @@ function unblockAddServer(){
     var randomPortButton = document.getElementById("randomPort");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
-    var connectCamera = document.getElementById("ConnectCamera");
+    var connectCamera = document.getElementById("connectCamera");
 
     connectCamera.classList.add("hidden");
     openServerButton.innerHTML = "Open Server";

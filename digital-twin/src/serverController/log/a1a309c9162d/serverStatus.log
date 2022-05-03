@@ -1,0 +1,95 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.005831] DBManager.insertQuery()
+[INFO]: Server [a1a309c9162d] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[a1a309c9162d], ip=[0.0.0.0], port=[4038], poll_interval=[0.5]. [Server [a1a309c9162d] in socket [0.0.0.0:4038] status [RUNNING] in thread: [a1a309c9162d]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4038
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: hOI2pxD4gT0okaH5DJv7dQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651549183384'%2C%20'cameraid'%3A%20'01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea], status [ONLINE] on [172.23.0.1:37192] logged in with sessionid = [d94028235e46643e842b8360a26e8e0e] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] BaseRequestHandler.setup().
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] > Received one request from 01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000599]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [117]
+[ERROR]: SJMPHandler.processINFlag(matricula=[]) The vehicle with plate [] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.086391]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.076101]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4038
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: /odJPjntYbmIDAn8eW7MhA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651549308419'%2C%20'cameraid'%3A%20'01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea], status [ONLINE] on [172.23.0.1:37234] logged in with sessionid = [a5a2c16bfb2ac029ec77289e4b3dcb21] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] BaseRequestHandler.setup().
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] > Received one request from 01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.004319]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [113]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1352-GDF]) The vehicle with plate [1352-GDF] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.218849]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [113]
+[EXCEPTION]:[can only concatenate str (not "int") to str]. in SJMPHandler(). On generateTicket() Was not posible to generate ticket! To vehicle [1352-GDF]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1352-GDF]) Was not posible to generate ticket for vehicle [1352-GDF]!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.387563]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.056092]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4038
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: JCyXEq1sBsm00jEI1/MDjA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651550062448'%2C%20'cameraid'%3A%20'01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea], status [ONLINE] on [172.23.0.1:37372] logged in with sessionid = [1c6cd491bf01e3b2d4444ffe9cf8992d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] BaseRequestHandler.setup().
+[DEBUG]: [a1a309c9162d]-[0.0.0.0:4038] > Received one request from 01bc3c93-70cf-4726-ae53-b8dfd5ffb3ea
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.009110]

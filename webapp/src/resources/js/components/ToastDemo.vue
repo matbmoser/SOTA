@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CustomToast from "./CustomToast.vue";
+import CustomToast from "./toasts/LoadingToast.vue";
 export default {
   components: {
     CustomToast,

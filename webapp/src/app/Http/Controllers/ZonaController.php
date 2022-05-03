@@ -16,7 +16,7 @@ class ZonaController extends Controller
         $zonas = Zona::all();
         return response()->json(
             [
-                'status' => 'success',
+                'success' => true,
                 'zonas' => $zonas->toArray()
             ], 200);
     }
@@ -30,7 +30,7 @@ class ZonaController extends Controller
         $zona = Zon::find($id);
         return response()->json(
             [
-                'status' => 'success',
+                'success' => true,
                 'zona' => $zona->toArray()
             ], 200);
     }

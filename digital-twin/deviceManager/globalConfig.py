@@ -2,7 +2,7 @@ class globalConfig:
     appName = "SOTA UFV MyParking"
     defaultparking = "Y" # LETRA parking
     defaultuniversidad = "UFV" # SIGLA Uni
-    defaultip = "127.0.0.1"
+    defaultip = "0.0.0.0"
     defaultport = 8888
     defaultname = "DEFAULT"
     defaultpollinterval = 0.5

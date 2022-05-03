@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\PlazaController;
+use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\TipoVehiculoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,6 +42,18 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Zonas
     Route::get('zonas', 'App\Http\Controllers\ZonaController@index');
     Route::get('zona/{id}', 'App\Http\Controllers\ZonaController@show');
+
+    // Tipo Vehiculo
+    Route::get('vehiculos/tipos', 'App\Http\Controllers\TipoVehiculoController@index');
+    Route::get('vehiculo/tipo', 'App\Http\Controllers\TipoVehiculoController@show');
+
+
+    // Vehiculos
+    Route::get('vehiculos', 'App\Http\Controllers\VehiculoController@index')->middleware('isAdmin');
+    Route::get('vehiculo/{id}', 'App\Http\Controllers\VehiculoController@show')->middleware('isAdmin');
+    Route::get('vehiculos/user/{id}', 'App\Http\Controllers\VehiculoController@vehiculosUser')->middleware('isAdminOrSelf');
+    Route::put('vehiculo/user/{id}', 'App\Http\Controllers\VehiculoController@store')->middleware('isAdminOrSelf');
+    Route::delete('vehiculo/user', 'App\Http\Controllers\VehiculoController@delete');
 
     // Plazas
     Route::get('plazas', 'App\Http\Controllers\PlazaController@index');

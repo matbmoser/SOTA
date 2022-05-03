@@ -7,11 +7,11 @@ class SJMPHandler{
   
   getIN(matricula)
   {
-      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessionid+"', 'flag': 'IN', 'matricula': '"+matricula+"'}".toString();
+      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessionid+"', 'flag': 'IN', 'plate': '"+matricula+"'}".toString();
   }
   getOUT(matricula)
   {
-      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessiond+"', 'flag': 'OUT', 'matricula': '"+matricula+"'}".toString();
+      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessiond+"', 'flag': 'OUT', 'plate': '"+matricula+"'}".toString();
   }
   getSYN()
   {

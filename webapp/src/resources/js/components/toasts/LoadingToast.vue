@@ -17,6 +17,7 @@ import Toast from "primevue/toast/Toast.vue";
 import LoadingToastMessage from "./LoadingToastMessage.vue";
 
 export default {
+  name: "LoadingToast", 
   extends: Toast,
   components: {
     LoadingToastMessage,
@@ -25,7 +26,6 @@ export default {
 </script>
 <style scoped>
 .p-toast .p-toast-message.p-toast-message-success {
-    background: #e4f8f0;
     border: none;
     color: #007bff!important;
 }
@@ -47,7 +47,6 @@ export default {
 .p-toast-icon-close{
     color: #007bff!important;
 }
-.p-toast-message-text{
-    color: #007bff!important;
-}
+
+
 </style>

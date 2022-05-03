@@ -68,29 +68,6 @@ class PlazaController extends Controller
             }
             $plazasZonas[$zona["id"]] = $nplazas;
         }
-        /*
-        foreach
-            ## Información plazas
-            $plazasZonas = array();
-            $vehiculosPlazas= array();
-            foreach ($zonas as $zona) {
-            $nplazas = 0;
-            $vehiculosPlazasZona = array();
-            foreach ($plazasOcupadas as $plaza){
-                if($zona["id"] == $plaza["idZona"]){
-                $nplazas++;
-                array_push($vehiculosPlazasZona, array(
-                    "idPlaza" => $zona["letra"].$plaza['id'],
-                    "matricula" => $matriculas[$plaza['idVehiculo']],
-                    "segmento" => $segmentosVehiculos[$idVehiculos[$plaza["idVehiculo"]]],
-                    "clasificacion" => $clasificacionesVehiculos[$idVehiculos[$plaza["idVehiculo"]]],
-                    "created_at" => $plaza['created_at']
-                ));
-                }
-            }
-            $plazasZonas[$zona["id"]] = $nplazas;
-            $vehiculosPlazas[$zona["id"]] = $vehiculosPlazasZona;
-            }*/
         return response()->json(
             [
                 'status' => 'success',

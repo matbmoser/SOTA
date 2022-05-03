@@ -16,7 +16,7 @@ class UserController extends Controller
         $users = User::all();
         return response()->json(
             [
-                'status' => 'success',
+                'success' => true,
                 'users' => $users->toArray()
             ], 200);
     }
@@ -30,7 +30,7 @@ class UserController extends Controller
         $user = User::find($id);
         return response()->json(
             [
-                'status' => 'success',
+                'success' => true,
                 'user' => $user->toArray()
             ], 200);
     }

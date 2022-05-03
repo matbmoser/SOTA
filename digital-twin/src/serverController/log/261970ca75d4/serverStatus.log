@@ -1,0 +1,1059 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.061619] DBManager.insertQuery()
+[INFO]: Server [261970ca75d4] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[261970ca75d4], ip=[0.0.0.0], port=[3988], poll_interval=[0.5]. [Server [261970ca75d4] in socket [0.0.0.0:3988] status [RUNNING] in thread: [261970ca75d4]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: AfN1fRB8kWgJlcXu4/t1sw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545124540'%2C%20'cameraid'%3A%20'da32c935-054e-4255-92b9-b1df0f7ce183'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [da32c935-054e-4255-92b9-b1df0f7ce183], status [ONLINE] on [172.23.0.1:41164] logged in with sessionid = [6614836a18e01fc7601c9b35293c3ddd] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from da32c935-054e-4255-92b9-b1df0f7ce183
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.006467]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [da32c935-054e-4255-92b9-b1df0f7ce183] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.058751]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: YlaPzV+E5kHUwbNM+XbOOA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545340051'%2C%20'cameraid'%3A%20'bb8a6ca8-d17b-4b68-bbda-a095894a8d1e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [bb8a6ca8-d17b-4b68-bbda-a095894a8d1e], status [ONLINE] on [172.23.0.1:41186] logged in with sessionid = [b35d0ea500309662d21787f0bad69f16] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from bb8a6ca8-d17b-4b68-bbda-a095894a8d1e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003041]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [bb8a6ca8-d17b-4b68-bbda-a095894a8d1e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026132]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: qdUEAeFgNIVOjpGHOcwrbg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545365823'%2C%20'cameraid'%3A%20'41014a9a-a356-475a-ad45-45bfaa454d60'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [41014a9a-a356-475a-ad45-45bfaa454d60], status [ONLINE] on [172.23.0.1:41226] logged in with sessionid = [f3113f3ee559c546102c8afac7ddaa7b] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 41014a9a-a356-475a-ad45-45bfaa454d60
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000378]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [41014a9a-a356-475a-ad45-45bfaa454d60] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.031381]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: Cevk2LRylAUgGwHBJi1Axg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545461963'%2C%20'cameraid'%3A%20'5e9875af-114e-4045-aed7-0de91bbbe516'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [5e9875af-114e-4045-aed7-0de91bbbe516], status [ONLINE] on [172.23.0.1:41266] logged in with sessionid = [f74353572f2831c9f880899017d40b8d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 5e9875af-114e-4045-aed7-0de91bbbe516
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000307]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [5e9875af-114e-4045-aed7-0de91bbbe516] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.031262]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: uc7bn65kIm0Ge6bZrknrXA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545506274'%2C%20'cameraid'%3A%20'e803739d-c6d1-44aa-bc26-56ab71091efe'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [e803739d-c6d1-44aa-bc26-56ab71091efe], status [ONLINE] on [172.23.0.1:41304] logged in with sessionid = [973e3d3e593afc9a1b11d7dcd6c99a58] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from e803739d-c6d1-44aa-bc26-56ab71091efe
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000318]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [e803739d-c6d1-44aa-bc26-56ab71091efe] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024683]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: TxgdQN56i836Q0isvQ7LZg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545554021'%2C%20'cameraid'%3A%20'c0a70269-e9db-4b2f-b640-8ff164c54f7f'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [c0a70269-e9db-4b2f-b640-8ff164c54f7f], status [ONLINE] on [172.23.0.1:41344] logged in with sessionid = [ffd3adf448d0a3e336865de96f903db4] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from c0a70269-e9db-4b2f-b640-8ff164c54f7f
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000343]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [c0a70269-e9db-4b2f-b640-8ff164c54f7f] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.061532]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: edxf3TLnL+Dpq+/DqPgI4w==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545885217'%2C%20'cameraid'%3A%20'd682e9ef-0eb3-4f73-be89-863e66ed95f6'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [d682e9ef-0eb3-4f73-be89-863e66ed95f6], status [ONLINE] on [172.23.0.1:41396] logged in with sessionid = [cdc74e9af6939a0583bfbebba0c90219] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from d682e9ef-0eb3-4f73-be89-863e66ed95f6
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003336]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [d682e9ef-0eb3-4f73-be89-863e66ed95f6] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.054711]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 0qcZZZmjpna6jQqVuq3Ekw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651545961271'%2C%20'cameraid'%3A%20'195b4454-acf5-476e-a99f-26db195f8782'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [195b4454-acf5-476e-a99f-26db195f8782], status [ONLINE] on [172.23.0.1:41466] logged in with sessionid = [54b6f1d4cd6dd5792352d9323834a8a3] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 195b4454-acf5-476e-a99f-26db195f8782
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003305]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [195b4454-acf5-476e-a99f-26db195f8782] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.073718]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 74wPixppuxU2MeSlRor5Hw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546257514'%2C%20'cameraid'%3A%20'8775b8d3-8c3c-44ad-bd53-7d4750987cc7'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [8775b8d3-8c3c-44ad-bd53-7d4750987cc7], status [ONLINE] on [172.23.0.1:41504] logged in with sessionid = [7962c4310fc46be65301c3801b88cb17] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 8775b8d3-8c3c-44ad-bd53-7d4750987cc7
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003092]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 17DLPLSZovx73JoW38lvkQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546287503'%2C%20'cameraid'%3A%20'6b58b7f8-ffed-4c16-a027-d203be58ab7e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [6b58b7f8-ffed-4c16-a027-d203be58ab7e], status [ONLINE] on [172.23.0.1:41508] logged in with sessionid = [e5f5d57e5ac32ea8fa1268500990e513] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 6b58b7f8-ffed-4c16-a027-d203be58ab7e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.001390]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: IholH6CY4b9K/6YEmqpjGg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546294978'%2C%20'cameraid'%3A%20'f737e31b-4dac-4622-a9bf-ac7e9ad54238'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f737e31b-4dac-4622-a9bf-ac7e9ad54238], status [ONLINE] on [172.23.0.1:41510] logged in with sessionid = [26e98b710e1be7c16aab78f112e23ad8] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f737e31b-4dac-4622-a9bf-ac7e9ad54238
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000333]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: U4s7HR0d9t6IaZ6L7/b+gw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546295715'%2C%20'cameraid'%3A%20'14df9cee-bbe3-4e2e-b8d2-2bac7c6616d8'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [14df9cee-bbe3-4e2e-b8d2-2bac7c6616d8], status [ONLINE] on [172.23.0.1:41512] logged in with sessionid = [6b309c6ce1151b15fbe0fb05fd1e420b] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 14df9cee-bbe3-4e2e-b8d2-2bac7c6616d8
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000272]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: qzjw5Zay6qS04pT0CqV52w==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546296377'%2C%20'cameraid'%3A%20'3b3538b7-d315-42ad-9684-ab97045a6280'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [3b3538b7-d315-42ad-9684-ab97045a6280], status [ONLINE] on [172.23.0.1:41514] logged in with sessionid = [adf6868f1739b6ae3e2d1d1935259c5d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 3b3538b7-d315-42ad-9684-ab97045a6280
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000730]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 6pYD/E53HM6KbDZJVlMMEw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546297112'%2C%20'cameraid'%3A%20'7c2cb72a-d0c6-48f9-8c74-1c36896a11bc'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [7c2cb72a-d0c6-48f9-8c74-1c36896a11bc], status [ONLINE] on [172.23.0.1:41516] logged in with sessionid = [028f2e270606e5f99af54495efa4182d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 7c2cb72a-d0c6-48f9-8c74-1c36896a11bc
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.001375]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [7c2cb72a-d0c6-48f9-8c74-1c36896a11bc] is Closed
+[INFO]: Connection with [6b58b7f8-ffed-4c16-a027-d203be58ab7e] is Closed
+[INFO]: Connection with [8775b8d3-8c3c-44ad-bd53-7d4750987cc7] is Closed
+[INFO]: Connection with [f737e31b-4dac-4622-a9bf-ac7e9ad54238] is Closed
+[INFO]: Connection with [3b3538b7-d315-42ad-9684-ab97045a6280] is Closed
+[INFO]: Connection with [14df9cee-bbe3-4e2e-b8d2-2bac7c6616d8] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026384]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.027058]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.027355]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026532]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.028590]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026937]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: u6RajvQpH0LHidPOU6Z3nA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546444593'%2C%20'cameraid'%3A%20'0b003f91-8fee-455e-8950-cbffda5ad3ef'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [0b003f91-8fee-455e-8950-cbffda5ad3ef], status [ONLINE] on [172.23.0.1:41554] logged in with sessionid = [fbcff03d9f12a7076912037753d6473b] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 0b003f91-8fee-455e-8950-cbffda5ad3ef
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000403]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [0b003f91-8fee-455e-8950-cbffda5ad3ef] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023269]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 6DitaQ37LTTxARz7WOA5EA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546726401'%2C%20'cameraid'%3A%20'9a234837-d60d-415d-8d2b-f2938841de70'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [9a234837-d60d-415d-8d2b-f2938841de70], status [ONLINE] on [172.23.0.1:41644] logged in with sessionid = [1795beea6239dcf01ff0caf3120ff957] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 9a234837-d60d-415d-8d2b-f2938841de70
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003909]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [9a234837-d60d-415d-8d2b-f2938841de70] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.056451]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: EfutHo4frk+R5O0YREttLw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546903491'%2C%20'cameraid'%3A%20'81610c93-641b-4605-a9a5-0f59005bbc1a'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [81610c93-641b-4605-a9a5-0f59005bbc1a], status [ONLINE] on [172.23.0.1:41680] logged in with sessionid = [4d2a420830aaf9b812f61f931e1c1c01] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 81610c93-641b-4605-a9a5-0f59005bbc1a
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002754]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [81610c93-641b-4605-a9a5-0f59005bbc1a] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024097]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: gOBryFvj8xKVgjh+5tSRZw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546953203'%2C%20'cameraid'%3A%20'1af7f7c0-bf0b-433e-9840-066e82d966a9'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [1af7f7c0-bf0b-433e-9840-066e82d966a9], status [ONLINE] on [172.23.0.1:41710] logged in with sessionid = [95c8d2e635bd546e3d5655a43bd6ee0f] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 1af7f7c0-bf0b-433e-9840-066e82d966a9
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000276]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [1af7f7c0-bf0b-433e-9840-066e82d966a9] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023358]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: pSuurYdn/4Unwlyb0TzVVg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651546972551'%2C%20'cameraid'%3A%20'6b2bf245-d468-4298-80a6-6a2d9220b3db'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [6b2bf245-d468-4298-80a6-6a2d9220b3db], status [ONLINE] on [172.23.0.1:41756] logged in with sessionid = [7ffb8c211b61e5578c6ac09974ef9861] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 6b2bf245-d468-4298-80a6-6a2d9220b3db
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000320]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [6b2bf245-d468-4298-80a6-6a2d9220b3db] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026182]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: v7N6bLqAxRM6SqnN5H1BTg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547021641'%2C%20'cameraid'%3A%20'9d636a0b-1688-4ac4-9460-ca807a4331e8'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [9d636a0b-1688-4ac4-9460-ca807a4331e8], status [ONLINE] on [172.23.0.1:41786] logged in with sessionid = [2ba0edcce201cf41add12a68fed74cb0] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 9d636a0b-1688-4ac4-9460-ca807a4331e8
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000273]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [9d636a0b-1688-4ac4-9460-ca807a4331e8] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.022166]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: uHANk9s+VZ/ZJGfw1Vbznw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547060653'%2C%20'cameraid'%3A%20'716bf591-3431-4cf6-8637-2a4584e0e78e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [716bf591-3431-4cf6-8637-2a4584e0e78e], status [ONLINE] on [172.23.0.1:41824] logged in with sessionid = [ef72b3a6aba1bb039eadf6eb87692cc9] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 716bf591-3431-4cf6-8637-2a4584e0e78e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000681]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [716bf591-3431-4cf6-8637-2a4584e0e78e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024959]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: mjgQM2Yb7kWRO/gNMAPaNA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547065706'%2C%20'cameraid'%3A%20'c70b75e7-aa8e-40e4-b1ea-a829328986ab'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [c70b75e7-aa8e-40e4-b1ea-a829328986ab], status [ONLINE] on [172.23.0.1:41828] logged in with sessionid = [42a858affbf10847f5f347fdfc4f20e2] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from c70b75e7-aa8e-40e4-b1ea-a829328986ab
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000268]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [c70b75e7-aa8e-40e4-b1ea-a829328986ab] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024527]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: xJiyWQBXYWr2OKRC1S2XhQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547130437'%2C%20'cameraid'%3A%20'ead88e5d-0beb-49c7-ba34-d9e7c54b4662'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [ead88e5d-0beb-49c7-ba34-d9e7c54b4662], status [ONLINE] on [172.23.0.1:41858] logged in with sessionid = [2f3c29cd8dea25afd9a25cfafb0b3e91] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from ead88e5d-0beb-49c7-ba34-d9e7c54b4662
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000268]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [ead88e5d-0beb-49c7-ba34-d9e7c54b4662] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.029169]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: eC9UrPO3J8ptjXC5qCeQtg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547138138'%2C%20'cameraid'%3A%20'd849ea7b-0b90-4056-bd6d-2bdcc09b9c44'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [d849ea7b-0b90-4056-bd6d-2bdcc09b9c44], status [ONLINE] on [172.23.0.1:41860] logged in with sessionid = [a40b9394011c659e0331efb59cf33f42] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from d849ea7b-0b90-4056-bd6d-2bdcc09b9c44
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000382]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [d849ea7b-0b90-4056-bd6d-2bdcc09b9c44] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.079519]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: uAjhSPYk9OpXXtNFchZHVg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547145850'%2C%20'cameraid'%3A%20'093f1e0c-51d3-4a95-833a-f6692804ad06'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [093f1e0c-51d3-4a95-833a-f6692804ad06], status [ONLINE] on [172.23.0.1:41898] logged in with sessionid = [ab6bc5ca4378119766071bd3d7bbc807] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 093f1e0c-51d3-4a95-833a-f6692804ad06
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000299]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [093f1e0c-51d3-4a95-833a-f6692804ad06] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023107]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 2LHX9XCZPMkCA3OqzlSo0A==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547147908'%2C%20'cameraid'%3A%20'651855b9-f5a3-4b77-bec7-e69d18d6f63d'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [651855b9-f5a3-4b77-bec7-e69d18d6f63d], status [ONLINE] on [172.23.0.1:41902] logged in with sessionid = [9f55f2d9ab5122f9bb679ec9391e90c9] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 651855b9-f5a3-4b77-bec7-e69d18d6f63d
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000433]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [651855b9-f5a3-4b77-bec7-e69d18d6f63d] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023917]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: VLocFmgu+gCPQGfkbdJQuA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547169693'%2C%20'cameraid'%3A%20'5b93bc33-94a8-470f-b3c1-7d4d400d9766'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [5b93bc33-94a8-470f-b3c1-7d4d400d9766], status [ONLINE] on [172.23.0.1:41940] logged in with sessionid = [77e9db8b16a00ab208652db5892d334b] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 5b93bc33-94a8-470f-b3c1-7d4d400d9766
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003721]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [5b93bc33-94a8-470f-b3c1-7d4d400d9766] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.021832]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: UcOXtYB3zkB2RhuN+4WpLQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547172667'%2C%20'cameraid'%3A%20'b4e3c1e5-ffaa-46ad-a82c-9f26494e7e3c'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [b4e3c1e5-ffaa-46ad-a82c-9f26494e7e3c], status [ONLINE] on [172.23.0.1:41942] logged in with sessionid = [903506ea11b112695ed01114bc55b8a5] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from b4e3c1e5-ffaa-46ad-a82c-9f26494e7e3c
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000262]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [b4e3c1e5-ffaa-46ad-a82c-9f26494e7e3c] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024768]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: GowlG8muCq26hMvkLP2u4Q==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547211301'%2C%20'cameraid'%3A%20'a32eb71b-be82-4a5d-98c3-64976963c576'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [a32eb71b-be82-4a5d-98c3-64976963c576], status [ONLINE] on [172.23.0.1:41982] logged in with sessionid = [b421a214acb4bbb8071bb5c725c21ee3] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from a32eb71b-be82-4a5d-98c3-64976963c576
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000370]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [a32eb71b-be82-4a5d-98c3-64976963c576] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.022338]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: t/wBkcYKp1jdYgDNVAyZqA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547278263'%2C%20'cameraid'%3A%20'6c87b039-82ff-48e2-8e17-6392f5bf1758'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [6c87b039-82ff-48e2-8e17-6392f5bf1758], status [ONLINE] on [172.23.0.1:42010] logged in with sessionid = [975c34ce19a1b89d62dd7b41191a329f] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 6c87b039-82ff-48e2-8e17-6392f5bf1758
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000279]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [6c87b039-82ff-48e2-8e17-6392f5bf1758] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023571]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: HgW3NRlv88oIg6MaPoCwKA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547388414'%2C%20'cameraid'%3A%20'd2d8e0c2-92fd-4730-b581-2063a3253d4e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [d2d8e0c2-92fd-4730-b581-2063a3253d4e], status [ONLINE] on [172.23.0.1:42012] logged in with sessionid = [a67fdc3b3eb23eb04fd6445e120c92bb] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from d2d8e0c2-92fd-4730-b581-2063a3253d4e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000270]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [d2d8e0c2-92fd-4730-b581-2063a3253d4e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.030529]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: Y4rfTXUqW5qS7dyomT0UwA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547395123'%2C%20'cameraid'%3A%20'81d8b995-edc2-402c-9baa-bab0240ab6ca'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [81d8b995-edc2-402c-9baa-bab0240ab6ca], status [ONLINE] on [172.23.0.1:42050] logged in with sessionid = [38a4fd17da9d6b599efff22da612946c] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from 81d8b995-edc2-402c-9baa-bab0240ab6ca
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002110]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [81d8b995-edc2-402c-9baa-bab0240ab6ca] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026072]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: KGSsNGlBipZVQ12Ur6jdxg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547449215'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42090] logged in with sessionid = [5a266b4ed252f252d0d2ea3eecdb0490] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000392]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.025011]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: dAVIdtM3DVwxYcXWjx5C/w==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547458351'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42118] logged in with sessionid = [f96ff4ac695267e8254fb6e95d88664a] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000298]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.093343]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 9YvsUD+BZKNFetBXBDjOPg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547854449'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42156] logged in with sessionid = [1a983bdc6666e0e06eabd1fbebaff6c2] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002996]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.026094]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: KiADHIiRfSwsm3m9WPV+OQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547897445'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42196] logged in with sessionid = [5ba1630ed3b5e1a8aa0d61c985b12a6c] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000340]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.025014]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: vdtc+nDMznHmvbqXaGTWXw==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651547987779'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42220] logged in with sessionid = [f693adb6b99263bfb46e4e3eccc9ff8d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000275]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.083917]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 5cG0dZbJOIMabrjkqbi59w==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651548126461'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42258] logged in with sessionid = [2f3aaea97fe12a42ac7b6580982f4c80] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002690]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [f045d73c-4fbf-4d6c-a4da-535897034a2e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.021266]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:3988
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 1bRzFP8pXBreSybunle+Kg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651548197276'%2C%20'cameraid'%3A%20'f045d73c-4fbf-4d6c-a4da-535897034a2e'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f045d73c-4fbf-4d6c-a4da-535897034a2e], status [ONLINE] on [172.23.0.1:42298] logged in with sessionid = [38adfd29fb0a8db4cf6e1fc8ae47265d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] BaseRequestHandler.setup().
+[DEBUG]: [261970ca75d4]-[0.0.0.0:3988] > Received one request from f045d73c-4fbf-4d6c-a4da-535897034a2e
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000392]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [117]
+[ERROR]: SJMPHandler.processINFlag(matricula=[]) The vehicle with plate [] don't exist!
+[EXCEPTION]:[a bytes-like object is required, not 'NoneType']. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.440864]

@@ -1,16 +1,17 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-import Profile from "../views/Profile.vue";
 import store from '../store/index.js';
-import AdminDashboard from "../views/AdminDashboard.vue";
-import AdminIncidencias from "../views/AdminIncidencias.vue";
-import Notificaciones from "../views/Notificaciones.vue";
-import Incidencias from "../views/Incidencias.vue";
-import Tickets from "../views/Tickets.vue";
-import Vehiculos from "../views/Vehiculos.vue";
+import AdminDashboard from "../views/admin/AdminDashboard.vue";
+import AdminIncidencias from "../views/admin/AdminIncidencias.vue";
+import Notificaciones from "../views/notificaciones/Notificaciones.vue";
+import Incidencias from "../views/incidencias/Incidencias.vue";
+import Tickets from "../views/tickets/Tickets.vue";
+import Vehiculos from "../views/vehiculos/Vehiculos.vue";
 import NotFound from "../views/NotFound.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
+import Login from "../views/auth/Login.vue";
+import Register from "../views/auth/Register.vue";
+import Profile from "../views/profile/Profile.vue";
+import EditUser from "../views/profile/EditUser.vue";
 
 export const routes = [
   {
@@ -74,9 +75,16 @@ export const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: "/profile/:name",
+    path: "/profile",
     name: "Profile",
     component: Profile,
+    props: true,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/profile/edit",
+    name: "EditUser",
+    component: EditUser,
     props: true,
     meta: { requiresAuth: true }
   },

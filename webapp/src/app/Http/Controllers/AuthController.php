@@ -62,7 +62,6 @@ class AuthController extends Controller
             'nombre' => 'required',
             'username' =>  'required|unique:users',
             'apellido1' => 'required',
-            'apellido2' => 'required',
             'documento' => 'required',
             'telefono' => 'required',
             'password' =>  'required',
@@ -85,7 +84,9 @@ class AuthController extends Controller
         $usuario->nombre = $request->input('nombre');
         $usuario->username =  strtolower($request->input('username'));
         $usuario->apellido1 = $request->input('apellido1');
-        $usuario->apellido2 = $request->input('apellido2');
+        if($request->input('apellido2') != "" || $request->input('apellido2') != null){
+            $usuario->apellido2 = $request->input('apellido2');
+        }
         $usuario->documento = $request->input('documento');
         $usuario->telefono = $request->input('telefono');
         $usuario->password = bcrypt($request->input('password'));

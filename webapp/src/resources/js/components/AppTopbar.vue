@@ -21,18 +21,18 @@
 				</button>
 			</li>
 			<li>
-				<router-link to="/profile">
-					<button class="p-link layout-topbar-button">
-						<i class="pi pi-user"></i>
-						<span>Perfil</span>
-					</button>
-				</router-link>
-			</li>
-			<li>
 				<router-link to="/notificaciones">
 					<button class="p-link layout-topbar-button">
 						<i class="pi pi-bell"></i>
 						<span>Notificaciones</span>
+					</button>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="/profile">
+					<button class="p-link layout-topbar-button">
+						<i class="pi pi-user"></i>
+						<span>Perfil</span>
 					</button>
 				</router-link>
 			</li>

@@ -4,7 +4,7 @@
                 <div class="main-card justify-content-center">
                     <div class="card">
                         <div class="text-center mb-5">
-                            <img src="../media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
+                            <img src="../..//media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
                             <div class="text-900 text-3xl font-medium mb-3 loginTitle">UFV MyParking</div>
                         </div>
                         <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid" autocomplete="off">
@@ -119,7 +119,7 @@
                             <Button type="submit" :icon="iconComputed" :label="labelComputed" class="mt-2 submitButton" />
                     
                         </form>
-                <p>Ya estás registrado? <a href="./login">Log in</a></p>
+                <p class="mt-3">¿Ya estás registrado? <router-link to="/login"><a>Log in</a></router-link></p>
             </div>
             <Dialog header="Política de Privacidad" v-model:visible="privacyModal" :breakpoints="{'960px': '75vw'}" :style="{width: '50vw'}" :modal="true">
                 <p>
@@ -129,7 +129,7 @@
                     <Button label="Acepto" icon="pi pi-check" @click="closePrivacyModal" autofocus />
                 </template>
             </Dialog>
-            <Toast position="top-center"/>
+            <ErrorToast position="top-center"/>
         </div>
     </div>
 </div>
@@ -139,8 +139,9 @@
 <script>
 import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
-import Privacidad from "../components/Privacidad.vue";
+import Privacidad from "../../components/Privacidad.vue";
 import {ToastSeverity} from 'primevue/api';
+import ErrorToast from "../../components/toasts/ErrorToast.vue";
 import axios from "axios";
 export default {
     setup: () => ({ v$: useVuelidate() }),
@@ -301,7 +302,7 @@ export default {
                         let contentArray = Object.keys(content);
                         let err = "";
                         while(i < contentArray.length){
-                            err += '['+i+'] = ['+contentArray[i]+': '+content[contentArray[i]] +']'
+                            err += '<strong>'+contentArray[i]+'</strong> '+content[contentArray[i]] +'<br>'
                             i++;
                         }
                         self.displayErrorMessage(err);
@@ -313,7 +314,8 @@ export default {
         }
     },
     components:{
-        "Privacidad": Privacidad
+        "Privacidad": Privacidad,
+        "ErrorToast": ErrorToast
     }
     
 }

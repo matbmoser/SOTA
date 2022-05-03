@@ -4,7 +4,7 @@
                 <div class="main-card justify-content-center">
                     <div class="card">
                         <div class="text-center mb-5">
-                            <img src="../media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
+                            <img src="../../media/img/logowhite.png" alt="Image" class="loginlogo mb-3">
                             <div class="text-900 text-3xl font-medium mb-3 loginTitle">UFV MyParking</div>
                         </div>
                         <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid" autocomplete="off">
@@ -36,9 +36,9 @@
                     <Button type="submit" :icon="iconComputed" :label="labelComputed" class="mt-2 submitButton" />
                     
                 </form>
-                <p>¿Todavia no estas registrado? <a href="./register">Registrate</a></p>
+                <p class="mt-3">¿Todavia no estás registrado? <router-link to="/register"><a>Regístrate</a></router-link></p>
             </div>
-            <Toast position="top-center"/>
+            <ErrorToast position="top-center"/>
         </div>
     </div>
 </div>
@@ -46,6 +46,7 @@
 <script>
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import ErrorToast from "../../components/toasts/ErrorToast.vue";
 import {ToastSeverity} from 'primevue/api';
 import axios from "axios";
 export default {
@@ -141,6 +142,9 @@ export default {
                 self.displayErrorMessage(error.response.data.message);
             });
         }
+    },
+    components: {
+        "ErrorToast":ErrorToast    
     }
 }
 </script>

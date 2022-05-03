@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CustomToast from "../components/CustomToast.vue";
+import CustomToast from "../../components/toasts/LoadingToast.vue";
 export default {
   components: {
     CustomToast,
@@ -25,11 +25,7 @@ export default {
   },
   methods: {
     test() {
-      this.$toast.add({
-        severity: "success",
-        summary: "Test",
-        detail: "<i>Test Bold</i>",
-      });
+      this.$toast.add({severity:"success", summary:"Please Wait...", detail: "<h3>Loading Content...</h3>"});
     },
   },
 };

@@ -59,8 +59,9 @@ services:
       DIGITAL_TWIN: "/var/www/digital-twin"
 
     ports:
-      - "3333:80"
-      - "8888:8888"
+      - "3333:80" # Puerto de acceso al digital twin.
+      - "8888:8888" # Puerto por defecto device manager.
+      - "3900-4080:3900-4080" # Rango de puertos del device manager.
     volumes:
       - ./digital-twin/src:/var/www/digital-twin
       - ./digital-twin/php/php.ini-development:/usr/local/etc/php/php.ini-development

@@ -83,7 +83,7 @@
               <div class="px-3 me-2">
                 <?php if ($username != "") { echo "<span>Welcome <strong>" . $_SESSION['username'] . "</strong>!</span>"; } ?>
               </div>
-              <button type="button" class="btn me-3 btn-light btn-outline-dark" onclick="window.location.href= './assets/mod/user/logout.php?uuid=<?php echo $configs['logoutToken'] ?>'">
+              <button type="button" class="btn me-3 btn-light btn-outline-dark" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i> 
                 <span>Log out</span>
               </button>
@@ -136,10 +136,8 @@
       </div>
       <div class="row d-flex justify-content-between">
         <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
-          <button class="btn btn-warning" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#OpenServer">Open Server</button> 
-        </div>
-        <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
-          <button class="btn btn-warning" type="button" id="connectCamera" data-bs-toggle="modal" data-bs-target="#ConnectCamera">Connect Camera</button> 
+          <button class="btn btn-warning hidden" type="button" id="connectCamera" data-bs-toggle="modal" data-bs-target="#ConnectCamera">Connect Camera</button> 
+          <button class="btn btn-warning" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#OpenServer">Open Server</button>
         </div>
         <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 justify-content-md-end justify-content-xl-end">
           <!-- Checked switch -->
@@ -175,6 +173,9 @@
 <script src="assets/js/front/dark-mode.js"></script>
 <script src="assets/js/barreras/barrera.js"></script>
 <script src="assets/js/front/cookieFunctions.js"></script>
+<script src="assets/js/camaras/SJMPHandler.js"></script>
+<script src="assets/js/camaras/CameraClient.js"></script>
+<script src="assets/js/camaras/createCameraFunctions.js"></script>
 <script>
     const parkingMap = new ParkingMap();
     parkingMap.refreshZonas();
@@ -200,6 +201,37 @@
                 parkingMap.pintarZonas(response);
                 break;
         }
+    }
+    function logout(){
+        let cameraid = localStorage.getItem("cameraid");
+        if(cameraid != null && cameraid != undefined && cameraid != ""){
+          disconnectFromServer();
+        }
+        let rawServer = localStorage.getItem("serverInfo");
+        if(rawServer != null && rawServer != undefined && rawServer != ""){
+          closeServerByPort();
+        }
+        localStorage.removeItem("serverInfo");
+        localStorage.removeItem("cameraid");
+        localStorage.removeItem("serverStatus");
+        localStorage.removeItem("cameraStatus");
+      
+        window.location.href= `./assets/mod/user/logout.php?uuid=<?php echo $configs['logoutToken'] ?>`
+      
+    }
+    function addVehiculo(){
+        var matriculaEntrada = document.getElementById("matriculaEntrada").value;
+        if(matriculaEntrada == "" || matriculaEntrada == null){
+            overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+        }
+        camera.sendPlateToServer(matriculaEntrada, "IN")
+    }
+    function deleteVehiculo(){
+        var matriculaSalida= document.getElementById("matriculaSalida").value;
+        if(matriculaSalida == "" || matriculaSalida == null){
+            overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+        }
+        camera.sendPlateToServer(matriculaSalida, "OUT")
     }
 
     function setAutoRefresh(){
@@ -236,8 +268,27 @@
           });
         });
     })
+    function overwrite(monitorName,data){
+      let monitor = document.getElementById(monitorName);
+      monitor.innerHTML = data;
+    }
 
+    function println(monitorName, data){
+        var pre = document.createElement("p"); 
+        pre.style.wordWrap = "break-word"; 
+        pre.innerHTML = data; 
+        document.getElementById(monitorName).appendChild(pre);
+    }
+
+      async function print(monitorName,data) {
+        var pre = document.createElement("span"); 
+        pre.style.wordWrap = "break-word"; 
+        pre.innerHTML = data; 
+        document.getElementById(monitorName).appendChild(pre);
+      }
   
+
+
     function overwriteMonitor(data){
       let monitor = document.getElementById("monitor");
       monitor.innerHTML = data;
@@ -262,7 +313,33 @@
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
       );
     }
-
+    function connectToServer(){
+        let rawServer = localStorage.getItem("serverInfo");
+        if(rawServer != null && rawServer != undefined && rawServer != ""){
+            server = JSON.parse(rawServer);
+            let ip = CONFIGS["defaultIP"];
+            let port = server["port"];
+            let cameraid = uuidv4();
+            createAndConnectCamera(cameraid, ip, port);
+            return;
+        }
+        let tmpCameraid = localStorage.getItem("cameraid");
+        if(tmpCameraid == null || tmpCameraid == undefined || tmpCameraid == ""){
+          tmpCameraid = uuidv4();
+        }
+        localStorage.setItem("cameraid", tmpCameraid);
+        let cameraid = tmpCameraid
+        let ip = CONFIGS["defaultIP"];
+        let port = document.getElementById("cameraServerPort").value;
+        createAndConnectCamera(cameraid, ip, port);
+        //localStorage.removeItem("serverInfo");
+        //unblockAddServer();
+        //refreshServerStatus();
+    }
+    function disconnectFromServer(){
+        camera.close()
+        stopMessage();
+    }
     function randomIntFromInterval(min, max) { // min and max included 
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -277,8 +354,8 @@
         
         var ipPattern = "#ip-pattern";
         var portPattern = "#port-pattern";
-        var minPort = 1;
-        var maxPort = 65535;
+        var minPort = 3900;
+        var maxPort = 4080;
 
         $(portPattern).removeAttr('disabled');
         $(portPattern).val(randomIntFromInterval(minPort, maxPort));

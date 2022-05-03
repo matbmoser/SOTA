@@ -6,11 +6,11 @@
         <h5 class="modal-title" id="exampleModalLabel">Camera Entrada E1</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
     <div class="modal-body">
-        <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
+        <input type="text" class="form-control" id="matriculaEntrada" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
         <textfield class="w-100 h-100" id="monitorEntrada" disable></textfield>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" id="addVehiculo" type="submit">Enviar Matricula</button>
+        <button class="btn btn-success" id="addVehiculo" onclick="addVehiculo()" type="submit">Enviar Matricula</button>
     </div>
     </div>
     </div>
@@ -24,11 +24,11 @@
         <h5 class="modal-title" id="exampleModalLabel">Camera Salida S1</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
     <div class="modal-body">
-        <input type="text" class="form-control" name="matriculaEntrada" maxlength = "12" placeholder="Matricula" required/>
+        <input type="text" class="form-control" id="matriculaSalida" name="matriculaSalida" maxlength = "12" placeholder="Matricula" required/>
         <textfield class="w-100 h-100" id="monitorSalida" disable></textfield>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" id="deleteVehiculo" type="submit">Enviar Matricula</button>
+        <button class="btn btn-success" id="deleteVehiculo" onclick="deleteVehiculo()" type="submit">Enviar Matricula</button>
     </div>
     </div>
     </div>

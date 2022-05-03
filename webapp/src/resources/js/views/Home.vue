@@ -1,8 +1,8 @@
 <template>
     <div>
     <Dashboard>
-        <Fieldset legend="Ocupación Zonas" class="flex justify-content-center align-content-center" toggleable="true">
-             <div class="grid">
+        <Fieldset legend="Ocupación Zonas" class="flex justify-content-center align-content-center" :toggleable="true">
+             <div class="grid justify-content-center">
                 <div v-for="(zona, index) in zonas" :key="index">
                     <div class="col-4 w-full">
                         <Card :id="setIdZona(zona.letra)">
@@ -22,18 +22,18 @@
                 </div>
             </div>
         </Fieldset>
-        <Fieldset legend="Mapa" class="mt-3 flex justify-content-center" :collapsed="true" toggleable="true">
+        <Fieldset legend="Mapa" class="mt-3 flex justify-content-center" :collapsed="true" :toggleable="true">
             <img src="../media/img/mapaparking.jpg" style="width:100%" alt="Mapa" preview/>
         </Fieldset>
-        <CustomToast position="center"/>
+        <LoadingToast position="center"/>
     </Dashboard>
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import LoadingToast from "../components/toasts/LoadingToast.vue";
 import {ToastSeverity} from 'primevue/api';
-import CustomToast from "../components/CustomToast.vue";
 import Dashboard from '../components/Dashboard.vue';
     export default {
         name: 'Home',
@@ -49,7 +49,7 @@ import Dashboard from '../components/Dashboard.vue';
         },
         components: {
             "Dashboard" : Dashboard,
-            "CustomToast": CustomToast
+            "LoadingToast": LoadingToast
         },
         methods: {
             setIdZona(letra){
@@ -84,12 +84,12 @@ import Dashboard from '../components/Dashboard.vue';
             },
             startLoading() {
                 this.loading = true;
-                this.$toast.add({severity:ToastSeverity.SUCCESS, summary:"Please Wait...", detail: "<h3>Loading Content...</h3>"});
+                this.$toast.add({severity:ToastSeverity.SUCCESS, summary:"Espere por favor...", detail: "<h3>Cargando contenido...</h3>"});
             },
         },
         mounted() {
-            this.startLoading(),
-            this.fetchAll()
+            this.startLoading();
+            this.fetchAll();
         }
     }
 </script>

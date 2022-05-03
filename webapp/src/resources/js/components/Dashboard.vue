@@ -22,35 +22,13 @@ import AppTopBar from './AppTopbar.vue';
 import AppMenu from './AppMenu.vue';
 
 export default {
+    name: "Dashboard",
     data() {
         return {
             layoutMode: 'static',
             staticMenuInactive: false,
             overlayMenuActive: false,
             mobileMenuActive: false,
-            menu : [
-                {
-                    label: 'Home', icon: 'pi pi-fw pi-home',
-                    items: [{
-                        label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', to: '/'
-                    }]
-                },
-				{
-					label: 'Área del Usuario', icon: 'pi pi-fw pi-sitemap',
-					items: [
-						{label: 'Vehiculos', icon: 'pi pi-fw pi-car', to: '/vehiculos'},
-                        {label: 'Tickets', icon: 'pi pi-fw pi-ticket', to: '/tickets'},
-                    {label: 'Incidencias', icon: 'pi pi-fw pi-exclamation-triangle', to: '/incidencias'},
-					]
-				},
-                {
-					label: 'Área del Administrador', icon: 'pi pi-fw pi-sitemap',
-					items: [
-                        {label: 'Admin Incidencias', icon: 'pi pi-fw pi-check-square', to: '/admin/incidencias'},
-                        {label: 'Admin Dashboard', icon: 'pi pi-fw pi-user-plus', to: '/admin/dashboard'},
-					]
-				},  
-            ]
         }
     },
     watch: {
@@ -120,7 +98,7 @@ export default {
                     return this.overlayMenuActive;
             }
             return true;
-        }
+        },
     },
     computed: {
         containerClass() {
@@ -135,7 +113,40 @@ export default {
             }];
         },
     },
+    beforeCreate() {
+        this.menu = [
+                {
+                    label: 'Home', icon: 'pi pi-fw pi-home',
+                    items: [{
+                        label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', to: '/'
+                    }]
+                },
+				{
+					label: 'Área del Usuario', icon: 'pi pi-fw pi-sitemap',
+					items: [
+						{label: 'Vehiculos', icon: 'pi pi-fw pi-car', to: '/vehiculos'},
+                        {label: 'Tickets', icon: 'pi pi-fw pi-ticket', to: '/tickets'},
+                        {label: 'Incidencias', icon: 'pi pi-fw pi-exclamation-triangle', to: '/incidencias'},
+					]
+				}
+            ];
+
+         this.rolUsuario= this.$store.state.currentRole;
+         if(this.rolUsuario["incidencias"] || this.rolUsuario["userDashboard"]){
+            let adminDashboard = {label: 'Área del Administrador', icon: 'pi pi-fw pi-sitemap'};
+            adminDashboard["items"] = [];
+            if(this.rolUsuario["incidencias"]){
+                adminDashboard["items"].push({label: 'Admin Incidencias', icon: 'pi pi-fw pi-check-square', to: '/admin/incidencias'});
+            }
+            if(this.rolUsuario["userDashboard"]){
+                adminDashboard["items"].push({label: 'Admin Dashboard', icon: 'pi pi-fw pi-user-plus', to: '/admin/dashboard'});
+            }
+            this.menu.push(adminDashboard);
+        } 
+    },
     beforeUpdate() {
+
+
         if (this.mobileMenuActive)
             this.addClass(document.body, 'body-overflow-hidden');
         else
