@@ -3,8 +3,11 @@ export SERVERFILENAME="ServerManager.py"
 export DEVICE_MANAGER=/usr/src/app
 
 export DEFAULTNAME="DefaultServer"
-export DEFAULTIP="127.0.0.1"
+export DEFAULTIP="0.0.0.0"
 export DEFAULTPORT=8888
+
+
+
 
 function generateRandomName(){
     LEN=${1}

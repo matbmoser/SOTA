@@ -11,10 +11,11 @@ class CreateTipoVehiculoTable extends Migration
         Schema::create('TipoVehiculo', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->text('nombre');
-		$table->integer('ancho',);
-		$table->integer('largo',);
-		$table->integer('alto',);
+		$table->string('segmento', 2)->unique();
+        $table->string('clasificacion', 20)->unique();
+		$table->float('ancho',);
+		$table->float('largo',);
+		$table->float('alto',);
         $table->timestamps();
         });
     }

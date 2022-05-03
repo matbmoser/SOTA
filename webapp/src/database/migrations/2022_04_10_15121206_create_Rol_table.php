@@ -11,9 +11,10 @@ class CreateRolTable extends Migration
         Schema::create('Rol', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->text('nombre')->unique();
+		$table->string('nombre', 30)->unique();
 		$table->boolean('incidencias');
 		$table->boolean('digitalTwin');
+        $table->boolean('userDashboard');
         $table->timestamps();
         });
     }

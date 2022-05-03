@@ -439,7 +439,7 @@ class Message():
             op.printLog(logType="EXCEPTION", e=e,
                         messageStr="Message.messageToBytes()")
             traceback.print_exc()
-            return bytes(self.content, "utf-8")
+            return self.content
 
     # Base Prepare Message Method
     def prepareMessage(self, message):

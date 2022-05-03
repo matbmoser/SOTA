@@ -11,7 +11,7 @@ class CreateTipoPlazaTable extends Migration
         Schema::create('TipoPlaza', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->text('tipo');
+		$table->string('tipo', 25)->unique();
 		$table->integer('ancho',);
 		$table->integer('largo',);
         $table->timestamps();

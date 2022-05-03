@@ -108,7 +108,13 @@ class op:
             return True
         os.makedirs(nameDir, permits)
         return True
-
+    
+    @ staticmethod
+    def deleteDir(nameDir):
+        if not op.pathExists(nameDir):
+            return False
+        
+        shutil.rmtree(nameDir)
     @ staticmethod
     def copyFile(src, dst):
         return copyfile(src, dst)

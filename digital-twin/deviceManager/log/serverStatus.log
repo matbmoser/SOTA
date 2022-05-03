@@ -1,4 +1,3 @@
 Starting Server Log Messages...
-[INFO]: Trying to start server...
-[INFO]: NEW SERVER CREATED!: serverid=[Server1], ip=[127.0.0.1], port=[8585], poll_interval=[0.5]. [Server [Server1] in socket [127.0.0.1:8585] status [RUNNING] in thread: [Server1]].
-[INFO]: Server is Opened in Background
+[EXCEPTION]:[invalid literal for int() with base 10: 'ç7']. [ERROR] Option not found!
+

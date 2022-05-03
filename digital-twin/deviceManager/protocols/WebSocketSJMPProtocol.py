@@ -120,7 +120,7 @@ class WebSocketSJMPHTTPResponse(WebSocketHTTPResponse):
         super().__init__(rawdata=rawdata)
 
     # Generates the subprotocol using the SJMP Protocol
-    def generateSubprotocolResponse(self, subprotocol=None, token=""):
+    def generateSubprotocolResponse(self, subprotocol=None, sessionid=""):
         # Sub protocol configuration
 
         # If in the handshake we include a subprotocol we must return it
@@ -130,6 +130,6 @@ class WebSocketSJMPHTTPResponse(WebSocketHTTPResponse):
         # SJMP OK flag response
         if self.subprotocol == "SJMP":
             self.subprotocolResponse = packet().dumpPacket(flag="OK", srv_time=str(
-                datetime.timestamp(datetime.now(timezone.utc))), token=token).messageToJSONString()
+                datetime.timestamp(datetime.now(timezone.utc))), sessionid=sessionid).messageToJSONString()
 
         return

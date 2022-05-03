@@ -3,6 +3,7 @@ import traceback
 import threading
 import socketserver
 from operators.op import op
+from operators.cryptool import cryptool
 from datetime import datetime, timezone
 import hashlib
 
@@ -108,14 +109,14 @@ class RequestHandler(socketserver.BaseRequestHandler):
 
     # Setups the Camera using the protocol
     def setupCamera(self, protocolClass):
-        """OVERRIDE THIS METHOD WITH DESIRED Camera PROTOCOL token SETUP"""
+        """OVERRIDE THIS METHOD WITH DESIRED Camera PROTOCOL sessionid SETUP"""
 
         # Set session id
         tmpSessionId = str(hashlib.md5((self.client_address[0] + ":" + str(
             self.client_address[1]) + ":" + str(datetime.now(timezone.utc))).encode()).hexdigest())
         # Create or Reconnect Camera
         tmpCamera = self.server.camerasManager.createOrGetCamera(
-            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, token=tmpSessionId)
+            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, sessionid=tmpSessionId)
 
         return tmpCamera
 
@@ -182,7 +183,6 @@ class RequestHandler(socketserver.BaseRequestHandler):
             self.totalmessagesProcessed += self.messagesProcessed
             self.totalduration += self.duration
 
-     
             # Print statistics after processing request (Messages Arrived and Time Duration of Processing)
             op.printLog(logType="STATS", messageStr="Messages Processed: nmessages=["+str(
                 self.messagesProcessed)+"];duration=["+str(self.duration)+"]")
@@ -238,7 +238,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
     """
 
-    def __init__(self, ip='localhost', port=0, poll_interval=0.5, bind_and_activate: bool = ...) -> None:
+    def __init__(self, serverid, ip='localhost', port=0, poll_interval=0.5, bind_and_activate: bool = ...) -> None:
         # Mandatory Socket Server attributes
         self.RequestHandlerClass = self.getServerRequestHandler()
         self.ip = ip
@@ -249,14 +249,16 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         # Server connection Atributtes
         self.camerasManager = self.getCamerasManager()
+        self.camerasManager.startControllers()
         self.keepAlive = True
         self.ip, self.port = self.server_address  # find out what port we were given
         self.status = "SHUTDOWN"
 
         # Server identification Attributes
         self.socketkey = self.ip+":"+str(self.port)
-        self.serverid = self.socketkey
-
+        self.serverid = serverid
+        self.publicKey, self.privateKey = self.generateSecret()
+        
         # Thread Attributes
         self.thread = None
 
@@ -286,6 +288,9 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         return BaseCameraManager(cameraprotocolClass="BaseCamera")
 
+    def generateSecret(self):
+        return cryptool.generateKeys(string=True)
+    
     # Defines the server request handler type
     def getServerRequestHandler(self):
         """OVERRIDE THIS METHOD WITH DESIRED DEFAULT PROTOCOL HANDLER"""

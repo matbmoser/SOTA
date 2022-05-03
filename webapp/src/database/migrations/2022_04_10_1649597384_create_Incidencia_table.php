@@ -12,20 +12,16 @@ class CreateIncidenciaTable extends Migration
 
 		$table->increments('id');
 		$table->integer('gravedad',)->comment('0-5');
-		$table->text('matriculaImplicada');
 		$table->string('titulo');
 		$table->text('descripcion');
-		$table->datetime('fechaApertura');
-		$table->datetime('fechaCierre');
-		$table->boolean('resuelta');
-		$table->text('notaCierre');
-		$table->text('nombreArchivoFoto');
-		$table->integer('idAprobador',)->unsigned();
-		$table->integer('idTicket',)->unsigned();
-		$table->integer('idTipoIncidencia',)->unsigned();
-		$table->foreign('idAprobador')->references('id')->on('Usuario')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('idTicket')->references('id')->on('Ticket')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('idTipoIncidencia')->references('id')->on('TipoIncidencia')->onUpdate('CASCADE')->onDelete('CASCADE'); 
+		$table->datetime('fechaCierre')->nullable();
+		$table->boolean('resuelta')->default(0);
+		$table->text('notaCierre')->nullable();
+		$table->text('nombreArchivoFoto')->nullable();
+		$table->integer('idAprobador',)->unsigned()->nullable();
+		$table->string('tokenPlaza',128)->unique()->comment('Unique sha512 hash');
+		$table->foreign('idAprobador')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE'); 
+		$table->foreign('tokenPlaza')->references('token')->on('Plaza')->onUpdate('CASCADE');
         $table->timestamps();    
 		});
     }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&family=Sarpanch:wght@400;900&display=swap');
 *{
     font-family: 'Open Sans', sans-serif;
 }
@@ -11,6 +12,19 @@ body {
     color: var(--color)!important;
     transition: all .25s ease;
 }
+
+/*Index*/
+.mainContainer{
+    padding: 0!important;
+}
+/* HEADER */
+
+/* MODAL */
+.modal-content {
+    background-color:var(--color)!important;
+    color: var(--bg-color)!important;
+}
+
 .hidden {
     display:none!important
 }

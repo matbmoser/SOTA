@@ -1,3 +1,0 @@
-2022/02/10 07:01:37|18044|38.234375|[INFO]: NEW cameras created=[1]!
-2022/02/10 07:01:37|18044|37.18359375|[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00]
-2022/02/10 07:01:37|18044|37.1953125|[STATS]: Messages Sent: ncameras=[0];messagesSent=[1];totalTime=[0:00:00];minSendDuration=[0:00:00];avgSendDuration=[0:00:00];maxSendDuration=[0:00:00]

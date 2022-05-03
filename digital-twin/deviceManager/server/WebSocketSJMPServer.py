@@ -110,7 +110,7 @@ class WebSocketSJMPRequestHandler(WebSocketRequestHandler):
             tmpSessionId = str(hashlib.md5((self.client_address[0] + ":" + str(
                 self.client_address[1]) + ":" + str(datetime.now(timezone.utc))).encode()).hexdigest())
             tmpCamera = self.server.camerasManager.createOrGetCamera(
-                protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, token=tmpSessionId)
+                protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=None, sessionid=tmpSessionId)
             return tmpCamera
 
         cameraid = self.subprotocolPayload["cameraid"]
@@ -119,7 +119,7 @@ class WebSocketSJMPRequestHandler(WebSocketRequestHandler):
             datetime.now(timezone.utc)) + "cameraid=["+cameraid+"]").encode()).hexdigest())
 
         tmpCamera = self.server.camerasManager.createOrGetCamera(
-            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=cameraid, token=tmpSessionId)
+            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=cameraid, sessionid=tmpSessionId)
 
         return tmpCamera
 

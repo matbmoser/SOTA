@@ -6,6 +6,9 @@ RUN apt update \
     telnet \
     net-tools \
     nmap \
+    openssl \
+    git \
+    iputils-ping \
     libicu-dev \
     libpq-dev \
     libzip-dev \
@@ -27,16 +30,28 @@ RUN apt update \
 WORKDIR /var/www/digital-twin
 RUN usermod -a -G www-data root
 RUN chmod +777 ./
-
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-RUN chmod +777 /usr/src/app 
+
+
+#RUN chmod +777 /usr/src/app 
 COPY ./python/requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY ./deviceManager/ .
 
-RUN chgrp www-data ./*
-RUN chmod g+rwxs ./*
-RUN chmod g+rwxs /usr/src/app/ServerManager.py
-RUN chgrp www-data /usr/src/app/ServerManager.py
+RUN chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /usr/src/app
+RUN chgrp -R www-data /var/www
+RUN chgrp -R www-data /usr/src/app
+
+
+#RUN chgrp www-data ./*
+#RUN chmod g+rwxs ./*
+#RUN chmod g+rwxs /usr/src/app/ServerManager.py
+#RUN chgrp www-data /usr/src/app/ServerManager.py
+
+#RUN chown www-data:www-data /var/www/digital-twin
+#RUN chown www-data:www-data /usr/src/app/
+#RUN echo 'www-data  ALL=(ALL) /bin/bash' >>  /etc/sudoers
+#RUN echo 'www-data  ALL=(ALL) /bin/su' >>  /etc/sudoers
