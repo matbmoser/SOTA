@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
 # coding=UTF-8
-from email import message
 import os
 import sys
+import getpass
 import traceback
 from operators.op import op
 from globalConfig import globalConfig
+from db.controllers.ServidorController import ServidorController
 serverManager = None
 
 
@@ -32,7 +33,7 @@ class ServerManager():
     def __init__(self, serversprotocolClass="server.Server"):
         self.serversprotocolClass = serversprotocolClass
         self.Servers = {}
-
+        self.serverController = ServidorController()
     # ================================================================
     # GET METHODS
 
@@ -54,7 +55,60 @@ class ServerManager():
                 continue  # If the object has no session id
 
         return None
-
+    
+    def db_getBySocketKey(self, socketKey):
+        self.serverController.refresh()
+        servidor = self.serverController.getBySocketKey(socketKey=socketKey)
+        if(servidor == [] or servidor == None):
+            return None
+        
+        return servidor[0]
+    
+    def db_getByServerId(self, serverid):
+        self.serverController.refresh()
+        servidor = self.serverController.getByServerId(serverid=serverid)
+        if(servidor == [] or servidor == None):
+            return None
+        
+        return servidor[0]  
+      
+    ### Save in Database Methods
+    def saveOrUpdateServer(self,server):
+        dbserver = self.db_getByServerId(serverid=server.serverid)
+        serverid = server.serverid
+        socketKey = server.socketkey
+        siglaUni = globalConfig.defaultuniversidad
+        
+        socketKeyServer = self.db_getBySocketKey(socketKey)
+        
+        if(dbserver != None and socketKeyServer == None):
+            if(self.serverController.update(where="id="+str(dbserver["id"]),serverid=serverid, socketKey=socketKey,siglaUni=siglaUni)):
+                op.printLog(logType="INFO", messageStr=f"Server [{serverid}] updated in id [{dbserver['id']}]") 
+                return True
+            else:
+                op.printLog(logType="ERROR", messageStr=f"Was not posible to update Server [{serverid}] in id [{dbserver['id']}]") 
+                return False
+            
+        elif(dbserver != None and socketKeyServer != None):
+            if (dbserver["id"] != socketKeyServer["id"]):
+                self.serverController.deleteByServerId(serverid = socketKeyServer["serverid"])
+            if(self.serverController.update(where="id="+str(dbserver["id"]),serverid=serverid, socketKey=socketKey,siglaUni=siglaUni)):
+                op.printLog(logType="INFO", messageStr=f"Server [{serverid}] updated in id [{dbserver['id']}]") 
+                return True
+            else:
+                op.printLog(logType="ERROR", messageStr=f"Was not posible to update Server [{serverid}] in id [{dbserver['id']}]") 
+                return False
+            
+        elif(socketKeyServer != None):
+            self.serverController.deleteByServerId(serverid = socketKeyServer["serverid"])
+        
+        if(self.serverController.add(serverid=serverid, socketKey=socketKey, siglaUni=siglaUni)):
+            op.printLog(logType="INFO", messageStr=f"Server [{serverid}] added into DB!") 
+            return True
+        else:
+            op.printLog(logType="ERROR", messageStr=f"Was not posible add Server [{serverid}] in DB!") 
+            return False
+        
     # Method responsible to get server by server id
     # (Returns Server and None if does not exists)
     def getByServerId(self, serverid):
@@ -73,6 +127,7 @@ class ServerManager():
 
     # Adds a new server to the list of servers
     def addServer(self, server):
+        self.saveOrUpdateServer(server)
         self.Servers[server.serverid] = server
 
     # Creates a new server if posible
@@ -145,7 +200,10 @@ class ServerManager():
         # Set Camera id from arguments
         serverid = str(serverid)
         op.startLog(logFile=f"log/{serverid}/serverStatus.log")
+        op.printLog(logType="INFO" , messageStr="You are ["+getpass.getuser()+"]")
         op.printLog(logType="INFO", messageStr="Trying to start server...")
+        
+            
         # Create and start the server
         server = self.newAndStart(
             serverid=serverid, ip=serverip, port=serverport, poll_interval=serverpollinterval)
@@ -157,7 +215,8 @@ class ServerManager():
             return None
 
         op.printLog(logType="INFO",
-                    messageStr="Server is Opened in Background")
+            messageStr="Server is Opened in Background")
+     
         return server
 
     # Stop all servers in manager server list

@@ -36,6 +36,9 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
+RUN a2enmod rewrite
+RUN service apache2 restart
 
 RUN npm install -g npm@latest
+RUN npm rebuild
 

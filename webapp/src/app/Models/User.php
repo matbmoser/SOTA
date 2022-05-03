@@ -86,4 +86,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+    return $this->password;
+    }
 }

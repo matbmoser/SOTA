@@ -20,16 +20,7 @@ class cryptool:
         return private_key.public_key()
     
     @staticmethod
-    def deleteKeys(id):
-        keysDir = f"keys/{id}"
-        if op.deleteDir(nameDir=keysDir):
-            return True
-        return False
-    
-    @staticmethod
-    def generateKeys(id, keySize=2048, publicExponent=65537, string=False):
-        keysDir = f"keys/{id}"
-        op.makeDir(nameDir=keysDir)
+    def generateKeys(keySize=2048, publicExponent=65537, string=False):
         # Generamos clave privada
         private_key = cryptool.generatePrivateKey(publicExponent=publicExponent,keySize=keySize)
         
@@ -40,8 +31,6 @@ class cryptool:
         strPriv = cryptool.privateKeyToString(private_key=private_key)
 
         strPub = cryptool.publicKeyToString(public_key=public_key)
-        
-        cryptool.storeKeys(strPub, strPriv, dir=keysDir)
             
         if(string):
             return strPub, strPriv

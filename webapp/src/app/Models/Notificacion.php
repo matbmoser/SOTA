@@ -29,7 +29,7 @@ class Notificacion extends Model
         'idUsuario'
     ];
     protected $casts = [
-        'boton' => 'boolean'
+        'boton' => 'boolean',
         'idUsuario' => 'integer'
     ];
     

@@ -29,6 +29,8 @@ class TipoVehiculoController(BaseController):
         
         self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
     
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
     
     def deleteBySegmento(self, name):
         self.conn.deleteTableElement(table=self.tableName, where="segmento="+str(name))

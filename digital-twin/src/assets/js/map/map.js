@@ -1,41 +1,69 @@
-// Define data for popup
-var data = [
-    {
-      photo_img: "https://images-na.ssl-images-amazon.com/images/I/81UYaJFVjCL._SY450_.jpg", // Prefix "_img" is special. With it Magnific Popup finds an  element "photo" and replaces it completely with image tag.
+
+
+class ParkingMap{
+  constructor(){
+    this.refreshIntervalMap=null;
+  }
+  pintarZonas(response){
+    var parsedResponse = JSON.parse(response);
+    var ocupacionZonas = parsedResponse["plazasZonas"];
+    var plazasOcupadas = parsedResponse["vehiculosPlazas"];
+    var lenzonas = ZONAS.length;
+    var zonasPattern = "#dataZona";
+    let i = 0;
+    let table = $("#verPlazasTable");
+    let tableContent = "";
+    while(i < lenzonas){
+      //Constante zonas mapa
+      let zona = ZONAS[i];
+      let idZona = zona["id"];
+      let aforo = zona["plazas"];
+      // Datos recogidos
+      let plazasZona = plazasOcupadas[idZona];
+      let lenplazaszona = plazasZona.length;
+      let j = 0;
+      while(j < lenplazaszona){
+        let plaza = plazasZona[j];
+        let idPlaza = plaza["idPlaza"].toString();
+        let matricula = plaza["matricula"].toString();
+        let segmento = plaza["segmento"].toString();
+        let clasificacion = plaza["clasificacion"].toString();
+        let created_at = plaza["created_at"].toString();
+        let row = `<tr>
+          <td>`+idPlaza+`</td>
+          <td>`+matricula+`</td>
+          <td>`+segmento+`</td>
+          <td>`+clasificacion+`</td>
+          <td>`+created_at+`</td>
+        </tr>`;
+        tableContent += row;
+        j++;
       }
-  ];
-  
-  
-  // Initialize popup 
-  $('.pulse-button').magnificPopup({
-        key: 'image-popup',
-        items: data,
-        type: 'inline',
-        inline: {
-          // Define markup. Class names should match key names.
-          markup: '<div class="white-popup"><div class="mfp-close"></div>'+
-   '<div class="mfp-photo"></div>'+
-              '</div>'
-              }
-          });
-  
-  // Define data for popup
-  var data = [
-    {
-      photo_img: "https://s3-online.com/images/2018/10/13/ai-pic-2.jpg", // Prefix "_img" is special. With it Magnific Popup finds an  element "photo" and replaces it completely with image tag.
-      }
-  ];
-  
-  
-  // Initialize popup 
-  $('.pulse-button2').magnificPopup({
-        key: 'image-popup',
-        items: data,
-        type: 'inline',
-        inline: {
-          // Define markup. Class names should match key names.
-          markup: '<div class="white-popup"><div class="mfp-close"></div>'+
-   '<div class="mfp-photo"></div>'+
-              '</div>'
-              }
-          });
+      document.querySelector(zonasPattern+idZona.toString()).innerHTML = ocupacionZonas[idZona].toString() +"/"+ aforo.toString()
+      i++;
+    }
+    table.html(tableContent);
+    document.querySelectorAll("#refresh, #refreshModal").forEach((ele) => {
+        ele.innerHTML = `Refresh`;
+    });
+}
+
+ refreshZonas(){
+  var uuid = getCookie("UUID");
+  var data = "uuid="+uuid;
+  HTTPRequest.POST('http://'+CONFIGS["httpHost"]+'/assets/mod/API/getPlazasZonas.php', data,  'refreshZonas');
+  }
+
+ startAutoRefresh(){
+  var self = this;
+  this.refreshIntervalMap = setInterval(function() {
+    let ele = document.getElementById("refresh");
+    ele.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
+    self.refreshZonas();
+  },8000); // 60 * 1000 milsec
+ }
+ stopAutoRefresh(){
+  clearInterval(this.refreshIntervalMap);
+ }
+}
+

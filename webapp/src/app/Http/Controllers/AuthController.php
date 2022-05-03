@@ -62,13 +62,11 @@ class AuthController extends Controller
             'nombre' => 'required',
             'username' =>  'required|unique:users',
             'apellido1' => 'required',
-            'apellido2' => 'required',
             'documento' => 'required',
             'telefono' => 'required',
             'password' =>  'required',
             'password_confirmation' => 'required|same:password', 
-            'fechaNacimiento' =>  'required',
-            'rolName' => 'required',
+            'fechaNacimiento' =>  'required'
         ]);
         if ($v->fails())
         {
@@ -82,11 +80,13 @@ class AuthController extends Controller
          * Creamos el usuario y ciframos su password
          */
         $usuario = new User;
-        $usuario->email = $request->input('email');
+        $usuario->email =  strtolower($request->input('email'));
         $usuario->nombre = $request->input('nombre');
-        $usuario->username = $request->input('username');
+        $usuario->username =  strtolower($request->input('username'));
         $usuario->apellido1 = $request->input('apellido1');
-        $usuario->apellido2 = $request->input('apellido2');
+        if($request->input('apellido2') != "" || $request->input('apellido2') != null){
+            $usuario->apellido2 = $request->input('apellido2');
+        }
         $usuario->documento = $request->input('documento');
         $usuario->telefono = $request->input('telefono');
         $usuario->password = bcrypt($request->input('password'));
@@ -94,29 +94,26 @@ class AuthController extends Controller
         $usuario->fechaNacimiento = $request->input('fechaNacimiento');
         $usuario->correoConfirmado = 0;
         $usuario->fechaUltimaConexion = now();
-        $usuario->idRol = Rol::where('nombre', $request->input('rolName'))->get("id")[0]->id;
+        $usuario->idRol = Rol::where('nombre', 'Usuario')->get("id")[0]->id;
         $usuario->save(); //storing values as an object
         
-        $token = $this->guard()->attempt(['email' => request('email'), 'password' => request('password')]);
+        $token = $this->guard()->attempt(['email' => strtolower($request->input('email')), 'password' => request('password')]);
         #With passport $success['token'] =  $usuario->createToken('__appMyParking')->accessToken;
         return response()->json([
             'success' => true,
-            'token' => $token,
             'user' => $usuario
         ], 200)->header('Authorization', $token);;
     }
 
 
     public function login(Request $request){
-        if($token = $this->guard()->attempt(['email' => request('email'), 'password' => request('password')])) {
+        if($token = $this->guard()->attempt(['email' => strtolower($request->input('email')), 'password' => request('password')])) {
             $user = $this->guard()->user();
             
             #Wtih passport $success['token'] =  $user->createToken('__appMyParking')-> accessToken;
-            $userdata['token'] =  $user->token;
-            $userdata['email'] =  $user->email;
             return response()->json([
                 'success' => true,
-                'user' => $userdata
+                'user' => $user
             ])->header('Authorization', $token);
         }
         else{
@@ -130,9 +127,21 @@ class AuthController extends Controller
     {
         $this->guard()->logout();
         return response()->json([
-            'status' => 'success',
-            'msg' => 'Logged out Successfully.'
+            'success' => true,
+            'message' => 'Logged out Successfully.'
         ], 200);
+    }
+    public function check()
+    {
+        if ($this->guard()->check()) {
+            return response()->json([
+                'success' => true
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => false
+            ], 401);
+        }
     }
     public function user(Request $request)
     {
@@ -146,7 +155,7 @@ class AuthController extends Controller
     {
         if ($token = $this->guard()->refresh()) {
             return response()
-                ->json(['status' => 'successs'], 200)
+                ->json(['status' => 'success'], 200)
                 ->header('Authorization', $token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);

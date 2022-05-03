@@ -286,7 +286,7 @@ class TCPMessage(Message):
     # Standad TCP Parse Message Method
     def parseMessage(self):
         try:
-            self.content = str(self.rawdata, "utf-8")
+            self.content = self.rawdata
             return self
         except Exception as e:
             op.printLog(logType="EXCEPTION", e=e,

@@ -1,0 +1,28 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.009281] DBManager.insertQuery()
+[INFO]: Server [43cbfbdfbd49] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[43cbfbdfbd49], ip=[0.0.0.0], port=[4077], poll_interval=[0.5]. [Server [43cbfbdfbd49] in socket [0.0.0.0:4077] status [RUNNING] in thread: [43cbfbdfbd49]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4077
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: XzuQTaANJKl1tI+bNR1vaA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651551139859'%2C%20'cameraid'%3A%20'4cdc142d-c88a-48a6-a844-1b7652fdc29c'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [4cdc142d-c88a-48a6-a844-1b7652fdc29c], status [ONLINE] on [172.23.0.1:54094] logged in with sessionid = [3bc63027fd0e8b32c6ccd8e558bbce29] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [43cbfbdfbd49]-[0.0.0.0:4077] BaseRequestHandler.setup().
+[DEBUG]: [43cbfbdfbd49]-[0.0.0.0:4077] > Received one request from 4cdc142d-c88a-48a6-a844-1b7652fdc29c
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000599]

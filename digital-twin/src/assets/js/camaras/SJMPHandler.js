@@ -1,17 +1,21 @@
 class SJMPHandler{
 
-  constructor(client){
-      this.client = client
-      this.flags = ["SYN", "OK", "IN", "OUT", "FIN", "ACK", "FETCH"]
+  constructor(camera){
+      this.camera = camera
+      this.flags = ["SYN", "OK", "IN", "OUT", "FIN", "ACK"]
   }
   
-  getMSG(cameraid, message)
+  getIN(matricula)
   {
-      return "{'clt-time': '"+new Date().getTime().toString()+"', 'token': '"+this.client.token+"', 'cameraid': '"+cameraid+"', 'flag': 'MSG', 'message': '"+message+"'}".toString();
+      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessionid+"', 'flag': 'IN', 'plate': '"+matricula+"'}".toString();
+  }
+  getOUT(matricula)
+  {
+      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessiond+"', 'flag': 'OUT', 'plate': '"+matricula+"'}".toString();
   }
   getSYN()
   {
-      return "{'clt-time': '"+new Date().getTime().toString()+"', 'cameraid': '"+this.client.cameraid+"', 'flag': 'SYN'}".toString();
+      return "{'clt-time': '"+new Date().getTime().toString()+"', 'cameraid': '"+this.camera.cameraid+"', 'flag': 'SYN', 'type': '"+this.camera.type+"'}".toString();
   }
 
 }

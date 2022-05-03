@@ -14,6 +14,7 @@ class CreateRolTable extends Migration
 		$table->string('nombre', 30)->unique();
 		$table->boolean('incidencias');
 		$table->boolean('digitalTwin');
+        $table->boolean('userDashboard');
         $table->timestamps();
         });
     }

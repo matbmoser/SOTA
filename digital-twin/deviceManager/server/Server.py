@@ -249,6 +249,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
         # Server connection Atributtes
         self.camerasManager = self.getCamerasManager()
+        self.camerasManager.startControllers()
         self.keepAlive = True
         self.ip, self.port = self.server_address  # find out what port we were given
         self.status = "SHUTDOWN"
@@ -288,7 +289,7 @@ class Server(socketserver.ThreadingMixIn, socketserver.TCPServer):
         return BaseCameraManager(cameraprotocolClass="BaseCamera")
 
     def generateSecret(self):
-        return cryptool.generateKeys(id="server/"+self.serverid, string=True)
+        return cryptool.generateKeys(string=True)
     
     # Defines the server request handler type
     def getServerRequestHandler(self):

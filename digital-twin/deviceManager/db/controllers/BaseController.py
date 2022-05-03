@@ -27,6 +27,9 @@ class BaseController():
         #Deletes the data
         pass
     
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
+    
     def get(self, where):
         pass
     
@@ -44,3 +47,6 @@ class BaseController():
     
     def update(self):
         pass
+    
+    def close(self):
+        self.conn.close()

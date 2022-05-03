@@ -76,12 +76,12 @@ class SocketCamera(Camera):
     # CONNECTION HANDLING METHODS
 
     def generateSecret(self):
-        return cryptool.generateKeys(id="camera/"+self.cameraid, string=True)
+        return cryptool.generateKeys(string=True)
     
     def deleteSecret(self):
         self.privateKey = None
         self.publicKey = None
-        return cryptool.deleteKeys(id="camera/"+self.cameraid)
+        return True
     
     # Gets the handler of connection
     def getHandler(self):
@@ -119,12 +119,6 @@ class SocketCamera(Camera):
         op.printLog(
             logType="DEBUG", messageStr="Camera Socket Opened on ["+self.socketkey+"] ...")
 
-        # Send Connection Message with protocol format
-        self.addOutputMessage(
-            value=self.protocol.getConnectionMessage(camera=self))
-        op.printLog(logType="DEBUG",
-                    messageStr="["+self.cameraid+"]->[SENT CONNECTION MESSAGE]")
-        self.encrypted = True
         return True
 
     # ================================================================

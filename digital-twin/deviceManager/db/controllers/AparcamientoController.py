@@ -10,7 +10,7 @@ class AparcamientoController(BaseController):
         self.externalTable = UniversidadController()
     
     def add(self, letra, color,  localizacion, siglaUni):
-        time = datetime.now().strftime("Y-m-d hh:mm:ss")
+        time = str(datetime.now())
         self.tipos = self.externalTable.getTipos()
         if(siglaUni not in self.tipos):
             return None
@@ -22,6 +22,9 @@ class AparcamientoController(BaseController):
         
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
+    
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
     
     def getValues(self):
         self.values = self.conn.getValueIdDict(id="id", value="letra", table=self.tableName)

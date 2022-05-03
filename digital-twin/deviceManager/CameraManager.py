@@ -362,7 +362,7 @@ class CameraManager(BaseCameraManager):
         else:
             return None
 
-    def selectCamaraAndPlate(self):
+    def selectCameraAndPlate(self):
         
         print("Select a Camera to send message FROM:")
         tmpFromCamera = self.selectCamera(
@@ -373,7 +373,7 @@ class CameraManager(BaseCameraManager):
         print("Insert Vehicle Licence Plate")
         licencePlate = input(
             "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
-        while(licencePlate == "" or len(licencePlate) < 12):
+        while(licencePlate == "" or len(licencePlate) > 9 or len(licencePlate) < 0):
             print("Please input a correct Vehicle Licence Plate!\n")
             licencePlate = input(
                 "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
@@ -426,8 +426,10 @@ class CameraManager(BaseCameraManager):
 
                 # Create new Camera
                 if (numopt == 1):
-                    cameraid = str(uuid.uuid4())
-                    print("Creating Camara... camaraid=["+str(cameraid)+"]")
+                    cameraid = input(
+                        "Please insert the Camera ID [Default Random UUID]: ")
+                    cameraid = cameraid if not cameraid == "" else str(uuid.uuid4())
+                    print("Creating camera... cameraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
                         print("\n[ERROR] A Camera id needs to be specified!\n")
@@ -457,15 +459,15 @@ class CameraManager(BaseCameraManager):
 
                     protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
-                    camaraType = self.selectCameraType()
+                    cameraType = self.selectCameraType()
                     
-                    if(camaraType == None):
-                        continue
+                    if(cameraType == None):
+                        cameraType = "BOTH"
                     
                     try:
                         # Create and Start Server
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port, type=camaraType)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
@@ -480,20 +482,21 @@ class CameraManager(BaseCameraManager):
                     # SET DEFAULT Camera CONFIGURATIONS:
 
                     cameraid = "DEFAULT"
-                    camaraType = "BOTH"
+                    cameraType = "BOTH"
                     
                     # If Camera exists
-                    if(self.getByCameraId(cameraid=cameraid) != None):
+                    camera = self.getByCameraId(cameraid=cameraid) 
+                    if(camera != None):
+                        self.deleteCameraByCameraId(cameraid=cameraid)
                         op.printLog(
-                            logType="ERROR", messageStr="Camera already registed in the server! Create a new Camera...")
-                        continue
+                            logType="WARNING", messageStr="Camera was already registerd, deleting camera.")
 
                     protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
                     try:
                         # Start new Camera
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport, type=camaraType)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
@@ -516,21 +519,21 @@ class CameraManager(BaseCameraManager):
                 # Add Vehicle
                 elif (numopt == 4):
                     
-                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
                     if(tmpFromCamera == None or licencePlate == None):
                         continue
                     
-                    tmpFromCamera.sendAddVehicle(licencePlate)
+                    tmpFromCamera.sendAddVehicle(str(licencePlate))
                     continue
                 
                 # Delete Vehicle
                 elif (numopt == 5):
                     
-                    tmpFromCamera, licencePlate = self.selectCamaraAndPlate()
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
                     if(tmpFromCamera == None or licencePlate == None):
                         continue
                     
-                    tmpFromCamera.sendDeleteVehicle(licencePlate)
+                    tmpFromCamera.sendDeleteVehicle(str(licencePlate))
                     continue
                 # Print all cameras
                 elif (numopt == 6):
@@ -745,7 +748,7 @@ if __name__ == '__main__':
     defaultip = globalConfig.defaultip
     defaultport = globalConfig.defaultport
     # DEFAULT Camera configurations
-    defaultprotocol = globalConfig.defaultcamaraprotocol
+    defaultprotocol = globalConfig.defaultcameraprotocol
 
     # ------
     cameraManager = CameraManager(cameraprotocolClass=defaultprotocol)

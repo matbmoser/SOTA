@@ -1,1 +1,12 @@
 // Suggested location to add your overrides so that migration would be easy by just updating the SASS folder in the future
+.layout-main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+    padding: 7rem 2rem 2rem 4rem;
+    transition: margin-left $transitionDuration;
+}
+.layout-main, #wrapper, .layout-wrapper{
+    height: 100%!important;
+}

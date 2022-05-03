@@ -27,7 +27,7 @@ class TCPSJMPCamera(TCPCamera):
 
     :attr str sessionid: Contains the Camera session identification unique key
     
-    :attr str type: Contains the type of camara/the function designated (add cars of delete cars, or both) ["ENTRY", "EXIT", "BOTH"] default: BOTH
+    :attr str type: Contains the type of camera/the function designated (add cars of delete cars, or both) ["ENTRY", "EXIT", "BOTH"] default: BOTH
 
     [More Attributes can be added]
     '''

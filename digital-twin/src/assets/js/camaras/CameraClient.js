@@ -9,44 +9,45 @@ class CameraClient{
         this.socket = null;
         this.type=null;
         // Until the server sends the data the id and session id will be empty
-        this.token = null;
+        this.sessionid = null;
         this.SJMPHandler = new SJMPHandler(this)
+        this.self = null
     }
-    async start(ip, port){
-        setConnecting()
+    async start(ip, port, self){
+        setConnecting();
         this.serverip = ip;
         this.serverport = port;
         this.serverkey = ip + ":" + port.toString();
         let protocolPayload = ["SJMP",encodeURIComponent(this.SJMPHandler.getSYN())];
         this.socket = new WebSocket('ws://'+this.serverip+':'+this.serverport.toString(),protocolPayload);
         this.setSocket();
+        this.self = self;
     }
     async close(){
         this.socket.close();
-        unlockConfig();
         stopMessage();
         setOffline();
         this.status = "OFFLINE"
-        if(this.type != "manual"){
-            closeWindow();
-        }
+        localStorage.setItem("cameraStatus", this.status)
     }
     async setSocket(){
+        var self = this;
         this.socket.onopen = function(evt) {
             startMessage();
             setConnected();
-            this.status = "CONNECTED";
+            self.status = "CONNECTED";
+            localStorage.setItem("cameraStatus", this.status)
         };
 
         this.socket.onclose = function(evt) {
             writeToScreen('<span style = "color: red;">CLIENT FORCED DISCONNECTED</span>');
-            client.close();
+            self.close();
         };
         
         this.socket.onmessage = function(evt) {
             writeToScreen('<span style = "color: gray; font-size:0.8em">RAW MESSAGE: ' + 
             evt.data+'</span>');
-            client.parseMessage(evt.data)
+            self.parseMessage(evt.data);
         };
         
         this.socket.onerror = function(evt) {
@@ -55,15 +56,18 @@ class CameraClient{
             unlockConfig();
             stopMessage();
             setOffline();
-            this.status = "OFFLINE"
-            client.close()
+            self.status = "OFFLINE"
+            localStorage.setItem("cameraStatus", this.status )
+            self.close();
         }; 
     }
-    
-    async sendMessageToClient(cameraid, message){
-        this.sendMessageToServer(this.SJMPHandler.getMSG(cameraid, message))
+    async sendPlateToServer(matricula, tipo) {
+        if (tipo === "IN"){
+            this.sendMessageToServer(this.SJMPHandler.getIN(matricula))
+        }else if(tipo === "OUT"){
+            this.sendMessageToServer(this.SJMPHandler.getOUT(matricula))
+        }
     }
-
     async sendMessageToServer(message) {
         try{
             this.socket.send(message);
@@ -89,8 +93,8 @@ class CameraClient{
                 }
                 else if(this.parsedMessage["flag"] == "OK"){
                     color = "#198754";
-                    this.token = this.parsedMessage["token"];
-                    document.cookie = "token="+encodeURIComponent(this.token)+"; path=/";
+                    this.sessionid = this.parsedMessage["sessionid"];
+                    document.cookie = "sessionid="+encodeURIComponent(this.sessionid)+"; path=/";
                 }
                 writeToScreenSpan("<span style='color:"+color+"'><strong>FLAG ["+this.parsedMessage["flag"]+"]:</strong></span><span style='color:#0d6efd'> INFO: </span>");
                 if("srv-time" in this.parsedMessage){
@@ -101,16 +105,18 @@ class CameraClient{
                 }
                 writeToScreenSpan("<br>");
             }
-            if(this.parsedMessage["flag"] == "OK"){
-                writeToScreenSpan("<span style='color:"+color+"'><strong>["+this.serverkey+"] token = </strong>"+ this.parsedMessage["token"]+"</span>");
-                writeToScreenSpan("<br><span style='color:#33ff00'>The connection is Opened! Client is Online, you can send messages!</span>");
+            if (this.parsedMessage["flag"] == "OK"){
+                writeToScreenSpan("<span style='color:" + color + "'><strong>[" + this.serverkey + "] sessionid = </strong>" + this.parsedMessage["sessionid"]+"</span>");
+                writeToScreenSpan("<br><span style='color:#00b92c'>La conexión está abierta, ¡puedes enviar matriculas!</span>");
                 setOnline();
-                this.status = "ONLINE"
+                this.status = "ONLINE";
+                localStorage.setItem("cameraid", this.cameraid);
+                localStorage.setItem("cameraStatus", this.status);
             }
             if("cameraid" in this.parsedMessage){
-                writeToScreenSpan("<span style='color:"+color+"'><strong>["+this.parsedMessage["cameraid"]+"] says -> </strong>"+ this.parsedMessage["message"]+"</span>");
-            }else if(this.parsedMessage["message"] != "" && this.parsedMessage["message"] != null){
-                writeToScreenSpan("<span style='color:"+color+"'><strong>["+this.serverkey+"] says -> </strong>"+ this.parsedMessage["message"]+"</span>");
+                writeToScreenSpan("<span style='color:" + color + "'><strong>[" + this.parsedMessage["cameraid"] + "] says -> </strong>" + this.parsedMessage["response"]+"</span>");
+            } else if (this.parsedMessage["response"] != "" && this.parsedMessage["response"] != null){
+                writeToScreenSpan("<span style='color:" + color + "'><strong>[" + this.serverkey + "] says -> </strong>" + this.parsedMessage["response"]+"</span>");
             }
             
         }catch(e){

@@ -31,7 +31,7 @@
 <script src="https://kit.fontawesome.com/6d67b863f5.js" crossorigin="anonymous"></script>
 <link rel="icon" type="image/x-icon" href="../media/favicon.ico">
 </head>
-<script>var configs = <?php echo json_encode($configs); ?>;</script>
+<script>var CONFIGS = <?php echo json_encode($configs); ?>;</script>
 <section class="gradient-custom">
 
 <div class="container py-5 h-100">

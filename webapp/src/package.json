@@ -23,7 +23,6 @@
         "autoprefixer": "^10.4.4",
         "axios": "^0.26.1",
         "laravel-mix": "^6.0.43",
-        "lodash": "^4.17.21",
         "postcss": "^8.4.12",
         "sass-loader": "^12.6.0",
         "tailwindcss": "^3.0.23",
@@ -32,6 +31,8 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "@vuelidate/core": "^2.0.0-alpha.40",
+        "@vuelidate/validators": "^2.0.0-alpha.28",
         "@websanova/vue-auth": "^4.1.12",
         "browser-sync": "^2.27.9",
         "browser-sync-webpack-plugin": "^0.1.0",

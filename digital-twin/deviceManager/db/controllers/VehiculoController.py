@@ -8,23 +8,18 @@ class VehiculoController(BaseController):
         self.tableName = 'Vehiculo'
         super().__init__()
         self.externalTable = TipoVehiculoController()
-        
-    def add(self, matricula, tipo):
-        time = datetime.now().strftime("Y-m-d hh:mm:ss")
-        self.tipos = self.externalTable.getValues()
-        if(tipo not in self.tipos):
-            return None
-        self.conn.insertTableElement(elem=(matricula,self.tipos[tipo],time, time), table=self.tableName)
-        return True
     
     def deleteByMatricula(self, matricula):
-        self.conn.deleteTableElement(table=self.tableName, where="matricula="+str(matricula))
+        self.conn.deleteTableElement(table=self.tableName, where="matricula='"+str(matricula)+"'")
     
     def getByMatricula(self, matricula):
-        return self.conn.fetchAll(table=self.tableName,where="matricula="+str(matricula))   
+        return self.conn.fetchAll(table=self.tableName,where="matricula='"+str(matricula)+"'")   
     
     def get(self, where):
         return self.conn.fetchAll(table=self.tableName, where=where)
+    
+    def getById(self, id):
+        return self.conn.fetchAll(table=self.tableName,where="id="+str(id)+"")
     
     def getAll(self):
         return self.conn.fetchAll(table=self.tableName)
@@ -33,7 +28,10 @@ class VehiculoController(BaseController):
         self.values = self.conn.getValueIdDict(id="id", value="matricula", table=self.tableName)
         return self.values
 
-    def update(self, where="all", matricula=None, tipo=None):
+    def addAparcamiento(self, idVehiculo):
+        return self.conn.updateQuery("UPDATE "+self.tableName+" SET numAparcamientos=numAparcamientos + 1,ultimoAparcamiento=now() WHERE idVehiculo='"+str(idVehiculo)+"'")
+    
+    def update(self, where="all", matricula=None, tipo=None, ultimoAparcamiento=None, numAparcamientos=None):
         if where == "all":
             where=None
         setList = []
