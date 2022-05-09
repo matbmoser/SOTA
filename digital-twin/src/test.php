@@ -1,6 +1,6 @@
 
 <?php
-    require "assets/mod/class.RSACrypto.php";
+    require "assets/mod/cryptool/class.RSACrypto.php";
     $cryptohandler = new RSACrypto();
 
     echo "<pre><p>Clave Publica = [\n".$cryptohandler->publicKey."]</p><br><br></pre>";

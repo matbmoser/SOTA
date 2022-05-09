@@ -29,7 +29,7 @@ class VehiculoController(BaseController):
         return self.values
 
     def addAparcamiento(self, idVehiculo):
-        return self.conn.updateQuery("UPDATE "+self.tableName+" SET numAparcamientos=numAparcamientos + 1,ultimoAparcamiento=now() WHERE idVehiculo='"+str(idVehiculo)+"'")
+        return self.conn.operationQuery("UPDATE "+self.tableName+" SET numAparcamientos=numAparcamientos + 1, ultimoAparcamiento='"+str(datetime.now())+"' WHERE id="+str(idVehiculo)+"")
     
     def update(self, where="all", matricula=None, tipo=None, ultimoAparcamiento=None, numAparcamientos=None):
         if where == "all":

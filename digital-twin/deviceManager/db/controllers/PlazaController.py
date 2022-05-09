@@ -15,9 +15,12 @@ class PlazaController(BaseController):
     
     def add(self, id, letraZona, matricula):
         time = str(datetime.now())
+        self.externalTable.refresh()
         self.tipos = self.externalTable.getValues()
         if(letraZona not in self.tipos):
             return None
+        self.externalTable1.refresh()
+        self.externalTable1.refresh()
         self.tipos1 = self.externalTable1.getValues()
         if(matricula not in self.tipos1):
             return None
@@ -31,6 +34,7 @@ class PlazaController(BaseController):
         time = str(datetime.now())
         hashDigest = "$token{"+str(time)+str(id)+str(idZona)+"}"
         token = str(hashlib.sha512((hashDigest).encode('utf-8')).hexdigest())
+        self.refresh()
         return self.conn.insertTableElementWithId(ignore="fechaSalida", elem=(id, time, 1, 0, idZona, idVehiculo,token, time, time), table=self.tableName)
     
     def deleteByMatricula(self, matricula):
@@ -40,7 +44,7 @@ class PlazaController(BaseController):
         self.conn.deleteTableElement(table=self.tableName, where="idVehiculo='"+str(self.tipos1[matricula])+"'")
 
     def invalidTicket(self, idVehiculo):
-        return self.conn.updateTableElement(table=self.tableName, set=[('valido',0)], where="idVehiculo='"+str(idVehiculo)+"'")
+        return self.conn.updateTableElement(table=self.tableName, set=[('valido', 0), ("fechaSalida", str(datetime.now()))], where="idVehiculo='"+str(idVehiculo)+"'")
     
     def deleteByToken(self, token):
         self.conn.deleteTableElement(table=self.tableName, where="token='"+str(token)+"'")
@@ -58,6 +62,8 @@ class PlazaController(BaseController):
         return self.conn.fetchAll(table=self.tableName,where="idZona="+str(idZona)+"")     
     
     def getByIdVehiculo(self, idVehiculo):
+        self.refresh()
+        self.externalTable1.refresh()
         return self.conn.fetchAll(table=self.tableName,where="idVehiculo="+str(idVehiculo)+"")
     
     def getByIdPlazaZona(self, id, idZona):

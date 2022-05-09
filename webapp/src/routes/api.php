@@ -8,6 +8,7 @@ use App\Http\Controllers\ZonaController;
 use App\Http\Controllers\PlazaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\TipoVehiculoController;
+use App\Http\Controllers\IncidenciaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,7 +35,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Users
     Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
     Route::get('user/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
-    
+    Route::patch('user/{id}', 'App\Http\Controllers\UserController@updateData')->middleware('isAdminOrSelf');
     // Roles
     Route::get('roles', 'App\Http\Controllers\RolController@index')->middleware('isAdmin');
     Route::get('rol/{id}', 'App\Http\Controllers\RolController@show')->middleware('isAdminOrSelfRol');
@@ -46,6 +47,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     // Tipo Vehiculo
     Route::get('vehiculos/tipos', 'App\Http\Controllers\TipoVehiculoController@index');
     Route::get('vehiculo/tipo', 'App\Http\Controllers\TipoVehiculoController@show');
+
+    Route::get('incidencias', 'App\Http\Controllers\IncidenciaController@index')->middleware('isAdmin');
+    Route::get('incidencias/user/{id}', 'App\Http\Controllers\IncidenciaController@getIncidencias')->middleware('isAdminOrSelf');
 
 
     // Vehiculos
@@ -60,4 +64,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('plaza/{id}', 'App\Http\Controllers\PlazaController@show');
     Route::get('plazas/validas', 'App\Http\Controllers\PlazaController@validas');
     Route::get('plazas/validas/zonas', 'App\Http\Controllers\PlazaController@validasZona');
+    Route::get('tickets/user/{id}', 'App\Http\Controllers\PlazaController@getTickets')->middleware('isAdminOrSelf');
 });
+Route::get('ticket/{token}', 'App\Http\Controllers\PlazaController@getTicket');

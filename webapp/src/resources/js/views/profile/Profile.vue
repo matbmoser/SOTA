@@ -46,8 +46,7 @@
                 </template>
                 <template #footer>
                     <span class="p-buttonset p-col-12 p-md-4 center">
-                        <Button class="p-button-danger p-button-outlined" @click="deleteUser($event, currentUser.id)" icon="pi pi-times" label="Delete profile" />
-                        <Button @click="toEdit()" label="Edit" icon="pi pi-user-edit" iconpos="left" />
+                        <Button @click="toEdit()" class="w-full" label="Editar Perfil" icon="pi pi-user-edit" iconpos="left" />
                     </span>
                 </template>
                 </Card>
@@ -138,7 +137,7 @@
                 });
             },
             toEdit() {
-                this.$router.push('/user/edit');
+                this.$router.push('/profile/edit');
             },
         },
         mounted(){

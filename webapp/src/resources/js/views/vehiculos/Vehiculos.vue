@@ -44,7 +44,6 @@
                                 i++;
                             }
                             this.tipovehiculos = tipos;
-                        console.log(this.tipovehiculos);
                     }).catch(error =>{
                         this.$toast.removeAllGroups();
                         self.displayToastMessage(ToastSeverity.ERROR, "No ha sido posible recoger el tipo de vehiculo!", "Intente otra vez más tarde...");
@@ -73,7 +72,6 @@
                         this.loading = false;
                         this.$toast.removeAllGroups();
                         this.vehiculos = response.data.vehiculos;
-                        console.log(this.tipovehiculos);
                     }).catch(error =>{
                         this.$toast.removeAllGroups();
                         self.displayErrorMessage();

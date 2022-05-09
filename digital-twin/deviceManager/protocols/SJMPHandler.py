@@ -264,6 +264,7 @@ class handler():
         # Check if the plate detected by the camera exists
         tmpVehicle = self.server.camerasManager.db_getVehicleByPlate(plate=self.packet.plate)
 
+
         # We must return an error if not
         if (tmpVehicle == None):
             op.printLog(
@@ -275,10 +276,10 @@ class handler():
                 return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
             else:
                 return tmpOutputMessage.messageToJSONString()
+                
+        plaza, zona = self.server.camerasManager.db_checkIfPlaza(
+            idVehiculo=tmpVehicle["id"])
 
-        
-        plaza, zona  = self.server.camerasManager.db_checkIfPlaza(idVehiculo=tmpVehicle["id"])
-        
         if(plaza != None or zona!=None):
             if(plaza["valido"] == 1):
                 op.printLog(
@@ -292,7 +293,7 @@ class handler():
                     return tmpOutputMessage.messageToJSONString()
             
             op.printLog(
-                logType="INFO", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Deleting old ticket from vehicle with plate ["+tmpVehicle["matricula"]+"], ticketToken=["+plaza["token"]+"] oldPlaza=["+str(zona["letra"])+str(plaza["id"])+"] ")
+                logType="INFO", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Deleting old ticket from vehicle with plate ["+tmpVehicle["matricula"]+"], ticketToken=["+str(plaza["token"])+"] oldPlaza=["+str(zona["letra"])+str(plaza["id"])+"] ")
             res = self.server.camerasManager.db_deleteTicket(token=plaza["token"])
             
         
@@ -349,14 +350,20 @@ class handler():
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Origin Camera with sessionid ["+self.packet.sessionid+"] does not exists!")
 
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            if(self.camera.encrypted):
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            else:
+                return tmpOutputMessage.messageToJSONString()
         
         ##  If the camera is in the entrace can not registrate a exit
         if (originCamera.type=="ENTRY"):
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Invalid Flag for Type ["+originCamera.type+"] of Camera!")
 
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            if(self.camera.encrypted):
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            else:
+                return tmpOutputMessage.messageToJSONString()
         
         # Check if the plate detected by the camera exists
         tmpVehicle = self.server.camerasManager.db_getVehicleByPlate(plate=self.packet.plate)
@@ -368,7 +375,10 @@ class handler():
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="The vehicle with plate ["+self.packet.plate+"] does not exists!")
 
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            if(self.camera.encrypted):
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            else:
+                return tmpOutputMessage.messageToJSONString()
 
         
         plaza, zona  = self.server.camerasManager.db_checkIfPlaza(idVehiculo=tmpVehicle["id"])
@@ -380,7 +390,10 @@ class handler():
                 tmpOutputMessage = tmpOutputPacket.dumpPacket(
                     flag="ERR", response=" The vehicle with plate [" + self.packet.plate + "] is not inside the parking!")
 
-                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+                if(self.camera.encrypted):
+                    return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+                else:
+                    return tmpOutputMessage.messageToJSONString()
         
         res = self.server.camerasManager.db_invalidarPlaza(idVehiculo=tmpVehicle["id"])
         
@@ -389,7 +402,10 @@ class handler():
                 logType="ERROR", messageStr="SJMPHandler.processINFlag(matricula=["+self.packet.plate+"]) Was not posible to invalid ticket for vehicle ["+self.packet.plate+"]!")
             tmpOutputMessage = tmpOutputPacket.dumpPacket(
                 flag="ERR", response="Was not posible to generate ticket for vehicule ["+self.packet.plate+"]!")
-            return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            if(self.camera.encrypted):
+                return tmpOutputMessage.encryptJSONMessage(originCamera.publicKey)
+            else:
+                return tmpOutputMessage.messageToJSONString()
         #
         # SENDING MESSAGE BACK TO Camera ---------------------------------
         # Send a message to the Camera saying that the message was sent
