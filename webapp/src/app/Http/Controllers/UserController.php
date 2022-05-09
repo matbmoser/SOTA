@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -143,6 +144,46 @@ class UserController extends Controller
         $usuario->save(); //storing values as an object
         
         return $usuario; //returns the stored value if the operation was successful.
+    }
+    public function updateData(Request $request, $id)
+    {       
+        $v = Validator::make($request->all(), [
+            'id' => 'required|integer',
+            'email' => 'required|email',
+            'nombre' => 'required',
+            'username' =>  'required',
+            'password' =>  'required',
+            'password_confirmation' => 'required|same:password', 
+        ]);
+        if ($v->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+  
+        $usuario = User::findorFail($id);
+        if($usuario == null){
+            return response()->json([
+                'success' => false,
+                'message' => "Usuario no encontrado!"
+            ], 401);
+        }
+        $usuario->email = $request->input('email');
+        $usuario->nombre = $request->input('nombre');
+        $usuario->username = $request->input('username');
+        $usuario->password = bcrypt($request->input('password'));
+        $usuario->token = hash("sha256",$usuario->email.hash("sha512",$request->input('password')));
+        $usuario->fechaUltimaConexion = now();
+        $usuario->save(); //storing values as an object
+
+        $token = Auth::guard()->attempt(['email' => strtolower($request->input('email')), 'password' => request('password')]);
+        
+        return response()->json([
+            'success' => true,
+            'user' => $usuario
+        ], 200)->header('Authorization', $token);;
     }
     /*
     @param  int  $id

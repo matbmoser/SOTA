@@ -12,6 +12,7 @@ import Login from "../views/auth/Login.vue";
 import Register from "../views/auth/Register.vue";
 import Profile from "../views/profile/Profile.vue";
 import EditUser from "../views/profile/EditUser.vue";
+import VerTicket from "../views/tickets/VerTicket.vue";
 
 export const routes = [
   {
@@ -49,6 +50,13 @@ export const routes = [
       requiresAuth: false,
       hideNavigation: true 
     }
+  },
+  {
+    path: "/ticket/:token",
+    name: "Ticket",
+    component: VerTicket,
+    props: true,
+    meta: { requiresAuth: false }
   },
   {
     path: "/vehiculos",

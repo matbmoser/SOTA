@@ -7,9 +7,12 @@ function openServer(port) {
 function getServer(port) {
     ServerConnectionManager.get(port);
 }
+function getServerLog(serverid){
+    ServerConnectionManager.getLog(serverid);
+}
 function printServerStatus(data){
     let monitor = document.getElementById("monitor");
-    monitor.innerHTML = `<span style="color:green">Servidor [`+data["name"].toString()+`] Abierto en IP=[`+data["ip"].toString()+`], PORT=[`+data["port"].toString()+`] y PID=[`+data["pid"].toString()+`]  </span>`
+    monitor.innerHTML = `<span style="color:green">Servidor [` + data["name"].toString() +`] Abierto en IP=[127.0.0.1], PORT=[`+data["port"].toString()+`] y PID=[`+data["pid"].toString()+`]  </span>`
     printServerData(data)
 }
 function printServerData(data){
@@ -18,7 +21,7 @@ function printServerData(data){
     serverData.innerHTML = `<span style="color:white">
     <strong>SERVERID</strong>: `+data["name"].toString()+` 
     <br>
-    <strong>IP</strong>: `+data["ip"].toString()+`
+    <strong>IP</strong>: 127.0.0.1
     <br>
     <strong>PORT</strong>: `+data["port"].toString()+`
     <br>
@@ -28,8 +31,9 @@ function printServerData(data){
 function closeServerByPort(){
     let data = JSON.parse(localStorage.getItem("serverInfo"));
     let monitor = document.getElementById("monitor");
-    monitor.innerHTML = `<span style="color:#dc3545"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>Cerrando Servidor [`+data["name"].toString()+`] Abierto en IP=[`+data["ip"].toString()+`], PORT=[`+data["port"].toString()+`] y PID=[`+data["pid"].toString()+`]  </span>`
+    monitor.innerHTML = `<span style="color:#dc3545"><div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div>Cerrando Servidor [`+data["name"].toString()+`] Abierto en IP=[127.0.0.1], PORT=[`+data["port"].toString()+`] y PID=[`+data["pid"].toString()+`]  </span>`
     closeServer(data["port"]);
+    disconnectFromServer();
 }
 function openServerByPort(){
     var ipPattern = "#ip-pattern";
@@ -99,8 +103,8 @@ function replaceForm(){
     <div class="mb-3"><label for="port-pattern" class="col-form-label">PORT:</label>
         <input type="number" id="port-pattern" min="1" max="65535" class="form-control" required>
     </div>`
-    var minPort = 1;
-    var maxPort = 65535;
+    var minPort = CONFIGS["minport"];
+    var maxPort = CONFIGS["maxport"];
     var portPattern = "#port-pattern";
     $(portPattern).val(randomIntFromInterval(minPort, maxPort));
 
@@ -151,12 +155,14 @@ function blockAddServer(){
     var randomPortButton = document.getElementById("randomPort");
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
+    var logButton = document.getElementById("log");
     var connectCamera = document.getElementById("connectCamera");
 
     connectCamera.classList.remove("hidden");
     openServerButton.innerHTML = "Close Server";
     openButton.classList.add("hidden");
     closeButton.classList.remove("hidden");
+    logButton.classList.remove("hidden");
     openServerButton.classList.remove("btn-warning");
     openServerButton.classList.add("btn-danger");
     openButton.classList.remove("btn-success");
@@ -176,11 +182,12 @@ function unblockAddServer(){
     var openButton = document.getElementById("open");
     var closeButton = document.getElementById("close");
     var connectCamera = document.getElementById("connectCamera");
-
+    var logButton = document.getElementById("log");
     connectCamera.classList.add("hidden");
     openServerButton.innerHTML = "Open Server";
     openButton.classList.remove("hidden");
     closeButton.classList.add("hidden");
+    logButton.classList.add("hidden");
     openServerButton.classList.add("btn-warning");
     openServerButton.classList.remove("btn-danger");
     openButton.classList.add("btn-success");

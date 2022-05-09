@@ -1,0 +1,20 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.008506] DBManager.operationQuery()
+[INFO]: Server [45027bc6ca7d] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[45027bc6ca7d], ip=[127.0.0.1], port=[4088], poll_interval=[0.5]. [Server [45027bc6ca7d] in socket [0.0.0.0:4088] status [RUNNING] in thread: [45027bc6ca7d]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651843886.184792, "cameraid": "54288f5c-2dcc-4f6e-be5b-a913798b2018", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl2H7Rj444hDO/sCPQZ8c\nkAbUp6RpBEHH0vkLG7aweUbSdCNR5qK3iU7TkDZMr2Lf05aLv0rN/hP8tTiEz420\n4cIpbI5XLmRB67XQpVFeRdAvkSZ+ZusL0+aU5zJYqJdz3iNos710m15QmvcddUI1\nyhGHtcIcfBzSzkZkWdz+ka8C7yE+idgdBTOkZBrEb1JyU6c+0OjWa4VO1vypYgH0\nk3hR7cauz/3cpWa5yG3MKeJFmtJDNJVBHBsgVQvL604cH/b0wWyFe5BCT9xezGYt\npkYbqpl2tNDwZK/fjOyxswoTvSSw0h0CqC1YmiIBFn1R8k+Qr066a625UwyZB8QS\nkQIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [54288f5c-2dcc-4f6e-be5b-a913798b2018], status [ONLINE] on [127.0.0.1:52906] logged in with sessionid = [f5cd2b35928b143ef71178abb0e39a7b] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [45027bc6ca7d]-[0.0.0.0:4088] BaseRequestHandler.setup().
+[DEBUG]: [45027bc6ca7d]-[0.0.0.0:4088] > Received one request from 54288f5c-2dcc-4f6e-be5b-a913798b2018
+[ERROR]: Was not posible to add camera [54288f5c-2dcc-4f6e-be5b-a913798b2018] in DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.049534]
+[DEBUG]: {'id': 9, 'matricula': '4561-QWE', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 29, 42), 'updated_at': datetime.datetime(2022, 5, 6, 13, 29, 42)}
+[DEBUG]: {'id': 9, 'matricula': '4561-QWE', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 29, 42), 'updated_at': datetime.datetime(2022, 5, 6, 13, 29, 42)}
+[STATS]: [0] elements update in [0:00:00.001121] DBManager.operationQuery()
+[CRITICAL]:[1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sotadb`.`plaza`, CONSTRAINT `plaza_idvehiculo_foreign` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)]. DBManager.operationQuery(INSERT INTO Plaza (`id`, `fechaEntrada`, `valido`, `incidencia`, `idZona`, `idVehiculo`, `token`, `created_at`, `updated_at`) VALUES (24, '2022-05-06 13:32:12.839102', 1, 0, 1, 9, 'f2aa62629627f041858d765ddbd60c9df2cf3cd9afd8de0db67699e842fde43fe452026c7d4696935a65fa86bae4a727273196704a0dd7cae253f9ca44c3283b', '2022-05-06 13:32:12.839102', '2022-05-06 13:32:12.839102'))
+[ERROR]: SJMPHandler.processINFlag(matricula=[4561-QWE]) Was not posible to generate ticket for vehicle [4561-QWE]!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.256792]

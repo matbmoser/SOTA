@@ -12,6 +12,7 @@ class CameraClient{
         this.sessionid = null;
         this.SJMPHandler = new SJMPHandler(this)
         this.self = null
+        this.sendedMessage = null;
     }
     async start(ip, port, self){
         setConnecting();
@@ -63,8 +64,10 @@ class CameraClient{
     }
     async sendPlateToServer(matricula, tipo) {
         if (tipo === "IN"){
+            this.sendedMessage = "IN";
             this.sendMessageToServer(this.SJMPHandler.getIN(matricula))
         }else if(tipo === "OUT"){
+            this.sendedMessage = "OUT";
             this.sendMessageToServer(this.SJMPHandler.getOUT(matricula))
         }
     }
@@ -88,8 +91,18 @@ class CameraClient{
                 // Personalize message printed
                 if(this.parsedMessage["flag"] == "ERR"){
                     color= "#fb4934";
+                    if (this.sendedMessage == "IN"){
+                        printLn("monitorEntrada", "<span style='color:" + color +"'><strong>[ERROR]</strong> " + this.parsedMessage["response"]+"</span>");
+                    } else if (this.sendedMessage == "OUT") {
+                        printLn("monitorSalida", "<span style='color:" + color +"'><strong>[ERROR]</strong> " + this.parsedMessage["response"] + "</span>");
+                    }
                 }else if(this.parsedMessage["flag"] == "ACK"){
-                    color = "#fabd2f";
+                    color = "#158a00";
+                    if (this.sendedMessage == "IN") {
+                        printLn("monitorEntrada", "<span style='color:" + color +"'><strong>[ADDED]</strong> " + this.parsedMessage["response"] + "</span>");
+                    } else if (this.sendedMessage == "OUT") {
+                        printLn("monitorSalida", "<span style='color:" + color +"'><strong>[DELETED]</strong> " + this.parsedMessage["response"] + "</span>");
+                    }
                 }
                 else if(this.parsedMessage["flag"] == "OK"){
                     color = "#198754";

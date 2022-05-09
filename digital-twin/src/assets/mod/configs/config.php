@@ -13,5 +13,7 @@ return array(
     'defaultPollInterval' => '0.5',
     'letraAparcamiento'   => 'Y',
     'siglaUniversidad'    => 'UFV',
+    'minport'             => 4050,
+    'maxport'             => 4100,
     'httpHost'            => $_SERVER['HTTP_HOST']
 );

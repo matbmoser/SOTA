@@ -47,6 +47,7 @@ class BaseCameraManager():
     def startControllers(self):
         self.controllersStarted = True
         self.cameraController = CamaraController()
+        self.vehicleController = VehiculoController()
         self.plazaController = PlazaController()
         self.zonaController = ZonaController()
         self.tipoVehiculotipoPlazaController = TipoVehiculoTipoPlazaController()
@@ -82,11 +83,11 @@ class BaseCameraManager():
         return None
 
     def db_getVehicleByPlate(self, plate):
-        self.vehicleController = VehiculoController()
         vehiculo = self.vehicleController.getByMatricula(matricula=plate)
+
         if(vehiculo == [] or vehiculo == None):
             return None
-        
+
         return vehiculo[0]
     
     def db_getBySocketKey(self, socketKey):
@@ -119,7 +120,7 @@ class BaseCameraManager():
         zonaFinal = None
         if(len(tipoPlazas) == 1):
             tipoPlazas = (tipoPlazas[0])
-            zonas = zonas = self.conn.query("SELECT id, plazas FROM Zona WHERE idTipoPlaza="+str(tipoPlazas)+" ORDER BY RAND()")
+            zonas = self.conn.query("SELECT id, plazas FROM Zona WHERE idTipoPlaza="+str(tipoPlazas)+" ORDER BY RAND()")
         elif(len(tipoPlazas) > 1):
             tipoPlazas = tuple(tipoPlazas)
             zonas = self.conn.query("SELECT id, plazas FROM Zona WHERE idTipoPlaza in "+str(tipoPlazas)+" ORDER BY RAND()")
@@ -145,32 +146,25 @@ class BaseCameraManager():
         if(plazaFinal == None or zonaFinal == None):
             return None, None
         
-        self.zonaController.refresh()
         zona = self.zonaController.getById(id=zonaFinal)
-        self.conn.close()
         return plazaFinal, zona[0]["id"], str(zona[0]["letra"])+str(plazaFinal)
     
     def db_asignarPlaza(self, plaza, idZona, idVehiculo):
-        self.plazaController.refresh()
-        self.vehicleController.refresh()
         self.vehicleController.addAparcamiento(idVehiculo=idVehiculo)
         return self.plazaController.addTicket(id=plaza, idZona=idZona, idVehiculo=idVehiculo)
         
     def db_invalidarPlaza(self, idVehiculo):
-        self.plazaController.refresh()
         return self.plazaController.invalidTicket(idVehiculo=idVehiculo)
     
     def db_checkIfPlaza(self, idVehiculo):
-        self.plazaController.refresh()
         plaza = self.plazaController.getByIdVehiculo(idVehiculo=idVehiculo)
         if(plaza == [] or plaza == None):
             return None, None
+        zona = self.zonaController.getById(id=plaza[0]["idZona"])
         
-        zona = self.zonaController.getById(id=plaza["idZona"])
-        return plaza, zona
+        return plaza[0], zona[0]
     
     def db_deleteTicket(self, token):
-        self.plazaController.refresh()
         return self.plazaController.deleteByToken(token=token)
         
         
@@ -211,7 +205,7 @@ class BaseCameraManager():
             op.printLog(logType="INFO", messageStr=f"Camera [{cameraid}] added into DB!") 
             return True
         else:
-            op.printLog(logType="ERROR", messageStr=f"Was not posible add camera [{cameraid}] in DB!") 
+            op.printLog(logType="ERROR", messageStr=f"Was not posible to add camera [{cameraid}] in DB!") 
             return False
     # Creates or gets Camera if already exists
     # (Returns new Camera)

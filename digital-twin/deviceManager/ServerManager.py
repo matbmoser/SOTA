@@ -153,7 +153,7 @@ class ServerManager():
                 logType="ERROR", messageStr="Was not posible to create the server in  ip=[" + ip + "], port=[" + str(port) + "]")
             return res
 
-        op.printLog(logType="INFO", messageStr="NEW SERVER CREATED!: serverid=["+tmpServer.serverid+"], ip=[" + ip + "], port=[" + str(
+        op.printLog(logType="INFO", messageStr="NEW SERVER CREATED!: serverid=["+tmpServer.serverid+"], ip=[127.0.0.1], port=[" + str(
             port) + "], poll_interval=[" + str(poll_interval) + "]. [" + tmpServer.toString() + "].")
 
         return tmpServer

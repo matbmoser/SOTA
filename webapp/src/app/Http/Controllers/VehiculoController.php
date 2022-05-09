@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vehiculo;
 use App\Models\User;
+use App\Models\Plaza;
+use App\Models\Zona;
 use App\Models\TipoVehiculo;
 use Illuminate\Support\Facades\Validator;
 
@@ -182,6 +184,15 @@ class VehiculoController extends Controller
             }
             $vehiculo = Vehiculo::where("idUsuario",Auth::user()->id)->where('id', $request->input('id'))->first(); //searching for object in database using ID
             if($vehiculo != null){ //deletes the object
+                $plaza = Plaza::where("valido", 1)->where("idVehiculo",$vehiculo->id)->first();
+
+                if($plaza != null){
+                    return response()->json([
+                    'success' => false,
+                    'message' => "The vehicle is inside the parking place [".Zona::where("id",$plaza->idZona)->first()->letra.strval($plaza->id)."]! Take it out before deleting it!"
+                ], 401);
+                }
+
                 $vehiculo->delete();
                 return response()->json(
                     [

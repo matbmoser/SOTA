@@ -1,0 +1,81 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements afected in [0:00:00.010208] DBManager.operationQuery()
+[INFO]: Server [92866a367dd1] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[92866a367dd1], ip=[127.0.0.1], port=[4098], poll_interval=[0.5]. [Server [92866a367dd1] in socket [0.0.0.0:4098] status [RUNNING] in thread: [92866a367dd1]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4098
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: Bw2QwXpOFcj1gr1GiJ3Z8A==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1652136487516'%2C%20'cameraid'%3A%20'815a8a95-700c-42b9-b0e9-41e89f5448be'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [815a8a95-700c-42b9-b0e9-41e89f5448be], status [ONLINE] on [172.23.0.1:36456] logged in with sessionid = [a1bf2655847c4f43824beddd9aa19543] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [92866a367dd1]-[0.0.0.0:4098] BaseRequestHandler.setup().
+[DEBUG]: [92866a367dd1]-[0.0.0.0:4098] > Received one request from 815a8a95-700c-42b9-b0e9-41e89f5448be
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000339]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-HGF]) The vehicle with plate [12345-HGF] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.118290]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-HGF]) The vehicle with plate [12345-HGF] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.122679]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [815a8a95-700c-42b9-b0e9-41e89f5448be] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024096]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4098
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: UsZghgqs+AQSsQbpEVTzbg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1652136562967'%2C%20'cameraid'%3A%20'815a8a95-700c-42b9-b0e9-41e89f5448be'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [815a8a95-700c-42b9-b0e9-41e89f5448be], status [ONLINE] on [172.23.0.1:36550] logged in with sessionid = [bee08362f9e1d558b7a592b12663cb9d] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [92866a367dd1]-[0.0.0.0:4098] BaseRequestHandler.setup().
+[DEBUG]: [92866a367dd1]-[0.0.0.0:4098] > Received one request from 815a8a95-700c-42b9-b0e9-41e89f5448be
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000466]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-TFG]) The vehicle with plate [12345-TFG] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.114360]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-TFG]) The vehicle with plate [12345-TFG] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.112974]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [115]
+[ERROR]: SJMPHandler.processOUTFlag(matricula=[12345-TFG]) The vehicle with plate [12345-TFG] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.119815]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [815a8a95-700c-42b9-b0e9-41e89f5448be] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.023490]

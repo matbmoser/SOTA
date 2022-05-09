@@ -21,7 +21,7 @@ class CreateIncidenciaTable extends Migration
 		$table->integer('idAprobador',)->unsigned()->nullable();
 		$table->string('tokenPlaza',128)->unique()->comment('Unique sha512 hash');
 		$table->foreign('idAprobador')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE'); 
-		$table->foreign('tokenPlaza')->references('token')->on('Plaza')->onUpdate('CASCADE');
+		$table->foreign('tokenPlaza')->references('token')->on('Plaza')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();    
 		});
     }
