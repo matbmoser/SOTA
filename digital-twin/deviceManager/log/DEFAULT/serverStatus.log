@@ -1,0 +1,19 @@
+Starting Server Log Messages...
+[INFO]: You are [root]
+[INFO]: Trying to start server...
+[STATS]: [1] elements afected in [0:00:00.009913] DBManager.operationQuery()
+[INFO]: Server [DEFAULT] updated in id [1]
+[INFO]: NEW SERVER CREATED!: serverid=[DEFAULT], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [DEFAULT] in socket [0.0.0.0:8888] status [RUNNING] in thread: [DEFAULT]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1652136421.576751, "cameraid": "564c0b28-a268-4c96-aaea-c072b951d164", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgT+FPvM0BWNxb2NGRo3\n/MJDusD+ummCBFqvJl/+Z9pHrCQXG0bHpDiimMl7f2s3CL9cWBBAIM9YlQ9W64sm\nNoMN14gAgeFP81Z6k3gJdj9UaO2dWsC2B2PhUWYad7SzYSHYTDmYhCI9ZZRJ72jP\nsCHkyOwxBGM1T2SSeJlI8rjkO9aqHM1B8TaB181r2nmdkw4LT+lYkklc6OAQVKDm\nseXLDI4PF7BZ0NXNmcxKUXhMDpxIzyt6HEok7004/KUcnYonroJSTXlQUQdplAVg\n4p097RKJ38hz9jSq5NtRXQT66m5+WnJDxxPruUcxhXOktp0rvjmE/BOs5fhmra13\n2wIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [564c0b28-a268-4c96-aaea-c072b951d164], status [ONLINE] on [127.0.0.1:33170] logged in with sessionid = [9851d0685b33beeebcb0fce68645b1f8] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [DEFAULT]-[0.0.0.0:8888] BaseRequestHandler.setup().
+[DEBUG]: [DEFAULT]-[0.0.0.0:8888] > Received one request from 564c0b28-a268-4c96-aaea-c072b951d164
+[STATS]: [1] elements afected in [0:00:00.010633] DBManager.operationQuery()
+[INFO]: Camera [564c0b28-a268-4c96-aaea-c072b951d164] added into DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.836246]
+[ERROR]: SJMPHandler.processINFlag(matricula=[4567-JKL]) The vehicle with plate [4567-JKL] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.147550]
+[ERROR]: SJMPHandler.processOUTFlag(matricula=[456G-HFD]) The vehicle with plate [456G-HFD] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.146132]

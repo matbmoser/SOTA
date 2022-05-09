@@ -6,8 +6,9 @@ from operators.op import op
 import json
 import fileinput
 from datetime import datetime, timezone
-
-
+from globalConfig import globalConfig
+import uuid
+  
 from camera.BaseCameraManager import BaseCameraManager
 
 
@@ -64,7 +65,7 @@ class CameraManager(BaseCameraManager):
 
     # Creates one or more Socket Cameras
     # (Returns new Camera)
-    def createCameras(self, cameraClass, serverip, serverport, baseCameraid, numCameras=1):
+    def createCameras(self, cameraClass, serverip, serverport, baseCameraid, numCameras=1, type="BOTH"):
 
         # Check if the number of cameras is correct
         try:
@@ -89,7 +90,7 @@ class CameraManager(BaseCameraManager):
                     logType="DEBUG", messageStr=f"Trying to start Camera [{tmpCameraid}]...")
                 # Create the Camera
                 tmpCamera = self.newAndConnect(
-                    protocolClass=cameraClass, cameraid=tmpCameraid, serverip=serverip, serverport=serverport)
+                    protocolClass=cameraClass, cameraid=tmpCameraid, serverip=serverip, serverport=serverport, type=type)
 
                 # If was not posible to create
                 if(tmpCamera == None):
@@ -106,72 +107,6 @@ class CameraManager(BaseCameraManager):
 
             return self.Cameras
 
-        except Exception as e:
-            op.printLog(logType="EXCEPTION", e=e,
-                        messageStr="in SocketCamerasManager(). On createCameras()")
-            traceback.print_exc()
-
-    # Creates a test Camera
-    def createTestCameras(self, cameraClass, serverip, serverport, baseCameraid, objectiveType, objectiveNC, objectiveNM, numCameras=1):
-
-        try:
-            numCameras = int(numCameras)
-            numCameras = 1 if(numCameras < 1 or numCameras ==
-                              None) else numCameras
-        except:  # If it fails
-            numCameras = 1
-
-        try:
-            # DEFINE OBJECTIVES
-            self.objectiveType = objectiveType
-            self.objectiveNC = objectiveNC
-            self.objectiveNM = objectiveNM
-            self.startMsgs = datetime.now(timezone.utc)
-
-            # Set up the expected results to stop calculate statistics later.
-            if(objectiveType == "RECEIVE"):
-                self.messagesPerCamera = self.objectiveNM+1
-                self.expectedMessages = (objectiveNM*objectiveNC)+objectiveNC
-            else:
-                self.messagesPerCamera = self.objectiveNM+1
-                self.expectedMessages = (objectiveNM*objectiveNC)
-
-            startPoint = int(int(self.objectiveNC)/5)
-            self.controlPoints = list(
-                range(startPoint, int(self.objectiveNC), startPoint))
-
-            op.printLog(logType="INFO", messageStr="Test Camera Started Objective:["+str(objectiveType)+"];expectedMessages:["+str(self.expectedMessages)+"];expectedCameras:["+str(
-                self.objectiveNC)+"];expectedMessagesPerCamera:["+str(self.messagesPerCamera)+"]; Control Points: ["+str(self.controlPoints)+"].")
-
-            # Set Camera id from arguments
-            for i in range(0, numCameras):
-
-                # Create Camera ID
-                if(i == 0):
-                    tmpCameraid = baseCameraid
-                else:
-                    tmpCameraid = baseCameraid+str(i)
-
-                op.printLog(
-                    logType="DEBUG", messageStr=f"Trying to start Camera [{tmpCameraid}]...")
-                # Create the Camera
-                tmpCamera = self.newAndConnect(
-                    protocolClass=cameraClass, cameraid=tmpCameraid, serverip=serverip, serverport=serverport)
-
-                # If was not posible to create
-                if(tmpCamera == None):
-                    op.printLog(
-                        logType="ERROR", messageStr="Was not posible to connect with server [ip=("+serverip+"), port=("+str(serverport)+")]")
-                    op.printLog(logType="DEBUG",
-                                messageStr=f"Closing Camera [{tmpCameraid}]...")
-                    return None
-
-            # Calculate the number of cameras
-            lenCameras = len(self.Cameras)
-            op.printLog(logType="INFO",
-                        messageStr=f"NEW cameras created=[{str(lenCameras)}]!")
-
-            return self.Cameras
         except Exception as e:
             op.printLog(logType="EXCEPTION", e=e,
                         messageStr="in SocketCamerasManager(). On createCameras()")
@@ -186,12 +121,12 @@ class CameraManager(BaseCameraManager):
 
     # Method responsible to create new Camera
     # (Returns new Camera)
-    def new(self, protocolClass=None, cameraid="", serverip='127.0.0.1', serverport=8080, ip="", port="", token=None):
+    def new(self, protocolClass=None, cameraid="", serverip='127.0.0.1', serverport=8080, ip="", port="", sessionid=None, type="BOTH"):
         if protocolClass == None:
             protocolClass = self.cameraprotocolClass
 
         tmpCamera = op.createClass(newClass=protocolClass, serverip=serverip,
-                                   serverport=serverport, ip=ip, port=port, cameraid=cameraid, token=token)
+                                   serverport=serverport, ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
         self.addCamera(camera=tmpCamera)
         op.printLog(logType="DEBUG", messageStr="SocketCamerasManager.new(protocolClass="+protocolClass +
                     ", cameraid=["+tmpCamera.cameraid+"], serverip=[" + serverip + "], serverport=[" + str(serverport) + "].")
@@ -199,10 +134,10 @@ class CameraManager(BaseCameraManager):
 
     # Method responsible to connect a Camera to server
     # (Returns the Camera if connected and None if not)
-    def newAndConnect(self, protocolClass=None, cameraid=None, serverip='127.0.0.1', serverport=8080, token=None):
+    def newAndConnect(self, protocolClass=None, cameraid=None, serverip='127.0.0.1', serverport=8080, sessionid=None, type="BOTH"):
 
         tmpCamera = self.new(protocolClass=protocolClass, cameraid=cameraid,
-                             serverip=serverip, serverport=serverport, token=token)
+                             serverip=serverip, serverport=serverport, sessionid=sessionid, type=type)
         res = tmpCamera.connect()
         if(res):
             op.printLog(logType="DEBUG", messageStr=tmpCamera.toString())
@@ -305,66 +240,6 @@ class CameraManager(BaseCameraManager):
 
         op.printLog(logType="DEBUG", messageStr="Camera Closed!")
 
-    def startFileCamera(self, camera, file):
-        # Read file content
-        lines = fileinput.input(files=(file), encoding="utf-8")
-        # Calculate initial time
-        self.startMessages(camera=camera)
-        # Go line per line sending the messages
-        for line in lines:
-            try:
-                if(line.rstrip() == ""):
-                    continue
-                # Try to parse JSON
-                parsedLine = json.loads(line.rstrip())
-                cameraid = parsedLine["cameraid"]
-                message = parsedLine["message"]
-                camera.sendMessageToCamera(message=message, cameraid=cameraid)
-            except Exception as e:
-                op.printLog(
-                    logType="DEBUG", e=e, messageStr=f"SocketCamerasManager.startFileCamera(): Was not possible to parse [{line}].")
-                camera.sendMessageToServer(message=message)
-                continue
-
-        # Calculate final results
-        self.finishMessages(camera=camera)
-
-    def startTestCamera(self, camera, cameras=None, message=None, nMessages=None):
-        # Wait for the Camera to be online
-        while camera.status != "ONLINE":
-            continue
-        # Calculate initial time
-        self.startMessages(camera=camera)
-        try:
-            # Check vars
-            if(cameras == None):
-                return
-            if(nMessages == None):
-                nMessages = 1
-            try:
-                nMessages = int(nMessages)
-            except:
-                repnMessageseat = 1
-
-            # If we want to send messages form a batch file
-            if(message == None):
-                message = "This is a test message 1234"
-
-            # Send message from Camera to cameras
-            for tmpCamera in cameras:
-                for i in range(0, nMessages):
-                    camera.sendMessageToCamera(
-                        message=message+str(i), cameraid=tmpCamera)
-                self.ncameras += 1
-
-        except Exception as e:
-            op.printLog(logType="EXCEPTION", e=e,
-                        messageStr="in SocketCamerasManager().startTestCamera()")
-            traceback.print_exc()
-
-        # Calculate final results
-        self.finishMessages(camera=camera)
-
     # ================================================================
     # STATISTICS/TEST METHODS
     # (Can be removed in production)
@@ -458,31 +333,53 @@ class CameraManager(BaseCameraManager):
         print(" 1 -> Start new Camera")
         print(" 2 -> Start Default Camera")
         print(" 3 -> Disconnect Camera")
-        print(" 4 -> Send Message")
-        print(" 5 -> List all cameras")
-        print(" 6 -> Exit")
+        print(" 4 -> Add Vehicle")
+        print(" 5 -> Delete Vehicle")
+        print(" 6 -> List all cameras")
+        print(" 7 -> Exit")
         print("-------------------------------------\n")
         print("Choose option:\n")
         return input("[Admin\cameras\cmd] > ")
-
+    
     # Prints Camera classes the options to select
-    def selectCameraClass(self):
-
-        print("\n------------[Protocols]--------------")
-        print(" 1 -> TCP Camera")
-        print(" 2 -> TCP SJMP Camera")
-        print(" 3 -> Return")
+    def selectCameraType(self):
+        
+        print("\n------------[Type]--------------")
+        print(" 1 -> ENTRY")
+        print(" 2 -> EXIT")
+        print(" 3 -> BOTH")
+        print(" 4 -> Return")
         print("-------------------------------------\n")
-        print("Choose a protocol:\n")
+        print("Where is the camera:\n")
         opt = input("[Admin\cameras\protocols] > ")
 
         if(opt == "1"):
-            return "camera.socket.TCPSocketCamera.TCPSocketCamera"
+            return "ENTRY"
         elif(opt == "2"):
-            return "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+            return "EXIT"
+        elif(opt == "3"):
+            return "BOTH"
         else:
             return None
 
+    def selectCameraAndPlate(self):
+        
+        print("Select a Camera to send message FROM:")
+        tmpFromCamera = self.selectCamera(
+            route="\\sendmessage\\from")
+        if (tmpFromCamera == None):
+            return None, None
+
+        print("Insert Vehicle Licence Plate")
+        licencePlate = input(
+            "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
+        while(licencePlate == "" or len(licencePlate) > 9 or len(licencePlate) < 0):
+            print("Please input a correct Vehicle Licence Plate!\n")
+            licencePlate = input(
+                "[Admin\cameras\sendmessage\\addVehicle] > Vehicle Licence Plate: ")
+            
+        return tmpFromCamera, licencePlate
+    
     # ================================================================
     # COMMAND LINE METHODS
 
@@ -529,7 +426,10 @@ class CameraManager(BaseCameraManager):
 
                 # Create new Camera
                 if (numopt == 1):
-                    cameraid = input("Please insert Camera id: ")
+                    cameraid = input(
+                        "Please insert the Camera ID [Default Random UUID]: ")
+                    cameraid = cameraid if not cameraid == "" else str(uuid.uuid4())
+                    print("Creating camera... cameraid=["+str(cameraid)+"]")
 
                     if(cameraid == ""):
                         print("\n[ERROR] A Camera id needs to be specified!\n")
@@ -557,23 +457,23 @@ class CameraManager(BaseCameraManager):
                             "\n[ERROR] The port needs to be between 1 and 65534\n")
                         continue
 
-                    # Get Camera class
-                    print(
-                        "Please select the Camera protocol [Default TCPCamera]: ")
-                    protocolClass = self.selectCameraClass()
-                    if(protocolClass == None):
-                        protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+                    protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
+                    cameraType = self.selectCameraType()
+                    
+                    if(cameraType == None):
+                        cameraType = "BOTH"
+                    
                     try:
                         # Create and Start Server
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=ip, serverport=port, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
                     except Exception as e:
                         op.printLog(
-                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndStart()")
+                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndConnect()")
                         traceback.print_exc()
                     continue
 
@@ -582,26 +482,28 @@ class CameraManager(BaseCameraManager):
                     # SET DEFAULT Camera CONFIGURATIONS:
 
                     cameraid = "DEFAULT"
-
+                    cameraType = "BOTH"
+                    
                     # If Camera exists
-                    if(self.getByCameraId(cameraid=cameraid) != None):
+                    camera = self.getByCameraId(cameraid=cameraid) 
+                    if(camera != None):
+                        self.deleteCameraByCameraId(cameraid=cameraid)
                         op.printLog(
-                            logType="ERROR", messageStr="Camera already registed in the server! Create a new Camera...")
-                        continue
+                            logType="WARNING", messageStr="Camera was already registerd, deleting camera.")
 
                     protocolClass = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
 
                     try:
                         # Start new Camera
                         tmpCamera = self.newAndConnect(
-                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport)
+                            protocolClass=protocolClass, cameraid=cameraid, serverip=defaultip, serverport=defaultport, type=cameraType)
                         if not tmpCamera:
                             op.printLog(
                                 logType="ERROR", messageStr="Was not possible to add a new Camera, invalid configuration!\n")
 
                     except Exception as e:
                         op.printLog(
-                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndStart()")
+                            logType="EXCEPTION", e=e, messageStr="in SocketCamerasManager(). On newAndConnect()")
                         traceback.print_exc()
 
                     continue
@@ -614,34 +516,31 @@ class CameraManager(BaseCameraManager):
 
                     tmpCamera.forceClose()
 
-                # Send messages to Camera
+                # Add Vehicle
                 elif (numopt == 4):
-
-                    print("Select a Camera to send message FROM:")
-                    tmpFromCamera = self.selectCamera(
-                        route="\\sendmessage\\from")
-                    if (tmpFromCamera == None):
+                    
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
+                    if(tmpFromCamera == None or licencePlate == None):
                         continue
-
-                    print("Insert Camera ID to send message TO:")
-                    tmpCameraid = input(
-                        "[Admin\cameras\sendmessage\\to] > Destination cameraid: ")
-                    while(tmpCameraid == ""):
-                        print("Please introduce a valid cameraid!\n")
-                        tmpCameraid = input(
-                            "[Admin\cameras\sendmessage\\to] > Destination cameraid: ")
-                    tmpMsg = input(
-                        "[Admin\cameras\sendmessage\message] > Message to send: ")
-                    tmpFromCamera.sendMessageToCamera(
-                        cameraid=tmpCameraid, message=str(tmpMsg))
+                    
+                    tmpFromCamera.sendAddVehicle(str(licencePlate))
                     continue
-
-                # Print all cameras
+                
+                # Delete Vehicle
                 elif (numopt == 5):
+                    
+                    tmpFromCamera, licencePlate = self.selectCameraAndPlate()
+                    if(tmpFromCamera == None or licencePlate == None):
+                        continue
+                    
+                    tmpFromCamera.sendDeleteVehicle(str(licencePlate))
+                    continue
+                # Print all cameras
+                elif (numopt == 6):
                     self.listCameras()
 
                 # Exit the manager
-                elif (numopt == 6):
+                elif (numopt == 7):
                     self.closeCameras()
                     break
 
@@ -652,6 +551,8 @@ class CameraManager(BaseCameraManager):
                 op.printLog(logType="EXCEPTION", e=e,
                             messageStr="[ERROR] Option not found!\n")
                 traceback.print_exc()
+                
+                   # Prints Camera classes the options to select
 
 ###### MAIN PROGRAM ######################################################################################################################################################
 # Main program help
@@ -659,45 +560,24 @@ class CameraManager(BaseCameraManager):
 
 def showHelp():
     print(
-        "\n***************************************\n"
-        + "\nMultiple Protocol Python Camera Manager"
-        + "\nby: David Graciani and Mathias Moser"
-        + "\nCopyright CGI, All rights reserved"
-        + "\n\n***************************************"
+        "\n\n***************************************"
         + "\n\nDEFAULT PROTOCOL = ["+defaultprotocol+"]"
         + '\n\n-> IF YOU NEED HELP: '
-        + '\n\n\tpy SocketCamerasManager.py -h'
+        + '\n\n\tpy CameraManager.py -h'
         + '\n\n-> IF YOU WANT TO USE CMD: '
-        + '\n\n\tpy SocketCamerasManager.py -cmd\n'
+        + '\n\n\tpy Camerasanager.py -cmd\n'
         + '\n\n-> ARGUMENTS DESCRIPTION: '
         + '\n\n\t-n [cameraid] [MANDATORY]: Camera unique identificator, can be alfanumeric.'
         + '\n\n\t-ip [ip]: IP from server to connect to.'
         + '\n\n\t-port [port]: PORT from server to connect to.'
-        + '\n\n\t-f [filepath]: Messages file path. If no other params are set messages will be sent to server.'
-        + '\n\t\tFile messages can use JSON format to specify the destination cameras and message: Ex: {"cameraid": "Clark", "message": "fraud tight cheese"} '
-        + '\n\n\t-m [message]: If a specific messages must be sent to different cameras'
-        + '\n\n\t-c [destination cameras]: Camerasid to send divided by "|". Ex: CL1|CL2|CL3.'
-        + '\n\n\t-nM [Number of messages to send]: Number of messages to send'
-        + '\n\n\t-dC [destination cameras base name]: If the cameras need to send to other cameras with a base destination cameraid.'
-        + '\n\n\t-nC [number of cameras to create]: If we need to create multiple cameras. Will be created using the -n [cameraid] as "baseCameraid + number"'
-        + '\n\n-> TEST ARGUMENTS DESCRIPTION: '
-        + '\n\n\t-t [test objective can be ["SEND" or "RECEIVE"]]: When test mode with objectives is use this option.'
-        + '\n\n\t-oC [nº cameras]: Number of cameras that will send information. '
-        + '\n\n\t-oM [nº messages per Camera]: Number of messages sent by each Camera. '
-        + '\n\n-> REQUIREMENTS: '
-        + '\n\n\t[cameraid] Must be filled to open Camera.'
-        + '\n\n\tIf TEST Objective is [RECEIVE]: -oC AND -oM need to be set.'
-        + '\n\n\tIf TEST Objective is [SEND]: -nC AND -nM need to be set.'
         + '\n\n\tDefault Values if empty:'
         + '\n\n\t-----------------------------------------'
         + '\n\t| [-ip] = '+defaultip+'\t\t\t|'
         + '\n\t| [-port] = '+str(defaultport)+'\t\t\t|'
-        + '\n\t| [-nM] = '+str(1)+'\t\t\t\t|'
-        + '\n\t| [-nC] = '+str(1)+'\t\t\t\t|'
-        + '\n\t| [-c] = None\t\t\t\t|'
         + '\n\t| Other Arguments = None\t\t|'
         + '\n\t-----------------------------------------\n'
     )
+   
 
 
 def main(cameraManager, arguments):
@@ -865,10 +745,10 @@ def main(cameraManager, arguments):
 if __name__ == '__main__':
     # SET DEFAULT Camera CONFIGURATIONS:
     # DEFAULT server configuration
-    defaultip = "127.0.0.1"
-    defaultport = 8888
+    defaultip = globalConfig.defaultip
+    defaultport = globalConfig.defaultport
     # DEFAULT Camera configurations
-    defaultprotocol = "camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera"
+    defaultprotocol = globalConfig.defaultcameraprotocol
 
     # ------
     cameraManager = CameraManager(cameraprotocolClass=defaultprotocol)

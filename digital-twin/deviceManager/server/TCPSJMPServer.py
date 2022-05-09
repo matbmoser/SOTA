@@ -60,7 +60,7 @@ class TCPSJMPRequestHandler(TCPRequestHandler):
             datetime.now(timezone.utc)) + "cameraid=["+tmpCameraId+"]").encode()).hexdigest())
 
         tmpCamera = self.server.camerasManager.createOrGetCamera(
-            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=tmpCameraId, token=tmpSessionId)
+            protocolClass=protocolClass, ip=self.client_address[0], port=self.client_address[1], cameraid=tmpCameraId, sessionid=tmpSessionId)
 
         return tmpCamera
 

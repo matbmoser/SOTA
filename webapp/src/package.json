@@ -12,18 +12,17 @@
         "production": "mix --production",
         "serve": "php artisan serve --host 0.0.0.0",
         "faker": "php artisan db:seed",
-        "migrate": "php artisan migrate:fresh",
+        "migrate": "php artisan migrate:fresh --seed",
         "controller": "php artisan make:controller ${P}Controller",
         "factory": "php artisan make:factory ${P}Factory",
         "completeModel": "php artisan make:model ${P} -fcsr",
-        "model": "php artisan make:model ${P}"
-
+        "model": "php artisan make:model ${P}",
+        "passport": "php artisan passport:install"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.4",
-        "axios": "^0.26",
+        "axios": "^0.26.1",
         "laravel-mix": "^6.0.43",
-        "lodash": "^4.17.21",
         "postcss": "^8.4.12",
         "sass-loader": "^12.6.0",
         "tailwindcss": "^3.0.23",
@@ -32,16 +31,27 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "@vuelidate/core": "^2.0.0-alpha.40",
+        "@vuelidate/validators": "^2.0.0-alpha.28",
+        "@websanova/vue-auth": "^4.1.12",
         "browser-sync": "^2.27.9",
-        "browser-sync-webpack-plugin": "^2.3.0",
+        "browser-sync-webpack-plugin": "^0.1.0",
+        "chart.js": "^3.7.1",
         "cross-env": "^7.0.3",
+        "es6-promise": "^4.2.8",
         "express": "^4.17.3",
+        "js-cookie": "^3.0.1",
         "primeflex": "^3.1.3",
         "primeicons": "^5.0.0",
         "primevue": "^3.12.2",
+        "qrious": "^4.0.2",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.49.9",
         "typescript": "^4.6.2",
-        "vue-router": "^4.0.13"
+        "vue-axios": "^3.4.1",
+        "vue-qrcode-component": "^2.1.1",
+        "vue-router": "^4.0.14",
+        "vuex": "^4.0.2",
+        "vuex-persistedstate": "^4.1.0"
     }
 }

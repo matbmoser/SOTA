@@ -1,14 +1,50 @@
 # Set log levels
+from shutil import copyfile, move
+import shutil
+from os.path import isfile, join
+from os import listdir
+import os
+import sys
 LOGLEVELS = {"NONE": 0, "CRITICAL": 1, "EXCEPTION": 2,
              "ERROR": 3, "WARNING": 4, "INFO": 5, "STATS": 6, "DEBUG": 7}
 LOGLEVEL = LOGLEVELS["DEBUG"]
 
 # Clas that defines operations
 
+LOGFILEDEFAULT = "./log/serverStatus.log"
+LOGFILE = None
+
+from datetime import datetime, timezone
 
 class op:
 
-    # Method to set value empty by default
+    @staticmethod
+    def timestamp(zone=timezone.utc, string=False):
+        timestamp = datetime.timestamp(datetime.now(zone))
+        if (string):
+            return str(timestamp)
+        
+        return timestamp
+    
+    @staticmethod
+    def getDatetime(zone=timezone.utc, string=False):
+        date = datetime.now(zone)
+        if (string):
+            return str(date)
+        
+        return date
+    
+    @staticmethod
+    def startLog(logFile=None):
+        global LOGFILE, LOGFILEDEFAULT
+        if(logFile != None):
+            LOGFILE = logFile
+        else:
+            LOGFILE = LOGFILEDEFAULT
+        openMessage = "Starting Server Log Messages..."
+        op.writeToFile(data=openMessage, filePath=LOGFILE,
+                       openMode="w+", end="\n")
+
     @staticmethod
     def valueEmpty(obj):
         return "" if obj == None or obj == "" else obj
@@ -21,7 +57,9 @@ class op:
     # Print log Operation
     @staticmethod
     def printLog(messageStr, logType="DEBUG", e=None):
-        global LOGLEVEL, LOGLEVELS
+        global LOGLEVEL, LOGLEVELS, LOGFILE
+        if(LOGFILE == None):
+            op.startLog()
         # If the log level requested is lower than the actual log level
         if LOGLEVEL < LOGLEVELS[logType]:
             return None
@@ -32,11 +70,12 @@ class op:
             logInfo += "[" + str(e) + "]."
 
         # Print the log
-
-        return print(" ".join([logInfo, messageStr]))
+        logData = " ".join([logInfo, messageStr])
+        op.writeToFile(data=logData, filePath=LOGFILE, openMode="a+", end="\n")
+        return print(logData)
 
     # Init dinamically the new class
-    @staticmethod
+    @ staticmethod
     def createClass(newClass, *args, **kwargs):
         # Get slices
         slices = newClass.split('.')
@@ -57,3 +96,63 @@ class op:
 
         # Create the class
         return importedClass(*args, **kwargs)
+
+    @ staticmethod
+    def pathExists(pathName):
+        pathFile = os.path.exists(pathName)
+        return pathFile
+
+    @ staticmethod
+    def makeDir(nameDir, permits=0o777):
+        if op.pathExists(nameDir):
+            return True
+        os.makedirs(nameDir, permits)
+        return True
+    
+    @ staticmethod
+    def deleteDir(nameDir):
+        if not op.pathExists(nameDir):
+            return False
+        
+        shutil.rmtree(nameDir)
+    @ staticmethod
+    def copyFile(src, dst):
+        return copyfile(src, dst)
+
+    @ staticmethod
+    def moveFile(src, dst):
+        return move(src, dst)
+
+    @ staticmethod
+    def toString(inputFile, openmode="r", encoding=sys.stdout.encoding):
+        str = open(inputFile, openmode, encoding=encoding).read()
+        return str
+
+    @ staticmethod
+    def deleteFile(filePath):
+        if not op.pathExists(filePath):
+            return None
+
+        os.remove(filePath)
+        return True
+
+    @ staticmethod
+    def getPathWithoutFile(filePath):
+        return os.path.dirname(filePath)
+
+    @ staticmethod
+    def writeToFile(data, filePath, openMode="r", end=""):
+        if(data == "" or data == None):
+            return None
+
+        data = data + end
+        path = op.getPathWithoutFile(filePath)
+
+        if path == None or not op.pathExists(path):
+            op.makeDir(path)
+
+        file = open(filePath,
+                    openMode, encoding=sys.stdout.encoding)
+        file.write(data)
+        file.close()
+        return True

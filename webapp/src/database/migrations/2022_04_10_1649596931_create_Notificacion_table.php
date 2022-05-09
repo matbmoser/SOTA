@@ -13,11 +13,11 @@ class CreateNotificacionTable extends Migration
 		$table->increments('id');
 		$table->string('titulo');
 		$table->text('descripcion');
-		$table->boolean('boton');
-		$table->string('tituloBoton',25);
-		$table->text('enlaceBoton');
+		$table->boolean('boton')->defalt(0);
+		$table->string('tituloBoton',25)->nullable();
+		$table->text('enlaceBoton')->nullable();
 		$table->integer('idUsuario',)->unsigned();
-        $table->foreign('idUsuario')->references('id')->on('Usuario')->onUpdate('CASCADE')->onDelete('CASCADE');
+        $table->foreign('idUsuario')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();
         });
     }

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* The alert message box */
+.alert-danger {
+    padding: 5px 15px;
+    background-color: #dc3545; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+.alert-encrypted {
+    padding: 5px 15px;
+    background-color: #0063de; /* Green */
+    color: white;
+    margin-bottom: 15px;
+}
+.alert-decrypted {
+    padding: 5px 15px;
+    background-color: #198754; /* Green */
+    color: white;
+    margin-bottom: 15px;
+}
+.alert-fail {
+    padding: 5px 15px;
+    background-color: #ffc107; /* Yellow */
+    color: white;
+    margin-bottom: 15px;
+} 

@@ -1,1 +1,4 @@
 psutil
+rsa
+mysql-connector-python
+cryptography

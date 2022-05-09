@@ -1,0 +1,16 @@
+Starting Server Log Messages...
+[DEBUG]: SocketCamerasManager.new(protocolClass=camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera, cameraid=[564c0b28-a268-4c96-aaea-c072b951d164], serverip=[localhost], serverport=[8888].
+[DEBUG]: Camera Socket Opened on [127.0.0.1:33170] ...
+[DEBUG]: [564c0b28-a268-4c96-aaea-c072b951d164]->[SENT SJMP SYN MESSAGE]
+[DEBUG]: Camera [564c0b28-a268-4c96-aaea-c072b951d164], status [CONNECTED] on [127.0.0.1:33170] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] in [localhost:8888] 
+[DEBUG]: Camera [564c0b28-a268-4c96-aaea-c072b951d164] listening in [<class 'camera.socket.TCPSJMPSocketCamera.TCPSJMPSocketCamera'>-564c0b28-a268-4c96-aaea-c072b951d164-localhost:8888]
+[DEBUG]: Camera [564c0b28-a268-4c96-aaea-c072b951d164] status [ONLINE] logged in with sessionid = [9851d0685b33beeebcb0fce68645b1f8] in [localhost:8888].
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003080]
+[DEBUG]: [564c0b28-a268-4c96-aaea-c072b951d164]->[SENT SJMP IN MESSAGE]
+[ERROR]: [NEW INCOMING ERROR]: [{"flag": "ERR", "srv-time": 1652136439.151103, "response": "The vehicle with plate [4567-JKL] does not exists!"}]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.042626]
+[DEBUG]: [564c0b28-a268-4c96-aaea-c072b951d164]->[SENT SJMP OUT MESSAGE]
+[ERROR]: [NEW INCOMING ERROR]: [{"flag": "ERR", "srv-time": 1652136453.088286, "response": "The vehicle with plate [456G-HFD] does not exists!"}]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.044363]
+[DEBUG]:[[Errno 9] Bad file descriptor]. BaseProtocol.loadRequest(request)
+[INFO]: Camera [564c0b28-a268-4c96-aaea-c072b951d164] KILLED!

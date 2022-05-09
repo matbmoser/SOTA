@@ -20,9 +20,20 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->firstName(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' =>  hash('sha512',$this->faker->word()),
+            'nombre' => "Mathias",
+            'username' => "matbmoser",
+            'apellido1' => "Brunkow",
+            'apellido2' => "Moser",
+            'documento' => "07164545J",
+            'telefono' => "647637778",
+            'email' => "mathiasmoser@outlook.com",
+            'password' =>  hash("sha-512","123456789"),
+            'token' => hash("sha256","mathiasmoser@outlook.com".hash("sha512","123456789")),
+            'fechaNacimiento' => "26/09/2000",
+            'codigoPostal' => "28223",
+            'ciudad' => "Pozuelo de Alarcón",
+            'comunidad' => "Comunidad de Madrid",
+            'pais' => "España",
         ];
     }
 }

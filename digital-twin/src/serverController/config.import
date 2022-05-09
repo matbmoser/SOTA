@@ -1,0 +1,19 @@
+export DEFAULTSERVERFILENAME="ServerManager.py --default"
+export SERVERFILENAME="ServerManager.py"
+export DEVICE_MANAGER=/usr/src/app
+
+export DEFAULTNAME="DefaultServer"
+export DEFAULTIP="0.0.0.0"
+export DEFAULTPORT=8888
+
+
+
+
+function generateRandomName(){
+    LEN=${1}
+    if [ -z $LEN ];
+    then 
+        LEN=32
+    fi    
+    echo $(cat /dev/urandom | tr -cd 'a-f0-9' | head -c $LEN)
+}

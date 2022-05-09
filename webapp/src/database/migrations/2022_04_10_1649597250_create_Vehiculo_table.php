@@ -12,8 +12,11 @@ class CreateVehiculoTable extends Migration
 
 		$table->increments('id');
 		$table->string('matricula',9)->unique();
-		$table->datetime('fechaRegistro');
+        $table->integer('numAparcamientos',)->default(0);
+        $table->datetime('ultimoAparcamiento')->nullable();
 		$table->integer('idTipoVehiculo',)->unsigned();
+        $table->integer('idUsuario',)->unsigned();
+        $table->foreign('idUsuario')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->foreign('idTipoVehiculo')->references('id')->on('TipoVehiculo')->onUpdate('CASCADE')->onDelete('CASCADE');
         $table->timestamps();   
         });

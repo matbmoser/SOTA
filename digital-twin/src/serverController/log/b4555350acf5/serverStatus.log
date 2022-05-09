@@ -1,0 +1,92 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.007847] DBManager.operationQuery()
+[INFO]: Server [b4555350acf5] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[b4555350acf5], ip=[127.0.0.1], port=[4086], poll_interval=[0.5]. [Server [b4555350acf5] in socket [0.0.0.0:4086] status [RUNNING] in thread: [b4555350acf5]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651843202.365027, "cameraid": "ccb7a039-b3f5-414b-97f9-6c88e2d02ce7", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIHphBaB6rmV1rbjtz3S\nnjrcYzL2xbcgxOPXmeAuXD8m3j+3rxvbn5zbpDnlRr5hZGl5dOSxuiKjE31swCO1\nJvmUbv2kV7Xj5siSh65D+G/6bS1VjlqB5411wUCtzAVpr90wJoslbb8GJoGyiJXZ\nElwkKxhyxzvKp8s/2SL7J9Q3s7dEM18jOVuoTdW0DwR6S20w/1adwwqWaY7tA5tb\n1xLMBpomz2iH1qTzl1bOtxdl/spn+a/N/fOyrNBFX6ce7zzyHSyttLChN+DBVx+s\nPGelF9SWy2M+u9IId7MhWKtU7hoft4X7aphzhXhIYMna8zK9/6dRqwqkepu1nJSm\nZwIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [ccb7a039-b3f5-414b-97f9-6c88e2d02ce7], status [ONLINE] on [127.0.0.1:34580] logged in with sessionid = [4471e9933763089cca09af25c2f29646] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] BaseRequestHandler.setup().
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] > Received one request from ccb7a039-b3f5-414b-97f9-6c88e2d02ce7
+[ERROR]: Was not posible to add camera [ccb7a039-b3f5-414b-97f9-6c88e2d02ce7] in DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.056979]
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[STATS]: [1] elements update in [0:00:00.007445] DBManager.operationQuery()
+[STATS]: [1] elements inserted in [0:00:00.005788] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.220661]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.042881]
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651843251.495377, "cameraid": "49270457-631b-45b9-8779-7d3c361caf34", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlgN82FW16pLLrgh4tI9j\nSG5bB3nprdgVQR0Kli63Wocgds3KvqY5qeE+Rfaz189y4iDf0ZALLU4GNV9Bt29e\nKm9AT3GBb0p2HkfFXpe786VjMViDsvsT36mWl6Hl5SSAufb9n+fla4UYqjJhnuBz\nx8GJVExUe3vlEE8z0Ebd6KZIfwr5eqWT19V9MgKFqiTm7LBmHTtVRGhHxuJ54lSO\nb89fUTqfyXcGogGH/BRPLpgwqafOFNxj/Jmpl6RN8svphKnZXp3+Op3Enp6oPGTI\nrtFsDIe1Zj0ZNYtN2N9N2Kiqr9LYhrJT2uHcDj97Z1mdJA3LIIts+eohDOTcupVv\n/QIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [49270457-631b-45b9-8779-7d3c361caf34], status [ONLINE] on [127.0.0.1:34584] logged in with sessionid = [8f9af187750c39c9e7b762788e582827] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] BaseRequestHandler.setup().
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] > Received one request from 49270457-631b-45b9-8779-7d3c361caf34
+[ERROR]: Was not posible to add camera [49270457-631b-45b9-8779-7d3c361caf34] in DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.051482]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4086
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: LkgEubLwL+wMgF8YLt72gA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651843297739'%2C%20'cameraid'%3A%20'578fc33f-bb33-47bc-af97-3b38fcf4b353'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [578fc33f-bb33-47bc-af97-3b38fcf4b353], status [ONLINE] on [172.23.0.1:34592] logged in with sessionid = [8563b2c76d0abb78f468e3f423923ee8] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] BaseRequestHandler.setup().
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] > Received one request from 578fc33f-bb33-47bc-af97-3b38fcf4b353
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.003574]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 20, 18), 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 20, 18), 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[DEBUG]: {'id': 22, 'fechaEntrada': datetime.datetime(2022, 5, 6, 13, 20, 18), 'fechaSalida': None, 'valido': 1, 'incidencia': 0, 'idZona': 4, 'idVehiculo': 7, 'token': '31afb8e2c45af79c9f11ea33ddb081702060b44e1edecb6a305b5d5594857e39b1b482fc9bbd8459f2eccc7277f5e0eac823a12f3731d35357f27b80c5873df8', 'created_at': datetime.datetime(2022, 5, 6, 13, 20, 18), 'updated_at': datetime.datetime(2022, 5, 6, 13, 20, 18)}
+[DEBUG]: {'id': 4, 'letra': 'D', 'plazas': 21, 'idTipoPlaza': 1, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 6, 12, 55, 57), 'updated_at': datetime.datetime(2022, 5, 6, 12, 55, 57)}
+[STATS]: [1] elements update in [0:00:00.018060] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.193980]
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 20, 18), 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[DEBUG]: {'id': 7, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 20, 18), 'idTipoVehiculo': 2, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 12, 41), 'updated_at': datetime.datetime(2022, 5, 6, 13, 12, 41)}
+[STATS]: [0] elements update in [0:00:00.000946] DBManager.operationQuery()
+[CRITICAL]:[1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sotadb`.`plaza`, CONSTRAINT `plaza_idvehiculo_foreign` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)]. DBManager.operationQuery(INSERT INTO Plaza (`id`, `fechaEntrada`, `valido`, `incidencia`, `idZona`, `idVehiculo`, `token`, `created_at`, `updated_at`) VALUES (13, '2022-05-06 13:23:58.125765', 1, 0, 1, 7, 'd4d2e481a54d8e8a4de379588a90ed6998adcd35cba320527ca16724738a171ead546f6e5e2fdf33ab17e9ade250902046148f595016a8f609dd49194f113772', '2022-05-06 13:23:58.125765', '2022-05-06 13:23:58.125765'))
+[ERROR]: SJMPHandler.processINFlag(matricula=[1234-HJK]) Was not posible to generate ticket for vehicle [1234-HJK]!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.270779]
+[DEBUG]: {'id': 8, 'matricula': '1234-HJK', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 23, 37), 'updated_at': datetime.datetime(2022, 5, 6, 13, 23, 37)}
+[DEBUG]: {'id': 8, 'matricula': '1234-HJK', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 23, 37), 'updated_at': datetime.datetime(2022, 5, 6, 13, 23, 37)}
+[STATS]: [1] elements update in [0:00:00.006943] DBManager.operationQuery()
+[STATS]: [1] elements inserted in [0:00:00.004119] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.219158]
+[DEBUG]: {'id': 8, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 24, 12), 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 23, 37), 'updated_at': datetime.datetime(2022, 5, 6, 13, 23, 37)}
+[DEBUG]: {'id': 8, 'matricula': '1234-HJK', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 24, 12), 'idTipoVehiculo': 3, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 23, 37), 'updated_at': datetime.datetime(2022, 5, 6, 13, 23, 37)}
+[DEBUG]: {'id': 21, 'fechaEntrada': datetime.datetime(2022, 5, 6, 13, 24, 12), 'fechaSalida': None, 'valido': 1, 'incidencia': 0, 'idZona': 7, 'idVehiculo': 8, 'token': '6bf8c4f007336f86566faae350b2e74ec2e72fabd3e803cc64b7ff7ffbd50fa9c113205de9e2e38f698e594a375bcc31c2df75ef5f47e519e050910eb5def676', 'created_at': datetime.datetime(2022, 5, 6, 13, 24, 12), 'updated_at': datetime.datetime(2022, 5, 6, 13, 24, 12)}
+[DEBUG]: {'id': 7, 'letra': 'G', 'plazas': 21, 'idTipoPlaza': 2, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 6, 12, 55, 57), 'updated_at': datetime.datetime(2022, 5, 6, 12, 55, 57)}
+[STATS]: [1] elements update in [0:00:00.005812] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.167959]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.086946]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.038897]
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651843793.057294, "cameraid": "49e2641e-8153-4c6d-b01b-b359fb9b7910", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz45kQW24ZHFeBy7ylnsU\nQ01EAuS8558/idhTjc7JGUoLZ7Lh3VLBEXpYuCZd4WuxTAg+vT82OTJ+qunlhDgG\nVIn0xmYL1pj2I4ZU7X7s+dBJyjO8/9xB/FvDaQzcUk8nah+/625Sn5Hitf/uUG21\nAH8iQdXzCsFc4LCsACZpsTMdjwZWOUHb+vH08aV7qXLsiszdKkQy5X5XF+ZKMVir\ndfYfZskVYs/mD6Z/oDHCW3u1/l3gVHyzULYJm+lGis4TTRgVbUcmnqav5i041J9E\nV9A8O9mLhcVOrOy62bysowLSKtYss4xW32yqNGgtMVA5lCyzqoU9xezXgprDo8ak\nRwIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [49e2641e-8153-4c6d-b01b-b359fb9b7910], status [ONLINE] on [127.0.0.1:34748] logged in with sessionid = [fcaa543f6d52cf68ec8778a8a1da303e] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] BaseRequestHandler.setup().
+[DEBUG]: [b4555350acf5]-[0.0.0.0:4086] > Received one request from 49e2641e-8153-4c6d-b01b-b359fb9b7910
+[ERROR]: Was not posible to add camera [49e2641e-8153-4c6d-b01b-b359fb9b7910] in DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.081491]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.089959]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.045484]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [578fc33f-bb33-47bc-af97-3b38fcf4b353] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.024702]

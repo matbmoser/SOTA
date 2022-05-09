@@ -12,14 +12,11 @@ class CreateServidorTable extends Migration
 
 		$table->increments('id');
 		$table->string('serverid',50)->unique();
-		$table->datetime('fechaAlta')->comment('Fecha de Creación');
+        $table->string('socketKey', 20)->unique();
 		$table->integer('idUniversidad')->unsigned();
         $table->foreign('idUniversidad')->references('id')->on('Universidad')->onUpdate('CASCADE')->onDelete('CASCADE');
+        $table->timestamps();
         });
-
-        
-
-
     }
 
     public function down()

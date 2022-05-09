@@ -11,7 +11,8 @@ class CreateAparcamientoTable extends Migration
         Schema::create('Aparcamiento', function (Blueprint $table) {
 
 		$table->increments('id');
-		$table->text('nombre');
+        $table->string("letra", 2)->unique();
+		$table->text('color');
 		$table->text('localizacion');
 		$table->integer('idUniversidad',)->unsigned();
         $table->foreign('idUniversidad')->references('id')->on('Universidad')->onUpdate('CASCADE')->onDelete('CASCADE');

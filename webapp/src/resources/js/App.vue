@@ -1,7 +1,12 @@
 <template>
-  <div id="nav">
-    <router-link :to="{ name: 'Home' }">Home</router-link> |
-    <router-link :to="{ name: 'About' }">About</router-link>
-  </div>
-  <router-view />
+	<div id="pagewrapper">
+        <router-view />
+	</div>
 </template>
+
+<style scoped>
+#pagewrapper{
+    height: 100%;
+}
+</style>
+

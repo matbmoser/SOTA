@@ -2,7 +2,7 @@
 from operators.op import op
 import threading
 import socket
-
+from operators.cryptool import cryptool
 
 from camera.socket.SocketCamerasHandler import SocketCamerasHandler
 from protocols.Protocol import *
@@ -44,15 +44,16 @@ class SocketCamera(Camera):
     [More Attributes can be added]
     '''
 
-    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, token=None):
+    def __init__(self, serverip, serverport, ip=None, port=None, cameraid=None, sessionid=None, type="BOTH"):
         # Call super of BaseCamera
-        super().__init__(ip=ip, port=port, cameraid=cameraid, token=token)
+        super().__init__(ip=ip, port=port, cameraid=cameraid, sessionid=sessionid, type=type)
 
         # Server configurations
         self.serverip = serverip
         self.serverport = serverport
         self.serverkey = self.serverip+":"+str(self.serverport)
-
+        self.serversecret = None
+        
         # Socket configurations
         self.socket = None
         self.socketkey = None
@@ -74,6 +75,14 @@ class SocketCamera(Camera):
     # ================================================================
     # CONNECTION HANDLING METHODS
 
+    def generateSecret(self):
+        return cryptool.generateKeys(string=True)
+    
+    def deleteSecret(self):
+        self.privateKey = None
+        self.publicKey = None
+        return True
+    
     # Gets the handler of connection
     def getHandler(self):
         """OVERRIDE THIS METHOD WITH DESIRED HANDLER"""
@@ -83,6 +92,9 @@ class SocketCamera(Camera):
     # Connects to server though socket
     # (Returns True if was posible to connect, and False if not, None if connection data is not defined)
     def connect(self):
+        
+        self.publicKey, self.privateKey = self.generateSecret()
+        
         # Check if server has connection information defined
         if(((self.serverip == "" or self.serverip == None) or (self.serverport == "" or self.serverport == None))):
             return None
@@ -106,12 +118,6 @@ class SocketCamera(Camera):
         self.status = "CONNECTED"
         op.printLog(
             logType="DEBUG", messageStr="Camera Socket Opened on ["+self.socketkey+"] ...")
-
-        # Send Connection Message with protocol format
-        self.addOutputMessage(
-            value=self.protocol.getConnectionMessage(cameraid=self.cameraid))
-        op.printLog(logType="DEBUG",
-                    messageStr="["+self.cameraid+"]->[SENT CONNECTION MESSAGE]")
 
         return True
 
@@ -139,6 +145,7 @@ class SocketCamera(Camera):
 
     # Close the Camera connection and stop listening
     def close(self):
+        self.deleteSecret()
         # If there is a socket connected
         if(self.socket != None):
             self.socket.close()
@@ -159,12 +166,6 @@ class SocketCamera(Camera):
         # Set message logic
         self.addOutputMessage(message)
 
-    # Sends messages adding to output buffer (TO Camera)
-    def sendMessageToCamera(self, message, cameraid):
-        """OVERRIDE THIS METHOD WITH DESIRED PROTOCOL SENDING MESSAGE STRUCTURE"""
-
-        self.addOutputMessage(message)
-
     # ================================================================
     # PRINT METHODS
 
@@ -177,29 +178,3 @@ class SocketCamera(Camera):
             tmpString += "in ["+str(self.serverkey)+"] "
 
         return tmpString
-
-    # ================================================================
-    # TEST METHODS (Can be removed in production)
-
-    # Start test Camera passing as parameter the cameras manager information to complete test.
-
-    def startTest(self, manager):
-        # Store test vars
-        self.isTestCamera = True
-        # Start Camera
-        # Open Camera passing the manager inside the handler, so we can access to objective information
-        self.handler = self.getHandler()
-        self.handler.manager = manager
-
-        # Set listening thread
-        self.thread = threading.Thread(name=str(
-            str(type(self))+"-"+self.cameraid+"-"+self.serverkey), target=self.handler.listen)
-        if(self.thread == None):
-            return False
-        self.thread.setDaemon = True
-        self.thread.start()
-
-        op.printLog(
-            logType="DEBUG", messageStr="Camera ["+self.cameraid+"] listening in ["+self.thread.getName()+"]")
-
-        return True

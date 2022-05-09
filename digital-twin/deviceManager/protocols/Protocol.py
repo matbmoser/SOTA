@@ -185,7 +185,7 @@ class Protocol():
             return self.closeRequest()
         except Exception as e:
             op.printLog(logType="DEBUG", e=e,
-                        messageStr="\nBaseProtocol.loadRequest(request)")
+                        messageStr="BaseProtocol.loadRequest(request)")
             self.handler.keepAlive = False  # Close connection
 
         # Close request
@@ -202,7 +202,7 @@ class Protocol():
             return self.handler
         except Exception as e:
             op.printLog(logType="EXCEPTION", e=e,
-                        messageStr="\nBaseProtocol.closeRequest()")
+                        messageStr="BaseProtocol.closeRequest()")
             traceback.print_exc()
             self.handler.keepAlive = False  # Close connection
             # Return updated handler
@@ -439,7 +439,7 @@ class Message():
             op.printLog(logType="EXCEPTION", e=e,
                         messageStr="Message.messageToBytes()")
             traceback.print_exc()
-            return bytes(self.content, "utf-8")
+            return self.content
 
     # Base Prepare Message Method
     def prepareMessage(self, message):

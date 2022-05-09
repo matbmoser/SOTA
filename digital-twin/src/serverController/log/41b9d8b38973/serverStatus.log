@@ -1,0 +1,69 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.020220] DBManager.operationQuery()
+[INFO]: Server [41b9d8b38973] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[41b9d8b38973], ip=[127.0.0.1], port=[4077], poll_interval=[0.5]. [Server [41b9d8b38973] in socket [0.0.0.0:4077] status [RUNNING] in thread: [41b9d8b38973]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4077
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: hIYRbGwN/U3UI96lHDpvlA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651717118031'%2C%20'cameraid'%3A%20'076e5780-d8d3-4acf-b19f-3555ff0070e2'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [076e5780-d8d3-4acf-b19f-3555ff0070e2], status [ONLINE] on [172.23.0.1:55624] logged in with sessionid = [ed35a440f604d23b5e74a5d4a7d08bf5] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [41b9d8b38973]-[0.0.0.0:4077] BaseRequestHandler.setup().
+[DEBUG]: [41b9d8b38973]-[0.0.0.0:4077] > Received one request from 076e5780-d8d3-4acf-b19f-3555ff0070e2
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000623]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-TFG]) The vehicle with plate [12345-TFG] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.047136]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [076e5780-d8d3-4acf-b19f-3555ff0070e2] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.080331]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4077
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: lfDhPhdXXPQDZT0NaSVo/Q==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651717393735'%2C%20'cameraid'%3A%20'076e5780-d8d3-4acf-b19f-3555ff0070e2'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [076e5780-d8d3-4acf-b19f-3555ff0070e2], status [ONLINE] on [172.23.0.1:56194] logged in with sessionid = [6905920d47f1c2235732b308c74b6195] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [41b9d8b38973]-[0.0.0.0:4077] BaseRequestHandler.setup().
+[DEBUG]: [41b9d8b38973]-[0.0.0.0:4077] > Received one request from 076e5780-d8d3-4acf-b19f-3555ff0070e2
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002847]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[ERROR]: SJMPHandler.processINFlag(matricula=[12345-TFG]) The vehicle with plate [12345-TFG] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.080256]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [076e5780-d8d3-4acf-b19f-3555ff0070e2] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.034439]

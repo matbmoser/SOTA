@@ -49,7 +49,7 @@ class TCPProtocol(Protocol):
 
     # Prepares and returns a connection message
     def getConnectionMessage(self, cameraid):
-        return self.newMessage(content="message=Hello, Server! Connection Requested.;cameraid="+str(cameraid)+";device-time="+str(datetime.timestamp(datetime.now(timezone.utc))))
+        return self.newMessage(content="message=Hello, Server! Connection Requested.;cameraid="+str(cameraid)+";clt-time="+str(datetime.timestamp(datetime.now(timezone.utc))))
 
     # Prepares and returns a close message
     def getCloseMessage(self):
@@ -149,14 +149,14 @@ class TCPProtocol(Protocol):
 
                     # Just return handshake
                     if(elements["message"] == "Hello, Server!"):
-                        tmpOutputMessage = "message=Welcome Camera!;token=" + \
-                            str(self.camera.token)+";srv-time=" + \
+                        tmpOutputMessage = "message=Welcome Camera!;sessionid=" + \
+                            str(self.camera.sessionid)+";srv-time=" + \
                             str(datetime.timestamp(datetime.now(timezone.utc)))
                     elif(elements["message"] == "Welcome Camera!"):
-                        self.camera.token = elements["token"]
+                        self.camera.sessionid = elements["sessionid"]
                         self.camera.status = "ONLINE"
                         op.printLog(logType="DEBUG", messageStr="Camera ["+self.camera.cameraid+"] status [" +
-                                    self.camera.status+"] logged in with token = ["+self.camera.token+"] in ["+self.camera.serverkey+"].")
+                                    self.camera.status+"] logged in with sessionid = ["+self.camera.sessionid+"] in ["+self.camera.serverkey+"].")
                         tmpOutputMessage = None
 
                     # EXAMPLE ==========================================================
@@ -286,7 +286,7 @@ class TCPMessage(Message):
     # Standad TCP Parse Message Method
     def parseMessage(self):
         try:
-            self.content = str(self.rawdata, "utf-8")
+            self.content = self.rawdata
             return self
         except Exception as e:
             op.printLog(logType="EXCEPTION", e=e,
