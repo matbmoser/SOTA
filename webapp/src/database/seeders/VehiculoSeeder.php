@@ -31,28 +31,34 @@ class VehiculoSeeder extends Seeder
             ["matricula" => "4561-QWR"],
             [
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'A')->get("id")[0]->id,
-                "idUsuario" => User::where('username', 'manager')->get("id")[0]->id
+                "idUsuario" => User::where('username', 'manager')->get("id")[0]->id,
+                "numAparcamientos" => 1,
+                "ultimoAparcamiento" => now()
             ]
         );
         Vehiculo::firstOrCreate(
             ["matricula" => "3201-PGL"],
             [
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'E')->get("id")[0]->id,
-                "idUsuario" => User::where('username', 'matbmoser')->get("id")[0]->id
+                "idUsuario" => User::where('username', 'matbmoser')->get("id")[0]->id,
+                "numAparcamientos" => 1,
+                "ultimoAparcamiento" => now()
             ]
         );
         Vehiculo::firstOrCreate(
             ["matricula" => "1234-ZXC"],
             [
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'D')->get("id")[0]->id,
-                "idUsuario" => User::where('username', 'conductor')->get("id")[0]->id
+                "idUsuario" => User::where('username', 'conductor')->get("id")[0]->id,
+                "numAparcamientos" => 1,
+                "ultimoAparcamiento" => now()
             ]
         );
         Vehiculo::firstOrCreate(
             ["matricula" => "4321-ZXC"],
             [
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'E')->get("id")[0]->id,
-                "idUsuario" => User::where('username', 'conductor')->get("id")[0]->id
+                "idUsuario" => User::where('username', 'conductor')->get("id")[0]->id,
             ]
         );
         Vehiculo::firstOrCreate(

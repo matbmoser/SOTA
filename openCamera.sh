@@ -1,0 +1,1 @@
+docker exec -it digital-twin python3 CameraManager.py -cmd

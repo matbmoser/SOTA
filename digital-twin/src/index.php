@@ -25,7 +25,6 @@
 
   $tablaZona = new Table($dbconfig, "Zona");
   $zonas = $tablaZona->getRows(array('return_type' => 'all'));
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -195,6 +194,9 @@
             case "getServer":
                 checkIfServerIsAlive(response);
                 break;
+            case "serverLog":
+                handleLogPrint(response);
+                break;
             case "serverRefresh":
                 break;
             case "refreshZonas":
@@ -202,6 +204,23 @@
                 break;
         }
     }
+
+    function handleLogPrint(response){
+      let refreshLog = document.getElementById("refreshLog");
+      refreshLog.innerHTML = "Refresh"
+      overwrite("monitorLog", response);
+    }
+
+    function seeServerLog(){
+        let rawServer = localStorage.getItem("serverInfo");
+        if(rawServer != null && rawServer != undefined && rawServer != ""){
+          let refreshLog = document.getElementById("refreshLog");
+          refreshLog.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
+          server = JSON.parse(rawServer);
+          getServerLog(server["name"]);
+        }
+    }
+
     function logout(){
         let cameraid = localStorage.getItem("cameraid");
         if(cameraid != null && cameraid != undefined && cameraid != ""){
@@ -220,18 +239,32 @@
       
     }
     function addVehiculo(){
-        var matriculaEntrada = document.getElementById("matriculaEntrada").value;
-        if(matriculaEntrada == "" || matriculaEntrada == null){
-            overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+        let cameraid = localStorage.getItem("cameraid");
+        if(cameraid != null && cameraid != undefined && cameraid != ""){
+          var matriculaEntrada = document.getElementById("matriculaEntrada").value;
+          if(matriculaEntrada == "" || matriculaEntrada == null){
+              overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+              return;
+            }
+          camera.sendPlateToServer(matriculaEntrada, "IN");
+          overwrite("monitorEntrada", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaEntrada.toString()+"] sended!<span>");
+        }else{
+          overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡Ninguna cámara conectada!</span>");
         }
-        camera.sendPlateToServer(matriculaEntrada, "IN")
     }
     function deleteVehiculo(){
-        var matriculaSalida= document.getElementById("matriculaSalida").value;
-        if(matriculaSalida == "" || matriculaSalida == null){
-            overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+        let cameraid = localStorage.getItem("cameraid");
+        if(cameraid != null && cameraid != undefined && cameraid != ""){
+          var matriculaSalida= document.getElementById("matriculaSalida").value;
+          if(matriculaSalida == "" || matriculaSalida == null){
+              overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
+              return;
+            }
+          camera.sendPlateToServer(matriculaSalida, "OUT");
+          overwrite("monitorSalida", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaEntrada.toString()+"] sended!<span>");
+        }else{
+          overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡Ninguna cámara conectada!</span>");
         }
-        camera.sendPlateToServer(matriculaSalida, "OUT")
     }
 
     function setAutoRefresh(){
@@ -272,8 +305,10 @@
       let monitor = document.getElementById(monitorName);
       monitor.innerHTML = data;
     }
-
-    function println(monitorName, data){
+    function clean(monitorName, data){
+        document.getElementById(monitorName).innerHTML = ""
+    }
+    function printLn(monitorName, data){
         var pre = document.createElement("p"); 
         pre.style.wordWrap = "break-word"; 
         pre.innerHTML = data; 
@@ -294,7 +329,7 @@
       monitor.innerHTML = data;
     }
 
-    function printlnMonitor(data){
+    function printlLnMonitor(data){
         var pre = document.createElement("p"); 
         pre.style.wordWrap = "break-word"; 
         pre.innerHTML = data; 
@@ -332,17 +367,19 @@
         let ip = CONFIGS["defaultIP"];
         let port = document.getElementById("cameraServerPort").value;
         createAndConnectCamera(cameraid, ip, port);
-        //localStorage.removeItem("serverInfo");
-        //unblockAddServer();
-        //refreshServerStatus();
     }
+
     function disconnectFromServer(){
         camera.close()
         stopMessage();
+        localStorage.removeItem("cameraid");
+        localStorage.removeItem("cameraStatus");
     }
+
     function randomIntFromInterval(min, max) { // min and max included 
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
+    
     $(function(){
         var modalContent = document.getElementById("modalContent");
         var addVehicle = document.getElementById("addVehicle");
@@ -354,8 +391,8 @@
         
         var ipPattern = "#ip-pattern";
         var portPattern = "#port-pattern";
-        var minPort = 3900;
-        var maxPort = 4080;
+        var minPort = CONFIGS["minport"];
+        var maxPort = CONFIGS["maxport"];
 
         $(portPattern).removeAttr('disabled');
         $(portPattern).val(randomIntFromInterval(minPort, maxPort));

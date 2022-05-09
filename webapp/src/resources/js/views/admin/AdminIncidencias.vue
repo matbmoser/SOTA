@@ -1,102 +1,29 @@
 <template>
-<div>
-  <div class="main">
-  <div class="d-flex row justify-content-center">
-  <div class="container-fluid">
-    <h1 class="h1 mb-4 mt-4">Admin Incidencias</h1>
-    <Panel class="p-shadow-4" header="5 Last Registered Users">
-          <template #icons>
-                <p>Total Users:<span class='bg-primary' style='padding:10px;margin-top:20px;'>{{numUsers}} Users</span></p>
-          </template>
-          <DataTable :value="users" responsiveLayout="stack">
-            <Column field="id" header="id"></Column>
-            <Column field="nombre" header="Nombre"></Column>
-            <Column field="email" header="Email"></Column>
-            <Column field="documento" header="documento"></Column>
-            <Column field="username" header="Username"></Column>
-            <Column field="created_at" header="Joined At"></Column>
-          </DataTable>
-    </Panel>
-    </div>
-  </div>
-</div>
-</div>
+<Dashboard>
+  <ListaIncidencias header="Admin Incidencias" v-if="renderComponent" :edit="true" :Incidencias="incidencias"/>
+  <LoadingToast position="center"  group='load'/>
+  <ErrorToast position="center" group='err'/>
+</Dashboard>
 </template>
 <script>
-
+    import ErrorToast from "../../components/toasts/ErrorToast.vue";
+    import LoadingToast from "../../components/toasts/LoadingToast.vue";
+    import {ToastSeverity} from 'primevue/api';
+    import ListaIncidencias from "../../components/ListaIncidencias.vue";
     import axios from "axios";
     export default {
         data() {
             return {
-                /**
-                 * Number of Users Registered
-                 * */
-                numUsers: 0,
-                users: null,
-                basicData: {
-                    labels: null,
-                    datasets: [
-                        {
-                            label: 'Registered Users',
-                            data: null,
-                            fill: false,
-                            borderColor: '#1bcf33'
-                        }
-                    ]
-                }
+                loading: false,
+                incidencias: [],
+                renderComponent: true
             }
         },
         methods: {
-            /**
-             * Updates the users object with a JSON list of 5 last users
-             * and filters and transform this information to the 7 last days of user
-             * flow in the app to show in the chart.
-             * @see forceUpdate()
-             */
-            fetchUsers() {
-                axios
-                    .get('/api/incidencias', {
-                        headers: {
-                            Authorization: 'Bearer ' + this.token,
-                        }
-                    })
-                    .then(response => {
-                        const usr = response.data;
-                        let lastDates = '01234567'.split('').map(function (n) {
-                            var d = new Date();
-                            d.setDate(d.getDate() - n);
-
-                            return (function (day, month, year) {
-                                return [day, month, year].join('/');
-                            })(d.getDate(), d.getMonth() + 1, d.getFullYear());
-                        }).sort();
-                        let numDates = [0, 0, 0, 0, 0, 0, 0]
-                        this.basicData.labels = '01234567'.split('').map(function (n) {
-                            var d = new Date();
-                            d.setDate(d.getDate() - n);
-
-                            return (function (day, month) {
-                                return [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month].join('/');
-                            })(d.getDate(), d.getMonth() + 1);
-                        }).sort();
-
-                        this.users = usr.filter(function (el, index) {
-                            return index >= usr.length - 5;
-                        });
-
-                        lastDates.forEach(function (d, i) {
-                            let dt = d.split("/");
-                            let usrs = usr.filter(function (el) {
-                                let myDate = new Date(el["created"]);
-                                let date = myDate.getDate() + "/" + (myDate.getMonth() + 1) + "/" + myDate.getFullYear();
-                                let date2 = dt[0] + "/" + dt[1] + "/" + dt[2];
-                                return date < date2;
-                            });
-                            numDates[i] = usrs.length;
-                        });
-
-                        this.basicData.datasets[0].data = numDates;
-                    })
+            
+            displayToastMessage(severity, summary, message) {
+                this.loading = false;
+                this.$toast.add({severity:severity, summary: summary, group:'err', detail: message});
             },
             /**
              * Updates the number of users with the lenght of a JSON list of all users from the back-end.
@@ -105,21 +32,41 @@
              *
              * @see forceUpdate()
              */
-            fetchNumUsers() {
-                fetch('/api/incidencias', {
-                    headers: {
-                        Authorization: 'Bearer ' + this.token,
-                    }
-                })
-                    .then(r => r.json())
-                    .then(val => {
-                        this.numUsers = val.length;
+            fetchAll() {
+                var self = this;
+                axios
+                    .get('/api/incidencias', {
+                        headers: {
+                            Authorization: 'Bearer ' + this.$store.state.jwtToken,
+                        }
                     })
-            }
+                    .then(response => {
+                        this.loading = false;
+                        this.$toast.removeAllGroups();
+                        this.incidencias = response.data.incidencias;
+
+                    }).catch(error =>{
+                        this.$toast.removeAllGroups();
+                        self.displayErrorMessage();
+                    });
+            },
+            displayErrorMessage() {
+                this.loading = false;
+                this.$toast.add({severity:ToastSeverity.INFO, summary: '¡Todavía no existen incidencias!', group:'err', detail: "Espera que se produzcan en el parking... <i class='pi pi-exclamation-triangle' style='font-size:1em'></i>"});
+            },
+            startLoading() {
+                this.loading = true;
+                this.$toast.add({severity:ToastSeverity.SUCCESS, summary:"Espere por favor...", group:'load', detail: "<h3>Cargando incidencias...</h3>"});
+            },
         },
         mounted() {
-            this.fetchUsers();
-            this.fetchNumUsers();
+            this.startLoading();
+            this.fetchAll();
+        },
+        components:{
+            "ListaIncidencias":ListaIncidencias,
+            "ErrorToast": ErrorToast,
+            "LoadingToast": LoadingToast
         }
     }
 </script>

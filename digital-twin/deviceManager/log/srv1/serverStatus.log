@@ -1,7 +1,7 @@
 Starting Server Log Messages...
 [INFO]: You are [root]
 [INFO]: Trying to start server...
-[STATS]: [1] elements update in [0:00:00.012117] DBManager.updateQuery()
+[STATS]: [1] elements update in [0:00:00.012117] DBManager.operationQuery()
 [INFO]: Server [Srv1] updated in id [5]
 [INFO]: NEW SERVER CREATED!: serverid=[Srv1], ip=[0.0.0.0], port=[8888], poll_interval=[0.5]. [Server [Srv1] in socket [0.0.0.0:8888] status [RUNNING] in thread: [Srv1]].
 [INFO]: Server is Opened in Background

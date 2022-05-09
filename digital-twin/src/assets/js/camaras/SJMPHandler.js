@@ -11,7 +11,7 @@ class SJMPHandler{
   }
   getOUT(matricula)
   {
-      return "{'clt-time': '"+new Date().getTime().toString()+"', 'sessionid': '"+this.camera.sessiond+"', 'flag': 'OUT', 'plate': '"+matricula+"'}".toString();
+      return "{'clt-time': '" + new Date().getTime().toString() + "', 'sessionid': '" + this.camera.sessionid+"', 'flag': 'OUT', 'plate': '"+matricula+"'}".toString();
   }
   getSYN()
   {

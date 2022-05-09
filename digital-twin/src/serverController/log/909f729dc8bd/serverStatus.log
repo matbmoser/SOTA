@@ -1,0 +1,21 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.008683] DBManager.operationQuery()
+[INFO]: Server [909f729dc8bd] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[909f729dc8bd], ip=[127.0.0.1], port=[4079], poll_interval=[0.5]. [Server [909f729dc8bd] in socket [0.0.0.0:4079] status [RUNNING] in thread: [909f729dc8bd]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [{"flag": "SYN", "clt-time": 1651844236.74557, "cameraid": "f400bb4e-2c4b-415a-829e-1e42533fadd1", "token": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj+uZCbQrYxDvH6mfmki0\nWboce8Is9fHpVuJoApBg2eFHgAlgPti4DNMwJa/c8rUr/uX3pqnxxRaW/PYCakKL\ngJALHNhFyQGdF1baHY137sPor7s2+KbJF4yMF2XCXgPEq8JkNljsGr9YFcZ/ZQqo\nS/gJdA6LcnWRd5Ziv9qz3LythpEHE2u4DLD5PCvmkk/st0EXT9/lm4QNbhdysYAF\nHHNYJgYsTbuRrqFAdfxm+oxuiX3GYtACSq4YsVNTzgC9VxsKdbCiCwozCtcLHVRQ\niFESUtykSqMsg0xj4rPh6hbQi+eyPiOmU4LfQzMNLMc7XQUr7GqpJrSk7CadyNMH\n7wIDAQAB\n-----END PUBLIC KEY-----\n", "type": "BOTH"}]
+[DEBUG]: Incoming [camera.TCPSJMPCamera.TCPSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [f400bb4e-2c4b-415a-829e-1e42533fadd1], status [ONLINE] on [127.0.0.1:56096] logged in with sessionid = [38b3849ecc1757f392d07fdf9ff13ea3] protocol [<class 'protocols.TCPSJMPProtocol.TCPSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [909f729dc8bd]-[0.0.0.0:4079] BaseRequestHandler.setup().
+[DEBUG]: [909f729dc8bd]-[0.0.0.0:4079] > Received one request from f400bb4e-2c4b-415a-829e-1e42533fadd1
+[ERROR]: Was not posible to add camera [f400bb4e-2c4b-415a-829e-1e42533fadd1] in DB!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.058483]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.100345]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.205457]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.101823]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.079964]

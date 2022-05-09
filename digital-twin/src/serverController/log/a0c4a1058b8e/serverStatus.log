@@ -1,0 +1,74 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements afected in [0:00:00.009107] DBManager.operationQuery()
+[INFO]: Server [a0c4a1058b8e] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[a0c4a1058b8e], ip=[127.0.0.1], port=[4061], poll_interval=[0.5]. [Server [a0c4a1058b8e] in socket [0.0.0.0:4061] status [RUNNING] in thread: [a0c4a1058b8e]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4061
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: aogLikAQwdYP98ZpdhxnfA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1652135952284'%2C%20'cameraid'%3A%20'8285a502-f08c-4457-a19c-a0bb80408a46'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [8285a502-f08c-4457-a19c-a0bb80408a46], status [ONLINE] on [172.23.0.1:42830] logged in with sessionid = [b8ee72bd6e5b379c278729eb44109577] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [a0c4a1058b8e]-[0.0.0.0:4061] BaseRequestHandler.setup().
+[DEBUG]: [a0c4a1058b8e]-[0.0.0.0:4061] > Received one request from 8285a502-f08c-4457-a19c-a0bb80408a46
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000469]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [113]
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 9, 21, 29, 51), 'updated_at': datetime.datetime(2022, 5, 9, 21, 29, 51)}
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 9, 21, 29, 51), 'updated_at': datetime.datetime(2022, 5, 9, 21, 29, 51)}
+[STATS]: [1] elements afected in [0:00:00.011664] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.010382] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.134746]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [8285a502-f08c-4457-a19c-a0bb80408a46] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.063792]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4061
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: ZSLLOVLqB2/xXsqGEnhyfg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1652136121588'%2C%20'cameraid'%3A%20'8285a502-f08c-4457-a19c-a0bb80408a46'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [8285a502-f08c-4457-a19c-a0bb80408a46], status [ONLINE] on [172.23.0.1:43248] logged in with sessionid = [7378c06cb3363736a001b097aab5dbfd] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [a0c4a1058b8e]-[0.0.0.0:4061] BaseRequestHandler.setup().
+[DEBUG]: [a0c4a1058b8e]-[0.0.0.0:4061] > Received one request from 8285a502-f08c-4457-a19c-a0bb80408a46
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.002668]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 9, 22, 39, 24), 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 9, 21, 29, 51), 'updated_at': datetime.datetime(2022, 5, 9, 21, 29, 51)}
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 9, 22, 39, 24), 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 9, 21, 29, 51), 'updated_at': datetime.datetime(2022, 5, 9, 21, 29, 51)}
+[DEBUG]: {'id': 25, 'fechaEntrada': datetime.datetime(2022, 5, 9, 22, 39, 24), 'fechaSalida': None, 'valido': 1, 'incidencia': 0, 'idZona': 2, 'idVehiculo': 1, 'token': '8bbf693845bb1873a09cb98030a9b941dc3970f58fb2d6ee0a378e7ab657f0202bf93e377443765bbd258e80925eb98d7d0cd5a967085927980a6c19897d2f08', 'created_at': datetime.datetime(2022, 5, 9, 22, 39, 24), 'updated_at': datetime.datetime(2022, 5, 9, 22, 39, 24)}
+[DEBUG]: {'id': 2, 'letra': 'B', 'plazas': 25, 'idTipoPlaza': 1, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 9, 21, 29, 51), 'updated_at': datetime.datetime(2022, 5, 9, 21, 29, 51)}
+[STATS]: [1] elements afected in [0:00:00.026784] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.028183]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.257267]

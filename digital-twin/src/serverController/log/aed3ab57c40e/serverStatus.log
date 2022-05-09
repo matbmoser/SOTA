@@ -1,0 +1,58 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements deleted in [0:00:00.013117] DBManager.operationQuery()
+[STATS]: [1] elements inserted in [0:00:00.005156] DBManager.operationQuery()
+[INFO]: Server [aed3ab57c40e] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[aed3ab57c40e], ip=[127.0.0.1], port=[4093], poll_interval=[0.5]. [Server [aed3ab57c40e] in socket [0.0.0.0:4093] status [RUNNING] in thread: [aed3ab57c40e]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4093
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: 0R+vDRDdtroPfLQRby+eLg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651718758351'%2C%20'cameraid'%3A%20'64331ea3-a2fd-4cdf-95c9-b62e861acf79'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [64331ea3-a2fd-4cdf-95c9-b62e861acf79], status [ONLINE] on [172.23.0.1:46194] logged in with sessionid = [e027d056e1a161d214fb85a699835ef9] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [aed3ab57c40e]-[0.0.0.0:4093] BaseRequestHandler.setup().
+[DEBUG]: [aed3ab57c40e]-[0.0.0.0:4093] > Received one request from 64331ea3-a2fd-4cdf-95c9-b62e861acf79
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.001036]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [113]
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[DEBUG]: {'id': 18, 'fechaEntrada': datetime.datetime(2022, 5, 5, 2, 42, 33), 'fechaSalida': datetime.datetime(2022, 5, 5, 2, 43, 11), 'valido': 0, 'incidencia': 0, 'idZona': 2, 'idVehiculo': 1, 'token': '33ff6bbd777d18e142b31b83c0b93a766109285721f4909b27ac1f78a50314d32f317e8b351273354fa92feeb9ec42c1e6a87ed8fb04cf17a87b3a152a73e2be', 'created_at': datetime.datetime(2022, 5, 5, 2, 42, 33), 'updated_at': datetime.datetime(2022, 5, 5, 2, 43, 11)}
+[DEBUG]: {'id': 2, 'letra': 'B', 'plazas': 25, 'idTipoPlaza': 1, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[33ff6bbd777d18e142b31b83c0b93a766109285721f4909b27ac1f78a50314d32f317e8b351273354fa92feeb9ec42c1e6a87ed8fb04cf17a87b3a152a73e2be] oldPlaza=[B18] 
+[STATS]: [1] elements deleted in [0:00:00.009030] DBManager.operationQuery()
+[CRITICAL]:[1582 (42000): Incorrect parameter count in the call to native function 'ISNULL']. DBManager.operationQuery(UPDATE Vehiculo SET numAparcamientos=ISNULL(numAparcamientos,0) + 1, ultimoAparcamiento='2022-05-05 02:46:07.096128' WHERE id=1)
+[STATS]: [1] elements inserted in [0:00:00.007738] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.272911]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [115]
+[EXCEPTION]:[list index out of range]. in SJMPHandler(). On processPacket()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.063818]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[DEBUG]: {'id': 1, 'matricula': '1605-LDJ', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 3, 'idUsuario': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[DEBUG]: {'id': 6, 'fechaEntrada': datetime.datetime(2022, 5, 5, 2, 46, 7), 'fechaSalida': None, 'valido': 1, 'incidencia': 0, 'idZona': 1, 'idVehiculo': 1, 'token': 'b90f2df169ccc7f6533087275b58f126f1da3470f0d60eb8d45f33a9648a49d2ac931edd4201392c8e5cbba651916c0b3d7f3cf30aaca4e7f3ff40e868eeeffb', 'created_at': datetime.datetime(2022, 5, 5, 2, 46, 7), 'updated_at': datetime.datetime(2022, 5, 5, 2, 46, 7)}
+[DEBUG]: {'id': 1, 'letra': 'A', 'plazas': 24, 'idTipoPlaza': 1, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 5, 1, 30, 35), 'updated_at': datetime.datetime(2022, 5, 5, 1, 30, 35)}
+[STATS]: [1] elements update in [0:00:00.007330] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.137330]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [64331ea3-a2fd-4cdf-95c9-b62e861acf79] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.040724]

@@ -31,7 +31,7 @@
         </DataTable>
       </div>
       <div class="w-full grid justify-content-end">
-          <SpeedDial :model="items" style="position: fixed;
+          <SpeedDial @click="openDialog" style="position: fixed;
     bottom: 20px;
     right: 20px;" :radius="120" direction="up-left" type="quarter-circle" />
       </div>
@@ -127,15 +127,14 @@ export default {
                     //callback to execute when user confirms the action
                 var self = this;
                 this.loading = true;
-                axios.delete('/api/vehiculo/user/'+this.$store.state.currentUser.id, {
+                axios.delete('/api/vehiculo/user',{ 
+                    headers: {
+                            Authorization: 'Bearer ' + this.$store.state.jwtToken
+                        },
+                    data:{
                         "id": id,
                         "idUsuario": this.$store.state.currentUser.id
-                    },
-                    {
-                        headers: {
-                            Authorization: 'Bearer ' + this.$store.state.jwtToken,
-                        }
-                    })
+                    }})
                     .then(response => {
                         self.displayMessage(ToastSeverity.SUCCESS, "¡Vehiculo Borrado!", "El vehiculo ha sido borrado de tu lista...");
                         location.reload();
@@ -143,6 +142,7 @@ export default {
                     }).catch(error =>{
                         if(error.response.data.message!=null){
                              self.displayMessage(ToastSeverity.ERROR, "¡Fallo al borrar el Vehiculo!", "Intente enviar otra vez... Error: ["+error.response.data.message+"]");
+                            return;
                         }
                         else{
                             if(error.response.data.errors != ''){
@@ -155,15 +155,18 @@ export default {
                                     i++;
                                 }
                                 self.displayMessage(ToastSeverity.ERROR, "¡Fallo al borrar el Vehiculo!", "Intente enviar otra vez... Error: ["+err+"]");
-                            }else{
-                                self.displayMessage(ToastSeverity.ERROR, "¡Fallo al borrar el Vehiculo!", "Intente enviar otra vez...");
+                                return;
                             }
                         }
+                        self.displayMessage(ToastSeverity.ERROR, "¡Fallo al borrar el Vehiculo!", "Intente enviar otra vez...");
                     });
                                 },
                 reject: () => {}
             }); 
 
+        },
+        openDialog(){
+            this.dialogDisplay = true;
         },
 		SaveVehicle() { 
                 var self = this;
@@ -216,43 +219,6 @@ export default {
           editDialog: false,
           vehicleTypeValue: null,
           loading: false,
-          items: [
-              {
-                  label: 'Add',
-                  icon: 'pi pi-plus',
-                  command: () => {
-                      this.dialogDisplay = true;
-                  }
-              },
-              {
-                  label: 'Update',
-                  icon: 'pi pi-refresh',
-                  command: () => {
-                      this.$toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-                  }
-              },
-              {
-                  label: 'Delete',
-                  icon: 'pi pi-trash',
-                  command: () => {
-                      this.$toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-                  }
-              },
-              {
-                  label: 'Upload',
-                  icon: 'pi pi-upload',
-                  command: () => {
-                      this.$router.push('fileupload');
-                  }
-              },
-              {
-                  label: 'Vue Website',
-                  icon: 'pi pi-external-link',
-                  command: () => {
-                      window.location.href = 'https://vuejs.org/'
-                  }
-              }
-          ]
       }
    }, 
       

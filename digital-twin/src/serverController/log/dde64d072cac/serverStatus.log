@@ -1,0 +1,76 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements inserted in [0:00:00.006324] DBManager.operationQuery()
+[INFO]: Server [dde64d072cac] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[dde64d072cac], ip=[127.0.0.1], port=[4051], poll_interval=[0.5]. [Server [dde64d072cac] in socket [0.0.0.0:4051] status [RUNNING] in thread: [dde64d072cac]].
+[INFO]: Server is Opened in Background
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4051
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: B5NZFTWMkD7Q2WganwczSA==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651844083521'%2C%20'cameraid'%3A%20'7841e4d7-d26f-4c9b-a56e-028eecf3161a'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [7841e4d7-d26f-4c9b-a56e-028eecf3161a], status [ONLINE] on [172.23.0.1:46946] logged in with sessionid = [a3d68299e5521417176c8214ff0dd3d0] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [dde64d072cac]-[0.0.0.0:4051] BaseRequestHandler.setup().
+[DEBUG]: [dde64d072cac]-[0.0.0.0:4051] > Received one request from 7841e4d7-d26f-4c9b-a56e-028eecf3161a
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000487]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [113]
+[DEBUG]: {'id': 10, 'matricula': '4561-QWE', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 4, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 31, 56), 'updated_at': datetime.datetime(2022, 5, 6, 13, 31, 56)}
+[DEBUG]: {'id': 10, 'matricula': '4561-QWE', 'numAparcamientos': 0, 'ultimoAparcamiento': None, 'idTipoVehiculo': 4, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 31, 56), 'updated_at': datetime.datetime(2022, 5, 6, 13, 31, 56)}
+[STATS]: [1] elements update in [0:00:00.005447] DBManager.operationQuery()
+[STATS]: [1] elements inserted in [0:00:00.005481] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.241036]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [text].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [114]
+[DEBUG]: {'id': 10, 'matricula': '4561-QWE', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 34, 48), 'idTipoVehiculo': 4, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 31, 56), 'updated_at': datetime.datetime(2022, 5, 6, 13, 31, 56)}
+[DEBUG]: {'id': 10, 'matricula': '4561-QWE', 'numAparcamientos': 1, 'ultimoAparcamiento': datetime.datetime(2022, 5, 6, 13, 34, 48), 'idTipoVehiculo': 4, 'idUsuario': 5, 'created_at': datetime.datetime(2022, 5, 6, 13, 31, 56), 'updated_at': datetime.datetime(2022, 5, 6, 13, 31, 56)}
+[DEBUG]: {'id': 14, 'fechaEntrada': datetime.datetime(2022, 5, 6, 13, 34, 48), 'fechaSalida': None, 'valido': 1, 'incidencia': 0, 'idZona': 2, 'idVehiculo': 10, 'token': '6697835c00f6f6039737811440a758ba42982883051eae12f0f233a039bab4b63dbb887425075d3d539ac8c1ce012ac810366928ba098ba94c59a67030d22bf0', 'created_at': datetime.datetime(2022, 5, 6, 13, 34, 48), 'updated_at': datetime.datetime(2022, 5, 6, 13, 34, 48)}
+[DEBUG]: {'id': 2, 'letra': 'B', 'plazas': 25, 'idTipoPlaza': 1, 'idAparcamiento': 1, 'created_at': datetime.datetime(2022, 5, 6, 12, 55, 57), 'updated_at': datetime.datetime(2022, 5, 6, 12, 55, 57)}
+[STATS]: [1] elements update in [0:00:00.007831] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.158273]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [2]
+[INFO]: Connection with [7841e4d7-d26f-4c9b-a56e-028eecf3161a] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.031609]
+[DEBUG]: [NEW] RAW Connection Data Received: [GET / HTTP/1.1
+Host: 127.0.0.1:4051
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36
+Upgrade: websocket
+Origin: http://localhost:3333
+Sec-WebSocket-Version: 13
+Accept-Encoding: gzip, deflate, br
+Accept-Language: es-ES,es;q=0.9
+Sec-WebSocket-Key: nuF/UclZubWfcrQpfyh73w==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: SJMP, %7B'clt-time'%3A%20'1651844101553'%2C%20'cameraid'%3A%20'7841e4d7-d26f-4c9b-a56e-028eecf3161a'%2C%20'flag'%3A%20'SYN'%2C%20'type'%3A%20'BOTH'%7D
+
+]
+[DEBUG]: Incoming [camera.WebSocketSJMPCamera.WebSocketSJMPCamera] Protocol Connection...
+[DEBUG]: Camera [7841e4d7-d26f-4c9b-a56e-028eecf3161a], status [ONLINE] on [172.23.0.1:46966] logged in with sessionid = [f596e4348aa68b511effdbd371eae0db] protocol [<class 'protocols.WebSocketSJMPProtocol.WebSocketSJMPProtocol'>] type [BOTH] 
+[DEBUG]: [dde64d072cac]-[0.0.0.0:4051] BaseRequestHandler.setup().
+[DEBUG]: [dde64d072cac]-[0.0.0.0:4051] > Received one request from 7841e4d7-d26f-4c9b-a56e-028eecf3161a
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000434]
+[DEBUG]: WebSocketMessage.getHeaders(): Incomming WS Message type [close].
+[DEBUG]: WebSocketMessage.parseMessage(): WS Payload received LEN = [0]
+[INFO]: Connection with [7841e4d7-d26f-4c9b-a56e-028eecf3161a] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.040175]
