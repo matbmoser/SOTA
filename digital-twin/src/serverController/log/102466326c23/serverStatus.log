@@ -1,0 +1,15 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements afected in [0:00:00.025032] DBManager.operationQuery()
+[INFO]: Server [102466326c23] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[102466326c23], ip=[127.0.0.1], port=[4068], poll_interval=[0.5]. [Server [102466326c23] in socket [0.0.0.0:4068] status [RUNNING] in thread: [102466326c23]].
+[INFO]: Server is Opened in Background
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.001645]
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[8bbf693845bb1873a09cb98030a9b941dc3970f58fb2d6ee0a378e7ab657f0202bf93e377443765bbd258e80925eb98d7d0cd5a967085927980a6c19897d2f08] oldPlaza=[B25] 
+[STATS]: [1] elements afected in [0:00:00.033062] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.013475] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009887] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.366676]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) The vehicle with plate [1605-LDJ] is already parked in [F10] 
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.542642]

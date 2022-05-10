@@ -25,6 +25,11 @@
 
   $tablaZona = new Table($dbconfig, "Zona");
   $zonas = $tablaZona->getRows(array('return_type' => 'all'));
+  $totalPlazas = 0;
+
+  foreach ($zonas as $zona){
+    $totalPlazas+=$zona["plazas"];
+  }
 ?>
 <!DOCTYPE html>
 <head>
@@ -134,11 +139,16 @@
         </div>
       </div>
       <div class="row d-flex justify-content-between">
-        <div class="col-md-6 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
+        <div class="col-md-4 d-flex justify-content-lg-start justify-content-md-start mt-3 justify-content-center justify-content-xl-start">
           <button class="btn btn-warning hidden" type="button" id="connectCamera" data-bs-toggle="modal" data-bs-target="#ConnectCamera">Connect Camera</button> 
           <button class="btn btn-warning" type="button" id="openserver" data-bs-toggle="modal" data-bs-target="#OpenServer">Open Server</button>
         </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 justify-content-md-end justify-content-xl-end">
+        <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-lg-center mt-3 justify-content-md-center justify-content-xl-center">
+          <!-- Checked switch -->
+            <button class="ml-2 btn btn-danger" type="button" id="aforoOcupadas">Plazas Ocupadas: -/<?php echo $totalPlazas;?></button>
+            <button style="margin-left: 1em" class="ml-2 btn btn-success" type="button" id="aforoLibres">Plazas Libres: -/<?php echo $totalPlazas;?></button>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 justify-content-md-end justify-content-xl-end">
           <!-- Checked switch -->
             <div class="form-check form-switch" style="margin-right: 10px; ">
               <input class="form-check-input" type="checkbox" role="switch" id="autorefresh" />
