@@ -8,6 +8,11 @@ import mysql.connector
 from db.dbConfig import dbConfig
 from datetime import datetime, timezone
 
+"""
+Clase responsable de Acceder a la Base de Datos
+Puede ser utilizada en controladores
+"""
+
 
 class DBManager():
     def __init__(self):
@@ -57,8 +62,6 @@ class DBManager():
             tmpTable["keys"] = self.getTableKeys(tmpTable["name"])
             self.tables[tmpTable["name"]] = tmpTable
         
-        #op.printLog(logType="STATS",
-         # messageStr="["+str(self.nTables)+"] tables found in ["+str(finiTime-initTime)+"] DBManager.refreshDatabase()")
         return self.tables
 
     def getTableKeys(self, table):
@@ -310,19 +313,14 @@ class DBManager():
         result =self.operationQuery('ALTER TABLE '+str(table)+' AUTO_INCREMENT = 1;')
         return result
 
-    
+
+## Test enviroment to see if connection is up or not reachable...
 if __name__ == '__main__':
     dbManager = DBManager()
     if(dbManager.checkIfConnected()):
         time = str(datetime.now())
-        #print(dbManager.insertTableElement(elem=("SUV", "250","350", "150", time, time), table='TipoVehiculo'))
-        #print(dbManager.insertTableElement(elem=("Furgoneta", "300","380", "200", time, time), table='TipoVehiculo'))
         values = dbManager.getValueIdDict(id="id", value="segmento", table="TipoVehiculo")
         print(values)
-        #data = dbManager.fetchAll("Vehiculo")
-        #print(data[0])
-        #dbManager.resetIndex(table="TipoVehiculo")
-        #dbManager.deleteTableElement(table="TipoVehiculo", where="id = "+str(values["SUV"]))
         print(dbManager.insertTableElement(
             elem=("1247-LDG", 0, None, 1, 1, time, time), table='Vehiculo'))
     else:

@@ -5,17 +5,19 @@ from os.path import isfile, join
 from os import listdir
 import os
 import sys
+
 LOGLEVELS = {"NONE": 0, "CRITICAL": 1, "EXCEPTION": 2,
              "ERROR": 3, "WARNING": 4, "INFO": 5, "STATS": 6, "DEBUG": 7}
-LOGLEVEL = LOGLEVELS["DEBUG"]
-
-# Clas that defines operations
+LOGLEVEL = LOGLEVELS["STATS"]
 
 LOGFILEDEFAULT = "./log/serverStatus.log"
 LOGFILE = None
 
 from datetime import datetime, timezone
 
+"""
+Class that defines operations in files, directories, clases, etc...
+"""
 class op:
 
     @staticmethod

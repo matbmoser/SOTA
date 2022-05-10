@@ -1,4 +1,9 @@
-# coding=UTF-8
+### ------------------------------------------
+#   SJMP (Secure JSON Message Protocol)
+#   Copyright Mathias Brunwkow Moser
+#   ©2021-2022 - ALL RIGHT RESERVED
+### ------------------------------------------
+
 from pickle import NONE
 import traceback
 from operators.op import op
@@ -52,7 +57,7 @@ class handler():
             Processes a rawPacket that can be SJMP.
                 @returns:
                     -> IF not SJMP -> Nothing (None)
-                    -> IF error -> RJTP Error packet
+                    -> IF error -> SJMP Error packet
                     -> IF success -> SJMP Success Ack packet
         """
         try:
@@ -72,6 +77,7 @@ class handler():
                         rawPacket = cryptool.decrypt(rawPacket, self.camera.privateKey)
                     print("Paquete DESENCRIPTADO:")
                     print(rawPacket)
+                    
                 except Exception as e:
                     op.printLog(logType="EXCEPTION", e=e,
                         messageStr="in SJMPHandler(). On processPacket() Decryption failed [NO ENCRIPTADO]")

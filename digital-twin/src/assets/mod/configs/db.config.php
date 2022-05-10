@@ -1,5 +1,5 @@
 <?php
-
+## Here you can configure your database
 return array (
     "host"    => "mysql",
     "user"    => "root",

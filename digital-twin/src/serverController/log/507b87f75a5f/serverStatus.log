@@ -1,8 +1,0 @@
-Starting Server Log Messages...
-[INFO]: You are [www-data]
-[INFO]: Trying to start server...
-[STATS]: [1] elements afected in [0:00:00.019630] DBManager.operationQuery()
-[STATS]: [1] elements afected in [0:00:00.011431] DBManager.operationQuery()
-[INFO]: Server [507b87f75a5f] added into DB!
-[INFO]: NEW SERVER CREATED!: serverid=[507b87f75a5f], ip=[127.0.0.1], port=[8888], poll_interval=[0.5]. [Server [507b87f75a5f] in socket [0.0.0.0:8888] status [RUNNING] in thread: [507b87f75a5f]].
-[INFO]: Server is Opened in Background

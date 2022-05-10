@@ -1,3 +1,5 @@
+
+## Aqui puedes configurar todo el DeviceManager
 class globalConfig:
     appName = "SOTA UFV MyParking"
     defaultparking = "Y" # LETRA parking

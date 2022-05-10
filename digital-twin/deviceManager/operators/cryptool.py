@@ -6,6 +6,15 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from datetime import datetime, timezone
 from operators.op import op
 
+
+
+"""
+Clase para encriptar y desencriptar utilizando Criptografia
+Asimétrica RSA en Python.
+Author: Mathias Brunkow Moser
+©2022 - ALL RIGHTS RESERVED
+"""
+
 class cryptool:
     @staticmethod
     def generatePrivateKey(keySize=2048, publicExponent=65537):

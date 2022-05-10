@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+## ----------------------------------
+# Functions to CONTROL DeviceManager Server
+# Author: Mathias Brunkow Moser
+# ©2022 - ALL RIGHT RESERVED
+# mathiasmoser@outlook.com // LinkedIn: mathias-brunkow-moser
+## ----------------------------------
+
 . ./config.import
 
 ## GET PID

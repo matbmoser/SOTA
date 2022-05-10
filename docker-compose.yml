@@ -1,24 +1,33 @@
+## --------------------------------------------------------------
+# CONFIGURACIÓN DE Sistema Optimizador de Tiempo de Aparcamiento
+# Autor: Mathias Brunkow Moser 
+# ©2022 - ALL RIGHTS RESERVED
+## --------------------------------------------------------------
+
 version: "3.9"
 
 services:
+  ## Configuración de Base de Datos MySQL
   mysql:
     image: mysql
     container_name: mysql-bbdd
     environment:
+      ## Cofiguración de Base de Datos
       MYSQL_DATABASE: "sotadb"
-      # So you don't have to use root, but you can if you like
+      
       MYSQL_USER: "dbadmin"
-      # You can use whatever password you like
+   
       MYSQL_PASSWORD: "GT9zEN(FdxSAmWiy"
-      # Password for root access
+
       MYSQL_ROOT_PASSWORD: "s0t42022"
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
+      ## Configuración de Puertos
       - "3306:3306"
-      # Where our data will be persisted
+
     volumes:
       - ./data:/var/lib/mysql
 
+  ## Configuración administrador phpMyAdmin
   php-my-admin:
     image: phpmyadmin
     container_name: php-my-admin
@@ -29,6 +38,7 @@ services:
     depends_on:
       - mysql
 
+  ## Configuración UFV MyParking WebApp
   php-apache:
     container_name: php-webapp
     build:
@@ -36,33 +46,41 @@ services:
     environment:
       WEBAPP: "/var/www/webapp"
     ports:
+      # Rango de puertos en producción
       - "8080:80"
+      ## Rango de puertos en Development
       - "3001:8001"
       - "3000:8000"
       - "3002:8002"
     volumes:
+      ## Creamos volumenes para guardar la configuración
       - ./webapp/src:/var/www/webapp
       - ./webapp/apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
       - mysql
     networks:
+      ## Pertenece a la red interna creada
       - default
       - appNet
 
+  ## Configuración del digital twin
   digital-twin:
     container_name: digital-twin
     build:
       context: ./digital-twin
     environment:
+      ## Configuración para las rutas
       DEVICE_MANAGER: "/usr/src/app"
 
       DIGITAL_TWIN: "/var/www/digital-twin"
 
     ports:
+      ## Rango de puertos utilizados.
       - "3333:80" # Puerto de acceso al digital twin.
       - "8888:8888" # Puerto por defecto device manager.
       - "4050-4100:4050-4100" # Rango de puertos del device manager.
     volumes:
+      ## Volumenes creados para configurar el entorno
       - ./digital-twin/src:/var/www/digital-twin
       - ./digital-twin/php/php.ini-development:/usr/local/etc/php/php.ini-development
       - ./digital-twin/php/php.ini-production:/usr/local/etc/php/php.ini-production
@@ -74,12 +92,13 @@ services:
       - default
       - appNet
 
+## Creamos redes para que se puedan comunicar entre si los contenedores
 networks:
-  default: # this network (app2)
+  default: 
     driver: bridge
-  appNet: # external network (app1)
+  appNet: 
     external: true
 
-# Names our volume
+## Los volumenes utilizados por la base de datos se guardarán en data.
 volumes:
   data:

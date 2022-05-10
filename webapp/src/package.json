@@ -17,7 +17,6 @@
         "factory": "php artisan make:factory ${P}Factory",
         "completeModel": "php artisan make:model ${P} -fcsr",
         "model": "php artisan make:model ${P}",
-        "passport": "php artisan passport:install"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.4",

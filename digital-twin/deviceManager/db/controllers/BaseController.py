@@ -3,6 +3,8 @@ from datetime import datetime
 from db.DBManager import DBManager
 
 
+## Controlador base, contiene todos los métodos que podrán se sobrescritos
+
 class BaseController():
     def __init__(self):
         self.conn = DBManager()
