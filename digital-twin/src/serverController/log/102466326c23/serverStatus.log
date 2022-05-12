@@ -13,3 +13,12 @@ Starting Server Log Messages...
 [STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.366676]
 [ERROR]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) The vehicle with plate [1605-LDJ] is already parked in [F10] 
 [STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.542642]
+[INFO]: Connection with [f8d168f4-7973-4a9c-81af-07e6cec1657e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.052503]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.004154]
+[INFO]: Connection with [f8d168f4-7973-4a9c-81af-07e6cec1657e] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.016128]

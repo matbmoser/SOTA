@@ -24,7 +24,7 @@
             <Column v-if="edit" class="actionButtons" style="display:flex; justify-content: center;">
                 <template #body="slotProps">
                     <Button @click="changeRol(slotProps.data)" icon="pi pi-pencil" label="Editar Rol" class="mr-2 p-button-primary p-button-filled p-button-squared "></Button>
-                    <Button @click="borrarUsuario($event, slotProps.data.id)" icon="pi pi-times" class="p-button-danger p-button-filled p-button-squared "></Button>
+                    <Button @click="deleteUsuario($event, slotProps.data.id)" icon="pi pi-times" class="p-button-danger p-button-filled p-button-squared "></Button>
                     <ConfirmPopup></ConfirmPopup>
                 </template>
             </Column>
@@ -38,9 +38,9 @@
                 <form autocomplete="off">
                 <div class="p-fluid">
                     <div class="p-field" style="margin-top: 30px">
-                        <span class="p-float-label">
-                            <Dropdown v-model="rol" :options="roles" optionLabel="nombre" emptyMessage="No existen roles..." />
+                        <span class="p-label">
                             <label>Roles</label>
+                            <Dropdown v-model="rol" :options="roles" :placeholder="selectedRol" optionLabel="nombre" emptyMessage="No existen roles..." />
                         </span>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <Button class="p-buttom-primary"
                             :icon="iconComputed" 
                             :label="labelComputed" 
-                            @click="ActualizarRol()">
+                            @click="actualizarRol()">
                     </Button>
                     </div>
                 </template>
@@ -66,8 +66,8 @@ export default {
   props: {
     Usuarios: Array,
     header: String,
-    edit:Boolean,
-    roles:Array
+    edit: Boolean,
+    roles: Array
   },
   
 computed: {
@@ -92,33 +92,33 @@ computed: {
       changeRol(data){
           this.dialogDisplay = true;
           this.user = data;
-          console.log(data["rol"])
-          this.rol=data["rol"];
+          var obj;
+
+          Object.keys(this.roles).forEach(x => obj = this.roles[x].id === data["rol"] ? this.roles[x]: obj);
+          this.rol = obj
+          this.selectedRol = data["rol"];
       },
-      ActualizarRol(){
+      actualizarRol(){
            this.loading=true;
             var self = this;
              var packet = {
                     "id": this.user.id,
-                    "idRol": this.currentUser.nombre,
+                    "idRol": this.rol.id,
             }
             axios
-            .patch("/api/user/"+this.currentUser.id,packet,{
+            .patch("/api/rol/user/",packet,{
                 headers:{
                     "Authorization": "Bearer " + this.token
                 }
             })
             .then(function (response) {
                 self.loading=false;
-                self.$store.dispatch('saveCurrentUser', response.data.user);
-                self.$store.dispatch('saveJwtToken', response.headers.authorization);
-                self.displayToastMessage(ToastSeverity.SUCCESS, "Perfil Actualizado!", "El perfil se encuentra actualizado...");
+                self.displayMessage(ToastSeverity.SUCCESS, "Rol Actualizado !", response.data.message);
                 location.reload();
             }).catch(error =>{
-                self.displayToastMessage(ToastSeverity.ERROR, "¡Fallo al añadir Incidencia!", "Intente enviar otra vez... Error: ["+error+"]");
-                this.loading = false;
                 if(error.response.data.message!=null){
-                    self.displayErrorMessage(error.response.data.message);
+                        self.displayMessage(ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez... Error: ["+error.response.data.message+"]");
+                    return;
                 }
                 else{
                     if(error.response.data.errors != ''){
@@ -130,11 +130,11 @@ computed: {
                             err += '<strong>'+contentArray[i]+'</strong> '+content[contentArray[i]] +'<br>'
                             i++;
                         }
-                        self.displayErrorMessage(err);
-                    }else{
-                    self.displayErrorMessage(error.response.data);
+                        self.displayMessage(ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez... Error: ["+err+"]");
+                        return;
                     }
                 }
+                self.displayMessage(ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez...");
             });
       },
        deleteUsuario(event, id) {
@@ -193,9 +193,11 @@ computed: {
   },data() {
       return {
           loading: false,
-          user : null,
+          user : "",
           dialogDisplay : false,
-          rol:null
+          rol: "",
+          selectedRol: null,
+          token: this.$store.state.jwtToken
       }
    }, 
 }

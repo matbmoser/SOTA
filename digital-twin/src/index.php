@@ -17,6 +17,11 @@
   if (empty($username)){
       header('Location: login/?result='.$configs["securityErrorToken"]);
   } 
+  if($permits->digitalTwin == 0){
+    setcookie("__LOGIN__", "", time() - 3600, "/");
+    header('Location: login/?result='.$configs["notAuthorizedToken"]);
+    exit;
+  }
   $modals = include("assets/mod/front/modals.php");
 
   $ip = include("assets/mod/API/getIP.php"); 
@@ -271,7 +276,7 @@
               return;
             }
           camera.sendPlateToServer(matriculaSalida, "OUT");
-          overwrite("monitorSalida", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaEntrada.toString()+"] sended!<span>");
+          overwrite("monitorSalida", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaSalida.toString()+"] sended!<span>");
         }else{
           overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡Ninguna cámara conectada!</span>");
         }

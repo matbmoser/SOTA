@@ -17,6 +17,7 @@
                 loading: false,
                 usuarios: [],
                 roles: [],
+                userRols: {},
                 renderComponent: true
             }
         },
@@ -32,25 +33,28 @@
                     .then(response => {
                         this.loading = false;
                         this.$toast.removeAllGroups();
-                        this.roles = response.data.roles;
+                        let tmpRoles = response.data.roles;
                         let i = 0;
-                        this.dir = {}
-                        while(i < this.roles.length){
-                            this.dir[this.roles[i]["id"]]=this.roles[i]["nombre"];
+
+
+                        while(i < tmpRoles.length){
+                            let rol = {}
+                            rol["id"] = tmpRoles[i]["id"]
+                            rol["nombre"] = tmpRoles[i]["nombre"]
+                            this.roles.push(rol)
+                            this.userRols[rol["id"]] = rol["nombre"]
                             i++;
                         }
-                        console.log(this.dir)
                         let j = 0;
                         let lenUsr = this.usuarios.length;
                         while(j < lenUsr){
-                            this.usuarios[j]["rol"] = this.dir[this.usuarios[j]["idRol"]]
-                            console.log(this.usuarios[j]["rol"])
+                            this.usuarios[j]["rol"] = this.userRols[this.usuarios[j]["idRol"]]
                             j++;
                         }
                         
                     }).catch(error =>{
                         this.$toast.removeAllGroups();
-                        self.displayToastMessage(ToastSeverity.ERROR, "¡No ha sido posible recoger los roles!", "Intente otra vez más tarde...");
+                        self.displayToastMessage(ToastSeverity.ERROR, "¡No ha sido posible recoger los roles!", "Intente otra vez más tarde... ERROR: " + error.toString());
                     });
             },
             displayToastMessage(severity, summary, message) {
@@ -73,9 +77,8 @@
                         }
                     })
                     .then(response => {
-                        this.loading = false;
-                        this.$toast.removeAllGroups();
                         this.usuarios = response.data.users;
+                        this.fetchRoles();
 
                     }).catch(error =>{
                         this.$toast.removeAllGroups();
@@ -94,7 +97,6 @@
         mounted() {
             this.startLoading();
             this.fetchAll();
-            this.fetchRoles();
         },
         components:{
             "ListaUsuarios":ListaUsuarios,

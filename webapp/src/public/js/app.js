@@ -22319,36 +22319,36 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     changeRol: function changeRol(data) {
-      this.dialogDisplay = true;
-      this.user = data;
-      console.log(data["rol"]);
-      this.rol = data["rol"];
-    },
-    ActualizarRol: function ActualizarRol() {
       var _this = this;
 
+      this.dialogDisplay = true;
+      this.user = data;
+      var obj;
+      Object.keys(this.roles).forEach(function (x) {
+        return obj = _this.roles[x].id === data["rol"] ? _this.roles[x] : obj;
+      });
+      this.rol = obj;
+      this.selectedRol = data["rol"];
+    },
+    actualizarRol: function actualizarRol() {
       this.loading = true;
       var self = this;
       var packet = {
         "id": this.user.id,
-        "idRol": this.currentUser.nombre
+        "idRol": this.rol.id
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/user/" + this.currentUser.id, packet, {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/rol/user/", packet, {
         headers: {
           "Authorization": "Bearer " + this.token
         }
       }).then(function (response) {
         self.loading = false;
-        self.$store.dispatch('saveCurrentUser', response.data.user);
-        self.$store.dispatch('saveJwtToken', response.headers.authorization);
-        self.displayToastMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.SUCCESS, "Perfil Actualizado!", "El perfil se encuentra actualizado...");
+        self.displayMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.SUCCESS, "Rol Actualizado !", response.data.message);
         location.reload();
       })["catch"](function (error) {
-        self.displayToastMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.ERROR, "¡Fallo al añadir Incidencia!", "Intente enviar otra vez... Error: [" + error + "]");
-        _this.loading = false;
-
         if (error.response.data.message != null) {
-          self.displayErrorMessage(error.response.data.message);
+          self.displayMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez... Error: [" + error.response.data.message + "]");
+          return;
         } else {
           if (error.response.data.errors != '') {
             var content = error.response.data.errors;
@@ -22361,11 +22361,12 @@ __webpack_require__.r(__webpack_exports__);
               i++;
             }
 
-            self.displayErrorMessage(err);
-          } else {
-            self.displayErrorMessage(error.response.data);
+            self.displayMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez... Error: [" + err + "]");
+            return;
           }
         }
+
+        self.displayMessage(primevue_api__WEBPACK_IMPORTED_MODULE_1__.ToastSeverity.ERROR, "¡Fallo al actualizar Rol!", "Intente enviar otra vez...");
       });
     },
     deleteUsuario: function deleteUsuario(event, id) {
@@ -22432,9 +22433,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loading: false,
-      user: null,
+      user: "",
       dialogDisplay: false,
-      rol: null
+      rol: "",
+      selectedRol: null,
+      token: this.$store.state.jwtToken
     };
   }
 });
@@ -22838,6 +22841,7 @@ __webpack_require__.r(__webpack_exports__);
       loading: false,
       usuarios: [],
       roles: [],
+      userRols: {},
       renderComponent: true
     };
   },
@@ -22855,28 +22859,31 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$toast.removeAllGroups();
 
-        _this.roles = response.data.roles;
+        var tmpRoles = response.data.roles;
         var i = 0;
-        _this.dir = {};
 
-        while (i < _this.roles.length) {
-          _this.dir[_this.roles[i]["id"]] = _this.roles[i]["nombre"];
+        while (i < tmpRoles.length) {
+          var rol = {};
+          rol["id"] = tmpRoles[i]["id"];
+          rol["nombre"] = tmpRoles[i]["nombre"];
+
+          _this.roles.push(rol);
+
+          _this.userRols[rol["id"]] = rol["nombre"];
           i++;
         }
 
-        console.log(_this.dir);
         var j = 0;
         var lenUsr = _this.usuarios.length;
 
         while (j < lenUsr) {
-          _this.usuarios[j]["rol"] = _this.dir[_this.usuarios[j]["idRol"]];
-          console.log(_this.usuarios[j]["rol"]);
+          _this.usuarios[j]["rol"] = _this.userRols[_this.usuarios[j]["idRol"]];
           j++;
         }
       })["catch"](function (error) {
         _this.$toast.removeAllGroups();
 
-        self.displayToastMessage(primevue_api__WEBPACK_IMPORTED_MODULE_2__.ToastSeverity.ERROR, "¡No ha sido posible recoger los roles!", "Intente otra vez más tarde...");
+        self.displayToastMessage(primevue_api__WEBPACK_IMPORTED_MODULE_2__.ToastSeverity.ERROR, "¡No ha sido posible recoger los roles!", "Intente otra vez más tarde... ERROR: " + error.toString());
       });
     },
     displayToastMessage: function displayToastMessage(severity, summary, message) {
@@ -22905,11 +22912,9 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: 'Bearer ' + this.$store.state.jwtToken
         }
       }).then(function (response) {
-        _this2.loading = false;
-
-        _this2.$toast.removeAllGroups();
-
         _this2.usuarios = response.data.users;
+
+        _this2.fetchRoles();
       })["catch"](function (error) {
         _this2.$toast.removeAllGroups();
 
@@ -22938,7 +22943,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.startLoading();
     this.fetchAll();
-    this.fetchRoles();
   },
   components: {
     "ListaUsuarios": _components_ListaUsuarios_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -24929,7 +24933,7 @@ var _hoisted_9 = {
   }
 };
 var _hoisted_10 = {
-  "class": "p-float-label"
+  "class": "p-label"
 };
 
 var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
@@ -25009,7 +25013,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           /* PROPS */
           , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
             onClick: function onClick($event) {
-              return _ctx.borrarUsuario($event, slotProps.data.id);
+              return $options.deleteUsuario($event, slotProps.data.id);
             },
             icon: "pi pi-times",
             "class": "p-button-danger p-button-filled p-button-squared"
@@ -25047,24 +25051,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         icon: $options.iconComputed,
         label: $options.labelComputed,
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $options.ActualizarRol();
+          return $options.actualizarRol();
         })
       }, null, 8
       /* PROPS */
       , ["icon", "label"])])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Dropdown, {
         modelValue: $data.rol,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.rol = $event;
         }),
         options: $props.roles,
+        placeholder: $data.selectedRol,
         optionLabel: "nombre",
         emptyMessage: "No existen roles..."
       }, null, 8
       /* PROPS */
-      , ["modelValue", "options"]), _hoisted_11])])])])];
+      , ["modelValue", "options", "placeholder"])])])])])];
     }),
     _: 1
     /* STABLE */

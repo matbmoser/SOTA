@@ -12,11 +12,11 @@ if (empty($_POST['token']) || $_POST['uuid'] != $configs["securityUUIDToken"]){
 $token = mysqli_real_escape_string($conexion, $_POST['token']);
 $sql = "SELECT * from `users` where token='$token'";
 if($result = $conexion->query($sql)){
-        $row = $result->fetch_object();
-        if(empty($row)){
-            echo json_encode(array('responseCode' => $configs["wrongUserPassToken"]));
-            exit;
-        }
+    $row = $result->fetch_object();
+    if(empty($row)){
+        echo json_encode(array('responseCode' => $configs["wrongUserPassToken"]));
+        exit;
+    }
 
     $arraySucess=array(
         'responseCode' => $configs["successToken"],

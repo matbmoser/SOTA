@@ -90,7 +90,7 @@ class AuthController extends Controller
         $usuario->documento = $request->input('documento');
         $usuario->telefono = $request->input('telefono');
         $usuario->password = bcrypt($request->input('password'));
-        $usuario->token = hash("sha256",$usuario->email.$usuario->password);
+        $usuario->token = hash("sha256",$usuario->email.hash("sha512",$request->input('password')));
         $usuario->fechaNacimiento = $request->input('fechaNacimiento');
         $usuario->correoConfirmado = 0;
         $usuario->fechaUltimaConexion = now();

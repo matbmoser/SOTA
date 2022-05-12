@@ -145,6 +145,61 @@ class UserController extends Controller
         
         return $usuario; //returns the stored value if the operation was successful.
     }
+    public function updateRol(Request $request)
+    {       
+        $v = Validator::make($request->all(), [
+            'id' => 'required|integer',
+            'idRol' =>'required|integer',
+        ]);
+        if ($v->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+
+        $id = $request->input('id');
+        $idRol = $request->input('idRol');
+
+        $usuario = User::findorFail($id);
+        if($usuario == null){
+            return response()->json([
+                'success' => false,
+                'message' => "Usuario no encontrado!"
+            ], 401);
+        }
+
+        if ($usuario->id == Auth::user()->id){
+            return response()->json([
+                'success' => false,
+                'message' => "No puedes modificar tu propio rol!"
+            ], 401);
+        }
+        
+        $rol = Rol::findorFail($idRol);
+        if($rol == null){
+            return response()->json([
+                'success' => false,
+                'message' => "El rol no existe!"
+            ], 401);
+        }
+        if($rol->id == $usuario->idRol){
+            return response()->json([
+                'success' => false,
+                'message' => "El usuario ya tiene el rol de [".$rol->nombre."]"
+            ], 401);
+        }
+
+        $usuario->idRol = $rol->id;
+        $usuario->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => "Rol Actualizado a [".$rol->nombre."]!"
+        ]);
+    }
+
     public function updateData(Request $request, $id)
     {       
         $v = Validator::make($request->all(), [
@@ -185,16 +240,43 @@ class UserController extends Controller
             'user' => $usuario
         ], 200)->header('Authorization', $token);;
     }
-    /*
-    @param  int  $id
-
-    @return \Illuminate\Http\Response
-    */
-    public function delete($id)
-    {
-        $usuario = User::findorFail($id); //searching for object in database using ID
-        if($usuario->delete()){ //deletes the object
-            return 'deleted successfully'; //shows a message when the delete operation was successful.
+        /*
+        @param  int  $id
+    
+        @return \Illuminate\Http\Response
+        */
+        public function delete(Request $request)
+        {
+            $v = Validator::make($request->all(), [
+                'id' => 'required|integer',
+            ]);
+            if ($v->fails())
+            {
+                return response()->json([
+                    'status' => 'error',
+                    'errors' => $v->errors()
+                ], 422);
+            }
+            $id = $request->input('id');
+            if($id == Auth::user()->id){
+                return response()->json([
+                    'success' => false,
+                    'message' => "¡No puedes borrar a ti mismo!"
+                ], 401);
+            }
+            $usuario = User::findorFail($id);
+            if($usuario != null){ //deletes the object
+                $usuario->delete();
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => "¡El Usuario ha sido borrado!"
+                    ], 200);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => "¡El usuario no existe!"
+                ], 401);
+            }
         }
-    }
 }

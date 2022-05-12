@@ -34,10 +34,12 @@ Route::prefix('auth')->group(function () {
 Route::group(['middleware' => 'auth:api'], function(){
     // Users
     Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
+    Route::delete('user', 'App\Http\Controllers\UserController@delete')->middleware('isAdmin');
     Route::get('user/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
     Route::patch('user/{id}', 'App\Http\Controllers\UserController@updateData')->middleware('isAdminOrSelf');
     // Roles
     Route::get('roles', 'App\Http\Controllers\RolController@index')->middleware('isAdmin');
+    Route::patch('rol/user', 'App\Http\Controllers\UserController@updateRol')->middleware('isAdmin');
     Route::get('rol/{id}', 'App\Http\Controllers\RolController@show')->middleware('isAdminOrSelfRol');
 
     // Zonas

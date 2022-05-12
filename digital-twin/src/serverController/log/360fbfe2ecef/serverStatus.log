@@ -1,0 +1,56 @@
+Starting Server Log Messages...
+[INFO]: You are [www-data]
+[INFO]: Trying to start server...
+[STATS]: [1] elements afected in [0:00:00.013838] DBManager.operationQuery()
+[INFO]: Server [360fbfe2ecef] added into DB!
+[INFO]: NEW SERVER CREATED!: serverid=[360fbfe2ecef], ip=[127.0.0.1], port=[4055], poll_interval=[0.5]. [Server [360fbfe2ecef] in socket [0.0.0.0:4055] status [RUNNING] in thread: [360fbfe2ecef]].
+[INFO]: Server is Opened in Background
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000368]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1352-GDF]) The vehicle with plate [1352-GDF] don't exist!
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.283893]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) The vehicle with plate [1605-LDJ] is already parked in [F10] 
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.586228]
+[STATS]: [1] elements afected in [0:00:00.016595] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.664976]
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[b04e32212e012da820f51fcf6aaca431f1a0f2d0107cac8f109fd3d576bfbc8692928575b8e002a322e34f8ede3f392e347c02f838c047bad0ce34d8312bee27] oldPlaza=[F10] 
+[STATS]: [1] elements afected in [0:00:00.012172] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.008256] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009041] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.324102]
+[STATS]: [1] elements afected in [0:00:00.014492] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.799025]
+[INFO]: Connection with [b93a6276-2fb4-4a9e-9709-4bc51e3a2105] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.016663]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.000654]
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[d4b7708980bc4da85069c77a8a6a9f8aa1ea9c994536f82cedb92af44a5fba1d075a1a6dfe3e7e7e471bcea10468fa73eb147b53984622c36d69cb9319825ea2] oldPlaza=[A12] 
+[STATS]: [1] elements afected in [0:00:00.010425] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009544] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009582] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.342805]
+[STATS]: [1] elements afected in [0:00:00.021099] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.625013]
+[ERROR]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) The vehicle with plate [1605-LDJ] is already parked in [I8] 
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.510565]
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[ddee22cf1ebd54bb4b42a2c3de423f1781b8cdb3731228642680b8ba047179f45193a6a04dbca407bf8d989b7348169e9784829235e389c06983b0590b03725c] oldPlaza=[I8] 
+[STATS]: [1] elements afected in [0:00:00.017160] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009277] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.009479] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.745210]
+[INFO]: Connection with [b93a6276-2fb4-4a9e-9709-4bc51e3a2105] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.028377]
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.001019]
+[STATS]: [1] elements afected in [0:00:00.008520] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.672399]
+[INFO]: SJMPHandler.processINFlag(matricula=[1605-LDJ]) Deleting old ticket from vehicle with plate [1605-LDJ], ticketToken=[0f3413000d9bd5cdf09f34ee5b13ae3c7119dd44fc3a30be146442d8a757b7289a46fa5e9720c49c8a93665b78f24550806cd38a02471bcaaa5cf3fbcd203a04] oldPlaza=[A13] 
+[STATS]: [1] elements afected in [0:00:00.008164] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.008257] DBManager.operationQuery()
+[STATS]: [1] elements afected in [0:00:00.007454] DBManager.operationQuery()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:01.296606]
+[INFO]: Connection with [b93a6276-2fb4-4a9e-9709-4bc51e3a2105] is Closed
+[WARNING]: Something went wrong! BaseCamera.addInputBuffer()
+[CRITICAL]: Was not posible to process rawdata. BaseProtocol.loadRequest()
+[STATS]: Messages Processed: nmessages=[1];duration=[0:00:00.042452]
