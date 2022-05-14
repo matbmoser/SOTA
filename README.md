@@ -124,7 +124,7 @@ If you want to deploy the system in your local machine, you must have a linux (u
 > ## Technology arquitecture
 
 <br>
-<img align="center" src="media/img/tecnology arquitecture.jpeg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/tecnology arquitecture.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
