@@ -82,21 +82,21 @@
 
 > ## Digital Twin ScreenShot
 <br>
-<img align="center" src="media/img/screenshotDigitalTwin.png" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/screenshotDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
 
 > ## UFV MyParking WebApp ScreenShot
 <br>
-<img align="center" src="media/img/parking webapp.png" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/parking webapp.jpg" alt="Logo" width="100%" height="100%">
 <br>
 <br>
 
 > ## Virtual Tickets 
 
 <br>
-<img align="center" src="media/img/Tickets Virtuales.png" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/Tickets Virtuales.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 

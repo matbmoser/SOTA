@@ -1,8 +1,6 @@
-data
 devcontainer
 **/__pycache__/
 .idea
 .idea/*
 __pycache__/
-*/data/
 data/
