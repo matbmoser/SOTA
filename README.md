@@ -372,7 +372,7 @@ For building the docker compose container enviroment run the following script.
  The script will perform a series of actions to build the containers.
 
 ```sh
-########## buildDocker.sh
+########## < buildDocker.sh >
 
 ## Set up internal network
 docker network create appNet 
@@ -413,15 +413,13 @@ Introduce the following credentials to have access to the digital twin.
 <br>
 > Default Admin Credentials:
 
-> Email: <strong> admin@myparking.com </strong>
-
+> Email: <strong> admin@myparking.com </strong><br>
 > Password: <strong> 789456123 </strong> # Default Password
 
 <br>
 > Default Manager Credentials:
 
-> Email: <strong> manager@myparking.com </strong>
-
+> Email: <strong> manager@myparking.com </strong><br>
 > Password: <strong> 789456123 </strong> # Default Password
 
 <br>
