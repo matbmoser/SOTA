@@ -23469,117 +23469,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "NotificationPage",
-  data: function data() {
-    return {
-      notifications: [],
-      joinRequests: [],
-      getParam: {
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + this.$store.state.jwtToken
-        },
-        method: "GET"
-      }
-    };
-  },
-  beforeMount: function beforeMount() {
-    this.getNotification();
-  },
-  methods: {
-    getBackgroundColour: function getBackgroundColour(isRead) {
-      return isRead ? 'background-color: white' : 'background-color: #e6e6e6';
-    },
-    getNotification: function getNotification() {
-      var _this = this;
-
-      fetch("/api/users/notificaciones", this.getParam).then(function (r) {
-        if (r.ok) return r.json();else return null;
-      }).then(function (val) {
-        return _this.notifications = val;
-      })["catch"](function (reason) {
-        return console.log(reason);
-      });
-    },
-    deleteNotification: function deleteNotification(notId, event) {
-      var _this2 = this;
-
-      this.$confirm.require({
-        target: event.currentTarget,
-        message: 'Do you want to delete this record?',
-        header: 'Delete Confirmation',
-        icon: 'pi pi-info-circle',
-        acceptClass: 'p-button-danger',
-        accept: function accept() {
-          var deleteParams = _this2.getParam;
-          deleteParams.method = "DELETE";
-          fetch('/api/notifications/' + notId, deleteParams).then(function (res) {
-            if (!res.ok) throw new Error(res);else _this2.$router.go();
-          })["catch"](function (reason) {
-            return console.log(reason);
-          });
-        },
-        reject: function reject() {}
-      });
-    },
-    acceptJoinRequest: function acceptJoinRequest(userId, groupId, event) {
-      var _this3 = this;
-
-      this.$confirm.require({
-        target: event.currentTarget,
-        message: 'Are you sure you want to accept this user to the group?',
-        header: 'Accept request',
-        icon: 'pi pi-info-circle',
-        accept: function accept() {
-          var postParams = _this3.getParam;
-          postParams.method = "POST";
-          fetch("/api/groups/".concat(groupId, "/requests/accept/").concat(userId), postParams).then(function (res) {
-            if (!res.ok) throw new Error(res);else _this3.$router.go();
-          })["catch"](function (reason) {
-            return console.log(reason);
-          });
-        },
-        reject: function reject() {}
-      });
-    },
-    rejectJoinRequest: function rejectJoinRequest(userId, groupId, event) {
-      var _this4 = this;
-
-      this.$confirm.require({
-        target: event.currentTarget,
-        message: 'Are you sure you want to reject this user from the group?',
-        header: 'Accept request',
-        icon: 'pi pi-info-circle',
-        acceptClass: 'p-button-danger',
-        accept: function accept() {
-          var deleteParam = _this4.getParam;
-          deleteParam.method = "DELETE";
-          fetch("/api/groups/".concat(groupId, "/requests/deny/").concat(userId), deleteParam).then(function (res) {
-            if (!res.ok) throw new Error(res);else _this4.$router.go();
-          })["catch"](function (reason) {
-            return console.log(reason);
-          });
-        },
-        reject: function reject() {}
-      });
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=script&lang=js":
 /*!*****************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=script&lang=js ***!
@@ -24529,11 +24418,11 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_12 = [_hoisted_10, _hoisted_11];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "p-link layout-topbar-button"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "pi pi-bell"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Notificaciones")], -1
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Notificaciones")])], -1
 /* HOISTED */
 );
 
@@ -24577,16 +24466,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.logout && $options.logout.apply($options, arguments);
     }),
     "class": "p-link layout-topbar-button"
-  }, _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/notificaciones"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_13];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, _hoisted_12)]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/profile"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25325,11 +25205,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h1>Nuestra Política de Privacidad</h1><p style=\"text-align:center;\"> </p><p><strong>UFV MyParking</strong> para proteger los derechos individuales, sobre todo en relación con los tratamientos automatizados y con voluntad de ser transparentes con el Usuario, ha establecido una política que recoge el conjunto de dichos tratamientos, los fines perseguidos por estos últimos, la legitimidad de los mismos y también los instrumentos a disposición del Usuario para que pueda ejercer sus derechos.</p><p>La navegación en este sitio web implica la total aceptación de las siguientes disposiciones y condiciones de utilización. Se aceptará la utilización de cookies. En caso de no estar de acuerdo envía un correo electrónico a <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a></p><p>La versión actualizada de esta política de privacidad es la única aplicable durante la duración del uso del sitio web hasta que no haya otra versión que la sustituya.</p><p>Para una más información complementaria sobre la protección de datos personales te invitamos a consultar la página web de la AEPD (Agencia Española de Protección de Datos) <a href=\"https://www.agpd.es/portalwebAGPD/index-ides-idphp.php\">https://www.agpd.es/portalwebAGPD/index-ides-idphp.php</a></p><h3>Recogida de datos</h3><p>Tus datos son recogidos por el TITULAR.</p><p>Un dato de carácter personal se refiere a toda la información referida a una persona física identificada o identificable (persona afectada). Se entiende como identificable una persona que pueda ser identificada, directa o indirectamente, sobre todo por referencia a un nombre, un número de identificación (DNI, NIF, NIE, pasaporte) o a uno o varios elementos específicos, propios a su identidad física, fisiológica, genética, psíquica, económica, cultural o social.</p><p>Los datos que con carácter general serán recopilados en los formularios son: Nombre, Comentario y Correo. Se podrán recopilar otro tipo de datos dependiendo del formulario siendo así siendo informado el Usuario. Además las de caracter específico para <strong>petición de ayuda de un centro de salud</strong> siendo, correo, nombre del centro, dirección, persona de contacto, número de teléfono para contacto, lugar de entrega, cantidad de pantallas-viseras: (indicar que son reutilizables, por lo que se suele calcular en función del nº de personas que vayan a trabajar simultáneamente)</p><h3>¿Con qué finalidad se tratan tus datos personales?</h3><p>La finalidad del tratamiento de los datos personales que se puedan recoger son usarlos principalmente por el TITULAR para la gestión de su relación contigo, poder ofrecerte productos y servicios de acuerdo con tus intereses, mejorar tu experiencia de usuario y en su caso, para el tratamiento de sus solicitudes, peticiones o pedidos. Se elaborará un perfil comercial en base a la información que le facilites. No se realizarán decisiones automatizadas en base a dicho perfil.</p><p>Los datos proporcionados se conservarán mientras se mantenga la relación comercial, siempre que no se solicite por el interesado su supresión, o durante los años necesarios para cumplir las obligaciones legales.</p><p>Se registrarán en el fichero de cliente y su tratamiento quedará registrado en el registro de tratamientos que debe llevar el TITULAR (antes del 25 de mayo de 2018 también podría estar incluido en el fichero elaborado con los datos personales registrado en la AEPD (Agencia Española de Protección de datos) u órgano competente de las respectiva Comunidad Autónoma).  </p><h3>¿Cuál es la legitimación para el tratamiento de tus datos?</h3><p>La base legal para el tratamiento de tus datos personales es:</p><p>- La correcta ejecución o cumplimiento del contrato</p><p>- El interés legítimo del TITULAR</p><p>- El consentimiento del usuario o cliente para el tratamiento de sus datos</p><h3>¿A qué destinatarios se comunicarán los datos?</h3><p>Los datos personales del Usuario podrán eventualmente ser comunicados a terceros relacionados con el TITULAR por contrato para la realización de las tareas necesarias para la gestión de su cuenta como cliente y sin que tenga que dar su autorización</p><p>También cuando tuvieran que hacerse comunicaciones a las autoridades en caso de que el Usuario hubiera realizado acciones contrarias a la Ley o incumplido el contenido del aviso legal</p><p>Los datos del Usuario podrán comunicarse a otras empresas del grupo, si las hubiese, para fines administrativos internos que podrían suponer un tratamiento de esos datos.</p><p>Los datos personales del Usuario podrán transferirse a un tercer país o a una organización internacional, pero se le deberá informar cuando se vaya a producir esa transferencia, y de las condiciones de la misma y del destinatario.</p><p>Cuando algunos datos sean obligatorios para acceder a funcionalidades concretas del sitio web, el TITULAR indicará dicho carácter obligatorio en el momento de la recogida de datos del Usuario.</p><h3>Cookies</h3><p>Al navegar por este sitio, las cookies del TITULAR del sitio en cuestión y / o de las compañías de terceros,  pueden depositarse en su ordenador, tablet o teléfono móvil. Durante la primera navegación, aparecerá un banner explicativo sobre el uso de cookies.<br> Por lo tanto, al continuar la navegación, el Usuario será considerado como informado y habrá aceptado el uso de dichas &quot;cookies&quot;. El consentimiento otorgado será válido por un período de trece meses. </p><h3>¿Qué son las Cookies?</h3><p>Una cookie es un fichero que se descarga en el equipo del Usuario al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.</p><p>Las cookies, en función de quién gestiona el equipo o dominio desde las que se envían, pueden dividirse en cookies propias (gestionadas por un equipo o dominio gestionado por el propio editor del sitio web) o cookies de terceros (gestionados por terceras entidades que tratan los datos obtenidos a través de éstas).</p><p>Según el plazo de tiempo que permanecen activadas, puede distinguirse entre cookies de sesión (diseñadas para recabar y almacenar datos mientras el usuario accede a una página web) y cookies persistentes (en las que los datos siguen almacenados en el terminal y pueden ser accedidos y tratados durante un periodo definido por el responsable de la cookie).</p><hr><h5>Cookies de análisis:</h5><p>Son aquéllas que nos permiten cuantificar el número de Usuarios y así realizar la medición y análisis estadístico de la utilización que hacen del servicio ofertado. Para ello se analiza su navegación en nuestro Portal con el fin de introducir mejoras en el funcionamiento del mismo y/o mejorar los productos o servicios ofertados. En particular, utilizamos las siguientes cookies de análisis:</p><p><strong>Cookies de Google Analytics.</strong> A través de Google Analytics se obtiene información que nos permite medir cómo interactúan los Usuarios con el contenido del Portal. Origen: Google Inc.</p><p class=\"lefttext\">Más información: <a href=\"https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es\" target=\"_blank\">https://developers.google.com/analytics</a></p><hr><h5>Cookies de personalización:</h5><p>Son aquéllas que permiten al Usuario acceder al servicio con algunas características de carácter general predefinidas en función de una serie de criterios en el terminal del usuario como por ejemplo serían el idioma, el tipo de navegador a través del cual accede al servicio, la configuración regional desde donde se accede al servicio, etc.</p><hr><h3>Cómo deshabilitar el uso de Cookies</h3><p>El Usuario puede en cualquier momento deshabilitar el funcionamiento de las cookies del Portal mediante la configuración del navegador, pero puede que esto afecte a la capacidad de navegar por el Portal o a la correcta utilización de algunas de las funciones de éste.</p><p>Puede consultar como hacerlo en cada navegador siguiendo los siguientes links:</p><p class=\"lefttext\"><span>Si utiliza <strong>Chrome</strong>, desde <a href=\"https://support.google.com/chrome/answer/95647?hl=es&amp;ref_topic=3434352\" target=\"_blank\">https://support.google.com/chrome/</a></span><br><span>Si utiliza <strong>Explorer</strong>, desde <a href=\"https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies\" target=\"_blank\"> https://support.microsoft.com/es-es/help</a></span><br><span>Si utiliza <strong>Firefox</strong>, desde <a href=\"https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias\" target=\"_blank\"> https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias</a></span><br><span>Si utiliza <strong>Safari</strong>, desde <a href=\"https://support.apple.com/kb/PH21411?viewlocale=es_ES&amp;locale=es_ES\" target=\"_blank\"> https://support.apple.com/kb/PH21411?viewlocale=es_ES&amp;locale=es_ES</a></span></p><hr><h3>Actualizaciones y cambios en la Política de Cookies</h3><p class=\"pred\"><strong>UFV MyParking</strong> se reserva el derecho a introducir modificaciones en esta Política de Cookies, por ello se aconseja a los Usuarios que la visiten periódicamente.</p><p>Cuando se produzcan cambios significativos en esta Política de Cookies, se comunicarán a los Usuarios para su aceptación mediante avisos en el Portal o a través de correo electrónico o bien través de cualquier otro procedimiento adecuado según las circunstancias.</p><p>Si tiene dudas sobre esta Política de Cookies, puede contactar con nosotros en este correo electrónico: <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a></p><h3>Derechos del usuario</h3><p>Se informa al usuario de la posibilidad de ejercer sus derechos de acceso, rectificación, cancelación y oposición. También cada persona dispone del derecho de limitación del tratamiento relativo a su persona, de un derecho de eliminación de transferencia de datos personales transmitidos al responsable del tratamiento y del derecho a la portabilidad de sus datos.</p><p>El usuario tiene la posibilidad de presentar una reclamación ante la AEPD (Agencia Española de Protección de Datos) u organismo competente de la respectiva Comunidad Autónoma, cuando no haya obtenido una solución satisfactoria en el ejercicio de sus derechos mediante un escrito dirigido a la misma. </p><p>Salvo que el Usuario se oponga, enviando un email a la dirección de correo electrónico <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a>, sus datos podrán ser utilizados, en su caso, si procede, para el envío de información comercial de <strong>UFV MyParking</strong></p><p>Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir las obligaciones legales.</p><p>El Usuario es responsable de que la información que proporcione a través de esta página web sea cierta, respondiendo de la exactitud de todos los datos que comunique y mantendrá actualizada la misma para que reflejen una situación real, siendo responsable de informaciones falsas o inexactas que proporcione y de los daños, molestias y problemas que pudieran causar al UFV MyParking  o a terceros.</p><p>Esa información será guardada y gestionada con la debida confidencialidad, aplicando las medidas de seguridad informática necesarias para impedir el acceso o uso indebido de sus datos, su manipulación, deterioro o pérdida</p><p>No obstante, el Usuario debe tener en cuenta que la seguridad de los sistemas informáticos nunca es absoluta. Cuando se facilitan datos personales por internet, dicha información pudiera ser recogida sin su consentimiento y tratada por terceros no autorizados.</p><p>UFV MyParking declina, cualquier tipo de responsabilidad sobre las consecuencias de esos actos puedan tener para el Usuario, si publicó la información voluntariamente.</p><p>Podrá acceder y ejercitar esos derechos mediante solicitud por escrito y firmada que podrá ser enviada al siguiente correo electrónico: <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a> adjuntando fotocopia del DNI o documento equivalente.</p><p>Además de lo anterior, y en relación con la normativa de protección de datos, los usuarios que lo soliciten, tienen la posibilidad de organizar el destino de sus datos después de su fallecimiento.</p>", 60);
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h1>Nuestra Política de Privacidad</h1><p style=\"text-align:center;\"> </p><p><strong>UFV MyParking</strong> para proteger los derechos individuales, sobre todo en relación con los tratamientos automatizados y con voluntad de ser transparentes con el Usuario, ha establecido una política que recoge el conjunto de dichos tratamientos, los fines perseguidos por estos últimos, la legitimidad de los mismos y también los instrumentos a disposición del Usuario para que pueda ejercer sus derechos.</p><p>La navegación en este sitio web implica la total aceptación de las siguientes disposiciones y condiciones de utilización. Se aceptará la utilización de cookies. En caso de no estar de acuerdo envía un correo electrónico a <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a></p><p>La versión actualizada de esta política de privacidad es la única aplicable durante la duración del uso del sitio web hasta que no haya otra versión que la sustituya.</p><p>Para una más información complementaria sobre la protección de datos personales te invitamos a consultar la página web de la AEPD (Agencia Española de Protección de Datos) <a href=\"https://www.agpd.es/portalwebAGPD/index-ides-idphp.php\">https://www.agpd.es/portalwebAGPD/index-ides-idphp.php</a></p><h3>Recogida de datos</h3><p>Tus datos son recogidos por el TITULAR.</p><p>Un dato de carácter personal se refiere a toda la información referida a una persona física identificada o identificable (persona afectada). Se entiende como identificable una persona que pueda ser identificada, directa o indirectamente, sobre todo por referencia a un nombre, un número de identificación (DNI, NIF, NIE, pasaporte) o a uno o varios elementos específicos, propios a su identidad física, fisiológica, genética, psíquica, económica, cultural o social.</p><p>Los datos que con carácter general serán recopilados en los formularios son: Nombre, Correo, Teléfono, DNI, Fecha de Nacimiento. Se podrán recopilar otro tipo de datos dependiendo del formulario siendo así siendo informado el Usuario. Además las de caracter específico para <strong>petición de ayuda de un centro de salud</strong> siendo, correo, nombre del centro, dirección, persona de contacto, número de teléfono para contacto, lugar de entrega, cantidad de pantallas-viseras: (indicar que son reutilizables, por lo que se suele calcular en función del nº de personas que vayan a trabajar simultáneamente)</p><h3>¿Con qué finalidad se tratan tus datos personales?</h3><p>La finalidad del tratamiento de los datos personales que se puedan recoger son usarlos principalmente por el TITULAR para la gestión de su relación contigo, poder ofrecerte productos y servicios de acuerdo con tus intereses, mejorar tu experiencia de usuario y en su caso, para el tratamiento de sus solicitudes, peticiones o pedidos. Se elaborará un perfil comercial en base a la información que le facilites. No se realizarán decisiones automatizadas en base a dicho perfil. En el caso que usted provoque una incidencia grave en el aparcamiento, será necesario tenerlo identificado para poder realizar los trámites estatales necesarios. Usted será notificado por correo eletrónico de cualquier incidente y resolución de incidencias ocasionadas por él. </p><p> Podrás ser expulso de la aplicación si se presentan cargos con pruebas contra TI en la aplicación, en caso de aparcamiento ilegal, accidentes u atropellamentos, serás notificado en caso de ocurrencia y denuncia del suceso. </p><p>En el caso de que llegue a occurrir un Administrador en representación del TITULAR contactará con usted para indicarle la nota de resolución y la pena que será aplicada, que podrá ser una expulsión temporal o permanente de la aplicación. </p><p><strong>UFV MyParking</strong> No es responsable de ningún incidente provocado por usted dentro del aparcamiento, el sistema le asignará una plaza, siempre que su vehiculo se encuentre registrado y haya plazas disponibles. Siga la asignación del sistema para evitar problemas con otros usuarios y aparque lo mejor posible. Puedes reportar cualquier incidencia ocurrida en sesión de aparcamiento, siempre que se aporten pruebas veríficas de los eventos producidos. </p><p>Los datos proporcionados se conservarán mientras se mantenga la relación comercial, siempre que no se solicite por el interesado su supresión, o durante los años necesarios para cumplir las obligaciones legales.</p><p>Se registrarán en el fichero de cliente y su tratamiento quedará registrado en el registro de tratamientos que debe llevar el TITULAR (antes del 25 de mayo de 2018 también podría estar incluido en el fichero elaborado con los datos personales registrado en la AEPD (Agencia Española de Protección de datos) u órgano competente de las respectiva Comunidad Autónoma).  </p><h3>¿Cuál es la legitimación para el tratamiento de tus datos?</h3><p>La base legal para el tratamiento de tus datos personales es:</p><p>- La correcta ejecución o cumplimiento del contrato</p><p>- El interés legítimo del TITULAR</p><p>- El consentimiento del usuario o cliente para el tratamiento de sus datos</p><h3>¿A qué destinatarios se comunicarán los datos?</h3><p>Los datos personales del Usuario podrán eventualmente ser comunicados a terceros relacionados con el TITULAR por contrato para la realización de las tareas necesarias para la gestión de su cuenta como cliente y sin que tenga que dar su autorización</p><p>También cuando tuvieran que hacerse comunicaciones a las autoridades en caso de que el Usuario hubiera realizado acciones contrarias a la Ley o incumplido el contenido del aviso legal</p><p>Los datos del Usuario podrán comunicarse a otras empresas del grupo, si las hubiese, para fines administrativos internos que podrían suponer un tratamiento de esos datos.</p><p>Los datos personales del Usuario podrán transferirse a un tercer país o a una organización internacional, pero se le deberá informar cuando se vaya a producir esa transferencia, y de las condiciones de la misma y del destinatario.</p><p>Cuando algunos datos sean obligatorios para acceder a funcionalidades concretas del sitio web, el TITULAR indicará dicho carácter obligatorio en el momento de la recogida de datos del Usuario.</p><h3>Cookies</h3><p>Al navegar por este sitio, las cookies del TITULAR del sitio en cuestión y / o de las compañías de terceros,  pueden depositarse en su ordenador, tablet o teléfono móvil. Durante la primera navegación, aparecerá un banner explicativo sobre el uso de cookies.<br> Por lo tanto, al continuar la navegación, el Usuario será considerado como informado y habrá aceptado el uso de dichas &quot;cookies&quot;. El consentimiento otorgado será válido por un período de trece meses. </p><h3>¿Qué son las Cookies?</h3><p>Una cookie es un fichero que se descarga en el equipo del Usuario al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.</p><p>Las cookies, en función de quién gestiona el equipo o dominio desde las que se envían, pueden dividirse en cookies propias (gestionadas por un equipo o dominio gestionado por el propio editor del sitio web) o cookies de terceros (gestionados por terceras entidades que tratan los datos obtenidos a través de éstas).</p><p>Según el plazo de tiempo que permanecen activadas, puede distinguirse entre cookies de sesión (diseñadas para recabar y almacenar datos mientras el usuario accede a una página web) y cookies persistentes (en las que los datos siguen almacenados en el terminal y pueden ser accedidos y tratados durante un periodo definido por el responsable de la cookie).</p><hr><h5>Cookies de análisis:</h5><p>Son aquéllas que nos permiten cuantificar el número de Usuarios y así realizar la medición y análisis estadístico de la utilización que hacen del servicio ofertado. Para ello se analiza su navegación en nuestro Portal con el fin de introducir mejoras en el funcionamiento del mismo y/o mejorar los productos o servicios ofertados. En particular, utilizamos las siguientes cookies de análisis:</p><p><strong>Cookies de Google Analytics.</strong> A través de Google Analytics se obtiene información que nos permite medir cómo interactúan los Usuarios con el contenido del Portal. Origen: Google Inc.</p><p class=\"lefttext\">Más información: <a href=\"https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es\" target=\"_blank\">https://developers.google.com/analytics</a></p><hr><h5>Cookies de personalización:</h5><p>Son aquéllas que permiten al Usuario acceder al servicio con algunas características de carácter general predefinidas en función de una serie de criterios en el terminal del usuario como por ejemplo serían el idioma, el tipo de navegador a través del cual accede al servicio, la configuración regional desde donde se accede al servicio, etc.</p><hr><h3>Cómo deshabilitar el uso de Cookies</h3><p>El Usuario puede en cualquier momento deshabilitar el funcionamiento de las cookies del Portal mediante la configuración del navegador, pero puede que esto afecte a la capacidad de navegar por el Portal o a la correcta utilización de algunas de las funciones de éste.</p><p>Puede consultar como hacerlo en cada navegador siguiendo los siguientes links:</p><p class=\"lefttext\"><span>Si utiliza <strong>Chrome</strong>, desde <a href=\"https://support.google.com/chrome/answer/95647?hl=es&amp;ref_topic=3434352\" target=\"_blank\">https://support.google.com/chrome/</a></span><br><span>Si utiliza <strong>Explorer</strong>, desde <a href=\"https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies\" target=\"_blank\"> https://support.microsoft.com/es-es/help</a></span><br><span>Si utiliza <strong>Firefox</strong>, desde <a href=\"https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias\" target=\"_blank\"> https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias</a></span><br><span>Si utiliza <strong>Safari</strong>, desde <a href=\"https://support.apple.com/kb/PH21411?viewlocale=es_ES&amp;locale=es_ES\" target=\"_blank\"> https://support.apple.com/kb/PH21411?viewlocale=es_ES&amp;locale=es_ES</a></span></p><hr><h3>Actualizaciones y cambios en la Política de Cookies</h3><p class=\"pred\"><strong>UFV MyParking</strong> se reserva el derecho a introducir modificaciones en esta Política de Cookies, por ello se aconseja a los Usuarios que la visiten periódicamente.</p><p>Cuando se produzcan cambios significativos en esta Política de Cookies, se comunicarán a los Usuarios para su aceptación mediante avisos en el Portal o a través de correo electrónico o bien través de cualquier otro procedimiento adecuado según las circunstancias.</p><p>Si tiene dudas sobre esta Política de Cookies, puede contactar con nosotros en este correo electrónico: <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a></p><h3>Derechos del usuario</h3><p>Se informa al usuario de la posibilidad de ejercer sus derechos de acceso, rectificación, cancelación y oposición. También cada persona dispone del derecho de limitación del tratamiento relativo a su persona, de un derecho de eliminación de transferencia de datos personales transmitidos al responsable del tratamiento y del derecho a la portabilidad de sus datos.</p><p>El usuario tiene la posibilidad de presentar una reclamación ante la AEPD (Agencia Española de Protección de Datos) u organismo competente de la respectiva Comunidad Autónoma, cuando no haya obtenido una solución satisfactoria en el ejercicio de sus derechos mediante un escrito dirigido a la misma. </p><p>Salvo que el Usuario se oponga, enviando un email a la dirección de correo electrónico <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a>, sus datos podrán ser utilizados, en su caso, si procede, para el envío de información comercial de <strong>UFV MyParking</strong></p><p>Los datos proporcionados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir las obligaciones legales.</p><p>El Usuario es responsable de que la información que proporcione a través de esta página web sea cierta, respondiendo de la exactitud de todos los datos que comunique y mantendrá actualizada la misma para que reflejen una situación real, siendo responsable de informaciones falsas o inexactas que proporcione y de los daños, molestias y problemas que pudieran causar al UFV MyParking  o a terceros.</p><p>Esa información será guardada y gestionada con la debida confidencialidad, aplicando las medidas de seguridad informática necesarias para impedir el acceso o uso indebido de sus datos, su manipulación, deterioro o pérdida</p><p>No obstante, el Usuario debe tener en cuenta que la seguridad de los sistemas informáticos nunca es absoluta. Cuando se facilitan datos personales por internet, dicha información pudiera ser recogida sin su consentimiento y tratada por terceros no autorizados.</p><p>UFV MyParking declina, cualquier tipo de responsabilidad sobre las consecuencias de esos actos puedan tener para el Usuario, si publicó la información voluntariamente.</p><p>Podrá acceder y ejercitar esos derechos mediante solicitud por escrito y firmada que podrá ser enviada al siguiente correo electrónico: <a href=\"ufvmyparking@gmail.com\">ufvmyparking@gmail.com</a> adjuntando fotocopia del DNI o documento equivalente.</p><p>Además de lo anterior, y en relación con la normativa de protección de datos, los usuarios que lo soliciten, tienen la posibilidad de organizar el destino de sus datos después de su fallecimiento.</p>", 63);
 
-var _hoisted_61 = [_hoisted_1];
+var _hoisted_64 = [_hoisted_1];
 function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_61);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_64);
 }
 
 /***/ }),
@@ -26648,173 +26528,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640 ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-var _hoisted_1 = {
-  "class": "p-grid nested-grid p-jc-center"
-};
-var _hoisted_2 = {
-  "class": "p-col-10"
-};
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "table-header"
-}, " General ", -1
-/* HOISTED */
-);
-
-var _hoisted_4 = {
-  "class": "p-grid"
-};
-var _hoisted_5 = {
-  "class": "p-col-10 box",
-  style: {
-    "text-align": "left"
-  }
-};
-var _hoisted_6 = {
-  "class": "p-col-2"
-};
-var _hoisted_7 = {
-  "class": "p-col-10"
-};
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "table-header"
-}, " Groups ", -1
-/* HOISTED */
-);
-
-var _hoisted_9 = {
-  "class": "p-grid"
-};
-var _hoisted_10 = {
-  "class": "p-col-10 box",
-  style: {
-    "text-align": "left"
-  }
-};
-var _hoisted_11 = {
-  key: 0,
-  "class": "p-col-2"
-};
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _this = this;
-
-  var _component_Button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Button");
-
-  var _component_DataView = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DataView");
-
-  var _component_ScrollPanel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ScrollPanel");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ScrollPanel, {
-    style: {
-      "width": "100%",
-      "height": "400px"
-    }
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataView, {
-        layout: "list",
-        value: $data.notifications
-      }, {
-        header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_3];
-        }),
-        list: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (slotProps) {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "p-col-12",
-            style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getBackgroundColour(slotProps.data.isRead))
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(slotProps.data.title), 1
-          /* TEXT */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
-            onClick: function onClick($event) {
-              return $options.deleteNotification(slotProps.data.id, $event);
-            },
-            icon: "pi pi-times",
-            "class": "p-button-rounded p-button-plain p-button-text"
-          }, null, 8
-          /* PROPS */
-          , ["onClick"])])])], 4
-          /* STYLE */
-          )];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["value"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ScrollPanel, {
-    style: {
-      "width": "100%",
-      "height": "400px"
-    }
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DataView, {
-        layout: "list",
-        value: $data.joinRequests
-      }, {
-        header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_8];
-        }),
-        list: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (slotProps) {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "p-col-12",
-            style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)($options.getBackgroundColour(false))
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(slotProps.data.title), 1
-          /* TEXT */
-          ), _this.$store.state.currentUser.id == slotProps.data.group.ownerId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
-            onClick: function onClick($event) {
-              return $options.acceptJoinRequest(slotProps.data.id, slotProps.data.group.id, $event);
-            },
-            icon: "pi pi-check",
-            "class": "p-button-rounded p-button-plain p-button-text"
-          }, null, 8
-          /* PROPS */
-          , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Button, {
-            onClick: function onClick($event) {
-              return $options.rejectJoinRequest(slotProps.data.id, slotProps.data.group.id, $event);
-            },
-            icon: "pi pi-times",
-            "class": "p-button-rounded p-button-plain p-button-text"
-          }, null, 8
-          /* PROPS */
-          , ["onClick"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 4
-          /* STYLE */
-          )];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["value"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])]);
-}
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=template&id=0e6a463a&scoped=true":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=template&id=0e6a463a&scoped=true ***!
@@ -28042,22 +27755,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "routes": () => (/* binding */ routes)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _views_Home_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/Home.vue */ "./resources/js/views/Home.vue");
 /* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/index.js */ "./resources/js/store/index.js");
 /* harmony import */ var _views_admin_AdminDashboard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/admin/AdminDashboard.vue */ "./resources/js/views/admin/AdminDashboard.vue");
 /* harmony import */ var _views_admin_AdminIncidencias_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/admin/AdminIncidencias.vue */ "./resources/js/views/admin/AdminIncidencias.vue");
-/* harmony import */ var _views_notificaciones_Notificaciones_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/notificaciones/Notificaciones.vue */ "./resources/js/views/notificaciones/Notificaciones.vue");
-/* harmony import */ var _views_incidencias_Incidencias_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../views/incidencias/Incidencias.vue */ "./resources/js/views/incidencias/Incidencias.vue");
-/* harmony import */ var _views_tickets_Tickets_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../views/tickets/Tickets.vue */ "./resources/js/views/tickets/Tickets.vue");
-/* harmony import */ var _views_vehiculos_Vehiculos_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../views/vehiculos/Vehiculos.vue */ "./resources/js/views/vehiculos/Vehiculos.vue");
-/* harmony import */ var _views_NotFound_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../views/NotFound.vue */ "./resources/js/views/NotFound.vue");
-/* harmony import */ var _views_auth_Login_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../views/auth/Login.vue */ "./resources/js/views/auth/Login.vue");
-/* harmony import */ var _views_auth_Register_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../views/auth/Register.vue */ "./resources/js/views/auth/Register.vue");
-/* harmony import */ var _views_profile_Profile_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../views/profile/Profile.vue */ "./resources/js/views/profile/Profile.vue");
-/* harmony import */ var _views_profile_EditUser_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../views/profile/EditUser.vue */ "./resources/js/views/profile/EditUser.vue");
-/* harmony import */ var _views_tickets_VerTicket_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../views/tickets/VerTicket.vue */ "./resources/js/views/tickets/VerTicket.vue");
-
+/* harmony import */ var _views_incidencias_Incidencias_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/incidencias/Incidencias.vue */ "./resources/js/views/incidencias/Incidencias.vue");
+/* harmony import */ var _views_tickets_Tickets_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../views/tickets/Tickets.vue */ "./resources/js/views/tickets/Tickets.vue");
+/* harmony import */ var _views_vehiculos_Vehiculos_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../views/vehiculos/Vehiculos.vue */ "./resources/js/views/vehiculos/Vehiculos.vue");
+/* harmony import */ var _views_NotFound_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../views/NotFound.vue */ "./resources/js/views/NotFound.vue");
+/* harmony import */ var _views_auth_Login_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../views/auth/Login.vue */ "./resources/js/views/auth/Login.vue");
+/* harmony import */ var _views_auth_Register_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../views/auth/Register.vue */ "./resources/js/views/auth/Register.vue");
+/* harmony import */ var _views_profile_Profile_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../views/profile/Profile.vue */ "./resources/js/views/profile/Profile.vue");
+/* harmony import */ var _views_profile_EditUser_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../views/profile/EditUser.vue */ "./resources/js/views/profile/EditUser.vue");
+/* harmony import */ var _views_tickets_VerTicket_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../views/tickets/VerTicket.vue */ "./resources/js/views/tickets/VerTicket.vue");
 
 
 
@@ -28098,7 +27809,7 @@ var routes = [{
 }, {
   path: "/login",
   name: "Login",
-  component: _views_auth_Login_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+  component: _views_auth_Login_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
   meta: {
     requiresAuth: false,
     hideNavigation: true
@@ -28106,7 +27817,7 @@ var routes = [{
 }, {
   path: "/register",
   name: "Register",
-  component: _views_auth_Register_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+  component: _views_auth_Register_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
   meta: {
     requiresAuth: false,
     hideNavigation: true
@@ -28114,7 +27825,7 @@ var routes = [{
 }, {
   path: "/ticket/:token",
   name: "Ticket",
-  component: _views_tickets_VerTicket_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+  component: _views_tickets_VerTicket_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
   props: true,
   meta: {
     requiresAuth: false
@@ -28122,35 +27833,28 @@ var routes = [{
 }, {
   path: "/vehiculos",
   name: "Vehiculos",
-  component: _views_vehiculos_Vehiculos_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+  component: _views_vehiculos_Vehiculos_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
   path: "/incidencias",
   name: "Incidencias",
-  component: _views_incidencias_Incidencias_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  component: _views_incidencias_Incidencias_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
   path: "/tickets",
   name: "Tickets",
-  component: _views_tickets_Tickets_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-  meta: {
-    requiresAuth: true
-  }
-}, {
-  path: "/notificaciones",
-  name: "Notificaciones",
-  component: _views_notificaciones_Notificaciones_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  component: _views_tickets_Tickets_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
   path: "/profile",
   name: "Profile",
-  component: _views_profile_Profile_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+  component: _views_profile_Profile_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
   props: true,
   meta: {
     requiresAuth: true
@@ -28158,20 +27862,20 @@ var routes = [{
 }, {
   path: "/profile/edit",
   name: "EditUser",
-  component: _views_profile_EditUser_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+  component: _views_profile_EditUser_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
   props: true,
   meta: {
     requiresAuth: true
   }
 }, {
   path: "/:catchAll(.*)",
-  component: _views_NotFound_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+  component: _views_NotFound_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
   meta: {
     requiresAuth: true
   }
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_14__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_14__.createWebHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_13__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_13__.createWebHistory)(),
   routes: routes
 });
 router.beforeEach(function (to, from, next) {
@@ -28913,30 +28617,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.p-panel[data-v-4f2e2916] {\r\n        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;\r\n        margin: 50px 0px;\n}\n.p-panel .p-panel-header[data-v-4f2e2916] {\r\n        border: 1px solid #f7f7f7;\r\n        padding: 1rem 1.25rem;\r\n        background: #f7f7f7;\r\n        color: #212529;\r\n        border-top-right-radius: 4px;\r\n        border-top-left-radius: 4px;\n}\ntable[data-v-4f2e2916] {\r\n        font-family: 'Open Sans', sans-serif;\r\n        width: 750px;\r\n        border-collapse: collapse;\r\n        margin: 10px 10px 0 10px;\n}\n.t.row[data-v-4f2e2916] {\r\n        margin: 0 !important;\n}\ntable .p-datatable-thead tr th[data-v-4f2e2916] {\r\n        text-transform: uppercase !important;\r\n        text-align: left !important;\r\n        background: #5600ff !important;\r\n        color: #FFF !important;\n}\ntable td[data-v-4f2e2916]:last-child {\r\n        border-right: none;\n}\ntable tbody tr:nth-child(2n) td[data-v-4f2e2916] {\r\n        background: #e4d6ff;\n}\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.p-scrollpanel-wrapper {\r\n  border-right: 9px solid var(--surface-b);\n}\n.p-scrollpanel-bar {\r\n  background-color: var(--primary-color) !important;\r\n  opacity: 1;\r\n  transition: background-color .2s;\n}\n.p-scrollpanel-bar:hover {\r\n  background-color: #007ad9 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68879,36 +68559,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_style_index_0_id_df7e4640_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_style_index_0_id_df7e4640_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_style_index_0_id_df7e4640_lang_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=style&index=0&id=0e6a463a&scoped=true&lang=css":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/profile/EditUser.vue?vue&type=style&index=0&id=0e6a463a&scoped=true&lang=css ***!
@@ -70390,37 +70040,6 @@ if (false) {}
 
 /***/ }),
 
-/***/ "./resources/js/views/notificaciones/Notificaciones.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/views/notificaciones/Notificaciones.vue ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Notificaciones_vue_vue_type_template_id_df7e4640__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Notificaciones.vue?vue&type=template&id=df7e4640 */ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640");
-/* harmony import */ var _Notificaciones_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Notificaciones.vue?vue&type=script&lang=js */ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js");
-/* harmony import */ var _Notificaciones_vue_vue_type_style_index_0_id_df7e4640_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css */ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css");
-/* harmony import */ var _var_www_webapp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
-
-
-
-
-;
-
-
-const __exports__ = /*#__PURE__*/(0,_var_www_webapp_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_Notificaciones_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Notificaciones_vue_vue_type_template_id_df7e4640__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/notificaciones/Notificaciones.vue"]])
-/* hot reload */
-if (false) {}
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
-
-/***/ }),
-
 /***/ "./resources/js/views/profile/EditUser.vue":
 /*!*************************************************!*\
   !*** ./resources/js/views/profile/EditUser.vue ***!
@@ -70880,22 +70499,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Notificaciones.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=script&lang=js");
- 
-
-/***/ }),
-
 /***/ "./resources/js/views/profile/EditUser.vue?vue&type=script&lang=js":
 /*!*************************************************************************!*\
   !*** ./resources/js/views/profile/EditUser.vue?vue&type=script&lang=js ***!
@@ -71312,22 +70915,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640 ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_template_id_df7e4640__WEBPACK_IMPORTED_MODULE_0__.render)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_template_id_df7e4640__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Notificaciones.vue?vue&type=template&id=df7e4640 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=template&id=df7e4640");
-
-
-/***/ }),
-
 /***/ "./resources/js/views/profile/EditUser.vue?vue&type=template&id=0e6a463a&scoped=true":
 /*!*******************************************************************************************!*\
   !*** ./resources/js/views/profile/EditUser.vue?vue&type=template&id=0e6a463a&scoped=true ***!
@@ -71651,19 +71238,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Incidencias_vue_vue_type_style_index_0_id_4f2e2916_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Incidencias.vue?vue&type=style&index=0&id=4f2e2916&scoped=true&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/incidencias/Incidencias.vue?vue&type=style&index=0&id=4f2e2916&scoped=true&lang=css");
-
-
-/***/ }),
-
-/***/ "./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css ***!
-  \**********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Notificaciones_vue_vue_type_style_index_0_id_df7e4640_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/notificaciones/Notificaciones.vue?vue&type=style&index=0&id=df7e4640&lang=css");
 
 
 /***/ }),

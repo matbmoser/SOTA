@@ -1,12 +1,13 @@
 <!-- Ver Vehiculos-->
 <div class="modal fade" id="VerPlazas" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
-    <div id="modalContent" class="modal-content">
+    <div id="modalContent" class="modal-content" style="background: white!important;
+    color: black!important;">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ver Plazas</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
     <div class="modal-body">
-        <div class="container-fluid mt-4 d-flex justify-content-center table-responsive" style="background: var(--color); color: var(--bg-color);">
+        <div class="container-fluid mt-4 d-flex justify-content-center table-responsive">
             <div class="row mt-5">    
             <div class="col-12">
             <h2 class="text-center">

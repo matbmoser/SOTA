@@ -21,12 +21,10 @@
 				</button>
 			</li>
 			<li>
-				<router-link to="/notificaciones">
-					<button class="p-link layout-topbar-button">
-						<i class="pi pi-bell"></i>
-						<span>Notificaciones</span>
-					</button>
-				</router-link>
+				<button class="p-link layout-topbar-button">
+					<i class="pi pi-bell"></i>
+					<span>Notificaciones</span>
+				</button>
 			</li>
 			<li>
 				<router-link to="/profile">

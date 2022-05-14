@@ -22,3 +22,30 @@ async function reconnectCamara(server){
   createAndConnectCamera(cameraid, CONFIGS["defaultIP"], server["port"])
 }
 
+function connectToServer() {
+  let rawServer = localStorage.getItem("serverInfo");
+  if (rawServer != null && rawServer != undefined && rawServer != "") {
+    server = JSON.parse(rawServer);
+    let ip = CONFIGS["defaultIP"];
+    let port = server["port"];
+    let cameraid = uuidv4();
+    createAndConnectCamera(cameraid, ip, port);
+    return;
+  }
+  let tmpCameraid = localStorage.getItem("cameraid");
+  if (tmpCameraid == null || tmpCameraid == undefined || tmpCameraid == "") {
+    tmpCameraid = uuidv4();
+  }
+  localStorage.setItem("cameraid", tmpCameraid);
+  let cameraid = tmpCameraid
+  let ip = CONFIGS["defaultIP"];
+  let port = document.getElementById("cameraServerPort").value;
+  createAndConnectCamera(cameraid, ip, port);
+}
+
+function disconnectFromServer() {
+  camera.close()
+  stopMessage();
+  localStorage.removeItem("cameraid");
+  localStorage.removeItem("cameraStatus");
+}

@@ -1,10 +1,8 @@
 from datetime import datetime
-from datetime import datetime
 from db.controllers.BaseController import BaseController
 from db.controllers.ZonaController import ZonaController
 from db.controllers.VehiculoController import VehiculoController
 import hashlib
-
 
 class PlazaController(BaseController):
     def __init__(self) -> None:
@@ -117,3 +115,4 @@ class PlazaController(BaseController):
         res = self.conn.updateTableElement(table=self.tableName, set=setList, where=where)
         
         return res
+

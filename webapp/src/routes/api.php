@@ -50,9 +50,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('vehiculos/tipos', 'App\Http\Controllers\TipoVehiculoController@index');
     Route::get('vehiculo/tipo', 'App\Http\Controllers\TipoVehiculoController@show');
 
+    // Incidencias
     Route::get('incidencias', 'App\Http\Controllers\IncidenciaController@index')->middleware('isAdmin');
     Route::get('incidencias/user/{id}', 'App\Http\Controllers\IncidenciaController@getIncidencias')->middleware('isAdminOrSelf');
-
 
     // Vehiculos
     Route::get('vehiculos', 'App\Http\Controllers\VehiculoController@index')->middleware('isAdmin');

@@ -3,7 +3,6 @@ import Home from "../views/Home.vue";
 import store from '../store/index.js';
 import AdminDashboard from "../views/admin/AdminDashboard.vue";
 import AdminIncidencias from "../views/admin/AdminIncidencias.vue";
-import Notificaciones from "../views/notificaciones/Notificaciones.vue";
 import Incidencias from "../views/incidencias/Incidencias.vue";
 import Tickets from "../views/tickets/Tickets.vue";
 import Vehiculos from "../views/vehiculos/Vehiculos.vue";
@@ -75,12 +74,6 @@ export const routes = [
     name: "Tickets",
     component: Tickets,
     meta: { requiresAuth: true}
-  },
-  {
-    path: "/notificaciones",
-    name: "Notificaciones",
-    component: Notificaciones,
-    meta: { requiresAuth: true }
   },
   {
     path: "/profile",

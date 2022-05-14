@@ -126,16 +126,20 @@ class BaseCameraManager():
             zonas = self.conn.query("SELECT id, plazas FROM Zona WHERE idTipoPlaza in "+str(tipoPlazas)+" ORDER BY RAND()")
         elif(len(tipoPlazas) <= 0):
             return None
-    
+
+        fullZones = 0
         for zona in zonas:
-            rawplazasOcupadas = self.conn.query("SELECT id FROM Plaza WHERE idZona = "+str(zona[0]))
+            rawplazasOcupadas = self.conn.query("SELECT id FROM Plaza WHERE valido=1 AND idZona = "+str(zona[0]))
             lenOcupadas = len(rawplazasOcupadas)
             if(lenOcupadas >= zona[1]):
+                fullZones+=1
                 continue
+
             plazasOcupadas = []
+
             for plaza in rawplazasOcupadas:
                 plazasOcupadas.append(plaza[0])
-                
+            
             plaza = random.randint(1, zona[1]+1)
             while(plaza in plazasOcupadas):
                 plaza = random.randint(1, zona[1]+1)
@@ -143,8 +147,12 @@ class BaseCameraManager():
             plazaFinal = plaza
             zonaFinal = zona[0]
             break
+
+        if(fullZones == len(zonas)):
+            return False, False, False
+
         if(plazaFinal == None or zonaFinal == None):
-            return None, None
+            return None, None, None
         
         zona = self.zonaController.getById(id=zonaFinal)
         return plazaFinal, zona[0]["id"], str(zona[0]["letra"])+str(plazaFinal)
@@ -393,3 +401,5 @@ class BaseCameraManager():
         print("\t|\n\t--------------------------------------------------")
 
         return num
+
+

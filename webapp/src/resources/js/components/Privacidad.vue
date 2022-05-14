@@ -23,7 +23,7 @@
         <p>Un dato de carácter personal se refiere a toda la información referida a una persona física identificada o identificable (persona afectada). Se entiende como identificable una persona que pueda ser identificada, directa o indirectamente,
             sobre todo por referencia a un nombre, un número de identificación (DNI, NIF, NIE, pasaporte) o a uno o varios elementos específicos, propios a su identidad física, fisiológica, genética, psíquica, económica, cultural o social.</p>
 
-        <p>Los datos que con carácter general serán recopilados en los formularios son: Nombre, Comentario y Correo. Se podrán recopilar otro tipo de datos dependiendo del formulario siendo así
+        <p>Los datos que con carácter general serán recopilados en los formularios son: Nombre, Correo, Teléfono, DNI, Fecha de Nacimiento. Se podrán recopilar otro tipo de datos dependiendo del formulario siendo así
             siendo informado el Usuario. Además las de caracter específico para <strong>petición de ayuda de un centro de salud</strong> 
             siendo, correo, nombre del centro, dirección, persona de contacto, número de teléfono para contacto, lugar de entrega, cantidad de pantallas-viseras: (indicar que son reutilizables, por lo que se suele calcular en función del nº de personas que vayan a trabajar simultáneamente)</p>
 
@@ -31,8 +31,24 @@
 
         <p>La finalidad del tratamiento de los datos personales que se puedan recoger son usarlos principalmente por el TITULAR para la gestión de su relación contigo,&nbsp;poder ofrecerte productos y servicios de acuerdo con tus intereses,
             mejorar tu experiencia de usuario y en su caso, para el tratamiento de sus solicitudes, peticiones o pedidos. Se elaborará un perfil comercial en base a la información que le&nbsp;facilites. No se realizarán decisiones automatizadas
-            en base a dicho perfil.</p>
+            en base a dicho perfil.
+            En el caso que usted provoque una incidencia grave en el aparcamiento, será necesario tenerlo identificado para poder realizar los trámites estatales necesarios.
+            Usted será notificado por correo eletrónico de cualquier incidente y resolución de incidencias ocasionadas por él. 
+            </p>
+        
+        <p> Podrás ser expulso de la aplicación si se presentan cargos con pruebas contra TI en la aplicación, en caso de aparcamiento ilegal, accidentes u atropellamentos, serás notificado en caso de ocurrencia y denuncia del suceso.
+        </p>
 
+        <p>En el caso de que llegue a occurrir un Administrador en representación del TITULAR contactará con usted para indicarle la nota de resolución y la pena que será aplicada, que podrá ser una
+            expulsión temporal o permanente de la aplicación.
+        </p>
+
+        <p><strong>UFV MyParking</strong> No es responsable de ningún incidente provocado por usted dentro del aparcamiento, el sistema le asignará una plaza, siempre que su vehiculo
+        se encuentre registrado y haya plazas disponibles. Siga la asignación del sistema para evitar problemas con otros usuarios y aparque lo mejor posible.
+
+        Puedes reportar cualquier incidencia ocurrida en sesión de aparcamiento, siempre que se aporten pruebas veríficas de los eventos producidos.
+        </p>
+        
         <p>Los datos proporcionados se conservarán mientras se mantenga la relación comercial, siempre que no se&nbsp;solicite por el interesado su supresión, o durante los años necesarios para cumplir las obligaciones legales.</p>
 
         <p>Se registrarán en el fichero de cliente y su tratamiento quedará registrado en el registro de tratamientos que debe llevar el TITULAR (antes del 25 de mayo de 2018 también podría estar incluido en el fichero elaborado con los datos

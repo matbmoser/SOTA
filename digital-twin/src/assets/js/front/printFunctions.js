@@ -3,6 +3,56 @@ async function cleanOutput(){
   document.getElementById("cameraMonitor").innerHTML = "";
 }
 
+function overwrite(monitorName, data) {
+  let monitor = document.getElementById(monitorName);
+  monitor.innerHTML = data;
+}
+function clean(monitorName, data) {
+  document.getElementById(monitorName).innerHTML = ""
+}
+function printLn(monitorName, data) {
+  var pre = document.createElement("p");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = data;
+  document.getElementById(monitorName).appendChild(pre);
+}
+
+async function print(monitorName, data) {
+  var pre = document.createElement("span");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = data;
+  document.getElementById(monitorName).appendChild(pre);
+}
+
+
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function overwriteMonitor(data) {
+  let monitor = document.getElementById("monitor");
+  monitor.innerHTML = data;
+}
+
+function printlLnMonitor(data) {
+  var pre = document.createElement("p");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = data;
+  document.getElementById("monitor").appendChild(pre);
+}
+
+async function printMonitor(data) {
+  var pre = document.createElement("span");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = data;
+  document.getElementById("monitor").appendChild(pre);
+}
+
+function uuidv4() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
 
 async function setOnline(){
   document.getElementById("statusCamera").innerHTML = '<span class="alert-online">ONLINE</span>';

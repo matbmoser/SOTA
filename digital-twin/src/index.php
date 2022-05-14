@@ -184,12 +184,15 @@
 <script src="assets/js/cryptool/hashFunctions.js"></script>
 <script src="assets/js/front/printFunctions.js"></script>
 <script src="assets/js/front/clock.js"></script>
+<script src="assets/js/front/autoRefresh.js"></script>
 <script src="assets/js/front/dark-mode.js"></script>
 <script src="assets/js/barreras/barrera.js"></script>
+<script src="assets/js/vehiculo/vehiculo.js"></script>
 <script src="assets/js/front/cookieFunctions.js"></script>
 <script src="assets/js/camaras/SJMPHandler.js"></script>
 <script src="assets/js/camaras/CameraClient.js"></script>
 <script src="assets/js/camaras/createCameraFunctions.js"></script>
+<script src="assets/js/auth/logout.js"></script>
 <script>
     const parkingMap = new ParkingMap();
     parkingMap.refreshZonas();
@@ -226,232 +229,12 @@
       overwrite("monitorLog", response);
     }
 
-    function seeServerLog(){
-        let rawServer = localStorage.getItem("serverInfo");
-        if(rawServer != null && rawServer != undefined && rawServer != ""){
-          let refreshLog = document.getElementById("refreshLog");
-          refreshLog.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
-          server = JSON.parse(rawServer);
-          getServerLog(server["name"]);
-        }
-    }
-
-    function logout(){
-        let cameraid = localStorage.getItem("cameraid");
-        if(cameraid != null && cameraid != undefined && cameraid != ""){
-          disconnectFromServer();
-        }
-        let rawServer = localStorage.getItem("serverInfo");
-        if(rawServer != null && rawServer != undefined && rawServer != ""){
-          closeServerByPort();
-        }
-        localStorage.removeItem("serverInfo");
-        localStorage.removeItem("cameraid");
-        localStorage.removeItem("serverStatus");
-        localStorage.removeItem("cameraStatus");
-      
-        window.location.href= `./assets/mod/user/logout.php?uuid=<?php echo $configs['logoutToken'] ?>`
-      
-    }
-    function addVehiculo(){
-        let cameraid = localStorage.getItem("cameraid");
-        if(cameraid != null && cameraid != undefined && cameraid != ""){
-          var matriculaEntrada = document.getElementById("matriculaEntrada").value;
-          if(matriculaEntrada == "" || matriculaEntrada == null){
-              overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
-              return;
-            }
-          camera.sendPlateToServer(matriculaEntrada, "IN");
-          overwrite("monitorEntrada", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaEntrada.toString()+"] sended!<span>");
-        }else{
-          overwrite("monitorEntrada", "<span style='color:red'>[ERROR] ¡Ninguna cámara conectada!</span>");
-        }
-    }
-    function deleteVehiculo(){
-        let cameraid = localStorage.getItem("cameraid");
-        if(cameraid != null && cameraid != undefined && cameraid != ""){
-          var matriculaSalida= document.getElementById("matriculaSalida").value;
-          if(matriculaSalida == "" || matriculaSalida == null){
-              overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡La matricula no puede estar vacía!</span>");
-              return;
-            }
-          camera.sendPlateToServer(matriculaSalida, "OUT");
-          overwrite("monitorSalida", "<span style='color:#0d6efd'>[INFO] ¡Plate ["+matriculaSalida.toString()+"] sended!<span>");
-        }else{
-          overwrite("monitorSalida", "<span style='color:red'>[ERROR] ¡Ninguna cámara conectada!</span>");
-        }
-    }
-
-    function setAutoRefresh(){
-      let content = ""
-      let setAutoRefresh = localStorage.getItem("autorefresh");
-      let elem = document.querySelector("#autorefresh");
-      if(setAutoRefresh == "true"){
-        parkingMap.startAutoRefresh();
-        elem.checked = true;
-      }else{
-        content = `<input class="form-check-input" type="checkbox" role="switch" id="autorefresh"/>`
-        parkingMap.stopAutoRefresh();
-        elem.checked = false;
-      }
-    }
-
     $(function(){
-        setAutoRefresh()
-        $('#autorefresh').change(function() {
-          if(this.checked) {
-            localStorage.setItem("autorefresh", "true")
-              parkingMap.startAutoRefresh();
-          }else{
-            localStorage.setItem("autorefresh", "false")
-            parkingMap.stopAutoRefresh();
-          }
-        });
-        currentTime();
-        getServerStatus();
-        document.querySelectorAll("#refresh, #refreshModal").forEach((ele) => {
-          ele.addEventListener("click", function (e) {
-            ele.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
-            parkingMap.refreshZonas();
-          });
-        });
-    })
-    function overwrite(monitorName,data){
-      let monitor = document.getElementById(monitorName);
-      monitor.innerHTML = data;
-    }
-    function clean(monitorName, data){
-        document.getElementById(monitorName).innerHTML = ""
-    }
-    function printLn(monitorName, data){
-        var pre = document.createElement("p"); 
-        pre.style.wordWrap = "break-word"; 
-        pre.innerHTML = data; 
-        document.getElementById(monitorName).appendChild(pre);
-    }
-
-      async function print(monitorName,data) {
-        var pre = document.createElement("span"); 
-        pre.style.wordWrap = "break-word"; 
-        pre.innerHTML = data; 
-        document.getElementById(monitorName).appendChild(pre);
-      }
-  
-
-
-    function overwriteMonitor(data){
-      let monitor = document.getElementById("monitor");
-      monitor.innerHTML = data;
-    }
-
-    function printlLnMonitor(data){
-        var pre = document.createElement("p"); 
-        pre.style.wordWrap = "break-word"; 
-        pre.innerHTML = data; 
-        document.getElementById("monitor").appendChild(pre);
-    }
-
-      async function printMonitor(data) {
-        var pre = document.createElement("span"); 
-        pre.style.wordWrap = "break-word"; 
-        pre.innerHTML = data; 
-        document.getElementById("monitor").appendChild(pre);
-      }
-
-    function uuidv4() {
-      return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-      );
-    }
-    function connectToServer(){
-        let rawServer = localStorage.getItem("serverInfo");
-        if(rawServer != null && rawServer != undefined && rawServer != ""){
-            server = JSON.parse(rawServer);
-            let ip = CONFIGS["defaultIP"];
-            let port = server["port"];
-            let cameraid = uuidv4();
-            createAndConnectCamera(cameraid, ip, port);
-            return;
-        }
-        let tmpCameraid = localStorage.getItem("cameraid");
-        if(tmpCameraid == null || tmpCameraid == undefined || tmpCameraid == ""){
-          tmpCameraid = uuidv4();
-        }
-        localStorage.setItem("cameraid", tmpCameraid);
-        let cameraid = tmpCameraid
-        let ip = CONFIGS["defaultIP"];
-        let port = document.getElementById("cameraServerPort").value;
-        createAndConnectCamera(cameraid, ip, port);
-    }
-
-    function disconnectFromServer(){
-        camera.close()
-        stopMessage();
-        localStorage.removeItem("cameraid");
-        localStorage.removeItem("cameraStatus");
-    }
-
-    function randomIntFromInterval(min, max) { // min and max included 
-      return Math.floor(Math.random() * (max - min + 1) + min)
-    }
-    
-    $(function(){
+        setServer();
         var modalContent = document.getElementById("modalContent");
-        var addVehicle = document.getElementById("addVehicle");
-
         barreras.addEventListener('click', function() {
           modalContent.innerHTML  = `<?php echo $modals["barreras"]; ?>`;
           adminBarreras();
         });
-        
-        var ipPattern = "#ip-pattern";
-        var portPattern = "#port-pattern";
-        var minPort = CONFIGS["minport"];
-        var maxPort = CONFIGS["maxport"];
-
-        $(portPattern).removeAttr('disabled');
-        $(portPattern).val(randomIntFromInterval(minPort, maxPort));
-        var defaultPortButton= document.getElementById("defaultPort");
-        defaultPortButton.classList.remove("hidden");
-        defaultPortButton.addEventListener('click', function() {
-            $(ipPattern).val(CONFIGS["defaultIP"]);
-            $(portPattern).val(CONFIGS["defaultPort"]);
-        });
-        var randomPortButton = document.getElementById("randomPort");
-        randomPortButton.classList.remove("hidden");
-        randomPortButton.addEventListener('click', function() {
-            $(portPattern).val(randomIntFromInterval(minPort, maxPort));
-        });
-        $(portPattern).change(function () { //Cuando detecta un cambio mira si ha superado el maximo o el minimo y lo cambia
-          try {
-              var valor = parseInt($(portPattern).val());
-              if (valor < minPort) {
-                  $(portPattern).val(minPort);
-              } else if (valor > maxPort) {
-                  $(portPattern).val(maxPort);
-              }
-          } catch (Exception) {
-              $(portPattern).val(minPort);
-          }
-      });
-        
     });
-    // Disable form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Get the forms we want to add validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
 </script>

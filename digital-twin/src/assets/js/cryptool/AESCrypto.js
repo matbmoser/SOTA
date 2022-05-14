@@ -1,9 +1,3 @@
-/** © CGI | All Rights Reserved | 2022
- *  Author: Mathias Brunkow Moser
- *  AES Class Crypto Tool 
- *  Mandatory Library: https://cryptojs.gitbook.io/docs/#ciphers 
- * **/
-  
 
 
 class AESCrypto{

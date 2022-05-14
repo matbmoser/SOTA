@@ -101,4 +101,4 @@
 <script src="../assets/bt/js/bootstrap.js"></script>
 <script src="../assets/js/libs/crypto-js/aes.js"></script>
 <script src="../assets/js/cryptool/hashFunctions.js"></script>
-<script src="../assets/js/login/login.js"></script>
+<script src="../assets/js/auth/login.js"></script>

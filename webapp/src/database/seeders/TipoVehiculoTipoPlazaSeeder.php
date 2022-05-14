@@ -29,6 +29,13 @@ class TipoVehiculoTipoPlazaSeeder extends Seeder
         );
         TipoVehiculoTipoPlaza::firstOrCreate(
             [
+                "idTipoPlaza" => TipoPlaza::where('tipo', 'Bateria')->get("id")[0]->id,
+                "idTipoVehiculo" => TipoVehiculo::where('segmento', 'A')->get("id")[0]->id
+            ],
+            []
+        );
+        TipoVehiculoTipoPlaza::firstOrCreate(
+            [
                 "idTipoPlaza" => TipoPlaza::where('tipo', 'Linea')->get("id")[0]->id,
                 "idTipoVehiculo" => TipoVehiculo::where('segmento', 'B')->get("id")[0]->id
             ],
@@ -57,8 +64,8 @@ class TipoVehiculoTipoPlazaSeeder extends Seeder
         );
         TipoVehiculoTipoPlaza::firstOrCreate(
             [
-                "idTipoPlaza" => TipoPlaza::where('tipo', 'BateriaDiagonal')->get("id")[0]->id,
-                "idTipoVehiculo" => TipoVehiculo::where('segmento', 'C')->get("id")[0]->id
+                "idTipoPlaza" => TipoPlaza::where('tipo', 'Bateria')->get("id")[0]->id,
+                "idTipoVehiculo" => TipoVehiculo::where('segmento', 'E')->get("id")[0]->id
             ],
             []
         );

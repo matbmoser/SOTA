@@ -28,6 +28,48 @@ function printServerData(data){
     <strong>PID</strong>: `+data["pid"].toString()+`
     </span>`
 }
+function seeServerLog() {
+    let rawServer = localStorage.getItem("serverInfo");
+    if (rawServer != null && rawServer != undefined && rawServer != "") {
+        let refreshLog = document.getElementById("refreshLog");
+        refreshLog.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div> Refreshing`;
+        server = JSON.parse(rawServer);
+        getServerLog(server["name"]);
+    }
+}
+function setServer(){
+
+    var ipPattern = "#ip-pattern";
+    var portPattern = "#port-pattern";
+    var minPort = CONFIGS["minport"];
+    var maxPort = CONFIGS["maxport"];
+
+    $(portPattern).removeAttr('disabled');
+    $(portPattern).val(randomIntFromInterval(minPort, maxPort));
+    var defaultPortButton = document.getElementById("defaultPort");
+    defaultPortButton.classList.remove("hidden");
+    defaultPortButton.addEventListener('click', function () {
+        $(ipPattern).val(CONFIGS["defaultIP"]);
+        $(portPattern).val(CONFIGS["defaultPort"]);
+    });
+    var randomPortButton = document.getElementById("randomPort");
+    randomPortButton.classList.remove("hidden");
+    randomPortButton.addEventListener('click', function () {
+        $(portPattern).val(randomIntFromInterval(minPort, maxPort));
+    });
+    $(portPattern).change(function () { //Cuando detecta un cambio mira si ha superado el maximo o el minimo y lo cambia
+        try {
+            var valor = parseInt($(portPattern).val());
+            if (valor < minPort) {
+                $(portPattern).val(minPort);
+            } else if (valor > maxPort) {
+                $(portPattern).val(maxPort);
+            }
+        } catch (Exception) {
+            $(portPattern).val(minPort);
+        }
+    });
+}
 function closeServerByPort(){
     let data = JSON.parse(localStorage.getItem("serverInfo"));
     let monitor = document.getElementById("monitor");
