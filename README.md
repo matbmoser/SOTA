@@ -147,7 +147,7 @@ For the installation of the system you will need:
 ```
 https://gitforwindows.org/
 ```
-> **_NOTE:_**: If you already have a virtualizated linux bash shell, like cygwin, please make sure you can execute .sh scripts.
+> **_NOTE:_** If you already have a virtualizated linux bash shell, like cygwin, please make sure you can execute .sh scripts.
 
 ### Install Docker:
 > **_NOTE:_**  Please check the system requirements to successfullu install docker
@@ -402,7 +402,7 @@ You can enter in the Digital Twin accessing the following url:
  http://localhost:3333
 ```
 
-For safety reasons you will be redirected a login page in ```/login```:
+For safety reasons you will be redirected to a login page in ```/login```:
 <br>
 <img align="center" src="media/img/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
 <br>
@@ -411,13 +411,13 @@ For safety reasons you will be redirected a login page in ```/login```:
 Introduce the following credentials to have access to the digital twin.
 
 <br>
-> Default Admin Credentials:
+> Default <strong> Admin Credentials</strong>:
 
 > Email: <strong> admin@myparking.com </strong><br>
 > Password: <strong> 789456123 </strong> # Default Password
 
 <br>
-> Default Manager Credentials:
+> Default <strong>Manager Credentials</strong>:
 
 > Email: <strong> manager@myparking.com </strong><br>
 > Password: <strong> 789456123 </strong> # Default Password
