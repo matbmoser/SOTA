@@ -404,7 +404,7 @@ You can enter in the Digital Twin accessing the following url:
 
 For safety reasons you will be redirected a login page in ```/login```:
 <br>
-<img align="center" src="media/img/loginDigitalTwin.png" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 ### **Access Credentials**
