@@ -362,7 +362,7 @@ volumes:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-# Build the App
+## 4- Build the App
 
 >  **_NOTE:_** When you build the docker compose container enviroment, a new directory will be created, it will contain the persistent data from the system database.
 ```
@@ -381,6 +381,7 @@ For building the docker compose container enviroment run the following script.
 
 
  The script will perform a series of actions to build the containers.
+ 
 
 ```sh
 ########## < buildDocker.sh >
@@ -388,24 +389,24 @@ For building the docker compose container enviroment run the following script.
 ## Set up internal network
 docker network create appNet 
 
- ## Build Docker Compose <docker-compose.yml> file requiered
+## Build Docker Compose <docker-compose.yml> file required
 docker-compose up -d --build
 
 ## Give permits for Laravel to access the storage.
 docker exec -it php-webapp chmod -R 777 storage 
 
-## Wait 15 secongds for MySQL Server Container to startup 
-sleep 15
-
 ## Install all the PHP Laravel packets
 docker exec -it php-webapp composer install
 ## Install all JS Packets 
-docker exec -it php-webapp npm install --force
+docker exec -it php-webapp npm install
+
+## Wait 15 seconds for MySQL Server Container to startup 
+sleep 15
 
 ## Execute the preconfigured database migration. 
 docker exec -it php-webapp npm run migrate 
 ```
-
+>  **_NOTE:_** This is a simplified version of ```buildDocker.sh```, to show the main commands.
 # User Manual
 
 Once the migrations are completed, the system is ready to go.
@@ -446,7 +447,11 @@ _In case you want to execute a manual migration you can use:_
 
 ```sh
 docker exec -it php-webapp php artisan migrate --seed
-````
+```
+
+## Digital Twin Interface
+
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -482,7 +487,7 @@ Project Link: [https://github.com/matbmoser/SOTA](https://github.com/matbmoser/S
 [tags-url]: https://github.com/matbmoser/SOTA/tags
 [issues-shield]: https://img.shields.io/github/issues/matbmoser/SOTA.svg?style=for-the-badge
 [issues-url]: https://github.com/matbmoser/SOTA/issues
-[license-shield]: https://img.shields.io/badge/Copyright-All%20rights%20reserved-green?style=for-the-badge
+[license-shield]: https://img.shields.io/badge/MIT-red?style=for-the-badge
 [license-url]: https://github.com/matbmoser/SOTA/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mathias-brunkow-moser
