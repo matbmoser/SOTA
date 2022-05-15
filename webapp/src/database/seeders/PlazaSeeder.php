@@ -31,7 +31,7 @@ class PlazaSeeder extends Seeder
             [
                 "fechaEntrada" => now(),
                 "incidencia" => 0,
-                "token" => hash("sha512","\$token{".now()."1". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '1605-LDJ')->get("id")[0]->id)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
+                "token" => hash("sha512","\$token{seed4".now()."1". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '1605-LDJ')->get("idUsuario")[0]->idUsuario)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
             ]
         );
         Plaza::firstOrCreate(
@@ -44,7 +44,7 @@ class PlazaSeeder extends Seeder
             [
                 "fechaEntrada" => now(),
                 "incidencia" => 0,
-                "token" => hash("sha512","\$token{".now()."2". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '1234-ZXC')->get("id")[0]->id)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
+                "token" => hash("sha512","\$token{seed3".now()."2". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '1234-ZXC')->get("idUsuario")[0]->idUsuario)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
             ]
         );
         Plaza::firstOrCreate(
@@ -57,7 +57,7 @@ class PlazaSeeder extends Seeder
             [
                 "fechaEntrada" => now(),
                 "incidencia" => 1,
-                "token" => hash("sha512","\$token{".now()."1". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '3201-PGL')->get("id")[0]->id)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
+                "token" => hash("sha512","\$token{seed2".now()."1". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '3201-PGL')->get("idUsuario")[0]->idUsuario)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
             ]
         );
         Plaza::firstOrCreate(
@@ -70,7 +70,7 @@ class PlazaSeeder extends Seeder
             [
                 "fechaEntrada" => now(),
                 "incidencia" => 0,
-                "token" => hash("sha512","\$token{".now()."3". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '4561-QWR')->get("id")[0]->id)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
+                "token" => hash("sha512","\$token{seed".now()."3". Zona::whereIn("idTipoPlaza", TipoVehiculoTipoPlaza::where("idTipoVehiculo", Vehiculo::where('matricula', '4561-QWR')->get("idUsuario")[0]->idUsuario)->get("idTipoPlaza"))->inRandomOrder()->first()->id."}"), 
             ]
         );
          

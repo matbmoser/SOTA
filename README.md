@@ -362,7 +362,7 @@ volumes:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-# Build the App
+## 4- Build the App
 
 >  **_NOTE:_** When you build the docker compose container enviroment, a new directory will be created, it will contain the persistent data from the system database.
 ```
@@ -381,6 +381,7 @@ For building the docker compose container enviroment run the following script.
 
 
  The script will perform a series of actions to build the containers.
+ 
 
 ```sh
 ########## < buildDocker.sh >
@@ -388,23 +389,24 @@ For building the docker compose container enviroment run the following script.
 ## Set up internal network
 docker network create appNet 
 
- ## Build Docker Compose <docker-compose.yml> file requiered
+## Build Docker Compose <docker-compose.yml> file required
 docker-compose up -d --build
 
 ## Give permits for Laravel to access the storage.
 docker exec -it php-webapp chmod -R 777 storage 
 
-## Wait 15 secongds for MySQL Server Container to startup 
-sleep 15
-
 ## Install all the PHP Laravel packets
 docker exec -it php-webapp composer install
 ## Install all JS Packets 
-docker exec -it php-webapp npm install --force
+docker exec -it php-webapp npm install
+
+## Wait 15 seconds for MySQL Server Container to startup 
+sleep 15
 
 ## Execute the preconfigured database migration. 
 docker exec -it php-webapp npm run migrate 
 ```
+>  **_NOTE:_** This is a simplified version of ```buildDocker.sh```, to show the main commands.
 
 # User Manual
 
@@ -446,7 +448,95 @@ _In case you want to execute a manual migration you can use:_
 
 ```sh
 docker exec -it php-webapp php artisan migrate --seed
-````
+```
+<hr>
+
+## Digital Twin Interface
+
+The the digital twin will have some test data included so you can visualize how the data is shown:
+
+<br>
+<img align="center" src="media/img/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+>  **_NOTE:_** Here you can visualize the parking place in real time, by zones.
+
+<hr>
+
+## Header
+
+<br>
+<img align="center" src="media/img/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In the header are able to:
+
+* Logout
+* Visualize your current information
+* Change to light/dark modes
+
+<hr>
+
+## Map
+The map will show you the parking lot capacity status, in zones.
+
+>  **_NOTE:_** In smartphones you will be not able to see the zones capacity just with ```Ver Plazas``` Action Button.
+
+<br>
+<img align="center" src="media/img/map.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<hr>
+
+## Action Buttons
+
+<br>
+<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In the action buttons you are able to:
+
+* Open a Camera Manager Server
+* Add a new vehicle to the parking place
+* Delete vehicle from parking place
+* See all the vehicles inside the parking place
+* Simulate the control of the barrers
+* Visualize the parking place free space capacity
+* Visualize the parking place filled space capacity
+
+<hr>
+
+## Device Manager Server Admin
+This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
+
+### Before Opened
+<br>
+<img align="center" src="media/img/openServer.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+When Started up a random UUID will be generated as ```serverid```.
+
+Here you can see the server status, inside the ```digital-twin``` docker container.
+
+### After Opened
+<br>
+<img align="center" src="media/img/openedServer.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In server admin you can:
+
+* Choose a random port to open the server.
+* Choose the default port.
+* Open the server when is closed
+* Close the server when is opened (will close all the cameras)
+* If open you can see the server log inside the ```digital-twin``` container
+
+
+<hr>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -482,7 +572,7 @@ Project Link: [https://github.com/matbmoser/SOTA](https://github.com/matbmoser/S
 [tags-url]: https://github.com/matbmoser/SOTA/tags
 [issues-shield]: https://img.shields.io/github/issues/matbmoser/SOTA.svg?style=for-the-badge
 [issues-url]: https://github.com/matbmoser/SOTA/issues
-[license-shield]: https://img.shields.io/badge/Copyright-All%20rights%20reserved-green?style=for-the-badge
+[license-shield]: https://img.shields.io/badge/MIT-red?style=for-the-badge
 [license-url]: https://github.com/matbmoser/SOTA/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mathias-brunkow-moser
