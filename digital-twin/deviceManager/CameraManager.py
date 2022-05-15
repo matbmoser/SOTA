@@ -439,7 +439,7 @@ class CameraManager(BaseCameraManager):
                     # Get server ip
                     ip = input(
                         "Please insert the Server IP [Default localhost]: ")
-                    ip = ip if not ip == "" else defaultip
+                    ip = defaultip
 
                     # Get server port
                     port = input(
