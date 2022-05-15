@@ -11,21 +11,13 @@
 
 <!-- PROJECT LOGO -->
 <br />
+
+
 <div align="center">
   <a href="https://github.com/matbmoser/SOTA">
     <img src="media/img/logo.jpg" alt="Logo" width="300" height="300">
   </a>
   <h1 align="center">Sistema de Optimización de Tiempo de Aparcamiento (SOTA)</h1>
-  <h2 align="Left">Parking Time Optimization System (PTOS)</h2>
-
-  <p align="justify">
-    PTOS or SOTA (in Spanish) is a Smart Parking integrated system that offers a safe live view to managers and users of a Smart Campus Parking Lot. The system is capable of handling the detection of a licence plate by a IP Camera at the entrance of a parking lot and asign to registered users a parking place with a unique ticket.
-    <br><br>
-    Users are able to interact with the system in a Web Aplication called UFV MyParking. There can to add vehicles that will be detected by the cameras in the parking lot entrance and exits. They are also able to visualize the parking lot capacity and status
-    <br><br>
-    Once a user enterers a ticket will be generated indicating the asigned parking place. This asigned place is the one that best suits the type of vehicle configured in the WebApp.
-    <br >
-    </p>
     <a href="https://github.com/matbmoser/SOTA"><strong>Explore the docs »</strong></a>
     <br >
     <br >
@@ -34,29 +26,63 @@
     <a href="https://github.com/matbmoser/SOTA/issues">Report Bug</a>
     ·
     <a href="https://github.com/matbmoser/SOTA/issues">Request Feature</a>
+
+</div>
+<br>
+
+
+<div align="justify">
+
+  # Description
+  > **_NOTE:_** The system default lenguage is Spanish, because the project is for a University in Spain (Interfaces are in ```Spanish```, system intern communication messages are in ```English```. The docs are in ```English``` for easing the universal undertanding of the PTOS System, all over the world)
+
+  <h2 align="Left">Parking Time Optimization System (PTOS)</h2>
+
+  <p>
+    PTOS or SOTA (in Spanish) is a Smart Parking integrated system that offers a safe live view to managers and users of a Smart Campus Parking Lot. The system is capable of handling the detection of a licence plate by a IP Camera at the entrance of a parking lot and asign to registered users a parking place with a unique ticket.
+    <br><br>
+    Users are able to interact with the system in a Web Aplication called UFV MyParking. There can to add vehicles that will be detected by the cameras in the parking lot entrance and exits. They are also able to visualize the parking lot capacity and status
+    <br><br>
+    Once a user enterers a ticket will be generated indicating the asigned parking place. This asigned place is the one that best suits the type of vehicle configured in the WebApp.
+    <br >
+    </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
+
+  - [Description](#description)
+    - [Integrated Systems:](#integrated-systems)
+  - [Important](#important)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [For Windows](#for-windows)
+      - [Install Git with Gitbash](#install-git-with-gitbash)
+      - [Install Docker:](#install-docker)
+      - [Use a Web Browser](#use-a-web-browser)
+  - [Deploying the App](#deploying-the-app)
+    - [1 - Start Docker Daemon](#1---start-docker-daemon)
+    - [2 - Clone this Repository](#2---clone-this-repository)
+    - [3 - Configure Credentials (Optional):](#3---configure-credentials-optional)
+      - [Digital Twin Global Configurations:](#digital-twin-global-configurations)
+      - [Device Manager Global Configurations](#device-manager-global-configurations)
+    - [Docker Compose File](#docker-compose-file)
+    - [4- Build the App](#4--build-the-app)
+    - [Execute Build Docker Script](#execute-build-docker-script)
+  - [User Manual](#user-manual)
+    - [Access To Digital Twin](#access-to-digital-twin)
+      - [**Access Credentials**](#access-credentials)
+    - [Digital Twin Interface](#digital-twin-interface)
+    - [Header](#header)
+    - [Map](#map)
+    - [Action Buttons](#action-buttons)
+    - [Device Manager Server Admin](#device-manager-server-admin)
+      - [Before Opened](#before-opened)
+      - [After Opened](#after-opened)
+    - [Action Buttons](#action-buttons-1)
+    - [License](#license)
+    - [Contact](#contact)
 </details>
 
 <br>
@@ -423,7 +449,7 @@ You can enter in the Digital Twin accessing the following url:
 
 For safety reasons you will be redirected to a login page in ```/login```:
 <br>
-<img align="center" src="media/img/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 ### **Access Credentials**
@@ -456,10 +482,21 @@ docker exec -it php-webapp php artisan migrate --seed
 
 The the digital twin will have some test data included so you can visualize how the data is shown:
 
+You have two interface color modes: ```Dark Mode``` (DEFAULT) and ```Light Mode```:
+
+### Dark Mode
 <br>
-<img align="center" src="media/img/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
 <br>
 <br>
+
+### Light Mode
+<br>
+<img align="center" src="media/img/digitalTwin/lightMode.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+
 
 >  **_NOTE:_** Here you can visualize the parking place in real time, by zones.
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -468,7 +505,7 @@ The the digital twin will have some test data included so you can visualize how 
 ## Header
 
 <br>
-<img align="center" src="media/img/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
@@ -486,7 +523,7 @@ The map will show you the parking lot capacity status, in zones.
 >  **_NOTE:_** In smartphones you will be not able to see the zones capacity just with ```Ver Plazas``` Action Button.
 
 <br>
-<img align="center" src="media/img/map.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/map.jpg" alt="Logo" width="100%" height="100%">
 <br>
 <p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
@@ -494,7 +531,7 @@ The map will show you the parking lot capacity status, in zones.
 ## Action Buttons
 
 <br>
-<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
@@ -514,9 +551,12 @@ In the action buttons you are able to:
 ## Device Manager Server Admin
 This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
 
+
+<img align="center" src="media/img/digitalTwin/openServerButton.jpg" alt="Logo" width="20%" height="50%">
+
 ### Before Opened
 <br>
-<img align="center" src="media/img/openServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openServer.jpg" alt="Logo" width="100%" height="100%">
 <br><br>
 
 When Started up a random UUID will be generated as ```serverid```.
@@ -525,7 +565,7 @@ Here you can see the server status, inside the ```digital-twin``` docker contain
 
 ### After Opened
 <br>
-<img align="center" src="media/img/openedServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openedServer.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
@@ -543,22 +583,35 @@ In server admin you can:
 
 
 
-## Action Buttons
+## Connect Camera
 
 <br>
-<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/connectCamara.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+### Before Connected
+<br>
+<img align="center" src="media/img/digitalTwin/connectCamaraModal.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+When Started up a random UUID will be generated as ```serverid```.
+
+Here you can see the server status, inside the ```digital-twin``` docker container.
+
+### After Opened
+<br>
+<img align="center" src="media/img/digitalTwin/connectedCamaraModal.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
-In the action buttons you are able to:
+In server admin you can:
 
-* Open a Camera Manager Server
-* Add a new vehicle to the parking place
-* Delete vehicle from parking place
-* See all the vehicles inside the parking place
-* Simulate the control of the barrers
-* Visualize the parking place free space capacity
-* Visualize the parking place filled space capacity
+* Choose a random port to open the server.
+* Choose the default port.
+* Open the server when is closed
+* Close the server when is opened (will close all the cameras)
+* If open you can see the server log inside the ```digital-twin``` container
+
 
 <hr>
 
@@ -567,7 +620,7 @@ In the action buttons you are able to:
 
 
 <!-- LICENSE -->
-## License
+# License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
@@ -576,7 +629,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+# Contact
 
 Mathias Moser  - matbmoser@gmail.com
 
