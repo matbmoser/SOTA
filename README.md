@@ -549,14 +549,14 @@ In the action buttons you are able to:
 <hr>
 
 ## Device Manager Server Admin
-This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
+This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
 
 
 <img align="center" src="media/img/digitalTwin/openServerButton.jpg" alt="Logo" width="20%" height="50%">
 
 ### Before Opened
 <br>
-<img align="center" src="media/img/digitalTwin/openServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openServer.jpg" alt="Logo" width="75%" height="100%">
 <br><br>
 
 When Started up a random UUID will be generated as ```serverid```.
@@ -565,7 +565,7 @@ Here you can see the server status, inside the ```digital-twin``` docker contain
 
 ### After Opened
 <br>
-<img align="center" src="media/img/digitalTwin/openedServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openedServer.jpg" alt="Logo" width="75%" height="100%">
 <br>
 
 <br>
@@ -591,32 +591,82 @@ In server admin you can:
 
 ### Before Connected
 <br>
-<img align="center" src="media/img/digitalTwin/connectCamaraModal.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/connectCamaraModal.jpg" alt="Logo" width="70%" height="50%">
 <br><br>
 
-When Started up a random UUID will be generated as ```serverid```.
+The camera will connect to the current running server using **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf)
 
-Here you can see the server status, inside the ```digital-twin``` docker container.
+Here you can see the logs for the camera connected to the server in ```digital-twin``` docker container.
+
+You will recieve a sessionid which can identify your session in the server.
 
 ### After Opened
 <br>
-<img align="center" src="media/img/digitalTwin/connectedCamaraModal.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/connectedCamaraModal.jpg" alt="Logo" width="70%" height="50%">
 <br>
 
 <br>
-In server admin you can:
+In camera admin you can:
 
-* Choose a random port to open the server.
-* Choose the default port.
-* Open the server when is closed
-* Close the server when is opened (will close all the cameras)
-* If open you can see the server log inside the ```digital-twin``` container
+* See camera status
+* Disconnect the camera
 
+<br>
+After you connected the button will change to disconnect: 
+
+<br>
+<img align="center" src="media/img/digitalTwin/disconnectCamara.jpg" alt="Logo" width="45%" height="45%">
+<br>
+<br>
+
+>  **_NOTE:_** If you reload the digital twin page, the camera will reconnect to the server and recieve a new sessionid.
 
 <hr>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+
+## Add Vehicle Button
+
+<br>
+<img align="center" src="media/img/digitalTwin/addVehicle.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+Here you can simulate to add a new vehicle to the server
+
+The camera will connect to the current running server using **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf)
+
+
+<br>
+<img align="center" src="media/img/digitalTwin/cameraEntrance.jpg" alt="Logo" width="70%" height="50%">
+<br>
+
+<br>
+In camera admin you can:
+
+* See camera status
+* Disconnect the camera
+
+<br>
+After you connected the button will change to disconnect: 
+
+<br>
+<img align="center" src="media/img/digitalTwin/disconnectCamara.jpg" alt="Logo" width="45%" height="45%">
+<br>
+<br>
+
+>  **_NOTE:_** If you reload the digital twin page, the camera will reconnect to the server and recieve a new sessionid.
+
+<hr>
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
 
 
 <!-- LICENSE -->
