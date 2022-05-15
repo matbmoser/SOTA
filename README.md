@@ -170,19 +170,22 @@ Both ```Digital Twin``` and ```UFV MyParking``` systems make use of the browser 
 
 # Deploying the App
 
-## Start Docker Daemon
+## 1 - Start Docker Daemon
+
+Here you will find more information about it:
+
+  ```sh
+  https://docs.docker.com/desktop/windows/
+  ```
+>  **_NOTE:_**: In windows you just need to open the Docker Desktop App
+
+## 2 - Clone this Repository
 
   ```sh
   git clone https://github.com/matbmoser/SOTA.git
   ```
 
-## Clone this Repository
-
-  ```sh
-  git clone https://github.com/matbmoser/SOTA.git
-  ```
-
-## Configure Credentials (Optional): 
+## 3 - Configure Credentials (Optional): 
 Configure the database credentials, default settings and default of the enviroment.
 
 >  **_NOTE:_** The system is already configurated with default values, so is optional the configuration of credentials. If you are willing to modify parameters like the connection to the Database, here there is a description. 
@@ -374,6 +377,8 @@ For building the docker compose container enviroment run the following script.
  ```sh
   ./buildDocker.sh
  ```
+>  **_ALERT:_** If you execute for the first time the script it will take some minutes.
+
 
  The script will perform a series of actions to build the containers.
 
@@ -391,6 +396,11 @@ docker exec -it php-webapp chmod -R 777 storage
 
 ## Wait 15 secongds for MySQL Server Container to startup 
 sleep 15
+
+## Install all the PHP Laravel packets
+docker exec -it php-webapp composer install
+## Install all JS Packets 
+docker exec -it php-webapp npm install --force
 
 ## Execute the preconfigured database migration. 
 docker exec -it php-webapp npm run migrate 
