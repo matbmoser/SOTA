@@ -1,2 +1,2 @@
-* text eol=lf
-media/ export-ignore
+digital-twin/* text eol=lf
+webapp/* text eol=lf

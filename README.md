@@ -11,21 +11,13 @@
 
 <!-- PROJECT LOGO -->
 <br />
+
+
 <div align="center">
   <a href="https://github.com/matbmoser/SOTA">
     <img src="media/img/logo.jpg" alt="Logo" width="300" height="300">
   </a>
   <h1 align="center">Sistema de Optimización de Tiempo de Aparcamiento (SOTA)</h1>
-  <h2 align="Left">Parking Time Optimization System (PTOS)</h2>
-
-  <p align="justify">
-    PTOS or SOTA (in Spanish) is a Smart Parking integrated system that offers a safe live view to managers and users of a Smart Campus Parking Lot. The system is capable of handling the detection of a licence plate by a IP Camera at the entrance of a parking lot and asign to registered users a parking place with a unique ticket.
-    <br><br>
-    Users are able to interact with the system in a Web Aplication called UFV MyParking. There can to add vehicles that will be detected by the cameras in the parking lot entrance and exits. They are also able to visualize the parking lot capacity and status
-    <br><br>
-    Once a user enterers a ticket will be generated indicating the asigned parking place. This asigned place is the one that best suits the type of vehicle configured in the WebApp.
-    <br >
-    </p>
     <a href="https://github.com/matbmoser/SOTA"><strong>Explore the docs »</strong></a>
     <br >
     <br >
@@ -34,30 +26,101 @@
     <a href="https://github.com/matbmoser/SOTA/issues">Report Bug</a>
     ·
     <a href="https://github.com/matbmoser/SOTA/issues">Request Feature</a>
+
+</div>
+<br>
+
+
+<div align="justify">
+
+  # Description
+  > **_NOTE:_** The system default lenguage is Spanish, because the project is for a University in Spain (Interfaces are in ```Spanish```, system intern communication messages are in ```English```. The docs are in ```English``` for easing the universal undertanding of the PTOS System, all over the world)
+
+  <h2 align="Left">Parking Time Optimization System (PTOS)</h2>
+
+  <p>
+    PTOS or SOTA (in Spanish) is a Smart Parking integrated system that offers a safe live view to managers and users of a Smart Campus Parking Lot. The system is capable of handling the detection of a licence plate by a IP Camera at the entrance of a parking lot and asign to registered users a parking place with a unique ticket.
+    <br><br>
+    Users are able to interact with the system in a Web Aplication called UFV MyParking. There can to add vehicles that will be detected by the cameras in the parking lot entrance and exits. They are also able to visualize the parking lot capacity and status
+    <br><br>
+    Once a user enterers a ticket will be generated indicating the asigned parking place. This asigned place is the one that best suits the type of vehicle configured in the WebApp.
+    <br >
+    </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
   <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+    
+  - [Description](#description)
+    - [Integrated Systems:](#integrated-systems)
+  - [Important](#important)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [For Windows](#for-windows)
+      - [Install Git with Gitbash](#install-git-with-gitbash)
+      - [Install Docker:](#install-docker)
+      - [Use a Web Browser](#use-a-web-browser)
+  - [Deploying the App](#deploying-the-app)
+    - [1 - Start Docker Daemon](#1---start-docker-daemon)
+    - [2 - Clone this Repository](#2---clone-this-repository)
+    - [3 - Configure Credentials (Optional):](#3---configure-credentials-optional)
+      - [Digital Twin Global Configurations:](#digital-twin-global-configurations)
+      - [Device Manager Global Configurations](#device-manager-global-configurations)
+    - [Docker Compose File](#docker-compose-file)
+    - [4- Build the App](#4--build-the-app)
+    - [Execute Build Docker Script](#execute-build-docker-script)
+  - [User Manual](#user-manual)
+    - [Access To Digital Twin](#access-to-digital-twin)
+      - [**Access Digital Twin Default Credentials**](#access-digital-twin-default-credentials)
+    - [Digital Twin Interface](#digital-twin-interface)
+      - [Dark Mode](#dark-mode)
+      - [Light Mode](#light-mode)
+    - [Header](#header)
+    - [Map](#map)
+    - [Action Buttons](#action-buttons)
+    - [Device Manager Server Admin](#device-manager-server-admin)
+      - [Before Opened](#before-opened)
+      - [After Opened](#after-opened)
+    - [Connect Camera](#connect-camera)
+      - [Before Connected](#before-connected)
+      - [After Opened](#after-opened-1)
+    - [Add Vehicle Button](#add-vehicle-button)
+    - [Delete Vehicle Button](#delete-vehicle-button)
+    - [See Places Button](#see-places-button)
+    - [Barrers Button](#barrers-button)
+      - [Open Entrace Barrer](#open-entrace-barrer)
+      - [Close Entrace Barrer](#close-entrace-barrer)
+      - [Change to Exit Barrer](#change-to-exit-barrer)
+    - [Refresh and AutoRefresh Button](#refresh-and-autorefresh-button)
+      - [Enabled Refresh](#enabled-refresh)
+      - [Disabled Refresh](#disabled-refresh)
+    - [Access To WebApp UFV MyParking](#access-to-webapp-ufv-myparking)
+      - [**Access WebApp Default Credentials**](#access-webapp-default-credentials)
+    - [Register](#register)
+      - [Data Policy](#data-policy)
+    - [Dashboard](#dashboard)
+      - [Menu User](#menu-user)
+      - [Menu Manager](#menu-manager)
+      - [Menu Admin](#menu-admin)
+      - [Header](#header-1)
+    - [Profile](#profile)
+      - [Edit profile data](#edit-profile-data)
+    - [Vehicles](#vehicles)
+      - [Add Vehicle](#add-vehicle)
+      - [Delete Vehicle](#delete-vehicle)
+    - [Tickets](#tickets)
+      - [Open Valid Virtual Ticket](#open-valid-virtual-ticket)
+      - [Invalid Virtual Ticket](#invalid-virtual-ticket)
+    - [Responsive Views](#responsive-views)
+      - [Responsive Login](#responsive-login)
+      - [Responsive Dashboard Parking Zones](#responsive-dashboard-parking-zones)
+      - [Responsive Header](#responsive-header)
+      - [Responsive Map](#responsive-map)
+      - [Responsive Ticket](#responsive-ticket)
+    - [Open TCP/IP Camera Simulator](#open-tcpip-camera-simulator)
+      - [Start Camera](#start-camera)
+  - [License](#license)
+  - [Contact](#contact)
 
 <br>
 <hr>
@@ -423,10 +486,10 @@ You can enter in the Digital Twin accessing the following url:
 
 For safety reasons you will be redirected to a login page in ```/login```:
 <br>
-<img align="center" src="media/img/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/loginDigitalTwin.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
-### **Access Credentials**
+### **Access Digital Twin Default Credentials**
 Introduce the following credentials to have access to the digital twin.
 
 <br>
@@ -456,8 +519,17 @@ docker exec -it php-webapp php artisan migrate --seed
 
 The the digital twin will have some test data included so you can visualize how the data is shown:
 
+You have two interface color modes: ```Dark Mode``` (DEFAULT) and ```Light Mode```:
+
+### Dark Mode
 <br>
-<img align="center" src="media/img/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+### Light Mode
+<br>
+<img align="center" src="media/img/digitalTwin/lightMode.jpg" alt="Logo" width="100%" height="100%">
 <br>
 <br>
 
@@ -468,7 +540,7 @@ The the digital twin will have some test data included so you can visualize how 
 ## Header
 
 <br>
-<img align="center" src="media/img/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
@@ -486,7 +558,7 @@ The map will show you the parking lot capacity status, in zones.
 >  **_NOTE:_** In smartphones you will be not able to see the zones capacity just with ```Ver Plazas``` Action Button.
 
 <br>
-<img align="center" src="media/img/map.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/map.jpg" alt="Logo" width="100%" height="100%">
 <br>
 <p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
@@ -494,7 +566,7 @@ The map will show you the parking lot capacity status, in zones.
 ## Action Buttons
 
 <br>
-<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
 <br>
 
 <br>
@@ -512,11 +584,14 @@ In the action buttons you are able to:
 <hr>
 
 ## Device Manager Server Admin
-This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
+This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
+
+
+<img align="center" src="media/img/digitalTwin/openServerButton.jpg" alt="Logo" width="20%" height="50%">
 
 ### Before Opened
 <br>
-<img align="center" src="media/img/openServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openServer.jpg" alt="Logo" width="75%" height="100%">
 <br><br>
 
 When Started up a random UUID will be generated as ```serverid```.
@@ -525,7 +600,7 @@ Here you can see the server status, inside the ```digital-twin``` docker contain
 
 ### After Opened
 <br>
-<img align="center" src="media/img/openedServer.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/openedServer.jpg" alt="Logo" width="75%" height="100%">
 <br>
 
 <br>
@@ -541,33 +616,462 @@ In server admin you can:
 
 <hr>
 
-
-
-## Action Buttons
+## Connect Camera
 
 <br>
-<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<img align="center" src="media/img/digitalTwin/connectCamara.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+### Before Connected
+<br>
+<img align="center" src="media/img/digitalTwin/connectCamaraModal.jpg" alt="Logo" width="70%" height="50%">
+<br><br>
+
+The camera will connect to the current running server using **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf)
+
+Here you can see the logs for the camera connected to the server in ```digital-twin``` docker container.
+
+You will recieve a sessionid which can identify your session in the server.
+
+### After Opened
+<br>
+<img align="center" src="media/img/digitalTwin/connectedCamaraModal.jpg" alt="Logo" width="70%" height="50%">
 <br>
 
 <br>
-In the action buttons you are able to:
+In camera admin you can:
 
-* Open a Camera Manager Server
-* Add a new vehicle to the parking place
-* Delete vehicle from parking place
-* See all the vehicles inside the parking place
-* Simulate the control of the barrers
-* Visualize the parking place free space capacity
-* Visualize the parking place filled space capacity
+* See camera status
+* Disconnect the camera
+
+<br>
+After you connected the button will change to disconnect: 
+
+<br>
+<img align="center" src="media/img/digitalTwin/disconnectCamara.jpg" alt="Logo" width="45%" height="45%">
+<br>
+<br>
+
+>  **_NOTE:_** If you reload the digital twin page, the camera will reconnect to the server and recieve a new sessionid.
 
 <hr>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<div id="addVehicle"></div>
+
+## Add Vehicle Button
+
+<br>
+<img align="center" src="media/img/digitalTwin/addVehicle.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+>  **_NOTE:_** Make sure the camera is connected, before adding!
+
+Here you can simulate to add a new vehicle like a camera.
+
+The camera will send a **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf) IN Flag with the plate
+
+
+<br>
+<img align="center" src="media/img/digitalTwin/cameraEntrance.jpg" alt="Logo" width="70%" height="50%">
+<br>
+
+<hr>
+
+<div id="deleteVehicle"></div>
+
+## Delete Vehicle Button
+
+<br>
+<img align="center" src="media/img/digitalTwin/deleteVehicle.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+>  **_NOTE:_** Make sure the camera is connected, before adding!
+
+Here you can simulate to delete a new vehicle like a camera.
+
+The camera will send a **SJMP Protocol** [```digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digital-twin/deviceManager/docs/SJMPProtocolDescription.pdf) IN Flag with the plate
+
+
+<br>
+<img align="center" src="media/img/digitalTwin/cameraExit.jpg" alt="Logo" width="70%" height="50%">
+<br>
+
+<hr>
+
+## See Places Button
+
+<br>
+<img align="center" src="media/img/digitalTwin/plazasButton.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+Here you can see all the vehicles in the parking.
+
+<br>
+<img align="center" src="media/img/digitalTwin/filledSpaces.jpg" alt="Logo" width="70%" height="50%">
+<br>
+
+<hr>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+## Barrers Button
+
+<br>
+<img align="center" src="media/img/digitalTwin/barreraButton.jpg" alt="Logo" width="45%" height="45%">
+<br>
+
+Here you can simulate to open and close the barrers.
+
+### Open Entrace Barrer
+<br>
+<img align="center" src="media/img/digitalTwin/openBarrera.jpg" alt="Logo" width="70%" height="50%">
+<br><br>
+
+### Close Entrace Barrer
+<br>
+<img align="center" src="media/img/digitalTwin/closeBarrera.jpg" alt="Logo" width="70%" height="50%">
+<br><br>
+
+### Change to Exit Barrer
+<br>
+<img align="center" src="media/img/digitalTwin/barreraExit.jpg" alt="Logo" width="70%" height="50%">
+<br><br>
+
+<br>
+All the information from status will appear in the monitor.
+
+<br>
+<hr>
+
+## Refresh and AutoRefresh Button
+
+<br>
+
+**_Autorefesh:_**
+Every 10 seconds it will update the parking map and info if is on. 
+
+You can click in refresh to refresh the information in the map.
+
+### Enabled Refresh
+<br>
+<img align="center" src="media/img/digitalTwin/autoRefresh.jpg" alt="Logo" width="45%" height="45%">
+<br>
+<br><br>
+
+### Disabled Refresh
+<br>
+<img align="center" src="media/img/digitalTwin/autoRefreshOff.jpg" alt="Logo" width="45%" height="45%">
+<br>
+<br><br>
+
+<br>
+The parking information will update then.
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<hr>
+
+## Access To WebApp UFV MyParking
+
+You can enter in the WebApp UFV MyParking accessing the following url
+if available:
+
+>  **_NOTE:_** If is not available you can change in the ```docker-compose.yaml``` the default port in ```php-webapp``` container, then rerun the ```./buildDocker.sh``` command.
+
+```sh
+ http://localhost:8080
+```
+
+For safety reasons you will be redirected to a login page in ```/login```:
+<br>
+<img align="center" src="media/img/webapp/login.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+### **Access WebApp Default Credentials**
+Introduce the following credentials to have access to the webapp:
+
+<br>
+> Default <strong> Admin Credentials</strong>:
+
+> Email: <strong> admin@myparking.com </strong><br>
+> Password: <strong> 789456123 </strong> # Default Password
+
+<br>
+> Default <strong>Manager Credentials</strong>:
+
+> Email: <strong> manager@myparking.com </strong><br>
+> Password: <strong> 789456123 </strong> # Default Password
+
+<br>
+> Default <strong>User Credentials</strong>:
+
+> Email: <strong> conductor@email.com </strong><br>
+> Password: <strong> 123456789 </strong> # Default Password
+
+## Register
+You can also create your own user: 
+
+>  **_NOTE:_** To register click in ```Registrate``` in the bottom of the login.
+
+<br>
+<img align="center" src="media/img/webapp/register.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+### Data Policy
+
+Read the data policy if is necesary, there we specify why the data is stored.
+<br>
+<img align="center" src="media/img/webapp/dataPolicy.jpg" alt="Logo" width="70%" height="50%">
+<br><br>
+
+<br>
+
+
+## Dashboard
+The dashboard shows you all the parking places.
+
+<br>
+<img align="center" src="media/img/webapp/dashboard.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+
+The menu is variable by the permits of the user rol.
+### Menu User
+
+<br>
+<img align="center" src="media/img/webapp/menuUser.jpg" alt="Logo" width="40%" height="50%">
+<br><br>
+
+<br>
+
+### Menu Manager
+
+<br>
+<img align="center" src="media/img/webapp/managerMenu.jpg" alt="Logo" width="40%" height="50%">
+<br><br>
+
+<br>
+
+### Menu Admin
+
+<br>
+<img align="center" src="media/img/webapp/menuAdmin.jpg" alt="Logo" width="40%" height="50%">
+<br><br>
+
+<br>
+
+
+### Header
+
+<br>
+<img align="center" src="media/img/webapp/header.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<hr>
+
+
+## Profile
+Click over the icon of profile in the ```header```
+
+Here you can see your data and permits:
+
+>  **_NOTE:_** As a normal user you have no permits, change to admin to have more permits.
+
+<br>
+<img align="center" src="media/img/webapp/profile.jpg" alt="Logo" width="50%" height="50%">
+<br>
+<br>
+
+### Edit profile data
+
+Here you can modify your data, and password.
+<br>
+<img align="center" src="media/img/webapp/editPassword.jpg" alt="Logo" width="50%" height="50%">
+<br>
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Vehicles
+Add vehicles so you can simulate them in the ```digital twin```
+
+Here you can see and manage all your vehicles
+
+<br>
+<img align="center" src="media/img/webapp/vehiculos.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+### Add Vehicle
+
+Click over the add button in the ```bottom right``` of the screen
+<br>
+<img align="center" src="media/img/webapp/addButton.jpg" alt="Logo" width="15%" height="20%">
+<br>
+
+Introduce your ```plate``` and ```vehicle type``` :
+
+<br>
+<img align="center" src="media/img/webapp/matricula.jpg" alt="Logo" width="40%" height="50%">
+<br><br>
+
+<br>
+
+### Delete Vehicle
+
+Click over the delete button in the ```right``` of the register and click on ```delete```:
+
+<br>
+<img align="center" src="media/img/webapp/deleteVehiculo.jpg" alt="Logo" width="50%" height="50%">
+<br><br>
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Tickets
+
+>  **_NOTE:_** Go to digital twin and click over the <a href="#addVehicle">```Add Vehicle Button```</a> and add the plate you just added
+
+
+You will recieve a ticket if you ```refresh the page```.
+
+<br>
+<img align="center" src="media/img/webapp/tickets.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+Click over ```Ver Ticket```:
+
+### Open Valid Virtual Ticket
+
+You can see your parking place in the top left:
+<br>
+<img align="center" src="media/img/webapp/ticket.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+>  **_NOTE:_** Go to digital twin and click over the <a href="#deleteVehicle">```Delete Vehicle Button```</a> and add the plate in your ticket and _refresh_ the page.
+
+<br>
+
+### Invalid Virtual Ticket
+
+Your ticket is now invalid, because you went from the parking lot.
+
+<br>
+<img align="center" src="media/img/webapp/invalidTicket.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Responsive Views
+
+All the WebApp UFV MyParking is responsive so you can see how the views are in mobile:
+
+###  Responsive Login
+
+<br>
+<img align="center" src="media/img/webapp/loginResponsive.jpg" alt="Logo" width="40%" height="50%">
+<br><br>
+
+<br>
+
+###  Responsive Dashboard Parking Zones
+
+<br>
+<img align="center" src="media/img/webapp/responsiveDashboard.jpg" alt="Logo" width="50%" height="50%">
+<br><br>
+
+<br>
+
+
+###  Responsive Header
+
+<br>
+<img align="center" src="media/img/webapp/responsiveHeader.jpg" alt="Logo" width="50%" height="50%">
+<br><br>
+
+<br>
+
+###  Responsive Map
+
+<br>
+<img align="center" src="media/img/webapp/map.jpg" alt="Logo" width="50%" height="50%">
+<br><br>
+
+<br>
+
+###  Responsive Ticket
+
+<br>
+<img align="center" src="media/img/webapp/responsiveTicket.jpg" alt="Logo" width="50%" height="50%">
+<br><br>
+
+<br>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Open TCP/IP Camera Simulator
+
+You can open a new camera and simulate using the ```CameraManager``` simulator
+
+>  **_NOTE:_** You need to have an ```open server```, in the ```digital twin```!
+
+Execute the script:
+
+```sh
+ ./openCamera.sh
+```
+
+A menu will open for you to configure a ```new camera```:
+<br>
+<img align="center" src="media/img/camera/openCamera.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+Select the diferent options to:
+* Start new Camera
+* Start Default Camera, if the default server is open.
+* Disconnect a camera
+* Add a vehicle to parking (needs to exist)
+* Delete vehicle from parking (needs to be inside)
+* List all the cameras in the manager
+
+
+>  **_NOTE:_** If you exit ```all the cameras``` will be closed!
+
+###  Start Camera
+
+Introduce the data from the open server to connect!
+
+>  **_NOTE:_**  If you introduce empty, the default settings will be used.
+
+<br>
+<img align="center" src="media/img/camera/startCamera.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+<br>
+
+>  **_NOTE:_** After this you are ready to ```add/delete vehicles```, select the ```camera``` in the list that will be deployed.
+> Then you can add the ```vehicle plate```, and it is done!
 
 <!-- LICENSE -->
-## License
+# License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
@@ -576,7 +1080,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+# Contact
 
 Mathias Moser  - matbmoser@gmail.com
 
