@@ -5,4 +5,6 @@ docker-compose up -d --build
 ## Migraciones y configuraciones posteriores
 docker exec -it php-webapp chmod -R 777 storage
 sleep 15
+docker exec -it php-webapp composer install
+docker exec -it php-webapp npm install --force
 docker exec -it php-webapp npm run migrate 

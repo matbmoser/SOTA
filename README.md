@@ -170,6 +170,12 @@ Both ```Digital Twin``` and ```UFV MyParking``` systems make use of the browser 
 
 # Deploying the App
 
+## Start Docker Daemon
+
+  ```sh
+  git clone https://github.com/matbmoser/SOTA.git
+  ```
+
 ## Clone this Repository
 
   ```sh
