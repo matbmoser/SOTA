@@ -1,5 +1,5 @@
 echo "[INFO] Starting build..." 
-echo "[INFO] Checking for docker daemon and open containers..." 
+echo "[INFO] Checking for docker daemon and opened containers..." 
 if (! docker stats --no-stream );
     then
         printf "\n******* [BUILD FAILED] ******************\n"

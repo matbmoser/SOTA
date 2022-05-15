@@ -407,6 +407,7 @@ sleep 15
 docker exec -it php-webapp npm run migrate 
 ```
 >  **_NOTE:_** This is a simplified version of ```buildDocker.sh```, to show the main commands.
+
 # User Manual
 
 Once the migrations are completed, the system is ready to go.
@@ -448,10 +449,94 @@ _In case you want to execute a manual migration you can use:_
 ```sh
 docker exec -it php-webapp php artisan migrate --seed
 ```
+<hr>
 
 ## Digital Twin Interface
 
+The the digital twin will have some test data included so you can visualize how the data is shown:
 
+<br>
+<img align="center" src="media/img/digitalTwinInterface.jpg" alt="Logo" width="100%" height="100%">
+<br>
+<br>
+
+>  **_NOTE:_** Here you can visualize the parking place in real time, by zones.
+
+<hr>
+
+## Header
+
+<br>
+<img align="center" src="media/img/digitalTwinHeader.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In the header are able to:
+
+* Logout
+* Visualize your current information
+* Change to light/dark modes
+
+<hr>
+
+## Map
+The map will show you the parking lot capacity status, in zones.
+
+>  **_NOTE:_** In smartphones you will be not able to see the zones capacity just with ```Ver Plazas``` Action Button.
+
+<br>
+<img align="center" src="media/img/map.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<hr>
+
+## Action Buttons
+
+<br>
+<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In the action buttons you are able to:
+
+* Open a Camera Manager Server
+* Add a new vehicle to the parking place
+* Delete vehicle from parking place
+* See all the vehicles inside the parking place
+* Simulate the control of the barrers
+* Visualize the parking place free space capacity
+* Visualize the parking place filled space capacity
+
+<hr>
+
+## Device Manager Server Admin
+This server manages all the cameras, and recieves WebSocket and TCP connections if the structures uses the **SJMP Protocol** [```digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf```](./digitalTwin/deviceManager/docs/SJMPProtocolDescription.pdf) packet structure.
+
+### Before Opened
+<br>
+<img align="center" src="media/img/openServer.jpg" alt="Logo" width="100%" height="100%">
+<br><br>
+
+When Started up a random UUID will be generated as ```serverid```.
+
+Here you can see the server status, inside the ```digital-twin``` docker container.
+
+### After Opened
+<br>
+<img align="center" src="media/img/openedServer.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In server admin you can:
+
+* Choose a random port to open the server.
+* Choose the default port.
+* Open the server when is closed
+* Close the server when is opened (will close all the cameras)
+* If open you can see the server log inside the ```digital-twin``` container
+
+
+<hr>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
