@@ -407,6 +407,7 @@ sleep 15
 docker exec -it php-webapp npm run migrate 
 ```
 >  **_NOTE:_** This is a simplified version of ```buildDocker.sh```, to show the main commands.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 # User Manual
 
@@ -441,7 +442,7 @@ Introduce the following credentials to have access to the digital twin.
 > Password: <strong> 789456123 </strong> # Default Password
 
 <br>
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 ** You can configure more default users in "```./webapp/src/database/seeders/UserSeeder.php```" and after you need to run again "```./buildDocker.sh```" to execute the migrations.
 
 _In case you want to execute a manual migration you can use:_
@@ -461,7 +462,7 @@ The the digital twin will have some test data included so you can visualize how 
 <br>
 
 >  **_NOTE:_** Here you can visualize the parking place in real time, by zones.
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
 
 ## Header
@@ -476,7 +477,7 @@ In the header are able to:
 * Logout
 * Visualize your current information
 * Change to light/dark modes
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
 
 ## Map
@@ -487,7 +488,7 @@ The map will show you the parking lot capacity status, in zones.
 <br>
 <img align="center" src="media/img/map.jpg" alt="Logo" width="100%" height="100%">
 <br>
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
 
 ## Action Buttons
@@ -507,6 +508,7 @@ In the action buttons you are able to:
 * Visualize the parking place free space capacity
 * Visualize the parking place filled space capacity
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 <hr>
 
 ## Device Manager Server Admin
@@ -535,6 +537,28 @@ In server admin you can:
 * Close the server when is opened (will close all the cameras)
 * If open you can see the server log inside the ```digital-twin``` container
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<hr>
+
+
+
+## Action Buttons
+
+<br>
+<img align="center" src="media/img/digitalTwinButtons.jpg" alt="Logo" width="100%" height="100%">
+<br>
+
+<br>
+In the action buttons you are able to:
+
+* Open a Camera Manager Server
+* Add a new vehicle to the parking place
+* Delete vehicle from parking place
+* See all the vehicles inside the parking place
+* Simulate the control of the barrers
+* Visualize the parking place free space capacity
+* Visualize the parking place filled space capacity
 
 <hr>
 
@@ -576,4 +600,3 @@ Project Link: [https://github.com/matbmoser/SOTA](https://github.com/matbmoser/S
 [license-url]: https://github.com/matbmoser/SOTA/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mathias-brunkow-moser
-[product-screenshot]: images/screenshot.png
