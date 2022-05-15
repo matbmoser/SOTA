@@ -1073,7 +1073,9 @@ Introduce the data from the open server to connect!
 <!-- LICENSE -->
 # License
 
-Distributed under the MIT License. See `LICENSE.md` for more information.
+Distributed under the Creative Commons License. See `LICENSE.md` for more information.
+
+Commercial use is not authorized, please contact with: Mathias Moser  - matbmoser@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -1100,7 +1102,7 @@ Project Link: [https://github.com/matbmoser/SOTA](https://github.com/matbmoser/S
 [tags-url]: https://github.com/matbmoser/SOTA/tags
 [issues-shield]: https://img.shields.io/github/issues/matbmoser/SOTA.svg?style=for-the-badge
 [issues-url]: https://github.com/matbmoser/SOTA/issues
-[license-shield]: https://img.shields.io/badge/MIT-red?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/matbmoser/SOTA.svg?style=for-the-badge
 [license-url]: https://github.com/matbmoser/SOTA/blob/master/LICENSE.md
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mathias-brunkow-moser
